@@ -270,9 +270,6 @@
           <button class="btn btn-outline w-full" onclick="openModal()">
             >Bloquer mon slot
           </button>
-          <button class="details-link details-link-bottom" onclick="openDetails('BUSINESS')">
-            Détails [ + ]
-          </button>
         </div>
       </div>
       
@@ -293,8 +290,7 @@
       <div class="squad-header">
         <h2 class="section-title">
           Votre équipe<br>
-          <span class="text-gradient">(de mercenaires)</span><br>
-          pour les prochaines 24H.
+          <span class="text-gradient">(de mercenaires)</span>
         </h2>
         <div class="squad-drag font-mono">
           <span class="hide-mobile">DRAG TO EXPLORE</span>
@@ -580,6 +576,7 @@
           <div class="venn-circle venn-template">
             <div class="circle-label">TEMPLATE<br>FIABLE</div>
           </div>
+          <div class="venn-center-gradient"></div>
         </div>
         
         <div class="mondes-content">
@@ -745,17 +742,11 @@
         </div>
       </div>
       
-      <!-- Video Footer -->
-      <div class="footer-video">
-        <div style="padding:56.25% 0 0 0;position:relative;">
-          <iframe src="https://player.vimeo.com/video/YOUR_VIDEO_ID?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" 
-            frameborder="0" 
-            allow="autoplay; fullscreen; picture-in-picture; clipboard-write" 
-            style="position:absolute;top:0;left:0;width:100%;height:100%;" 
-            title="Tomorrow.Online - Showreel">
-          </iframe>
-        </div>
-        <script src="https://player.vimeo.com/api/player.js"></script>
+      <!-- Video Footer Link -->
+      <div class="footer-video-link">
+        <button class="video-link-btn" onclick="openVideoModal()">
+          Comment on voit les acheteurs de templates
+        </button>
       </div>
       
       <div class="footer-bottom">
@@ -779,6 +770,22 @@
     </div>
   </div>
 
+  <!-- Video Modal -->
+  <div id="videoModal" class="modal hidden">
+    <div class="modal-overlay" onclick="closeVideoModal()"></div>
+    <div class="video-modal-content">
+      <button class="video-modal-close" onclick="closeVideoModal()">✕</button>
+      <div style="padding:56.25% 0 0 0;position:relative;">
+        <iframe id="videoIframe" src="" 
+          frameborder="0" 
+          allow="autoplay; fullscreen; picture-in-picture; clipboard-write" 
+          style="position:absolute;top:0;left:0;width:100%;height:100%;" 
+          title="Tomorrow.Online - Comment on voit les acheteurs de templates">
+        </iframe>
+      </div>
+    </div>
+  </div>
+
   <!-- Scripts -->
   <script src="js/cursor.js"></script>
   <script src="js/animations.js"></script>
@@ -788,6 +795,11 @@
   
   <!-- Initialize on load -->
   <script>
+    // Ensure openModal is available immediately
+    if (typeof window.openModal === 'undefined') {
+      console.log('Waiting for formulaire.js to load...');
+    }
+    
     document.addEventListener('DOMContentLoaded', () => {
       initCursor();
       initAnimations();
@@ -828,9 +840,29 @@
       // TODO: Implement modal with pack details
     }
     
+    // Video modal functions
+    function openVideoModal() {
+      const modal = document.getElementById('videoModal');
+      const iframe = document.getElementById('videoIframe');
+      // Replace YOUR_VIDEO_ID with actual Vimeo ID
+      iframe.src = 'https://player.vimeo.com/video/YOUR_VIDEO_ID?autoplay=1&badge=0&autopause=0';
+      modal.classList.remove('hidden');
+      document.body.style.overflow = 'hidden';
+    }
+    
+    function closeVideoModal() {
+      const modal = document.getElementById('videoModal');
+      const iframe = document.getElementById('videoIframe');
+      iframe.src = ''; // Stop video
+      modal.classList.add('hidden');
+      document.body.style.overflow = '';
+    }
+    
     // Export functions
     window.toggleFaq = toggleFaq;
     window.openDetails = openDetails;
+    window.openVideoModal = openVideoModal;
+    window.closeVideoModal = closeVideoModal;
   </script>
   
 </body>
