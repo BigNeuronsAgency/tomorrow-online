@@ -13,10 +13,10 @@ function initCursor() {
   
   if (!cursor) return;
   
-  // Track mouse position
+  // Track mouse position with scroll
   document.addEventListener('mousemove', (e) => {
-    mouseX = e.clientX;
-    mouseY = e.clientY;
+    mouseX = e.pageX;
+    mouseY = e.pageY;
   });
   
   // Smooth cursor movement - position exactly on mouse

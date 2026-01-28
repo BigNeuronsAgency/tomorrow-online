@@ -621,6 +621,13 @@
   width: 100%;
 }
 
+.details-link-under-oui {
+  position: static;
+  display: inline-block;
+  margin-top: 1rem;
+  font-size: 0.875rem;
+}
+
 .pricing-badge {
   display: inline-block;
   border: 1px solid var(--grid);
@@ -973,9 +980,6 @@
 .process-header {
   max-width: 1200px;
   margin: 0 auto 2rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
 }
 
 .process-intro {
@@ -1069,8 +1073,9 @@
 /* Process CTA */
 .process-cta {
   text-align: center;
-  padding: 2rem 0;
+  padding: 2rem 0 0 0;
   border-top: 2px solid var(--white);
+  margin-bottom: 0;
 }
 
 .cta-title {
@@ -1092,7 +1097,7 @@
    ======================================== */
 .jean-charles {
   background: var(--void);
-  padding: var(--spacing-xl) 0;
+  padding: 2rem 0 var(--spacing-xl) 0;
 }
 
 .bsod {

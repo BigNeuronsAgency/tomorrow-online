@@ -21,12 +21,12 @@
   <link rel="stylesheet" href="css/formulaire.css">
   
   <!-- GSAP -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js" defer></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js" defer></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollToPlugin.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollToPlugin.min.js"></script>
   
   <!-- Lenis Smooth Scroll -->
-  <script src="https://unpkg.com/lenis@1.0.19/dist/lenis.min.js" defer></script>
+  <script src="https://unpkg.com/lenis@1.0.19/dist/lenis.min.js"></script>
 </head>
 <body>
   
@@ -255,6 +255,9 @@
         
         <!-- BUSINESS -->
         <div class="pricing-card">
+          <button class="details-link" onclick="openDetails('BUSINESS')">
+            Détails [ + ]
+          </button>
           <div class="pricing-badge">Business</div>
           <div class="pricing-time">48H</div>
           <div class="pricing-price">
@@ -382,11 +385,11 @@
         <h2 class="section-title">
           Comment on fait ?<br>
           On triche ?<br>
-          <span class="text-gradient">Oui.</span>
+          <span class="text-gradient">Oui.</span><br>
+          <button class="details-link details-link-under-oui" onclick="openProcessDetails()">
+            Détails [ + ]
+          </button>
         </h2>
-        <button class="details-link" onclick="openProcessDetails()">
-          Détails [ + ]
-        </button>
       </div>
       
       <p class="process-intro">

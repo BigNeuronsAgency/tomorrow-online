@@ -199,7 +199,7 @@ p {
   background: var(--white);
   border: 2px solid var(--white);
   mix-blend-mode: difference;
-  position: fixed;
+  position: absolute;
   pointer-events: none;
   z-index: var(--z-cursor);
   transition: transform 0.15s ease;
