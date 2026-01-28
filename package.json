@@ -1,0 +1,10 @@
+{
+  "name": "tomorrow-online",
+  "version": "1.0.0",
+  "description": "Tomorrow.Online - Site en 24H",
+  "scripts": {
+    "build": "echo 'No build needed - static HTML site'"
+  },
+  "author": "Tomorrow.Online",
+  "license": "MIT"
+}
