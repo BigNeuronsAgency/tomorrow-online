@@ -1,0 +1,837 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tomorrow.Online - Site en 24H | Webflow Expert</title>
+  <meta name="description" content="On construit votre site en 24H. Sinon on vous rembourse. Équipe senior + IA. Webflow. 0 bug. Tomorrow.">
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="images/favicon.png">
+  <link rel="apple-touch-icon" href="images/webclip.png">
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700;800;900&family=Syne:wght@700;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+  
+  <!-- CSS -->
+  <link rel="stylesheet" href="css/design-system.css">
+  <link rel="stylesheet" href="css/home.css">
+  <link rel="stylesheet" href="css/formulaire.css">
+  
+  <!-- GSAP -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollToPlugin.min.js" defer></script>
+  
+  <!-- Lenis Smooth Scroll -->
+  <script src="https://unpkg.com/lenis@1.0.19/dist/lenis.min.js" defer></script>
+  
+  <!-- Weglot -->
+  <script src="https://cdn.weglot.com/weglot.min.js"></script>
+  <script>
+    Weglot.initialize({
+      api_key: 'wg_3b8be3f3773886e6a9139b91c364f46f1',
+      hide_switcher: true
+    });
+  </script>
+</head>
+<body>
+  
+  <!-- Custom Cursor -->
+  <div class="custom-cursor" id="cursor"></div>
+  
+  <!-- Grid Background -->
+  <div class="bg-grid-fixed"></div>
+  
+  <!-- Header -->
+  <header class="header">
+    <div class="header-top">
+      <div class="header-top-inner">
+        <div class="header-slot">
+          <span class="font-mono">Slots disponibles par jour :</span>
+          <span class="slot-count">3</span>
+        </div>
+        <div class="header-powered">
+          <span class="font-mono">Propulsé par BIG NEURONS™</span>
+        </div>
+      </div>
+    </div>
+    
+    <nav class="nav">
+      <div class="nav-logo" onclick="scrollToTop()">
+        <img src="images/TO-logo-baseline.svg" alt="Tomorrow.Online" class="logo">
+      </div>
+      
+      <div class="nav-links">
+        <a href="process-24h.html" class="nav-link">Process</a>
+        <a href="realisations.html" class="nav-link">Réalisations</a>
+        <div class="nav-dropdown">
+          <span class="nav-link nav-link-dropdown">
+            Ressources
+            <span class="dropdown-arrow">▼</span>
+          </span>
+          <div class="dropdown-content">
+            <a href="la-vision-tomorrow.html">🔮 Notre Vision</a>
+            <a href="notre-histoire.html">🏢 Qui sommes-nous</a>
+            <a href="comparatif-solutions-web.html">⚡ Comparatif Solutions</a>
+            <a href="migrations.html">🔄 Migrations CMS</a>
+          </div>
+        </div>
+      </div>
+      
+      <div class="nav-cta">
+        <button class="btn btn-primary" onclick="openModal()">
+          Réserver mon créneau
+        </button>
+      </div>
+      
+      <!-- Mobile Menu Button -->
+      <button class="mobile-menu-btn" onclick="toggleMobileMenu()">
+        <span class="hamburger"></span>
+      </button>
+    </nav>
+    
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobileMenu">
+      <a href="process-24h.html">Process</a>
+      <a href="realisations.html">Réalisations</a>
+      <div class="mobile-dropdown" onclick="toggleMobileDropdown(this)">
+        <span>Ressources ▼</span>
+        <div class="mobile-dropdown-content">
+          <a href="la-vision-tomorrow.html">🔮 Notre Vision</a>
+          <a href="notre-histoire.html">🏢 Qui sommes-nous</a>
+          <a href="comparatif-solutions-web.html">⚡ Comparatif Solutions</a>
+          <a href="migrations.html">🔄 Migrations CMS</a>
+        </div>
+      </div>
+      <button class="btn btn-primary" onclick="openModal()">Réserver</button>
+    </div>
+  </header>
+  
+  <!-- Hero Section -->
+  <section class="hero section">
+    <div class="container">
+      <div class="hero-content">
+        <h1 class="hero-title hero-load">
+          ON CONSTRUIT<br>
+          VOTRE SITE<br>
+          <span class="text-gradient">EN 24H<span class="asterisk">*</span></span>
+        </h1>
+        
+        <div class="hero-subtitle hero-load">
+          <p class="hero-text">
+            <span class="asterisk">*</span>Sinon <span class="highlight-dark">on vous rembourse.</span><br>
+            La lenteur est un choix.
+          </p>
+        </div>
+        
+        <div class="hero-cta hero-load">
+          <button class="btn btn-primary btn-large" onclick="openModal()">
+            Démarrer mon projet en 24H
+          </button>
+          <p class="hero-cta-note font-mono">Formulaire rapide en 2 min</p>
+          <button class="btn btn-outline" onclick="smoothScroll('#work')">
+            + de preuves
+          </button>
+        </div>
+      </div>
+      
+      <!-- Hero Stats -->
+      <div class="hero-stats">
+        <div class="hero-stat">
+          <span class="stat-label font-mono">01 / SQUAD</span>
+          <span class="stat-value">Seniors Only.<br>Pas de Juniors.</span>
+        </div>
+        <div class="hero-stat">
+          <span class="stat-label font-mono">02 / STACK</span>
+          <span class="stat-value">Human Art.<br>Boost IA.</span>
+        </div>
+        <div class="hero-stat">
+          <span class="stat-label font-mono">03 / PROMISE</span>
+          <span class="stat-value">Tomorrow<br>en ligne.</span>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Marquee Section -->
+  <div class="marquee">
+    <div class="marquee-content">
+      SOYEZ IMPATIENTS : L'ATTENTE EST UN BUG. <span class="mx-4">///</span> 
+      QUALITÉ CHIRURGICALE. <span class="mx-4">///</span> 
+      VITESSE BRUTALE. <span class="mx-4">///</span> 
+      EXPERTISE HUMAINE. <span class="mx-4">///</span> 
+      LA VITESSE EST UNE FONCTIONNALITÉ. <span class="mx-4">///</span>
+      SOYEZ IMPATIENTS : L'ATTENTE EST UN BUG. <span class="mx-4">///</span> 
+      QUALITÉ CHIRURGICALE. <span class="mx-4">///</span> 
+      VITESSE BRUTALE. <span class="mx-4">///</span> 
+      EXPERTISE HUMAINE. <span class="mx-4">///</span> 
+      LA VITESSE EST UNE FONCTIONNALITÉ. <span class="mx-4">///</span>
+    </div>
+  </div>
+
+  <!-- Manifesto Section -->
+  <section id="manifesto" class="section manifesto">
+    <div class="container">
+      <div class="manifesto-grid">
+        <div class="manifesto-content">
+          <h2 class="manifesto-title">
+            <span class="text-gradient">BE IMPATIENT</span>
+          </h2>
+          
+          <div class="manifesto-text">
+            <p>
+              Hier, il était normal de patienter 5 semaines pour un site,<br>
+              comme il était commun d'attendre 2 semaines pour développer une photo.
+            </p>
+            
+            <p class="opacity-60 italic">
+              Mais les avancées tech' et les exigences du nouveau monde — toujours plus rapide — interdisent ce genre de délais.
+            </p>
+            
+            <p>
+              Et si certaines agences préfèrent vous facturer le temps passé à la machine à café,
+              <strong>Tomorrow.Online</strong> ne vous vend que des résultats.
+            </p>
+            
+            <p class="manifesto-conclusion">
+              Pas dans 1 mois. Ni dans 1 semaine.<br>
+              <strong>Tomorrow.</strong>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pricing Section -->
+  <section id="pricing" class="section pricing">
+    <div class="container">
+      <div class="pricing-header">
+        <h2 class="section-title">
+          3 Offres<span class="text-gradient">.</span>
+        </h2>
+        <p class="section-subtitle font-mono">
+          2 créneaux par jour. 1 site sur mesure.
+        </p>
+      </div>
+      
+      <div class="pricing-grid">
+        <!-- MAQUETTE -->
+        <div class="pricing-card">
+          <button class="details-link" onclick="openDetails('MAQUETTE')">
+            Détails [ + ]
+          </button>
+          <div class="pricing-badge">Maquette</div>
+          <div class="pricing-time">12H</div>
+          <div class="pricing-price">
+            900€ <span class="price-ht">HT</span>
+          </div>
+          <div class="pricing-label">Design Only</div>
+          <ul class="pricing-features">
+            <li><span class="feature-dot"></span> Maquette intégrable</li>
+            <li><span class="feature-dot"></span> UX/UI CRO</li>
+            <li><span class="feature-dot"></span> Copy + visuels</li>
+            <li class="opacity-40"><span class="feature-dot inactive"></span> Sans code</li>
+          </ul>
+          <button class="btn btn-outline w-full" onclick="openModal()">
+            >Bloquer mon slot
+          </button>
+        </div>
+        
+        <!-- STARTER (POPULAIRE) -->
+        <div class="pricing-card pricing-card-popular">
+          <div class="popular-badge">Populaire</div>
+          <button class="details-link details-link-light" onclick="openDetails('STARTER')">
+            Détails [ + ]
+          </button>
+          <div class="pricing-badge pricing-badge-light">Starter</div>
+          <div class="pricing-time">24H</div>
+          <div class="pricing-price">
+            <span class="price-strike">1500€</span> 980€ <span class="price-ht">HT</span>
+            <span class="price-offer">Offre du mois</span>
+          </div>
+          <div class="pricing-label">Conversions instantanées</div>
+          <ul class="pricing-features">
+            <li><span class="feature-dot"></span> One page / Landing</li>
+            <li><span class="feature-dot"></span> UX/UI CRO</li>
+            <li><span class="feature-dot"></span> Copy + visuels</li>
+            <li><span class="feature-dot"></span> Dev Webflow</li>
+          </ul>
+          <button class="btn btn-primary w-full" onclick="openModal()">
+            >Bloquer mon slot
+          </button>
+        </div>
+        
+        <!-- BUSINESS -->
+        <div class="pricing-card">
+          <button class="details-link" onclick="openDetails('BUSINESS')">
+            Détails [ + ]
+          </button>
+          <div class="pricing-badge">Business</div>
+          <div class="pricing-time">48H</div>
+          <div class="pricing-price">
+            2200€ <span class="price-ht">HT</span>
+          </div>
+          <div class="pricing-label">Réassurance +</div>
+          <ul class="pricing-features">
+            <li><span class="feature-dot"></span> Max 5 pages</li>
+            <li><span class="feature-dot"></span> UX/CRO</li>
+            <li><span class="feature-dot"></span> Copy + visuels</li>
+            <li><span class="feature-dot"></span> Dev Webflow</li>
+          </ul>
+          <button class="btn btn-outline w-full" onclick="openModal()">
+            >Bloquer mon slot
+          </button>
+        </div>
+      </div>
+      
+      <!-- Projet complexe -->
+      <a href="https://www.bigneurons.com" target="_blank" class="pricing-complex">
+        <div>
+          <div class="complex-title">Projet complexe ?</div>
+          <p class="complex-subtitle">Scale, SaaS, E-commerce</p>
+        </div>
+        <div class="complex-link">Big Neurons ↗</div>
+      </a>
+    </div>
+  </section>
+
+  <!-- Squad Section (X-RAY Effect) -->
+  <section id="squad" class="section squad">
+    <div class="container-full">
+      <div class="squad-header">
+        <h2 class="section-title">
+          Votre équipe<br>
+          <span class="text-gradient">(de mercenaires)</span><br>
+          pour les prochaines 24H.
+        </h2>
+        <div class="squad-drag font-mono">
+          <span class="hide-mobile">DRAG TO EXPLORE</span>
+          <span class="show-mobile">SWIPE</span> →
+        </div>
+      </div>
+      
+      <div class="squad-scroll">
+        <div class="squad-grid">
+          <!-- Le Stratège -->
+          <div class="squad-card xray-container">
+            <div class="squad-role font-mono">STRATÉGIE</div>
+            <div class="squad-image">
+              <img src="images/PPTIMTOMORROW.jpeg" alt="Le Stratège" class="xray-img">
+              <div class="xray-scanline"></div>
+            </div>
+            <h3 class="squad-name">Le Stratège</h3>
+            <p class="squad-xp font-mono">15 ans d'XP • Ex-Codir</p>
+            <p class="squad-desc">Il analyse votre marché, trouve la faille et briefe l'IA.</p>
+          </div>
+          
+          <!-- Le Publicitaire -->
+          <div class="squad-card xray-container">
+            <div class="squad-role font-mono">COPYWRITING</div>
+            <div class="squad-image">
+              <img src="images/PPARTHURTOMORROW.jpeg" alt="Le Publicitaire" class="xray-img">
+              <div class="xray-scanline"></div>
+            </div>
+            <h3 class="squad-name">Le Publicitaire</h3>
+            <p class="squad-xp font-mono">5 ans d'XP • Focus Vente</p>
+            <p class="squad-desc">Il injecte émotion et psycho de vente.</p>
+          </div>
+          
+          <!-- L'Architecte -->
+          <div class="squad-card xray-container">
+            <div class="squad-role font-mono">UX DESIGN</div>
+            <div class="squad-image">
+              <img src="images/PPMARIIATOMORROW.jpeg" alt="L'Architecte" class="xray-img">
+              <div class="xray-scanline"></div>
+            </div>
+            <h3 class="squad-name">L'Architecte</h3>
+            <p class="squad-xp font-mono">5 ans d'XP • Pixel Perfect</p>
+            <p class="squad-desc">Elle ne laisse rien au hasard : UX, Wireframe, CRO.</p>
+          </div>
+          
+          <!-- L'Artiste -->
+          <div class="squad-card xray-container">
+            <div class="squad-role font-mono">ART & ASSETS</div>
+            <div class="squad-image">
+              <img src="images/PPHAMIDTOMORROW.png" alt="L'Artiste" class="xray-img">
+              <div class="xray-scanline"></div>
+            </div>
+            <h3 class="squad-name">L'Artiste</h3>
+            <p class="squad-xp font-mono">15 ans d'XP • Brutal Branding</p>
+            <p class="squad-desc">Il crée l'identité visuelle et les assets qui frappent.</p>
+          </div>
+          
+          <!-- La Caporale -->
+          <div class="squad-card xray-container">
+            <div class="squad-role font-mono">PILOTAGE</div>
+            <div class="squad-image">
+              <img src="images/PPMARIEFRANCINETOMORROW.jpg" alt="La Caporale" class="xray-img">
+              <div class="xray-scanline"></div>
+            </div>
+            <h3 class="squad-name">La Caporale</h3>
+            <p class="squad-xp font-mono">10 ans d'XP • Ops Master</p>
+            <p class="squad-desc">Elle veille au respect de la deadline et vous appelle pour sabrer le champagne.</p>
+          </div>
+          
+          <!-- La Stack IA -->
+          <div class="squad-card squad-card-ai">
+            <div class="squad-role font-mono">STACK IA</div>
+            <div class="squad-image squad-image-ai">
+              <div class="ai-icon">AI</div>
+            </div>
+            <h3 class="squad-name">La stack IA</h3>
+            <p class="squad-xp font-mono opacity-60">La secret sauce Tomorrow.Online</p>
+            <p class="squad-desc">Chaque expert a paramétré nos IA pendant des semaines pour l'assister dans ses missions.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Process Section -->
+  <section id="process" class="section process">
+    <div class="container">
+      <div class="process-header">
+        <h2 class="section-title">
+          Comment on fait ?<br>
+          On triche ?<br>
+          <span class="text-gradient">Oui.</span>
+        </h2>
+        <button class="details-link" onclick="openProcessDetails()">
+          Détails [ + ]
+        </button>
+      </div>
+      
+      <p class="process-intro">
+        Pendant que certains refusent l'IA ou produisent de la soupe déshumanisée, 
+        nous avons créé un process où humain et machine ne font qu'un.
+      </p>
+      
+      <div class="process-grid">
+        <div class="process-step">
+          <div class="step-number">1</div>
+          <div class="step-badge font-mono">Étape 1</div>
+          <h3 class="step-title">Brief</h3>
+          <p class="step-desc">
+            Vous remplissez notre questionnaire détaillé. On veut tout savoir sur votre site, 
+            marché, concurrents, vision.
+          </p>
+        </div>
+        
+        <div class="process-step">
+          <div class="step-number">2</div>
+          <div class="step-badge font-mono">Étape 2</div>
+          <h3 class="step-title">Call</h3>
+          <p class="step-desc">
+            Notre équipe vous contacte. On confirme le brief. Le paiement se fait à ce moment, 
+            si tout est validé.
+          </p>
+        </div>
+        
+        <div class="process-step">
+          <div class="step-number">3</div>
+          <div class="step-badge font-mono">Étape 3</div>
+          <h3 class="step-title">Deepwork</h3>
+          <p class="step-desc">
+            On rédige vos textes, crée vos visuels, génère wireframe et design system. 
+            Humain + IA en symbiose.
+          </p>
+        </div>
+        
+        <div class="process-step process-step-final">
+          <div class="step-number step-number-gradient">4</div>
+          <div class="step-badge font-mono">Étape 4</div>
+          <h3 class="step-title">Champagne</h3>
+          <p class="step-desc">
+            Présentation visio, SEO, mise en ligne. On ouvre le Dom Pérignon. Votre site est live.
+          </p>
+        </div>
+      </div>
+      
+      <div class="process-cta">
+        <p class="cta-title">Prêt à célébrer ?</p>
+        <button class="btn btn-primary btn-large" onclick="openModal()">
+          > Sabrer le champagne Tomorrow !
+        </button>
+        <p class="cta-note font-mono">24H chrono • Qualité garantie</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Jean-Charles BSOD Section -->
+  <section id="jean-charles" class="section jean-charles">
+    <div class="container">
+      <div class="bsod">
+        <div class="bsod-header">
+          <div class="bsod-title font-mono">FATAL_ERROR_JC_DIY_ATTEMPT</div>
+          <p class="bsod-subtitle font-mono">
+            A problem has been detected and your project has been shut down to prevent damage to your business.
+          </p>
+          <p class="bsod-problem font-mono">
+            THE_PROBLEM: JEAN-CHARLES IS TRYING TO CODE.
+          </p>
+        </div>
+        
+        <div class="bsod-timeline">
+          <!-- Étape 1 -->
+          <div class="timeline-item">
+            <div class="timeline-emoji">😊</div>
+            <div class="timeline-content">
+              <div class="timeline-step font-mono">Étape 1</div>
+              <h3 class="timeline-title">Briefer l'IA</h3>
+              <p class="timeline-desc"><strong>Jean-Charles croit maîtriser le prompt engineering.</strong></p>
+              <p class="timeline-note">L'IA génère une soupe de div sans sémantique.</p>
+            </div>
+          </div>
+          
+          <!-- Étape 2 -->
+          <div class="timeline-item">
+            <div class="timeline-emoji">😕</div>
+            <div class="timeline-content">
+              <div class="timeline-step font-mono">Étape 2</div>
+              <h3 class="timeline-title">Évaluer la qualité</h3>
+              <p class="timeline-desc"><strong>Jean-Charles ne sait pas reconnaître du bon code.</strong></p>
+              <p class="timeline-note">Il publie quand même. Ça convertit pas.</p>
+            </div>
+          </div>
+          
+          <!-- Étape 3 -->
+          <div class="timeline-item">
+            <div class="timeline-emoji">😰</div>
+            <div class="timeline-content">
+              <div class="timeline-step font-mono">Étape 3</div>
+              <h3 class="timeline-title">Intégrer le code</h3>
+              <p class="timeline-desc"><strong>Jean-Charles ne sait pas intégrer le code.</strong></p>
+              <p class="timeline-note">Stack Overflow devient son BFF.</p>
+            </div>
+          </div>
+          
+          <!-- Game Over -->
+          <div class="timeline-item timeline-item-gameover">
+            <div class="timeline-emoji timeline-emoji-dead">💀</div>
+            <div class="timeline-content">
+              <div class="timeline-step font-mono">Game Over</div>
+              <h3 class="timeline-title">Résultat final</h3>
+              <p class="timeline-desc"><strong>Jean-Charles passe plus de temps à comprendre qu'à faire.</strong></p>
+              <p class="timeline-result">
+                De <span class="text-strike">Tomorrow Online</span> à <span class="text-gameover">NEVER Online</span>.
+              </p>
+            </div>
+          </div>
+        </div>
+        
+        <div class="bsod-cta">
+          <p class="cta-title">Ne soyez pas comme Jean-Charles.</p>
+          <button class="btn btn-error btn-large" onclick="openModal()">
+            > Je ne veux pas être comme JC…
+          </button>
+          <p class="cta-note font-mono">Slots disponibles demain</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Work Section -->
+  <section id="work" class="section work">
+    <div class="container">
+      <div class="work-header">
+        <h2 class="section-title">
+          Ils ont arrêté de rêver<span class="text-gradient">.</span><br>
+          Ils ont <span class="text-gradient">agi</span>.
+        </h2>
+        <p class="section-subtitle font-mono">
+          Des projets réels. Des résultats mesurables.
+        </p>
+      </div>
+      
+      <div class="work-stats">
+        <div class="work-stat">
+          <div class="stat-value">127</div>
+          <div class="stat-label font-mono">Sites livrés en 2026</div>
+        </div>
+        <div class="work-stat">
+          <div class="stat-value">24H</div>
+          <div class="stat-label font-mono">Délai moyen de livraison</div>
+        </div>
+        <div class="work-stat">
+          <div class="stat-value">4.9/5</div>
+          <div class="stat-label font-mono">Satisfaction client</div>
+        </div>
+      </div>
+      
+      <div class="work-cta">
+        <a href="realisations.html" class="btn btn-outline btn-large">
+          > Voir toutes les réalisations
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3 Mondes Section -->
+  <section id="trois-mondes" class="section trois-mondes">
+    <div class="container">
+      <div class="mondes-header">
+        <h2 class="section-title">
+          Le Meilleur des<br>
+          <span class="text-gradient">3 Mondes.</span>
+        </h2>
+        <p class="section-subtitle font-mono">La vision tomorrow.online</p>
+      </div>
+      
+      <div class="mondes-grid">
+        <div class="mondes-venn">
+          <div class="venn-circle venn-tech">
+            <div class="circle-label">TECH<br>IA</div>
+          </div>
+          <div class="venn-circle venn-agency">
+            <div class="circle-label">AGENCE<br>PARISIENNE</div>
+          </div>
+          <div class="venn-circle venn-template">
+            <div class="circle-label">TEMPLATE<br>FIABLE</div>
+          </div>
+          <div class="venn-center">TOMORROW.<br>ONLINE</div>
+        </div>
+        
+        <div class="mondes-content">
+          <div class="monde-item">
+            <div class="monde-number font-mono">01</div>
+            <h3 class="monde-title">Nous avons pris la vitesse de l'IA...</h3>
+            <p class="monde-desc">Structure codée par IA, finalisée par des experts Webflow. 24-48h chrono.</p>
+          </div>
+          
+          <div class="monde-item">
+            <div class="monde-number font-mono">02</div>
+            <h3 class="monde-title">L'âme d'une Agence Parisienne...</h3>
+            <p class="monde-desc">Direction Artistique senior et copywriting inclus. Pas de devis à rallonge.</p>
+          </div>
+          
+          <div class="monde-item">
+            <div class="monde-number font-mono">03</div>
+            <h3 class="monde-title">La fiabilité d'un Template...</h3>
+            <p class="monde-desc">Zéro bug technique, mais un design qui ne ressemble à aucun autre.</p>
+          </div>
+          
+          <button class="btn btn-primary btn-large" onclick="openModal()">
+            > Rejoindre la nouvelle norme
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ Section -->
+  <section id="faq" class="section faq">
+    <div class="container-grid">
+      <div class="faq-sidebar">
+        <h2 class="section-title">FAQ<span class="text-gradient">.</span></h2>
+        <p class="section-subtitle font-mono">
+          Pas de zone d'ombre.<br>Tout est clair avant le départ.
+        </p>
+      </div>
+      
+      <div class="faq-list">
+        <div class="faq-item" onclick="toggleFaq(this)">
+          <div class="faq-question">
+            <h3 class="faq-title">Vraiment livré en 24h ?</h3>
+            <span class="faq-icon font-mono">+</span>
+          </div>
+          <div class="faq-answer">
+            <p>Oui. Le chronomètre démarre à la validation du brief ("Sprint Go"). Nous mobilisons une équipe senior complète sur votre projet pendant une journée non-stop.</p>
+          </div>
+        </div>
+        
+        <div class="faq-item" onclick="toggleFaq(this)">
+          <div class="faq-question">
+            <h3 class="faq-title">Est-ce que le site m'appartient ?</h3>
+            <span class="faq-icon font-mono">+</span>
+          </div>
+          <div class="faq-answer">
+            <p>À 100%. Contrairement à beaucoup d'agences, nous ne vous louons pas votre site. Une fois livré et payé, nous vous transférons la propriété complète du projet Webflow. Vous êtes libre.</p>
+          </div>
+        </div>
+        
+        <div class="faq-item" onclick="toggleFaq(this)">
+          <div class="faq-question">
+            <h3 class="faq-title">Je suis sur WordPress / Shopify / Autre ?</h3>
+            <span class="faq-icon font-mono">+</span>
+          </div>
+          <div class="faq-answer">
+            <p>Aucun problème. Nous recommandons Webflow pour la performance. Si votre infra est ailleurs, <strong>nous vous livrons le code source exporté (HTML/CSS/JS)</strong> propre et documenté, prêt à être intégré par vos équipes sur n'importe quel CMS.</p>
+          </div>
+        </div>
+        
+        <div class="faq-item" onclick="toggleFaq(this)">
+          <div class="faq-question">
+            <h3 class="faq-title">C'est optimisé pour Google (SEO) ?</h3>
+            <span class="faq-icon font-mono">+</span>
+          </div>
+          <div class="faq-answer">
+            <p>Absolument. Nous livrons une structure technique irréprochable : Balisage Hn sémantique, attributs Alt sur les images, optimisation du poids des assets, et structure responsive.</p>
+          </div>
+        </div>
+        
+        <div class="faq-item" onclick="toggleFaq(this)">
+          <div class="faq-question">
+            <h3 class="faq-title">J'ai déjà un nom de domaine (OVH...) ?</h3>
+            <span class="faq-icon font-mono">+</span>
+          </div>
+          <div class="faq-answer">
+            <p>On ne touche pas à vos emails ni à votre hébergeur actuel. On pointe simplement les enregistrements DNS (A & CNAME) de votre domaine vers les serveurs CDN ultra-rapides. C'est une opération de 5 minutes, sans coupure de service.</p>
+          </div>
+        </div>
+        
+        <div class="faq-item" onclick="toggleFaq(this)">
+          <div class="faq-question">
+            <h3 class="faq-title">Vous faites aussi de la refonte de sites existants ?</h3>
+            <span class="faq-icon font-mono">+</span>
+          </div>
+          <div class="faq-answer">
+            <p>Oui. Nous sommes spécialisés dans les migrations ultra-rapides. WordPress cassé ? Site Wix qui rame ? On récupère votre contenu et on reconstruit proprement en 48h max.</p>
+          </div>
+        </div>
+        
+        <div class="faq-item" onclick="toggleFaq(this)">
+          <div class="faq-question">
+            <h3 class="faq-title">Vous gérez l'hébergement ?</h3>
+            <span class="faq-icon font-mono">+</span>
+          </div>
+          <div class="faq-answer">
+            <p>Non. Nous livrons le site clé-en-main sur votre propre infrastructure (Webflow, Netlify, Vercel…). Vous gardez le contrôle total.</p>
+          </div>
+        </div>
+        
+        <div class="faq-item" onclick="toggleFaq(this)">
+          <div class="faq-question">
+            <h3 class="faq-title">Et après la livraison ?</h3>
+            <span class="faq-icon font-mono">+</span>
+          </div>
+          <div class="faq-answer">
+            <p>Vous êtes 100% autonome. Mais si vous voulez déléguer les MAJ/évolutions, notre offre Care démarre à 190€/mois (détails dans le formulaire).</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <img src="images/TO-logo-baseline.svg" alt="Tomorrow.Online" class="footer-logo">
+          <p class="footer-tagline font-mono">
+            La première agence web "NO-WAIT" en France.<br>
+            Designed for speed. Powered by intelligence.
+          </p>
+        </div>
+        
+        <div class="footer-links">
+          <h4 class="footer-title font-mono">Services</h4>
+          <ul class="footer-list">
+            <li><a href="process-24h.html">Process 24H</a></li>
+            <li><a href="realisations.html">Réalisations</a></li>
+            <li><a href="comparatif-solutions-web.html">Comparatif</a></li>
+            <li><a href="migrations.html">Migrations</a></li>
+          </ul>
+        </div>
+        
+        <div class="footer-links">
+          <h4 class="footer-title font-mono">À Propos</h4>
+          <ul class="footer-list">
+            <li><a href="la-vision-tomorrow.html">La Vision</a></li>
+            <li><a href="notre-histoire.html">Notre Histoire</a></li>
+            <li><a href="detail_sprints.html">Détails Sprints</a></li>
+            <li><a href="detail_integrations.html">Intégrations</a></li>
+          </ul>
+        </div>
+        
+        <div class="footer-links">
+          <h4 class="footer-title font-mono">Réseau & Contact</h4>
+          <ul class="footer-list">
+            <li><a href="https://www.bigneurons.com" target="_blank">Groupe Big Neurons <span class="external-icon">↗</span></a></li>
+            <li><a href="mentions-legales.html">Mentions Légales</a></li>
+            <li><a href="mailto:hello@tomorrow.online">Contact Ops</a></li>
+          </ul>
+        </div>
+      </div>
+      
+      <div class="footer-bottom">
+        <p class="footer-copyright font-mono">
+          © 2026 TOMORROW AGENCY. UNE MARQUE DE SAS BIG NEURONS. TOMORROW.ONLINE EST LA PREMIÈRE AGENCE WEB "NO-WAIT" EN FRANCE. DESIGNED FOR SPEED. POWERED BY INTELLIGENCE.
+        </p>
+        <div class="footer-status font-mono">
+          SYSTEM STATUS: OPERATIONAL
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Modal Formulaire 7 Étapes -->
+  <div id="bookingModal" class="modal hidden">
+    <div class="modal-overlay" onclick="window.closeModal()"></div>
+    <div class="modal-container">
+      <div id="modalContent" class="modal-content">
+        <!-- Dynamic content generated by formulaire.js -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="js/cursor.js"></script>
+  <script src="js/animations.js"></script>
+  <script src="js/navigation.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/formulaire.js"></script>
+  
+  <!-- Initialize on load -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      initCursor();
+      initAnimations();
+      initSmoothScroll();
+    });
+    
+    // FAQ Toggle Function
+    function toggleFaq(element) {
+      const answer = element.querySelector('.faq-answer');
+      const icon = element.querySelector('.faq-icon');
+      const isOpen = answer.style.maxHeight && answer.style.maxHeight !== '0px';
+      
+      // Close all other FAQs
+      document.querySelectorAll('.faq-answer').forEach(el => {
+        if (el !== answer) {
+          el.style.maxHeight = '0';
+        }
+      });
+      document.querySelectorAll('.faq-icon').forEach(el => {
+        if (el !== icon) {
+          el.textContent = '+';
+        }
+      });
+      
+      // Toggle current FAQ
+      if (isOpen) {
+        answer.style.maxHeight = '0';
+        icon.textContent = '+';
+      } else {
+        answer.style.maxHeight = answer.scrollHeight + 'px';
+        icon.textContent = '-';
+      }
+    }
+    
+    // Details modal functions (placeholder)
+    function openDetails(pack) {
+      console.log('Opening details for:', pack);
+      // TODO: Implement modal with pack details
+    }
+    
+    // Export functions
+    window.toggleFaq = toggleFaq;
+    window.openDetails = openDetails;
+  </script>
+  
+</body>
+</html>

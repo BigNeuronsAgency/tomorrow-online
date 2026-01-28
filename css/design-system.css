@@ -1,0 +1,421 @@
+/* ========================================
+   TOMORROW.ONLINE - DESIGN SYSTEM
+   Dark Theme avec Gradient Rose→Violet
+   ======================================== */
+
+/* === VARIABLES === */
+:root {
+  /* Couleurs principales */
+  --void: #000000;
+  --void-soft: #0A0A0A;
+  --white: #FFFFFF;
+  --white-soft: #EAEAEA;
+  --white-ghost: rgba(255, 255, 255, 0.6);
+  
+  /* Gradient rose→violet (accent principal) */
+  --gradient-main: linear-gradient(90deg, rgba(180, 7, 254, 1) 0%, rgba(255, 10, 55, 1) 100%);
+  --gradient-violet: rgba(180, 7, 254, 1);
+  --gradient-rose: rgba(255, 10, 55, 1);
+  
+  /* Grille */
+  --grid: rgba(255, 255, 255, 0.05);
+  
+  /* Spacing */
+  --spacing-xs: 0.5rem;
+  --spacing-sm: 1rem;
+  --spacing-md: 2rem;
+  --spacing-lg: 4rem;
+  --spacing-xl: 8rem;
+  
+  /* Border radius */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 16px;
+  
+  /* Transitions */
+  --transition-fast: 0.2s ease;
+  --transition-base: 0.3s ease;
+  --transition-slow: 0.5s ease;
+  
+  /* Z-index layers */
+  --z-background: -1;
+  --z-base: 1;
+  --z-dropdown: 10;
+  --z-sticky: 50;
+  --z-modal-overlay: 100;
+  --z-modal: 200;
+  --z-cursor: 9999;
+}
+
+/* === RESET & BASE === */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--void);
+  color: var(--white);
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 400;
+  line-height: 1.6;
+  overflow-x: hidden;
+  cursor: none; /* Pour le cursor custom */
+}
+
+/* === TYPOGRAPHY === */
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 900;
+  line-height: 1;
+  text-transform: uppercase;
+  letter-spacing: -0.02em;
+}
+
+h1 { font-size: clamp(2.5rem, 10vw, 8rem); }
+h2 { font-size: clamp(2rem, 6vw, 5rem); }
+h3 { font-size: clamp(1.5rem, 4vw, 3rem); }
+h4 { font-size: clamp(1.25rem, 3vw, 2rem); }
+h5 { font-size: clamp(1rem, 2vw, 1.5rem); }
+h6 { font-size: clamp(0.875rem, 1.5vw, 1.25rem); }
+
+p {
+  font-size: clamp(1rem, 2vw, 1.125rem);
+  line-height: 1.6;
+}
+
+.font-heading {
+  font-family: 'Syne', sans-serif;
+  font-weight: 800;
+}
+
+.font-mono {
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 400;
+}
+
+.text-gradient {
+  background: var(--gradient-main);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* === BUTTONS === */
+.btn {
+  display: inline-block;
+  padding: 1rem 2rem;
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 700;
+  font-size: 0.875rem;
+  text-transform: uppercase;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  transition: all var(--transition-base);
+  position: relative;
+}
+
+.btn-primary {
+  background: var(--gradient-main);
+  color: var(--white);
+  box-shadow: 0 4px 0 0 var(--gradient-violet);
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 0 0 var(--gradient-violet),
+              0 12px 30px rgba(180, 7, 254, 0.4);
+}
+
+.btn-primary:active {
+  transform: translateY(2px);
+  box-shadow: 0 2px 0 0 var(--gradient-violet);
+}
+
+.btn-outline {
+  background: transparent;
+  color: var(--white);
+  border: 2px solid var(--white);
+}
+
+.btn-outline:hover {
+  background: var(--white);
+  color: var(--void);
+}
+
+.btn-ghost {
+  background: transparent;
+  color: var(--white-soft);
+  border: 1px solid var(--grid);
+}
+
+.btn-ghost:hover {
+  border-color: var(--gradient-violet);
+  color: var(--white);
+}
+
+/* === CARDS === */
+.card {
+  background: var(--void-soft);
+  border: 1px solid var(--grid);
+  padding: 2rem;
+  transition: all var(--transition-base);
+}
+
+.card:hover {
+  border-color: var(--gradient-violet);
+  box-shadow: 0 0 30px rgba(180, 7, 254, 0.2);
+  transform: translateY(-4px);
+}
+
+.card-gradient {
+  background: var(--gradient-main);
+  color: var(--white);
+  border: none;
+}
+
+/* === GRID BACKGROUND === */
+.bg-grid {
+  background-image: 
+    linear-gradient(to right, var(--grid) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--grid) 1px, transparent 1px);
+  background-size: 60px 60px;
+}
+
+/* === CUSTOM CURSOR === */
+.custom-cursor {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--white);
+  mix-blend-mode: difference;
+  position: fixed;
+  pointer-events: none;
+  z-index: var(--z-cursor);
+  transition: transform 0.15s ease;
+  transform: translate(-50%, -50%);
+}
+
+.custom-cursor.hover {
+  transform: translate(-50%, -50%) scale(1.5);
+}
+
+/* === UTILITIES === */
+.container {
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+.section {
+  padding: var(--spacing-xl) 0;
+  position: relative;
+}
+
+.text-center { text-align: center; }
+.text-left { text-align: left; }
+.text-right { text-align: right; }
+
+.uppercase { text-transform: uppercase; }
+.lowercase { text-transform: lowercase; }
+.capitalize { text-transform: capitalize; }
+
+.opacity-60 { opacity: 0.6; }
+.opacity-40 { opacity: 0.4; }
+
+/* === ANIMATIONS === */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+.animate-fadeIn {
+  animation: fadeIn 0.6s ease-out;
+}
+
+.animate-slideInLeft {
+  animation: slideInLeft 0.6s ease-out;
+}
+
+.animate-slideInRight {
+  animation: slideInRight 0.6s ease-out;
+}
+
+.animate-pulse {
+  animation: pulse 2s ease-in-out infinite;
+}
+
+/* === RESPONSIVE === */
+@media (max-width: 768px) {
+  :root {
+    --spacing-lg: 3rem;
+    --spacing-xl: 5rem;
+  }
+  
+  .container {
+    padding: 0 1rem;
+  }
+  
+  .section {
+    padding: var(--spacing-lg) 0;
+  }
+}
+
+/* === SMOOTH SCROLL === */
+html.lenis {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+.lenis.lenis-scrolling iframe {
+  pointer-events: none;
+}
+
+/* === WHATSAPP FLOAT BUTTON === */
+.whatsapp-float {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  z-index: 999;
+  width: 60px;
+  height: 60px;
+  background: #25D366;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 12px rgba(37, 211, 102, 0.4);
+  transition: all var(--transition-base);
+  color: white;
+}
+
+.whatsapp-float:hover {
+  transform: scale(1.1);
+  box-shadow: 0 8px 20px rgba(37, 211, 102, 0.6);
+}
+
+/* === LANGUAGE SWITCHER === */
+.lang-switch {
+  position: fixed;
+  bottom: 2rem;
+  left: 2rem;
+  z-index: 999;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: var(--void-soft);
+  border: 1px solid var(--grid);
+  padding: 0.5rem 1rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  transition: all var(--transition-base);
+}
+
+.lang-switch:hover {
+  border-color: var(--gradient-violet);
+  box-shadow: 0 4px 12px rgba(180, 7, 254, 0.3);
+}
+
+.lang-link {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--white-ghost);
+  text-decoration: none;
+  transition: color var(--transition-fast);
+}
+
+.lang-link:hover {
+  color: var(--white);
+}
+
+.lang-link.active {
+  color: var(--white);
+  background: var(--gradient-main);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.lang-sep {
+  color: var(--grid);
+  font-size: 0.75rem;
+}
+
+@media (max-width: 768px) {
+  .whatsapp-float {
+    bottom: 1rem;
+    right: 1rem;
+    width: 50px;
+    height: 50px;
+  }
+  
+  .whatsapp-float svg {
+    width: 24px;
+    height: 24px;
+  }
+  
+  .lang-switch {
+    bottom: 1rem;
+    left: 1rem;
+    padding: 0.4rem 0.8rem;
+  }
+}
