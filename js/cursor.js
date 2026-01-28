@@ -19,7 +19,7 @@ function initCursor() {
     mouseY = e.clientY;
   });
   
-  // Smooth cursor movement
+  // Smooth cursor movement - position exactly on mouse
   function animateCursor() {
     const dx = mouseX - cursorX;
     const dy = mouseY - cursorY;
@@ -27,8 +27,9 @@ function initCursor() {
     cursorX += dx * 0.15;
     cursorY += dy * 0.15;
     
-    cursor.style.left = cursorX + 'px';
-    cursor.style.top = cursorY + 'px';
+    // Center the cursor exactly on mouse position
+    cursor.style.left = (cursorX - cursor.offsetWidth / 2) + 'px';
+    cursor.style.top = (cursorY - cursor.offsetHeight / 2) + 'px';
     
     requestAnimationFrame(animateCursor);
   }

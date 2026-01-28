@@ -27,15 +27,6 @@
   
   <!-- Lenis Smooth Scroll -->
   <script src="https://unpkg.com/lenis@1.0.19/dist/lenis.min.js" defer></script>
-  
-  <!-- Weglot -->
-  <script src="https://cdn.weglot.com/weglot.min.js"></script>
-  <script>
-    Weglot.initialize({
-      api_key: 'wg_3b8be3f3773886e6a9139b91c364f46f1',
-      hide_switcher: true
-    });
-  </script>
 </head>
 <body>
   
@@ -132,9 +123,6 @@
             Démarrer mon projet en 24H
           </button>
           <p class="hero-cta-note font-mono">Formulaire rapide en 2 min</p>
-          <button class="btn btn-outline" onclick="smoothScroll('#work')">
-            + de preuves
-          </button>
         </div>
       </div>
       
@@ -267,9 +255,6 @@
         
         <!-- BUSINESS -->
         <div class="pricing-card">
-          <button class="details-link" onclick="openDetails('BUSINESS')">
-            Détails [ + ]
-          </button>
           <div class="pricing-badge">Business</div>
           <div class="pricing-time">48H</div>
           <div class="pricing-price">
@@ -284,6 +269,9 @@
           </ul>
           <button class="btn btn-outline w-full" onclick="openModal()">
             >Bloquer mon slot
+          </button>
+          <button class="details-link details-link-bottom" onclick="openDetails('BUSINESS')">
+            Détails [ + ]
           </button>
         </div>
       </div>
@@ -592,7 +580,6 @@
           <div class="venn-circle venn-template">
             <div class="circle-label">TEMPLATE<br>FIABLE</div>
           </div>
-          <div class="venn-center">TOMORROW.<br>ONLINE</div>
         </div>
         
         <div class="mondes-content">
@@ -756,6 +743,19 @@
             <li><a href="mailto:hello@tomorrow.online">Contact Ops</a></li>
           </ul>
         </div>
+      </div>
+      
+      <!-- Video Footer -->
+      <div class="footer-video">
+        <div style="padding:56.25% 0 0 0;position:relative;">
+          <iframe src="https://player.vimeo.com/video/YOUR_VIDEO_ID?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" 
+            frameborder="0" 
+            allow="autoplay; fullscreen; picture-in-picture; clipboard-write" 
+            style="position:absolute;top:0;left:0;width:100%;height:100%;" 
+            title="Tomorrow.Online - Showreel">
+          </iframe>
+        </div>
+        <script src="https://player.vimeo.com/api/player.js"></script>
       </div>
       
       <div class="footer-bottom">
