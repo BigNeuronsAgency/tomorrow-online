@@ -12,10 +12,10 @@
   --white-soft: #EAEAEA;
   --white-ghost: rgba(255, 255, 255, 0.6);
   
-  /* Gradient rose→violet (accent principal) */
-  --gradient-main: linear-gradient(90deg, rgba(180, 7, 254, 1) 0%, rgba(255, 10, 55, 1) 100%);
-  --gradient-violet: rgba(180, 7, 254, 1);
-  --gradient-rose: rgba(255, 10, 55, 1);
+  /* Gradient warm (magenta→orange→jaune) */
+  --gradient-main: linear-gradient(to right, #FF00CC, #FF5500, #FFCC00);
+  --gradient-violet: #FF00CC;
+  --gradient-rose: #FF5500;
   
   /* Grille */
   --grid: rgba(255, 255, 255, 0.05);

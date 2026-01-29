@@ -33,7 +33,7 @@ function initAnimations() {
   // Scroll skew effect on body - ONLY on fast scroll
   let skewSetter = gsap.quickSetter('body', 'skewY', 'deg');
   let clamp = gsap.utils.clamp(-1.5, 1.5); // Réduit de -3/3 à -1.5/1.5
-  const VELOCITY_THRESHOLD = 100; // Only trigger if scroll velocity > 100
+  const VELOCITY_THRESHOLD = 50; // Only trigger if scroll velocity > 50
   
   ScrollTrigger.create({
     onUpdate: (self) => {
