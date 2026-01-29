@@ -553,38 +553,6 @@
   animation: nervous 0.1s infinite linear;
 }
 
-/* Yeux pour les larmes - Positionnés sur les vrais yeux */
-.tear-eye {
-  position: absolute;
-  width: 2px;
-  height: 2px;
-  z-index: 20;
-  pointer-events: none;
-}
-
-#eye-left {
-  left: 35%;
-  top: 52%;
-}
-
-#eye-right {
-  left: 65%;
-  top: 52%;
-}
-
-/* Style des larmes */
-.tear {
-  position: absolute;
-  width: 6px;
-  height: 15px;
-  background: var(--gradient-rose);
-  border-radius: 50%;
-  opacity: 0.8;
-  pointer-events: none;
-  z-index: 15;
-  box-shadow: 0 0 10px var(--gradient-rose);
-}
-
 .manifesto-text p {
   opacity: 0;
   transform: translateY(30px);
