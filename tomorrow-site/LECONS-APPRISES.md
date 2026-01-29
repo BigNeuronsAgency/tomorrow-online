@@ -256,6 +256,8 @@ git push origin main
 9. **NE JAMAIS** faire `git add .` ou `git add -A` sans vérifier `git status` et `git diff` AVANT
 10. **NE JAMAIS** commit un fichier sans être sûr à 100% que c'est la bonne version
 11. **TOUJOURS** faire `git status` puis `git diff` puis `git add [FICHIER_PRÉCIS]` puis `git commit`
+12. **NE JAMAIS** faire "les trucs à ma façon" - **RESPECTER LA CONSIGNE À LA LETTRE**
+13. **NE JAMAIS** inventer, innover, ou "améliorer" si la consigne ne le demande pas explicitement
 
 ---
 
