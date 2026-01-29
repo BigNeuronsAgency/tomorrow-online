@@ -1,5 +1,5 @@
 // ========================================
-// MARQUEE DYNAMIQUE - Accélération sur "LA VITESSE"
+// MARQUEE DYNAMIQUE - Accélération précise
 // ========================================
 
 function initMarqueeSpeed() {
@@ -10,43 +10,46 @@ function initMarqueeSpeed() {
     return;
   }
   
-  const text = marqueeContent.textContent;
-  const speedTrigger = 'LA VITESSE EST UNE FONCTIONNALITÉ';
   const normalSpeed = 30; // 30s
-  const fastSpeed = 5;    // 5s (TRÈS rapide)
+  const fastSpeed = 4;    // 4s (TRÈS rapide)
   
-  let currentPosition = 0;
   let isAccelerating = false;
   
   function checkPosition() {
-    const transform = window.getComputedStyle(marqueeContent).transform;
-    if (transform && transform !== 'none') {
-      const matrix = transform.match(/matrix.*\((.+)\)/);
-      if (matrix) {
-        currentPosition = parseFloat(matrix[1].split(', ')[4]);
-      }
+    const rect = marqueeContent.getBoundingClientRect();
+    const viewportWidth = window.innerWidth;
+    
+    // Récupérer le texte pour calculer les positions
+    const text = marqueeContent.textContent;
+    
+    // Calculer position approximative du texte dans le défilement
+    // Position de "LA VITESSE EST UNE FONCTIONNALITÉ" dans le texte complet
+    const vitesseIndex = text.indexOf('LA VITESSE EST UNE FONCTIONNALITÉ');
+    const impatientIndex = text.indexOf('SOYEZ IMPATIENT');
+    
+    if (vitesseIndex === -1 || impatientIndex === -1) {
+      requestAnimationFrame(checkPosition);
+      return;
     }
     
-    const contentWidth = marqueeContent.scrollWidth / 2;
-    const normalizedPos = Math.abs(currentPosition) % contentWidth;
+    // Calculer le pourcentage de position
+    const totalLength = marqueeContent.scrollWidth / 2; // Divisé par 2 car contenu dupliqué
+    const currentOffset = Math.abs(rect.left);
+    const normalizedOffset = currentOffset % totalLength;
     
-    // Accélération AVANT que "LA VITESSE" soit visible (50%-80% du cycle)
-    const speedTriggerStart = contentWidth * 0.50;
-    const speedTriggerEnd = contentWidth * 0.80;
+    // Position relative dans le cycle (0-1)
+    const cyclePosition = normalizedOffset / totalLength;
     
-    const shouldAccelerate = normalizedPos >= speedTriggerStart && normalizedPos <= speedTriggerEnd;
+    // Position de "FONCTIONNALITÉ" touche bord droit = environ 0.72 du cycle
+    // Position de "SOYEZ IMPATIENT" touche bord gauche = environ 0.95 du cycle
+    const shouldAccelerate = cyclePosition >= 0.72 && cyclePosition <= 0.95;
     
     if (shouldAccelerate && !isAccelerating) {
       isAccelerating = true;
-      // Changement instantané sans glitch
-      marqueeContent.style.transition = 'none';
       marqueeContent.style.animationDuration = `${fastSpeed}s`;
-      void marqueeContent.offsetWidth; // Force reflow
     } else if (!shouldAccelerate && isAccelerating) {
       isAccelerating = false;
-      marqueeContent.style.transition = 'none';
       marqueeContent.style.animationDuration = `${normalSpeed}s`;
-      void marqueeContent.offsetWidth;
     }
     
     requestAnimationFrame(checkPosition);

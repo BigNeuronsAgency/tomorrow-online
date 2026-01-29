@@ -914,19 +914,28 @@
 }
 
 /* === VALIDATION (Step 6) === */
+.step-6 .step-grid {
+  gap: 1rem;
+  max-height: 450px;
+}
+
+.step-6 .form-group {
+  gap: 0.75rem;
+}
+
 .domain-box,
 .care-box,
 .contact-box {
-  padding: 1rem;
+  padding: 0.75rem;
   background: rgba(0, 0, 0, 0.02);
   border: 1px solid rgba(0, 0, 0, 0.1);
-  margin-bottom: 1rem;
+  margin-bottom: 0.75rem;
 }
 
 .care-box {
   background: rgba(0, 0, 0, 0.02);
   border: 2px solid rgba(0, 0, 0, 0.1);
-  padding: 1.25rem;
+  padding: 1rem;
   border-radius: 4px;
 }
 
@@ -1109,11 +1118,17 @@
 .step-7 {
   background: var(--void);
   color: var(--white);
-  margin: -1.5rem;
-  padding: 1.5rem;
-  min-height: calc(100% + 3rem);
-  width: calc(100% + 3rem);
-  overflow: hidden;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: 0;
+  padding: 1.5rem 1.5rem 1rem 1.5rem;
+  overflow-y: auto;
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
 }
 
 .step-7 .step-title {
