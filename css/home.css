@@ -553,7 +553,7 @@
   animation: nervous 0.1s infinite linear;
 }
 
-/* Yeux pour les larmes */
+/* Yeux pour les larmes - Positionnés sur les vrais yeux */
 .tear-eye {
   position: absolute;
   width: 2px;
@@ -563,13 +563,13 @@
 }
 
 #eye-left {
-  left: 38%;
-  top: 45%;
+  left: 35%;
+  top: 52%;
 }
 
 #eye-right {
-  left: 62%;
-  top: 42%;
+  left: 65%;
+  top: 52%;
 }
 
 /* Style des larmes */
