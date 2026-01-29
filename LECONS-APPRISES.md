@@ -267,13 +267,30 @@ Avant de commit [PAGE].html, je vérifie :
 
 ## 🎯 PAGES À REFONDRE (ORDRE)
 
-1. ✅ ~~la-vision-tomorrow.html~~ (RATÉ - à refaire)
+### Pages principales (7)
+1. ⏳ la-vision-tomorrow.html (RATÉ - à refaire)
 2. ⏳ notre-histoire.html
 3. ⏳ migrations.html
 4. ⏳ process-24h.html
 5. ⏳ realisations.html
 6. ⏳ comparatif-solutions-web.html
 7. ⏳ mentions-legales.html
+
+### Sous-pages migrations (5)
+8. ⏳ migrations/wordpress.html
+9. ⏳ migrations/shopify.html
+10. ⏳ migrations/wix.html
+11. ⏳ migrations/squarespace.html
+12. ⏳ migrations/joomla.html
+
+### Pages SEO (5)
+13. ⏳ agence-webflow-rapide.html
+14. ⏳ agence-webflow-paris.html
+15. ⏳ site-vitrine-pme.html
+16. ⏳ creation-sites-internet-24h.html
+17. ⏳ landing-page-haute-conversion.html
+
+**TOTAL : 17 PAGES**
 
 ---
 
