@@ -106,6 +106,17 @@ file_read /tmp/[PAGE]-webflow.html offset=101 limit=100
 - La structure complète de la page
 
 ### ÉTAPE 2 : CRÉATION DU NOUVEAU HTML (1h MAX)
+
+**RÈGLES ABSOLUES** :
+1. Créer le fichier **À LA RACINE** du repo (`/Users/secondmac/Downloads/TOMORROW ONLINE/`)
+2. **OBLIGATOIRE** : Inclure les 3 CSS dans cet ordre :
+   ```html
+   <link rel="stylesheet" href="css/design-system.css">
+   <link rel="stylesheet" href="css/home.css">  <!-- NE JAMAIS OUBLIER -->
+   <link rel="stylesheet" href="css/formulaire.css">
+   ```
+3. Copier header/footer EXACTEMENT depuis `index.html` (racine, pas tomorrow-site/)
+
 ```html
 <!DOCTYPE html>
 <html lang="fr">
