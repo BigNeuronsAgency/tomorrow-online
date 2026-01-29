@@ -698,8 +698,8 @@ function getStepContent() {
         ` : ''}
         
         <div class="success-actions">
-          <button onclick="window.skipSuccessUpsells()" class="btn btn-outline">Passer</button>
-          <button onclick="window.submitSuccessUpsells()" class="btn btn-primary">Bloquer ces options</button>
+          <div></div>
+          <button onclick="window.skipSuccessUpsells()" class="btn btn-outline">PASSER →</button>
         </div>
       </div>
     `;
@@ -1093,7 +1093,7 @@ window.skipSuccessUpsells = function() {
       </div>
       
       <button onclick="window.closeModal()" class="btn btn-primary btn-large">
-        Fermer la console
+        Retour au site
       </button>
     </div>
   `;
