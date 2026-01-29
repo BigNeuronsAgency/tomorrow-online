@@ -68,7 +68,7 @@ window.submitForm = async function() {
     dataToSend.files = files;
     console.log('📧 Sending to Netlify Function with', files.length, 'files');
     
-    const response = await fetch('/submit-brief.php', {
+    const response = await fetch('/.netlify/functions/submit-brief', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
