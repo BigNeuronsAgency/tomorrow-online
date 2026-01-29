@@ -648,61 +648,7 @@ function getStepContent() {
     `;
   }
   
-  // Step 7: Success Upsells
-  if (currentStep === 7) {
-    var totalSuccessUpsells = 0;
-    var bundleSelected = formData.upsellsSuccess['tomorrowSucces'];
-    UPSELLS_SUCCESS.forEach(u => {
-      if (formData.upsellsSuccess[u.id]) {
-        if (u.id === 'tomorrowSucces') {
-          totalSuccessUpsells += u.price;
-        } else if (!bundleSelected) {
-          totalSuccessUpsells += u.price;
-          if (u.id === 'socialMedia' && formData.socialNetworkExtra) totalSuccessUpsells += 80;
-        }
-      }
-    });
-    
-    // Séparer le bundle des autres options
-    var bundleUpsell = UPSELLS_SUCCESS.find(u => u.isBundle);
-    var regularUpsells = UPSELLS_SUCCESS.filter(u => !u.isBundle);
-    
-    return `
-      <div class="form-step step-7">
-        <div class="success-header">
-          <div>
-            <h2 class="step-title">BOOSTEZ VOTRE LANCEMENT</h2>
-            <p class="success-subtitle">Profitez d'options exclusives pour maximiser l'impact de votre nouveau site</p>
-          </div>
-          <div class="countdown-box">
-            <div class="countdown-label font-mono">Offre limitée</div>
-            <div id="countdown" class="countdown font-mono">02:00</div>
-          </div>
-        </div>
-        
-        <div class="success-grid">
-          ${regularUpsells.map(u => renderSuccessCard(u)).join('')}
-        </div>
-        
-        ${bundleUpsell ? `
-          <div class="success-grid-bundle">
-            ${renderSuccessCard(bundleUpsell)}
-          </div>
-        ` : ''}
-        
-        ${totalSuccessUpsells > 0 ? `
-          <div class="success-total">
-            <span class="success-total-label">TOTAL OPTIONS</span>
-            <span class="success-total-value">${totalSuccessUpsells}€</span>
-          </div>
-        ` : ''}
-        
-        <div class="success-actions">
-          <button onclick="window.skipSuccessUpsells()" class="btn btn-outline">PASSER →</button>
-        </div>
-      </div>
-    `;
-  }
+  // Step 7 SUPPRIMÉ - On passe direct au success screen après submit
 }
 
 function renderSuccessCard(u) {
@@ -983,10 +929,21 @@ window.openModal = function(plan) {
     currentStep = 1;
     formData.selectedPack = plan || '';
     
+    // Force clear any stale styles/transforms
+    document.body.style.transform = '';
+    document.body.style.filter = '';
+    document.body.style.skewY = '';
+    document.body.style.pointerEvents = '';
+    
     // Stop Lenis smooth scroll
     if (window.lenis) {
       window.lenis.stop();
       console.log('🔥 Lenis stopped');
+    }
+    
+    // Stop GSAP animations
+    if (typeof gsap !== 'undefined') {
+      gsap.killTweensOf(document.body);
     }
     
     // Cacher WhatsApp widget si présent
@@ -1126,8 +1083,8 @@ function sendFormData(formDataObj, btn) {
       console.log('📧 Response status:', response.status);
       if (response.ok) {
         console.log('✅ Form submitted successfully');
-        currentStep = 7;
-        draw();
+        // SKIP Step 7, go directly to success screen
+        showSuccessScreen();
       } else {
         console.error('❌ Form submission failed:', response.statusText);
         alert("Erreur de transmission. Veuillez réessayer.");
@@ -1139,6 +1096,53 @@ function sendFormData(formDataObj, btn) {
       alert("Erreur de transmission.");
       if (btn) btn.innerHTML = "Bloquer mon slot 🔒";
     });
+}
+
+function showSuccessScreen() {
+  document.getElementById('modalContent').innerHTML = `
+    <div class="success-screen">
+      <div class="success-check-icon">✓</div>
+      <h1 class="success-title">BRIEF BIEN REÇU !</h1>
+      <p class="success-subtitle">Merci pour votre confiance.</p>
+      
+      <div class="success-report">
+        <div class="report-badge">WORKFLOW AUTOMATISÉ</div>
+        <div class="report-items">
+          <div class="report-item done">
+            <span class="report-icon">✓</span>
+            <span class="report-text">Brief transmis à l'équipe</span>
+          </div>
+          <div class="report-item active">
+            <span class="report-icon">⏳</span>
+            <span class="report-text">Analyse & validation du projet</span>
+          </div>
+          <div class="report-item">
+            <span class="report-icon">○</span>
+            <span class="report-text">Appel de confirmation</span>
+          </div>
+          <div class="report-item">
+            <span class="report-icon">○</span>
+            <span class="report-text">Lancement de production</span>
+          </div>
+        </div>
+      </div>
+      
+      <div class="success-next">
+        <h3 class="success-next-title">ET MAINTENANT ?</h3>
+        <p class="success-next-text">
+          Un membre de notre équipe vous appellera <strong>demain matin entre 09h00 et 10h00</strong> 
+          pour valider les détails de votre projet.
+        </p>
+        <p class="success-next-note">
+          Consultez votre boîte mail, vous avez reçu une confirmation.
+        </p>
+      </div>
+      
+      <button onclick="window.closeModal()" class="btn btn-primary">
+        RETOUR AU SITE →
+      </button>
+    </div>
+  `;
 }
 
 window.skipSuccessUpsells = function() {
