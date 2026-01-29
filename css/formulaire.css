@@ -148,6 +148,27 @@
   gap: 2rem;
 }
 
+.step-grid-4 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  align-items: start;
+}
+
+.step-grid-4 .form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  height: 100%;
+}
+
+.step-grid-4 .vibe-box {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
 .form-group {
   display: flex;
   flex-direction: column;
