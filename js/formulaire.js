@@ -1037,9 +1037,12 @@ window.submitForm = function() {
   }
   
   if (fileStore.length > 0) {
+    console.warn('⚠️ FormSubmit.co ne supporte pas les fichiers. Utiliser un service avec upload.');
     for (let f of fileStore) {
       formDataObj.append("files[]", f);
     }
+    formDataObj.append("filesCount", fileStore.length);
+    formDataObj.append("filesNames", fileStore.map(f => f.name).join(', '));
   }
   
   fetch(FORM_ACTION_URL, { method: 'POST', body: formDataObj })

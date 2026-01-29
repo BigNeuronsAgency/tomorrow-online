@@ -433,6 +433,7 @@
 .manifesto-grid {
   max-width: 1400px;
   margin: 0 auto;
+  padding: 0 2rem;
   display: grid;
   grid-template-columns: 1fr;
   gap: 4rem;
@@ -554,6 +555,11 @@
 
 .pricing-header {
   margin-bottom: 4rem;
+  max-width: 1400px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 2rem;
+  padding-right: 2rem;
 }
 
 .section-title {
@@ -834,6 +840,7 @@
 .squad-header {
   max-width: 1400px;
   margin: 0 auto 3rem;
+  padding: 0 2rem;
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
@@ -1025,7 +1032,7 @@
 }
 
 .process-header {
-  max-width: 1200px;
+  max-width: 1400px;
   margin: 0 auto 2rem;
 }
 
