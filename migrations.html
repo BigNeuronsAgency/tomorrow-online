@@ -4,42 +4,199 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Migrations CMS - Tomorrow.Online</title>
-  <meta name="description" content="Migrez depuis WordPress, Shopify, Wix, Squarespace ou Joomla vers Webflow. Exit legacy. Tomorrow.">
+  <meta name="description" content="Migrez votre site WordPress, Shopify, Wix, Squarespace ou Joomla vers une stack moderne et performante. Exit Legacy.">
   
-  <!-- Favicon -->
   <link rel="icon" type="image/png" href="images/favicon.png">
   <link rel="apple-touch-icon" href="images/webclip.png">
   
-  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700;800;900&family=Syne:wght@700;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
   
-  <!-- CSS -->
   <link rel="stylesheet" href="css/design-system.css">
   <link rel="stylesheet" href="css/home.css">
   <link rel="stylesheet" href="css/formulaire.css">
   
-  <!-- GSAP -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollToPlugin.min.js"></script>
-  
-  <!-- Lenis Smooth Scroll -->
   <script src="https://unpkg.com/lenis@1.0.19/dist/lenis.min.js"></script>
+  
+  <style>
+    .migrations-page {
+      background: #000;
+      min-height: 100vh;
+      padding: 150px 2rem 80px;
+    }
+    
+    .migrations-container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    
+    .migrations-header {
+      margin-bottom: 80px;
+      padding-bottom: 40px;
+      border-bottom: 1px solid #222;
+    }
+    
+    .migrations-hero-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: clamp(3rem, 10vw, 9rem);
+      font-weight: 900;
+      text-transform: uppercase;
+      line-height: 0.85;
+      color: #FFF;
+      margin-bottom: 2rem;
+    }
+    
+    .migrations-hero-title .accent {
+      background: linear-gradient(90deg, #FF5500, #FF0000);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    
+    .migrations-intro {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 1rem;
+      line-height: 1.8;
+      color: #999;
+      max-width: 800px;
+      margin-bottom: 1.5rem;
+    }
+    
+    .migrations-intro strong {
+      color: #FFF;
+      font-weight: 700;
+    }
+    
+    .migrations-section-title {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.75rem;
+      color: #FF5500;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      margin-bottom: 2rem;
+    }
+    
+    .cms-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    
+    .cms-item {
+      display: grid;
+      grid-template-columns: 2fr 3fr 1fr;
+      gap: 2rem;
+      padding: 2.5rem 0;
+      border-top: 1px solid #333;
+      transition: all 0.3s;
+      text-decoration: none;
+      color: inherit;
+      align-items: center;
+    }
+    
+    .cms-item:last-child {
+      border-bottom: 1px solid #333;
+    }
+    
+    .cms-item:hover {
+      background: linear-gradient(90deg, rgba(180,7,254,0.1), rgba(255,10,55,0.1));
+      padding-left: 1rem;
+      border-color: #FF5500;
+    }
+    
+    .cms-name {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: clamp(2rem, 4vw, 3.5rem);
+      font-weight: 900;
+      text-transform: uppercase;
+      color: #FFF;
+      line-height: 1;
+    }
+    
+    .cms-description {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: #666;
+      transition: color 0.3s;
+    }
+    
+    .cms-item:hover .cms-description {
+      color: #CCC;
+    }
+    
+    .cms-arrow {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.75rem;
+      text-align: right;
+      color: #FF5500;
+      transition: transform 0.3s;
+    }
+    
+    .cms-item:hover .cms-arrow {
+      transform: translateX(10px);
+    }
+    
+    .migrations-why {
+      background: #111;
+      border-top: 1px solid #333;
+      padding: 4rem 2rem;
+      margin-top: 4rem;
+    }
+    
+    .migrations-why-content {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    
+    .migrations-why h2 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.75rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      color: #FFF;
+      margin-bottom: 1.5rem;
+    }
+    
+    .migrations-why p {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.875rem;
+      line-height: 1.8;
+      color: #999;
+      margin-bottom: 1.5rem;
+    }
+    
+    @media (max-width: 768px) {
+      .migrations-page {
+        padding: 120px 1.5rem 60px;
+      }
+      
+      .cms-item {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+        padding: 2rem 0;
+      }
+      
+      .cms-arrow {
+        text-align: left;
+      }
+    }
+  </style>
 </head>
 <body>
   
-  <!-- Custom Cursor -->
   <div class="custom-cursor" id="cursor"></div>
-  
-  <!-- Grid Background -->
   <div class="bg-grid-fixed"></div>
   
   <!-- Header -->
   <header class="header">
     <nav class="nav">
-      <div class="nav-logo" onclick="scrollToTop()">
+      <div class="nav-logo" onclick="window.location.href='index.html'">
         <img src="images/TO-logo.webp" alt="Tomorrow.Online" class="logo">
       </div>
       
@@ -88,93 +245,72 @@
       <button class="btn btn-primary" onclick="openModal()">Réserver</button>
     </div>
   </header>
-
-  <!-- Hero Section -->
-  <section class="section hero-alt">
-    <div class="container">
-      <h1 class="hero-title-alt">
-        EXIT<br>
-        <span class="text-gradient">LEGACY.</span>
-      </h1>
+  
+  <!-- Migrations Content -->
+  <div class="migrations-page">
+    <div class="migrations-container">
       
-      <div class="hero-text-content">
-        <p class="hero-description">
-          Le web a changé. Votre CMS historique (WordPress, Drupal, Prestashop) est devenu une dette technique. Il ralentit votre croissance, fragilise votre sécurité et bride votre créativité.
-        </p>
-        
-        <p class="hero-description">
-          <strong>Tomorrow.online est une agence spécialisée en "Re-Platforming".</strong> Nous extrayons votre data des systèmes obsolètes pour la réinjecter dans une stack moderne, statique et incassable (Webflow).
-        </p>
+      <div class="migrations-header">
+        <h1 class="migrations-hero-title">
+          EXIT<br><span class="accent">LEGACY.</span>
+        </h1>
+        <div class="migrations-intro">
+          <p>Le web a changé. Votre CMS historique (WordPress, Drupal, Prestashop) est devenu une dette technique. Il ralentit votre croissance, fragilise votre sécurité et bride votre créativité.</p>
+          <p><strong>Tomorrow.online est une agence spécialisée en "Re-Platforming".</strong> Nous extrayons votre data des systèmes obsolètes pour la réinjecter dans une stack moderne, statique et incassable (Webflow).</p>
+        </div>
       </div>
-    </div>
-  </section>
-
-  <!-- CMS List Section -->
-  <section class="section cms-migration-list">
-    <div class="container">
-      <p class="section-label font-mono">/// SÉLECTIONNEZ VOTRE TECHNOLOGIE ACTUELLE</p>
       
-      <div class="cms-links">
-        <a href="migrations/wordpress.html" class="cms-link-row">
-          <div class="cms-name">WordPress</div>
-          <div class="cms-desc font-mono">Le Dinosaure (PHP)</div>
-          <div class="cms-arrow font-mono">Voir le protocole →</div>
-        </a>
-        
-        <a href="migrations/shopify.html" class="cms-link-row">
-          <div class="cms-name">Shopify</div>
-          <div class="cms-desc font-mono">Le Banquier (Liquid)</div>
-          <div class="cms-arrow font-mono">Voir le protocole →</div>
-        </a>
-        
-        <a href="migrations/wix.html" class="cms-link-row">
-          <div class="cms-name">Wix</div>
-          <div class="cms-desc font-mono">Le Jouet pour enfants (Closed Source)</div>
-          <div class="cms-arrow font-mono">Voir le protocole →</div>
-        </a>
-        
-        <a href="migrations/squarespace.html" class="cms-link-row">
-          <div class="cms-name">Squarespace</div>
-          <div class="cms-desc font-mono">Le Décorateur (Template)</div>
-          <div class="cms-arrow font-mono">Voir le protocole →</div>
-        </a>
-        
-        <a href="migrations/joomla.html" class="cms-link-row">
-          <div class="cms-name">Joomla</div>
-          <div class="cms-desc font-mono">L'Ancêtre (Complexité)</div>
-          <div class="cms-arrow font-mono">Voir le protocole →</div>
-        </a>
-      </div>
-    </div>
-  </section>
-
-  <!-- Why Migrate Section -->
-  <section class="section bg-dark-panel">
-    <div class="container content-narrow">
-      <h2 class="section-subtitle-alt">Pourquoi migrer votre site internet ?</h2>
+      <div class="migrations-section-title">/// SÉLECTIONNEZ VOTRE TECHNOLOGIE ACTUELLE</div>
       
-      <div class="text-content font-mono">
-        <p>
-          La migration de site web (ou refonte technique) n'est pas qu'une question d'esthétique. C'est une question de survie digitale. Les CMS traditionnels basés sur des bases de données dynamiques (SQL) comme WordPress génèrent un temps de chargement serveur (TTFB) trop long pour les standards 2025 de Google (Core Web Vitals).
-        </p>
-        
-        <p>
-          En passant chez Tomorrow, vous passez d'un hébergement mutualisé à une distribution CDN mondiale. Votre site n'est plus "généré" à chaque visite, il est "servi" instantanément. Résultat : meilleur SEO, meilleur Quality Score sur vos Ads, et un taux de conversion en hausse.
-        </p>
-      </div>
+      <ul class="cms-list">
+        <li>
+          <a href="migrations/wordpress.html" class="cms-item">
+            <div class="cms-name">WordPress</div>
+            <div class="cms-description">Le Dinosaure (PHP)</div>
+            <div class="cms-arrow">Voir le protocole -></div>
+          </a>
+        </li>
+        <li>
+          <a href="migrations/shopify.html" class="cms-item">
+            <div class="cms-name">Shopify</div>
+            <div class="cms-description">Le Banquier (Liquid)</div>
+            <div class="cms-arrow">Voir le protocole -></div>
+          </a>
+        </li>
+        <li>
+          <a href="migrations/wix.html" class="cms-item">
+            <div class="cms-name">Wix</div>
+            <div class="cms-description">Le Jouet pour enfants (Closed Source)</div>
+            <div class="cms-arrow">Voir le protocole -></div>
+          </a>
+        </li>
+        <li>
+          <a href="migrations/squarespace.html" class="cms-item">
+            <div class="cms-name">Squarespace</div>
+            <div class="cms-description">Le Décorateur (Template)</div>
+            <div class="cms-arrow">Voir le protocole -></div>
+          </a>
+        </li>
+        <li>
+          <a href="migrations/joomla.html" class="cms-item">
+            <div class="cms-name">Joomla</div>
+            <div class="cms-description">L'Ancêtre (Complexité)</div>
+            <div class="cms-arrow">Voir le protocole -></div>
+          </a>
+        </li>
+      </ul>
+      
     </div>
-  </section>
-
-  <!-- CTA Section -->
-  <section class="section">
-    <div class="container text-center">
-      <button class="btn btn-primary btn-large" onclick="openModal()">
-        > Migrer mon site maintenant
-      </button>
-      <p class="cta-note font-mono">48H max pour reconstruire proprement</p>
+  </div>
+  
+  <div class="migrations-why">
+    <div class="migrations-why-content">
+      <h2>Pourquoi migrer votre site internet ?</h2>
+      <p>La migration de site web (ou refonte technique) n'est pas qu'une question d'esthétique. C'est une question de survie digitale. Les CMS traditionnels basés sur des bases de données dynamiques (SQL) comme WordPress génèrent un temps de chargement serveur (TTFB) trop long pour les standards 2025 de Google (Core Web Vitals).</p>
+      <p>En passant chez Tomorrow, vous passez d'un hébergement mutualisé à une distribution CDN mondiale. Votre site n'est plus "généré" à chaque visite, il est "servi" instantanément. Résultat : meilleur SEO, meilleur Quality Score sur vos Ads, et un taux de conversion en hausse.</p>
     </div>
-  </section>
-
+  </div>
+  
   <!-- Footer -->
   <footer class="footer">
     <div class="container">
@@ -234,17 +370,15 @@
       </div>
     </div>
   </footer>
-
+  
   <!-- Modal Formulaire -->
   <div id="bookingModal" class="modal hidden">
     <div class="modal-overlay" onclick="window.closeModal()"></div>
     <div class="modal-container">
-      <div id="modalContent" class="modal-content">
-        <!-- Dynamic content generated by formulaire.js -->
-      </div>
+      <div id="modalContent" class="modal-content"></div>
     </div>
   </div>
-
+  
   <!-- Video Modal -->
   <div id="videoModal" class="modal hidden">
     <div class="modal-overlay" onclick="closeVideoModal()"></div>
@@ -260,25 +394,22 @@
       </div>
     </div>
   </div>
-
+  
   <!-- Scripts -->
   <script src="js/cursor.js"></script>
-  <script src="js/animations.js"></script>
   <script src="js/navigation.js"></script>
-  <script src="js/marquee.js"></script>
-  <script src="js/main.js"></script>
   <script src="js/formulaire.js"></script>
-  <script src="js/submit-netlify.js"></script>
   
   <script>
+    // Init
     if (typeof initCursor === 'function') initCursor();
-    if (typeof initAnimations === 'function') initAnimations();
     if (typeof initSmoothScroll === 'function') initSmoothScroll();
     
+    // Video modal functions
     function openVideoModal() {
       const modal = document.getElementById('videoModal');
       const iframe = document.getElementById('videoIframe');
-      iframe.src = 'https://player.vimeo.com/video/YOUR_VIDEO_ID?autoplay=1&badge=0&autopause=0';
+      iframe.src = 'https://player.vimeo.com/video/1141806002?autoplay=1&badge=0&autopause=0';
       modal.classList.remove('hidden');
       document.body.style.overflow = 'hidden';
     }
@@ -290,6 +421,16 @@
       modal.classList.add('hidden');
       document.body.style.overflow = '';
     }
+    
+    // ESC key to close video
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        const videoModal = document.getElementById('videoModal');
+        if (videoModal && !videoModal.classList.contains('hidden')) {
+          closeVideoModal();
+        }
+      }
+    });
     
     window.openVideoModal = openVideoModal;
     window.closeVideoModal = closeVideoModal;

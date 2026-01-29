@@ -4,42 +4,279 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Comparatif Solutions Web - Tomorrow.Online</title>
-  <meta name="description" content="Comparatif complet : IA, Templates, Agences vs Tomorrow. Découvrez pourquoi nous sommes le meilleur des 3 mondes.">
+  <meta name="description" content="Le crash test : IA, Templates, Agences vs Tomorrow.Online. Analyse comparative 2025 des solutions de création de site web.">
   
-  <!-- Favicon -->
   <link rel="icon" type="image/png" href="images/favicon.png">
   <link rel="apple-touch-icon" href="images/webclip.png">
   
-  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700;800;900&family=Syne:wght@700;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
   
-  <!-- CSS -->
   <link rel="stylesheet" href="css/design-system.css">
   <link rel="stylesheet" href="css/home.css">
   <link rel="stylesheet" href="css/formulaire.css">
   
-  <!-- GSAP -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollToPlugin.min.js"></script>
-  
-  <!-- Lenis Smooth Scroll -->
   <script src="https://unpkg.com/lenis@1.0.19/dist/lenis.min.js"></script>
+  
+  <style>
+    .comparatif-page {
+      background: #FFF;
+      min-height: 100vh;
+      padding: 150px 2rem 80px;
+    }
+    
+    .comparatif-container {
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+    
+    .comparatif-header {
+      text-align: center;
+      margin-bottom: 80px;
+      padding-bottom: 40px;
+      border-bottom: 1px solid #E5E5E5;
+    }
+    
+    .comparatif-tag {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      background: linear-gradient(90deg, #FF5500, #FF0000);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 1.5rem;
+    }
+    
+    .comparatif-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: clamp(3rem, 8vw, 7rem);
+      font-weight: 900;
+      text-transform: uppercase;
+      line-height: 1;
+      color: #000;
+      margin-bottom: 2rem;
+    }
+    
+    .comparatif-title .accent {
+      background: linear-gradient(90deg, #FF5500, #FF0000);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    
+    .comparatif-subtitle {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.25rem;
+      line-height: 1.6;
+      color: #666;
+      max-width: 800px;
+      margin: 0 auto;
+      font-weight: 500;
+    }
+    
+    .comparison-table {
+      background: #FFF;
+      border: 2px solid #000;
+      overflow: hidden;
+      margin-bottom: 4rem;
+    }
+    
+    .table-header {
+      display: grid;
+      grid-template-columns: 1.5fr 1fr 1fr 1fr 1fr;
+      background: #000;
+      color: #FFF;
+      border-bottom: 2px solid #000;
+    }
+    
+    .table-header-cell {
+      padding: 1.5rem 1rem;
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 900;
+      text-transform: uppercase;
+      font-size: 0.875rem;
+      border-right: 1px solid #333;
+    }
+    
+    .table-header-cell:last-child {
+      border-right: none;
+      background: #FF5500;
+      position: relative;
+    }
+    
+    .recommended-badge {
+      position: absolute;
+      top: -8px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #FF5500;
+      color: #FFF;
+      font-size: 0.625rem;
+      padding: 0.25rem 0.75rem;
+      font-weight: 900;
+      letter-spacing: 0.1em;
+      box-shadow: 0 2px 8px rgba(255,85,0,0.3);
+    }
+    
+    .table-row {
+      display: grid;
+      grid-template-columns: 1.5fr 1fr 1fr 1fr 1fr;
+      border-bottom: 1px solid #E5E5E5;
+      transition: background 0.2s;
+    }
+    
+    .table-row:hover {
+      background: #F8F8F8;
+    }
+    
+    .table-cell {
+      padding: 1.5rem 1rem;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 0.875rem;
+      display: flex;
+      align-items: center;
+      border-right: 1px solid #E5E5E5;
+    }
+    
+    .table-cell:first-child {
+      font-weight: 700;
+      text-transform: uppercase;
+      font-size: 0.875rem;
+    }
+    
+    .table-cell:last-child {
+      background: #000;
+      color: #FFF;
+      font-weight: 700;
+      border-right: none;
+    }
+    
+    .check {
+      color: #000;
+      font-weight: 900;
+      font-size: 1.25rem;
+      margin-right: 0.5rem;
+    }
+    
+    .cross {
+      color: #CCC;
+      font-size: 1.25rem;
+      margin-right: 0.5rem;
+    }
+    
+    .tomorrow-check {
+      background: linear-gradient(90deg, #FF5500, #FF0000);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      font-weight: 900;
+      font-size: 1.25rem;
+      margin-right: 0.5rem;
+    }
+    
+    .seo-section {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 4rem 0;
+    }
+    
+    .seo-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+      gap: 3rem;
+    }
+    
+    .seo-block h3 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.5rem;
+      font-weight: 900;
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+      color: #000;
+    }
+    
+    .seo-block p {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1rem;
+      line-height: 1.8;
+      color: #666;
+      margin-bottom: 1.5rem;
+    }
+    
+    .cta-section {
+      text-align: center;
+      margin-top: 4rem;
+      padding-top: 4rem;
+      border-top: 2px solid #E5E5E5;
+    }
+    
+    .cta-button {
+      display: inline-block;
+      padding: 1.5rem 3rem;
+      background: linear-gradient(90deg, #FF5500, #FF0000);
+      color: #FFF;
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 900;
+      font-size: 1rem;
+      text-transform: uppercase;
+      text-decoration: none;
+      letter-spacing: 0.1em;
+      transition: all 0.3s;
+      border: 2px solid #000;
+      box-shadow: 8px 8px 0px 0px #000;
+    }
+    
+    .cta-button:hover {
+      transform: translate(4px, 4px);
+      box-shadow: 4px 4px 0px 0px #000;
+    }
+    
+    @media (max-width: 968px) {
+      .comparatif-page {
+        padding: 120px 1rem 60px;
+      }
+      
+      .table-header,
+      .table-row {
+        display: none;
+      }
+      
+      .comparison-table {
+        padding: 2rem;
+      }
+      
+      .comparison-table::before {
+        content: 'Tableau disponible sur desktop';
+        display: block;
+        text-align: center;
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 0.875rem;
+        color: #666;
+      }
+      
+      .seo-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+    }
+  </style>
 </head>
 <body>
   
-  <!-- Custom Cursor -->
   <div class="custom-cursor" id="cursor"></div>
-  
-  <!-- Grid Background -->
   <div class="bg-grid-fixed"></div>
   
   <!-- Header -->
   <header class="header">
     <nav class="nav">
-      <div class="nav-logo" onclick="scrollToTop()">
+      <div class="nav-logo" onclick="window.location.href='index.html'">
         <img src="images/TO-logo.webp" alt="Tomorrow.Online" class="logo">
       </div>
       
@@ -88,128 +325,101 @@
       <button class="btn btn-primary" onclick="openModal()">Réserver</button>
     </div>
   </header>
-
-  <!-- Hero Section -->
-  <section class="section hero-alt">
-    <div class="container">
-      <p class="section-label font-mono">Analyse Comparative 2025</p>
-      <h1 class="hero-title-alt">
-        Le Crash<br>
-        <span class="text-gradient">Test.</span>
-      </h1>
+  
+  <!-- Comparatif Content -->
+  <div class="comparatif-page">
+    <div class="comparatif-container">
       
-      <p class="hero-description">
-        Pourquoi choisir entre la vitesse de l'IA et la qualité d'une agence ? Voici les faits.
-      </p>
-    </div>
-  </section>
-
-  <!-- Comparative Table Section -->
-  <section class="section">
-    <div class="container">
-      <div class="comparative-table">
+      <div class="comparatif-header">
+        <div class="comparatif-tag">Analyse Comparative 2025</div>
+        <h1 class="comparatif-title">
+          Le Crash<br>Test<span class="accent">.</span>
+        </h1>
+        <p class="comparatif-subtitle">
+          Pourquoi choisir entre la vitesse de l'IA et la qualité d'une agence ? Voici les faits.
+        </p>
+      </div>
+      
+      <div class="comparison-table">
         <div class="table-header">
-          <div class="table-cell header-cell font-mono">Critères</div>
-          <div class="table-cell header-cell">
-            <h3>Générateurs IA</h3>
-            <p class="table-subtitle font-mono">Wix, Framer AI...</p>
-          </div>
-          <div class="table-cell header-cell">
-            <h3>Templates</h3>
-            <p class="table-subtitle font-mono">WordPress, ThemeForest...</p>
-          </div>
-          <div class="table-cell header-cell">
-            <h3>Agence Web</h3>
-            <p class="table-subtitle font-mono">Les "Gros Paquebots"</p>
-          </div>
-          <div class="table-cell header-cell highlight-cell">
-            <span class="recommended-badge font-mono">RECOMMANDÉ</span>
-            <h3 class="text-gradient">TOMORROW.</h3>
-            <p class="table-subtitle font-mono">L'Agence Hybride</p>
+          <div class="table-header-cell">Critères</div>
+          <div class="table-header-cell">Générateurs IA<br><span style="font-size:0.7rem;font-weight:400;opacity:0.7;">Wix, Framer AI...</span></div>
+          <div class="table-header-cell">Templates<br><span style="font-size:0.7rem;font-weight:400;opacity:0.7;">WordPress, ThemeForest...</span></div>
+          <div class="table-header-cell">Agence Web<br><span style="font-size:0.7rem;font-weight:400;opacity:0.7;">Les "Gros Paquebots"</span></div>
+          <div class="table-header-cell">
+            <span class="recommended-badge">RECOMMANDÉ</span>
+            TOMORROW.<br><span style="font-size:0.7rem;font-weight:400;opacity:0.9;">L'Agence Hybride</span>
           </div>
         </div>
         
         <div class="table-row">
-          <div class="table-cell row-label">Délai de Livraison</div>
+          <div class="table-cell">Délai de Livraison</div>
           <div class="table-cell">Instantané (mais vide)</div>
-          <div class="table-cell text-muted">1 à 3 semaines</div>
-          <div class="table-cell text-error">2 à 4 mois</div>
-          <div class="table-cell highlight-cell"><strong>48 Heures</strong></div>
+          <div class="table-cell" style="color:#999;">1 à 3 semaines</div>
+          <div class="table-cell" style="color:#FF0000;font-weight:700;">2 à 4 mois</div>
+          <div class="table-cell"><span class="tomorrow-check">✓</span> 48 Heures</div>
         </div>
         
         <div class="table-row">
-          <div class="table-cell row-label">Direction Artistique</div>
-          <div class="table-cell"><span class="cross">×</span> Générique</div>
-          <div class="table-cell"><span class="cross">×</span> Déjà vu</div>
-          <div class="table-cell"><span class="check">✓</span> Sur-mesure</div>
-          <div class="table-cell highlight-cell"><span class="check text-gradient">✓</span> <strong>Sur-mesure & Arrogant</strong></div>
+          <div class="table-cell">Direction Artistique</div>
+          <div class="table-cell"><span class="cross">×</span> <span style="font-size:0.75rem;color:#999;">Générique</span></div>
+          <div class="table-cell"><span class="cross">×</span> <span style="font-size:0.75rem;color:#999;">Déjà vu</span></div>
+          <div class="table-cell"><span class="check">✓</span> <span style="font-size:0.75rem;">Sur-mesure</span></div>
+          <div class="table-cell"><span class="tomorrow-check">✓</span> Sur-mesure & Arrogant</div>
         </div>
         
         <div class="table-row">
-          <div class="table-cell row-label">Intelligence Marketing</div>
-          <div class="table-cell"><span class="cross">×</span> Hallucinations</div>
-          <div class="table-cell"><span class="cross">×</span> À votre charge</div>
-          <div class="table-cell"><span class="check">✓</span> Inclus</div>
-          <div class="table-cell highlight-cell"><span class="check text-gradient">✓</span> <strong>Copywriting Senior</strong></div>
+          <div class="table-cell">Intelligence Marketing</div>
+          <div class="table-cell"><span class="cross">×</span> <span style="font-size:0.75rem;color:#999;">Hallucinations</span></div>
+          <div class="table-cell"><span class="cross">×</span> <span style="font-size:0.75rem;color:#999;">À votre charge</span></div>
+          <div class="table-cell"><span class="check">✓</span> <span style="font-size:0.75rem;">Inclus</span></div>
+          <div class="table-cell"><span class="tomorrow-check">✓</span> Copywriting Senior</div>
         </div>
         
         <div class="table-row">
-          <div class="table-cell row-label">Budget Moyen</div>
-          <div class="table-cell font-mono">~30€/mois (à vie)</div>
-          <div class="table-cell font-mono">~150€ + Plugin</div>
-          <div class="table-cell font-mono text-error">5 000€ - 15 000€</div>
-          <div class="table-cell highlight-cell font-mono"><strong class="text-gradient">990€ - 1990€</strong></div>
+          <div class="table-cell">Budget Moyen</div>
+          <div class="table-cell" style="font-family:'JetBrains Mono',monospace;font-size:0.75rem;">~30€/mois (à vie)</div>
+          <div class="table-cell" style="font-family:'JetBrains Mono',monospace;font-size:0.75rem;">~150€ + Plugin</div>
+          <div class="table-cell" style="font-family:'JetBrains Mono',monospace;font-size:0.75rem;color:#FF0000;font-weight:700;">5 000€ - 15 000€</div>
+          <div class="table-cell" style="font-family:'JetBrains Mono',monospace;font-size:1.125rem;"><span class="tomorrow-check" style="font-size:1.5rem;">990€ - 1990€</span></div>
         </div>
       </div>
-    </div>
-  </section>
-
-  <!-- Analysis Section -->
-  <section class="section bg-dark-panel">
-    <div class="container">
-      <div class="analysis-grid">
-        <div class="analysis-block">
-          <h3 class="monde-title">Pourquoi les Agences Web sont mortes</h3>
-          <p class="text-content">
-            Le modèle traditionnel est cassé. Payer des frais de structure, des chefs de projet et des réunions interminables n'a plus de sens en 2025. Les agences web classiques vous facturent le temps passé, pas la valeur créée. Tomorrow.online supprime le gras pour ne garder que le muscle : le design et la tech.
-          </p>
-        </div>
-        
-        <div class="analysis-block">
-          <h3 class="monde-title">Les limites des sites IA (Wix, Framer)</h3>
-          <p class="text-content">
-            L'intelligence artificielle génère du code, pas de l'émotion. Un site 100% IA ressemble à... un site 100% IA. Il manque la psychologie de vente, la nuance de marque et "l'âme" qui convertit un visiteur en client. C'est parfait pour un prototype, insuffisant pour un business.
-          </p>
-        </div>
-        
-        <div class="analysis-block">
-          <h3 class="monde-title">L'approche Tomorrow : Le "No-Wait"</h3>
-          <p class="text-content">
-            Nous avons industrialisé la créativité sans la robotiser. En utilisant des bases techniques solides (Webflow) et des processus de sprint design, nous livrons en 48h ce qui prend 4 semaines ailleurs. C'est la réponse à la question "Comment avoir un site pro rapidement ?".
-          </p>
+      
+      <div class="seo-section">
+        <div class="seo-grid">
+          <div class="seo-block">
+            <h3>Pourquoi les Agences Web sont mortes</h3>
+            <p>Le modèle traditionnel est cassé. Payer des frais de structure, des chefs de projet et des réunions interminables n'a plus de sens en 2025. Les agences web classiques vous facturent le temps passé, pas la valeur créée. Tomorrow.online supprime le gras pour ne garder que le muscle : le design et la tech.</p>
+            
+            <h3>Les limites des sites IA (Wix, Framer)</h3>
+            <p>L'intelligence artificielle génère du code, pas de l'émotion. Un site 100% IA ressemble à... un site 100% IA. Il manque la psychologie de vente, la nuance de marque et "l'âme" qui convertit un visiteur en client. C'est parfait pour un prototype, insuffisant pour un business.</p>
+          </div>
           
-          <div class="summary-box">
-            <p class="font-mono">En résumé :</p>
-            <ul class="check-list font-mono">
-              <li>✓ Pas d'attente (48h max)</li>
-              <li>✓ Pas de devis surprise (Prix fixe)</li>
-              <li>✓ Pas de template générique (Design unique)</li>
-            </ul>
+          <div class="seo-block">
+            <h3>L'approche Tomorrow : Le "No-Wait"</h3>
+            <p>Nous avons industrialisé la créativité sans la robotiser. En utilisant des bases techniques solides (Webflow) et des processus de sprint design, nous livrons en 48h ce qui prend 4 semaines ailleurs. C'est la réponse à la question "Comment avoir un site pro rapidement ?".</p>
+            
+            <div style="background:#F8F8F8;border-left:4px solid #000;padding:1.5rem;margin-top:2rem;">
+              <p style="font-weight:700;font-size:0.875rem;text-transform:uppercase;margin-bottom:1rem;color:#000;">En résumé :</p>
+              <ul style="list-style:none;padding:0;margin:0;font-family:'JetBrains Mono',monospace;font-size:0.875rem;line-height:2;">
+                <li>✓ Pas d'attente (48h max)</li>
+                <li>✓ Pas de devis surprise (Prix fixe)</li>
+                <li>✓ Pas de template générique (Design unique)</li>
+              </ul>
+            </div>
           </div>
         </div>
       </div>
+      
+      <div class="cta-section">
+        <a href="/#pricing" class="cta-button" onclick="if(typeof openModal === 'function') { openModal(); return false; }">
+          Arrêter de comparer, commencer à convertir
+        </a>
+      </div>
+      
     </div>
-  </section>
-
-  <!-- CTA Section -->
-  <section class="section text-center">
-    <div class="container">
-      <button class="btn btn-primary btn-large" onclick="openModal()">
-        > Arrêter de comparer, commencer à convertir
-      </button>
-    </div>
-  </section>
-
+  </div>
+  
   <!-- Footer -->
   <footer class="footer">
     <div class="container">
@@ -252,6 +462,7 @@
         </div>
       </div>
       
+      <!-- Video Footer Link -->
       <div class="footer-video-link">
         <button class="video-link-btn" onclick="openVideoModal()">
           Comment on voit les acheteurs de templates
@@ -268,17 +479,15 @@
       </div>
     </div>
   </footer>
-
+  
   <!-- Modal Formulaire -->
   <div id="bookingModal" class="modal hidden">
     <div class="modal-overlay" onclick="window.closeModal()"></div>
     <div class="modal-container">
-      <div id="modalContent" class="modal-content">
-        <!-- Dynamic content generated by formulaire.js -->
-      </div>
+      <div id="modalContent" class="modal-content"></div>
     </div>
   </div>
-
+  
   <!-- Video Modal -->
   <div id="videoModal" class="modal hidden">
     <div class="modal-overlay" onclick="closeVideoModal()"></div>
@@ -294,25 +503,22 @@
       </div>
     </div>
   </div>
-
+  
   <!-- Scripts -->
   <script src="js/cursor.js"></script>
-  <script src="js/animations.js"></script>
   <script src="js/navigation.js"></script>
-  <script src="js/marquee.js"></script>
-  <script src="js/main.js"></script>
   <script src="js/formulaire.js"></script>
-  <script src="js/submit-netlify.js"></script>
   
   <script>
+    // Init
     if (typeof initCursor === 'function') initCursor();
-    if (typeof initAnimations === 'function') initAnimations();
     if (typeof initSmoothScroll === 'function') initSmoothScroll();
     
+    // Video modal functions
     function openVideoModal() {
       const modal = document.getElementById('videoModal');
       const iframe = document.getElementById('videoIframe');
-      iframe.src = 'https://player.vimeo.com/video/YOUR_VIDEO_ID?autoplay=1&badge=0&autopause=0';
+      iframe.src = 'https://player.vimeo.com/video/1141806002?autoplay=1&badge=0&autopause=0';
       modal.classList.remove('hidden');
       document.body.style.overflow = 'hidden';
     }
@@ -324,6 +530,16 @@
       modal.classList.add('hidden');
       document.body.style.overflow = '';
     }
+    
+    // ESC key to close video
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        const videoModal = document.getElementById('videoModal');
+        if (videoModal && !videoModal.classList.contains('hidden')) {
+          closeVideoModal();
+        }
+      }
+    });
     
     window.openVideoModal = openVideoModal;
     window.closeVideoModal = closeVideoModal;

@@ -3,43 +3,335 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Réalisations - Portfolio Tomorrow.Online</title>
-  <meta name="description" content="127 sites livrés en 2026. Portfolio Tomorrow.Online : startups, PME, scale-ups. Livraison 24-48H garantie.">
+  <title>Réalisations - Tomorrow.Online</title>
+  <meta name="description" content="Ils l'ont fait en 24-48H. Portfolio de 42 sites livrés en moins de 48H chrono. Zéro bullshit, que des résultats mesurables.">
   
-  <!-- Favicon -->
   <link rel="icon" type="image/png" href="images/favicon.png">
   <link rel="apple-touch-icon" href="images/webclip.png">
   
-  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700;800;900&family=Syne:wght@700;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
   
-  <!-- CSS -->
   <link rel="stylesheet" href="css/design-system.css">
   <link rel="stylesheet" href="css/home.css">
   <link rel="stylesheet" href="css/formulaire.css">
   
-  <!-- GSAP -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollToPlugin.min.js"></script>
-  
-  <!-- Lenis Smooth Scroll -->
   <script src="https://unpkg.com/lenis@1.0.19/dist/lenis.min.js"></script>
+  
+  <style>
+    .realisations-page {
+      background: #FFF;
+      min-height: 100vh;
+      padding: 150px 2rem 80px;
+    }
+    
+    .realisations-container {
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+    
+    .realisations-header {
+      margin-bottom: 80px;
+      padding-bottom: 40px;
+      border-bottom: 1px solid #E5E5E5;
+    }
+    
+    .realisations-badge {
+      display: inline-block;
+      border: 2px solid #FF5500;
+      padding: 0.5rem 1rem;
+      margin-bottom: 2rem;
+    }
+    
+    .realisations-badge span {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: #FF5500;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+    }
+    
+    .realisations-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: clamp(2.5rem, 8vw, 5rem);
+      font-weight: 900;
+      text-transform: uppercase;
+      line-height: 0.9;
+      color: #000;
+      margin-bottom: 2rem;
+    }
+    
+    .realisations-title .accent {
+      background: linear-gradient(90deg, #FF5500, #FF0000);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    
+    .realisations-subtitle {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.25rem;
+      line-height: 1.6;
+      color: #666;
+      max-width: 900px;
+      margin-bottom: 2rem;
+    }
+    
+    .stats-mini {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+      margin-bottom: 3rem;
+    }
+    
+    .stat-mini-item {
+      text-align: center;
+    }
+    
+    .stat-mini-number {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 2.5rem;
+      font-weight: 900;
+      background: linear-gradient(90deg, #FF5500, #FF0000);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 0.25rem;
+    }
+    
+    .stat-mini-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      color: #999;
+    }
+    
+    .filter-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      margin-bottom: 3rem;
+    }
+    
+    .filter-btn {
+      padding: 0.5rem 1rem;
+      border: 2px solid #E5E5E5;
+      background: #FFF;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 0.8125rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    
+    .filter-btn:hover,
+    .filter-btn.active {
+      background: #000;
+      color: #FFF;
+      border-color: #000;
+    }
+    
+    .cases-grid {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 1.5rem;
+    }
+    
+    .case-card {
+      border: 2px solid #E5E5E5;
+      background: #FFF;
+      overflow: hidden;
+      transition: all 0.3s;
+    }
+    
+    .case-card:hover {
+      border-color: #000;
+      box-shadow: 8px 8px 0px 0px #000;
+      transform: translate(-4px, -4px);
+    }
+    
+    .case-card.large {
+      grid-column: span 7;
+    }
+    
+    .case-card.medium {
+      grid-column: span 5;
+    }
+    
+    .case-card.small {
+      grid-column: span 6;
+    }
+    
+    .case-image {
+      height: 200px;
+      background: #F0F0F0;
+      overflow: hidden;
+      position: relative;
+    }
+    
+    .case-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: grayscale(100%);
+      transition: filter 0.5s;
+    }
+    
+    .case-card:hover .case-image img {
+      filter: grayscale(0%);
+    }
+    
+    .case-content {
+      padding: 2rem;
+    }
+    
+    .case-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 1.5rem;
+    }
+    
+    .case-logo {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    
+    .case-logo-icon {
+      width: 3.5rem;
+      height: 3.5rem;
+      background: #000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 900;
+      color: #FFF;
+      font-size: 1.25rem;
+    }
+    
+    .case-name h3 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.25rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      margin-bottom: 0.25rem;
+      line-height: 1.2;
+    }
+    
+    .case-category {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.625rem;
+      text-transform: uppercase;
+      color: #999;
+    }
+    
+    .case-time {
+      background: #000;
+      color: #FFF;
+      padding: 0.25rem 0.75rem;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.625rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+    
+    .case-stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+      padding-bottom: 1.5rem;
+      border-bottom: 1px solid #E5E5E5;
+    }
+    
+    .case-stat-number {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.5rem;
+      font-weight: 900;
+      background: linear-gradient(90deg, #FF5500, #FF0000);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 0.25rem;
+    }
+    
+    .case-stat-label {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 0.75rem;
+      color: #666;
+    }
+    
+    .case-quote {
+      background: #F8F8F8;
+      border-left: 4px solid #FF5500;
+      padding: 1rem;
+      margin-bottom: 1rem;
+    }
+    
+    .case-quote p {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 0.875rem;
+      font-style: italic;
+      margin-bottom: 0.75rem;
+      line-height: 1.6;
+    }
+    
+    .case-quote-author {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 700;
+    }
+    
+    .case-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+    
+    .case-tag {
+      padding: 0.25rem 0.75rem;
+      background: #F0F0F0;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.625rem;
+      text-transform: uppercase;
+    }
+    
+    @media (max-width: 968px) {
+      .realisations-page {
+        padding: 120px 1.5rem 60px;
+      }
+      
+      .case-card.large,
+      .case-card.medium,
+      .case-card.small {
+        grid-column: span 12;
+      }
+      
+      .stats-mini {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1rem;
+      }
+    }
+  </style>
 </head>
 <body>
   
-  <!-- Custom Cursor -->
   <div class="custom-cursor" id="cursor"></div>
-  
-  <!-- Grid Background -->
   <div class="bg-grid-fixed"></div>
   
   <!-- Header -->
   <header class="header">
     <nav class="nav">
-      <div class="nav-logo" onclick="scrollToTop()">
+      <div class="nav-logo" onclick="window.location.href='index.html'">
         <img src="images/TO-logo.webp" alt="Tomorrow.Online" class="logo">
       </div>
       
@@ -88,202 +380,285 @@
       <button class="btn btn-primary" onclick="openModal()">Réserver</button>
     </div>
   </header>
-
-  <!-- Hero Section -->
-  <section class="section hero-alt">
-    <div class="container">
-      <h1 class="hero-title-alt">
-        Ils ont arrêté de rêver<span class="text-gradient">.</span><br>
-        Ils ont <span class="text-gradient">agi</span>.
-      </h1>
+  
+  <!-- Realisations Content -->
+  <div class="realisations-page">
+    <div class="realisations-container">
       
-      <p class="hero-description font-mono">
-        Des projets réels. Des résultats mesurables.
-      </p>
-    </div>
-  </section>
-
-  <!-- Stats Section -->
-  <section class="section">
-    <div class="container">
-      <div class="work-stats">
-        <div class="work-stat">
-          <div class="stat-value">127</div>
-          <div class="stat-label font-mono">Sites livrés en 2026</div>
+      <div class="realisations-header">
+        <div class="realisations-badge">
+          <span>/// PORTFOLIO</span>
         </div>
-        <div class="work-stat">
-          <div class="stat-value">24H</div>
-          <div class="stat-label font-mono">Délai moyen de livraison</div>
-        </div>
-        <div class="work-stat">
-          <div class="stat-value">4.9/5</div>
-          <div class="stat-label font-mono">Satisfaction client</div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Portfolio Grid Section -->
-  <section class="section bg-dark-panel">
-    <div class="container">
-      <div class="portfolio-grid">
-        <!-- Project Card 1 -->
-        <div class="portfolio-card">
-          <div class="portfolio-image">
-            <div class="placeholder-image">PREVIEW</div>
+        <h1 class="realisations-title">
+          Ils l'ont fait<br>en <span class="accent">24-48H.</span>
+        </h1>
+        <p class="realisations-subtitle">
+          Zéro bullshit. Que des résultats mesurables. Voici ce que nos clients ont accompli pendant que leurs concurrents attendaient leurs devis.
+        </p>
+        
+        <div class="stats-mini">
+          <div class="stat-mini-item">
+            <div class="stat-mini-number">42</div>
+            <div class="stat-mini-label">Sites livrés</div>
           </div>
-          <div class="portfolio-content">
-            <span class="portfolio-category font-mono">SaaS • B2B</span>
-            <h3 class="portfolio-title">Platform Analytics Pro</h3>
-            <p class="portfolio-desc">Dashboard analytics pour startups SaaS. Livré en 24H.</p>
-            <div class="portfolio-tags">
-              <span class="tag">Webflow</span>
-              <span class="tag">CMS</span>
-              <span class="tag">Dashboard</span>
-            </div>
+          <div class="stat-mini-item">
+            <div class="stat-mini-number">38H</div>
+            <div class="stat-mini-label">Délai moyen</div>
           </div>
-        </div>
-
-        <!-- Project Card 2 -->
-        <div class="portfolio-card">
-          <div class="portfolio-image">
-            <div class="placeholder-image">PREVIEW</div>
-          </div>
-          <div class="portfolio-content">
-            <span class="portfolio-category font-mono">E-commerce • Retail</span>
-            <h3 class="portfolio-title">Boutique Mode Éthique</h3>
-            <p class="portfolio-desc">Site e-commerce Shopify + landing pages. 48H chrono.</p>
-            <div class="portfolio-tags">
-              <span class="tag">Shopify</span>
-              <span class="tag">Landing</span>
-              <span class="tag">Conversion</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- Project Card 3 -->
-        <div class="portfolio-card">
-          <div class="portfolio-image">
-            <div class="placeholder-image">PREVIEW</div>
-          </div>
-          <div class="portfolio-content">
-            <span class="portfolio-category font-mono">Service • B2C</span>
-            <h3 class="portfolio-title">Cabinet Conseil RH</h3>
-            <p class="portfolio-desc">Site vitrine corporate + blog. SEO optimisé.</p>
-            <div class="portfolio-tags">
-              <span class="tag">Webflow</span>
-              <span class="tag">Blog</span>
-              <span class="tag">SEO</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- Project Card 4 -->
-        <div class="portfolio-card">
-          <div class="portfolio-image">
-            <div class="placeholder-image">PREVIEW</div>
-          </div>
-          <div class="portfolio-content">
-            <span class="portfolio-category font-mono">Startup • Fintech</span>
-            <h3 class="portfolio-title">Neo-Banque Mobile</h3>
-            <p class="portfolio-desc">Landing page conversion + waitlist. 24H garantie.</p>
-            <div class="portfolio-tags">
-              <span class="tag">Landing</span>
-              <span class="tag">Fintech</span>
-              <span class="tag">CRO</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- Project Card 5 -->
-        <div class="portfolio-card">
-          <div class="portfolio-image">
-            <div class="placeholder-image">PREVIEW</div>
-          </div>
-          <div class="portfolio-content">
-            <span class="portfolio-category font-mono">Tech • AI</span>
-            <h3 class="portfolio-title">AI Tool Marketing</h3>
-            <p class="portfolio-desc">Site produit SaaS. Animations + dark mode.</p>
-            <div class="portfolio-tags">
-              <span class="tag">Webflow</span>
-              <span class="tag">AI</span>
-              <span class="tag">Dark</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- Project Card 6 -->
-        <div class="portfolio-card">
-          <div class="portfolio-image">
-            <div class="placeholder-image">PREVIEW</div>
-          </div>
-          <div class="portfolio-content">
-            <span class="portfolio-category font-mono">Agency • Creative</span>
-            <h3 class="portfolio-title">Studio Design Paris</h3>
-            <p class="portfolio-desc">Portfolio agence créative. Full custom animations.</p>
-            <div class="portfolio-tags">
-              <span class="tag">Webflow</span>
-              <span class="tag">Portfolio</span>
-              <span class="tag">GSAP</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Testimonials Section -->
-  <section class="section">
-    <div class="container">
-      <h2 class="section-title text-center">
-        Ce qu'ils disent<span class="text-gradient">.</span>
-      </h2>
-      
-      <div class="testimonials-grid">
-        <div class="testimonial-card">
-          <p class="testimonial-text">
-            "Site livré en 22H. Qualité incroyable. On a multiplié nos conversions par 3."
-          </p>
-          <div class="testimonial-author">
-            <strong>Marc D.</strong>
-            <span class="font-mono">CEO @ SaaS Startup</span>
+          <div class="stat-mini-item">
+            <div class="stat-mini-number">98%</div>
+            <div class="stat-mini-label">Satisfaction</div>
           </div>
         </div>
         
-        <div class="testimonial-card">
-          <p class="testimonial-text">
-            "Enfin une agence qui tient ses promesses. Budget respecté, délai respecté."
-          </p>
-          <div class="testimonial-author">
-            <strong>Sophie L.</strong>
-            <span class="font-mono">CMO @ E-commerce</span>
+        <div class="filter-buttons">
+          <button class="filter-btn active" data-filter="all">Tous</button>
+          <button class="filter-btn" data-filter="b2b">B2B</button>
+          <button class="filter-btn" data-filter="b2c">B2C</button>
+          <button class="filter-btn" data-filter="saas">SaaS</button>
+          <button class="filter-btn" data-filter="ecommerce">E-commerce</button>
+          <button class="filter-btn" data-filter="starter">Offre Starter</button>
+          <button class="filter-btn" data-filter="business">Offre Business</button>
+        </div>
+      </div>
+      
+      <div class="cases-grid">
+        <!-- Case 1: PPF -->
+        <div class="case-card large" data-tags="b2b business">
+          <div class="case-content">
+            <div class="case-header">
+              <div class="case-logo">
+                <div class="case-logo-icon">PPF</div>
+                <div class="case-name">
+                  <h3>Préservation Patrimoine Français</h3>
+                  <p class="case-category">Leader amélioration énergétique</p>
+                </div>
+              </div>
+              <div class="case-time">43H 12MIN</div>
+            </div>
+            <div class="case-stats">
+              <div>
+                <div class="case-stat-number">+247%</div>
+                <div class="case-stat-label">Leads qualifiés</div>
+              </div>
+              <div>
+                <div class="case-stat-number">12</div>
+                <div class="case-stat-label">Pages créées</div>
+              </div>
+              <div>
+                <div class="case-stat-number">4.2s</div>
+                <div class="case-stat-label">Load time</div>
+              </div>
+            </div>
+            <div class="case-quote">
+              <p>"J'ai briefé Tomorrow.online le lundi matin. Le mercredi soir, mon site était en ligne. ROI immédiat : 3 gros contrats signés la première semaine grâce à la crédibilité du site."</p>
+              <div class="case-quote-author">Marc Dubois - Fondateur, PPF</div>
+            </div>
+            <div class="case-tags">
+              <span class="case-tag">B2B</span>
+              <span class="case-tag">Énergie</span>
+              <span class="case-tag">Offre Business</span>
+            </div>
+          </div>
+          <div class="case-image">
+            <img src="https://images.unsplash.com/photo-1614028674026-a65e31bfd27c?q=80&w=2670&auto=format&fit=crop" alt="PPF">
           </div>
         </div>
         
-        <div class="testimonial-card">
-          <p class="testimonial-text">
-            "Tomorrow a compris notre vision en 30 minutes. Le résultat est parfait."
-          </p>
-          <div class="testimonial-author">
-            <strong>Thomas R.</strong>
-            <span class="font-mono">Founder @ Fintech</span>
+        <!-- Case 2: Moubandje Academy -->
+        <div class="case-card medium" data-tags="b2c sport">
+          <div class="case-image">
+            <img src="https://images.unsplash.com/photo-1496747611176-843222e1e57c?q=80&w=2673&auto=format&fit=crop" alt="Moubandje Academy">
+          </div>
+          <div class="case-content">
+            <div class="case-header">
+              <div class="case-logo">
+                <div class="case-logo-icon">MA</div>
+                <div class="case-name">
+                  <h3>Moubandje Academy</h3>
+                  <p class="case-category">Académie football</p>
+                </div>
+              </div>
+              <div class="case-time">46H 30M</div>
+            </div>
+            <div class="case-stats">
+              <div>
+                <div class="case-stat-number">+180%</div>
+                <div class="case-stat-label">Inscriptions</div>
+              </div>
+              <div>
+                <div class="case-stat-number">5</div>
+                <div class="case-stat-label">Pages</div>
+              </div>
+            </div>
+            <div class="case-quote">
+              <p>"Site professionnel qui booste notre image. Parents convaincus dès la première visite."</p>
+              <div class="case-quote-author">Jacques M., Directeur</div>
+            </div>
+            <div class="case-tags">
+              <span class="case-tag">Sport</span>
+              <span class="case-tag">B2C</span>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Case 3: LexData AI -->
+        <div class="case-card medium" data-tags="saas startup">
+          <div class="case-image">
+            <img src="https://images.unsplash.com/photo-1560179707-f14e90ef3623?q=80&w=2673&auto=format&fit=crop" alt="LexData AI">
+          </div>
+          <div class="case-content">
+            <div class="case-header">
+              <div class="case-logo">
+                <div class="case-logo-icon">LX</div>
+                <div class="case-name">
+                  <h3>LexData AI</h3>
+                  <p class="case-category">SaaS LegalTech</p>
+                </div>
+              </div>
+              <div class="case-time">24H 00M</div>
+            </div>
+            <div class="case-stats">
+              <div>
+                <div class="case-stat-number">+340%</div>
+                <div class="case-stat-label">Signups beta</div>
+              </div>
+              <div>
+                <div class="case-stat-number">92</div>
+                <div class="case-stat-label">Score Perf</div>
+              </div>
+            </div>
+            <div class="case-quote">
+              <p>"Livraison en 24H chrono pour notre levée. Investisseurs bluffés."</p>
+              <div class="case-quote-author">Sophie L., CEO</div>
+            </div>
+            <div class="case-tags">
+              <span class="case-tag">SaaS</span>
+              <span class="case-tag">Startup</span>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Case 4: Villa Rosa -->
+        <div class="case-card large" data-tags="b2c restaurant starter">
+          <div class="case-content">
+            <div class="case-header">
+              <div class="case-logo">
+                <div class="case-logo-icon">VR</div>
+                <div class="case-name">
+                  <h3>Villa Rosa Paris</h3>
+                  <p class="case-category">Restaurant gastronomique</p>
+                </div>
+              </div>
+              <div class="case-time">35H 48MIN</div>
+            </div>
+            <div class="case-stats">
+              <div>
+                <div class="case-stat-number">+420%</div>
+                <div class="case-stat-label">Réservations web</div>
+              </div>
+              <div>
+                <div class="case-stat-number">8K</div>
+                <div class="case-stat-label">Visiteurs/mois</div>
+              </div>
+              <div>
+                <div class="case-stat-number">4.9</div>
+                <div class="case-stat-label">Note Google</div>
+              </div>
+            </div>
+            <div class="case-quote">
+              <p>"Notre ancien site était une catastrophe. Tomorrow.online a tout refait en moins de 2 jours. Le site reflète enfin la qualité de notre cuisine. Les réservations ont explosé."</p>
+              <div class="case-quote-author">Alessandra Bianchi - Chef & Propriétaire</div>
+            </div>
+            <div class="case-tags">
+              <span class="case-tag">Restaurant</span>
+              <span class="case-tag">B2C</span>
+              <span class="case-tag">Offre Starter</span>
+            </div>
+          </div>
+          <div class="case-image">
+            <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?q=80&w=2670&auto=format&fit=crop" alt="Villa Rosa">
+          </div>
+        </div>
+        
+        <!-- Case 5: Candle Bloom -->
+        <div class="case-card small" data-tags="ecommerce b2c">
+          <div class="case-image">
+            <img src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?q=80&w=2670&auto=format&fit=crop" alt="Candle Bloom">
+          </div>
+          <div class="case-content">
+            <div class="case-header">
+              <div class="case-logo">
+                <div class="case-logo-icon">CB</div>
+                <div class="case-name">
+                  <h3>Candle Bloom</h3>
+                  <p class="case-category">Bougies artisanales</p>
+                </div>
+              </div>
+              <div class="case-time">42H 15M</div>
+            </div>
+            <div class="case-stats">
+              <div>
+                <div class="case-stat-number">+310%</div>
+                <div class="case-stat-label">Ventes en ligne</div>
+              </div>
+              <div>
+                <div class="case-stat-number">4.8</div>
+                <div class="case-stat-label">Avis moyens</div>
+              </div>
+            </div>
+            <div class="case-quote">
+              <p>"E-shop Webflow complet en 42H. Mon ancien Shopify était lent et cher."</p>
+              <div class="case-quote-author">Clara B., Fondatrice</div>
+            </div>
+            <div class="case-tags">
+              <span class="case-tag">E-commerce</span>
+              <span class="case-tag">B2C</span>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Case 6: Keller Strategy -->
+        <div class="case-card small" data-tags="b2b consultant">
+          <div class="case-image">
+            <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?q=80&w=2670&auto=format&fit=crop" alt="Keller Strategy">
+          </div>
+          <div class="case-content">
+            <div class="case-header">
+              <div class="case-logo">
+                <div class="case-logo-icon">KS</div>
+                <div class="case-name">
+                  <h3>Keller Strategy</h3>
+                  <p class="case-category">Cabinet conseil RH</p>
+                </div>
+              </div>
+              <div class="case-time">28H 00M</div>
+            </div>
+            <div class="case-stats">
+              <div>
+                <div class="case-stat-number">+195%</div>
+                <div class="case-stat-label">Demandes RDV</div>
+              </div>
+              <div>
+                <div class="case-stat-number">91</div>
+                <div class="case-stat-label">Score SEO</div>
+              </div>
+            </div>
+            <div class="case-quote">
+              <p>"Site premium qui reflète notre positionnement haut de gamme. Livré en 28H top chrono."</p>
+              <div class="case-quote-author">David K., Associé</div>
+            </div>
+            <div class="case-tags">
+              <span class="case-tag">Consulting</span>
+              <span class="case-tag">B2B</span>
+            </div>
           </div>
         </div>
       </div>
+      
     </div>
-  </section>
-
-  <!-- CTA Section -->
-  <section class="section text-center">
-    <div class="container">
-      <p class="cta-title">Prêt à rejoindre le portfolio ?</p>
-      <button class="btn btn-primary btn-large" onclick="openModal()">
-        > Lancer mon projet
-      </button>
-      <p class="cta-note font-mono">Slots disponibles demain : 3</p>
-    </div>
-  </section>
-
+  </div>
+  
   <!-- Footer -->
   <footer class="footer">
     <div class="container">
@@ -326,6 +701,7 @@
         </div>
       </div>
       
+      <!-- Video Footer Link -->
       <div class="footer-video-link">
         <button class="video-link-btn" onclick="openVideoModal()">
           Comment on voit les acheteurs de templates
@@ -342,17 +718,15 @@
       </div>
     </div>
   </footer>
-
+  
   <!-- Modal Formulaire -->
   <div id="bookingModal" class="modal hidden">
     <div class="modal-overlay" onclick="window.closeModal()"></div>
     <div class="modal-container">
-      <div id="modalContent" class="modal-content">
-        <!-- Dynamic content generated by formulaire.js -->
-      </div>
+      <div id="modalContent" class="modal-content"></div>
     </div>
   </div>
-
+  
   <!-- Video Modal -->
   <div id="videoModal" class="modal hidden">
     <div class="modal-overlay" onclick="closeVideoModal()"></div>
@@ -368,25 +742,46 @@
       </div>
     </div>
   </div>
-
+  
   <!-- Scripts -->
   <script src="js/cursor.js"></script>
-  <script src="js/animations.js"></script>
   <script src="js/navigation.js"></script>
-  <script src="js/marquee.js"></script>
-  <script src="js/main.js"></script>
   <script src="js/formulaire.js"></script>
-  <script src="js/submit-netlify.js"></script>
   
   <script>
+    // Init
     if (typeof initCursor === 'function') initCursor();
-    if (typeof initAnimations === 'function') initAnimations();
     if (typeof initSmoothScroll === 'function') initSmoothScroll();
     
+    // Filter functionality
+    const filterButtons = document.querySelectorAll('.filter-btn');
+    const caseCards = document.querySelectorAll('.case-card');
+    
+    filterButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const filter = btn.dataset.filter;
+        
+        // Update active state
+        filterButtons.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        
+        // Filter cards
+        caseCards.forEach(card => {
+          const tags = card.dataset.tags || '';
+          if (filter === 'all' || tags.includes(filter)) {
+            card.style.display = 'block';
+          } else {
+            card.style.display = 'none';
+          }
+        });
+      });
+    });
+    
+    // Video modal functions
     function openVideoModal() {
       const modal = document.getElementById('videoModal');
       const iframe = document.getElementById('videoIframe');
-      iframe.src = 'https://player.vimeo.com/video/YOUR_VIDEO_ID?autoplay=1&badge=0&autopause=0';
+      iframe.src = 'https://player.vimeo.com/video/1141806002?autoplay=1&badge=0&autopause=0';
       modal.classList.remove('hidden');
       document.body.style.overflow = 'hidden';
     }
@@ -398,6 +793,16 @@
       modal.classList.add('hidden');
       document.body.style.overflow = '';
     }
+    
+    // ESC key to close video
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        const videoModal = document.getElementById('videoModal');
+        if (videoModal && !videoModal.classList.contains('hidden')) {
+          closeVideoModal();
+        }
+      }
+    });
     
     window.openVideoModal = openVideoModal;
     window.closeVideoModal = closeVideoModal;

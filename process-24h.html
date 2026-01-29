@@ -3,43 +3,234 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Process 24H - Comment on fait ? | Tomorrow.Online</title>
-  <meta name="description" content="Le process Tomorrow : Brief → Call → Deepwork → Champagne. Livraison garantie en 24H chrono ou remboursé.">
+  <title>Notre Process 24H - Tomorrow.Online</title>
+  <meta name="description" content="Comment on livre en 24-48H sans tricher. Process hybride IA + Humain qui a permis de livrer 42 sites en moins de 48H chrono.">
   
-  <!-- Favicon -->
   <link rel="icon" type="image/png" href="images/favicon.png">
   <link rel="apple-touch-icon" href="images/webclip.png">
   
-  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700;800;900&family=Syne:wght@700;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
   
-  <!-- CSS -->
   <link rel="stylesheet" href="css/design-system.css">
   <link rel="stylesheet" href="css/home.css">
   <link rel="stylesheet" href="css/formulaire.css">
   
-  <!-- GSAP -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollToPlugin.min.js"></script>
-  
-  <!-- Lenis Smooth Scroll -->
   <script src="https://unpkg.com/lenis@1.0.19/dist/lenis.min.js"></script>
+  
+  <style>
+    .process-page {
+      background: #FFF;
+      min-height: 100vh;
+      padding: 150px 2rem 80px;
+    }
+    
+    .process-container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    
+    .process-header {
+      margin-bottom: 80px;
+      padding-bottom: 40px;
+      border-bottom: 1px solid #E5E5E5;
+    }
+    
+    .process-badge {
+      display: inline-block;
+      border: 2px solid #FF5500;
+      padding: 0.5rem 1rem;
+      margin-bottom: 2rem;
+    }
+    
+    .process-badge span {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: #FF5500;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+    }
+    
+    .process-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: clamp(2.5rem, 8vw, 5rem);
+      font-weight: 900;
+      text-transform: uppercase;
+      line-height: 0.9;
+      color: #000;
+      margin-bottom: 2rem;
+    }
+    
+    .process-title .accent {
+      background: linear-gradient(90deg, #FF5500, #FF0000);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    
+    .process-subtitle {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.25rem;
+      line-height: 1.6;
+      color: #666;
+      max-width: 900px;
+      margin-bottom: 2rem;
+    }
+    
+    .timeline-section {
+      position: relative;
+      padding: 4rem 0;
+    }
+    
+    .timeline-step {
+      position: relative;
+      padding-left: 3rem;
+      margin-bottom: 3rem;
+      padding-bottom: 3rem;
+    }
+    
+    .timeline-step::before {
+      content: '';
+      position: absolute;
+      left: 6px;
+      top: 0;
+      bottom: -3rem;
+      width: 2px;
+      background: linear-gradient(180deg, #FF5500 0%, #FF0000 100%);
+    }
+    
+    .timeline-step:last-child::before {
+      display: none;
+    }
+    
+    .timeline-dot {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: linear-gradient(90deg, #FF5500, #FF0000);
+      box-shadow: 0 0 0 4px #FFF, 0 0 0 6px #FF5500;
+    }
+    
+    .timeline-time {
+      display: inline-block;
+      background: #000;
+      color: #FFF;
+      padding: 0.5rem 1rem;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.875rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+    }
+    
+    .timeline-heading {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      color: #000;
+      margin-bottom: 1rem;
+    }
+    
+    .timeline-content {
+      background: #F8F8F8;
+      border-left: 4px solid #FF5500;
+      padding: 1.5rem;
+      margin-bottom: 1rem;
+    }
+    
+    .timeline-content p {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1rem;
+      line-height: 1.8;
+      color: #666;
+      margin-bottom: 1rem;
+    }
+    
+    .timeline-content p:last-child {
+      margin-bottom: 0;
+    }
+    
+    .timeline-meta {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 0.875rem;
+      color: #999;
+    }
+    
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+      margin-bottom: 4rem;
+      padding: 3rem 0;
+      border-top: 2px solid #E5E5E5;
+      border-bottom: 2px solid #E5E5E5;
+    }
+    
+    .stat-item {
+      text-align: center;
+      padding: 2rem;
+      background: #FFF;
+      border: 2px solid #E5E5E5;
+    }
+    
+    .stat-number {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 3rem;
+      font-weight: 900;
+      background: linear-gradient(90deg, #FF5500, #FF0000);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 0.5rem;
+    }
+    
+    .stat-label {
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 700;
+      text-transform: uppercase;
+      font-size: 0.875rem;
+      margin-bottom: 0.5rem;
+    }
+    
+    .stat-detail {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 0.875rem;
+      color: #666;
+    }
+    
+    @media (max-width: 768px) {
+      .process-page {
+        padding: 120px 1.5rem 60px;
+      }
+      
+      .stats-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+      }
+      
+      .timeline-step {
+        padding-left: 2rem;
+      }
+    }
+  </style>
 </head>
 <body>
   
-  <!-- Custom Cursor -->
   <div class="custom-cursor" id="cursor"></div>
-  
-  <!-- Grid Background -->
   <div class="bg-grid-fixed"></div>
   
   <!-- Header -->
   <header class="header">
     <nav class="nav">
-      <div class="nav-logo" onclick="scrollToTop()">
+      <div class="nav-logo" onclick="window.location.href='index.html'">
         <img src="images/TO-logo.webp" alt="Tomorrow.Online" class="logo">
       </div>
       
@@ -88,166 +279,138 @@
       <button class="btn btn-primary" onclick="openModal()">Réserver</button>
     </div>
   </header>
-
-  <!-- Hero Section -->
-  <section class="section hero-alt">
-    <div class="container">
-      <h1 class="hero-title-alt">
-        Comment on fait ?<br>
-        On triche ?<br>
-        <span class="text-gradient">Oui.</span>
-      </h1>
+  
+  <!-- Process Content -->
+  <div class="process-page">
+    <div class="process-container">
       
-      <p class="hero-description">
-        Pendant que certains refusent l'IA ou produisent de la soupe déshumanisée, nous avons créé un process où humain et machine ne font qu'un.
-      </p>
-    </div>
-  </section>
-
-  <!-- Process Section -->
-  <section class="section process">
-    <div class="container">
-      <div class="process-grid">
-        <div class="process-step">
-          <div class="step-number">1</div>
-          <div class="step-badge font-mono">Étape 1</div>
-          <h3 class="step-title">Brief</h3>
-          <p class="step-desc">
-            Vous remplissez notre questionnaire détaillé. On veut tout savoir sur votre site, marché, concurrents, vision.
-          </p>
+      <div class="process-header">
+        <div class="process-badge">
+          <span>/// PROCESS CERTIFIÉ</span>
         </div>
-        
-        <div class="process-step">
-          <div class="step-number">2</div>
-          <div class="step-badge font-mono">Étape 2</div>
-          <h3 class="step-title">Call</h3>
-          <p class="step-desc">
-            Notre équipe vous contacte. On confirme le brief. Le paiement se fait à ce moment, si tout est validé.
-          </p>
+        <h1 class="process-title">
+          Comment on livre<br>en <span class="accent">24-48H</span><br>(sans tricher)
+        </h1>
+        <p class="process-subtitle">
+          La vitesse sans sacrifier la qualité. Découvrez le process hybride IA + Humain qui a permis de livrer 42 sites en moins de 48H chrono.
+        </p>
+      </div>
+      
+      <div class="stats-grid">
+        <div class="stat-item">
+          <div class="stat-number">42</div>
+          <div class="stat-label">Sites livrés</div>
+          <div class="stat-detail">En moins de 48H</div>
         </div>
-        
-        <div class="process-step">
-          <div class="step-number">3</div>
-          <div class="step-badge font-mono">Étape 3</div>
-          <h3 class="step-title">Deepwork</h3>
-          <p class="step-desc">
-            On rédige vos textes, crée vos visuels, génère wireframe et design system. Humain + IA en symbiose.
-          </p>
+        <div class="stat-item">
+          <div class="stat-number">38H</div>
+          <div class="stat-label">Délai moyen</div>
+          <div class="stat-detail">Record : 24H exactement</div>
         </div>
-        
-        <div class="process-step process-step-final">
-          <div class="step-number step-number-gradient">4</div>
-          <div class="step-badge font-mono">Étape 4</div>
-          <h3 class="step-title">Champagne</h3>
-          <p class="step-desc">
-            Présentation visio, SEO, mise en ligne. On ouvre le Dom Pérignon. Votre site est live.
-          </p>
+        <div class="stat-item">
+          <div class="stat-number">98%</div>
+          <div class="stat-label">Satisfaction</div>
+          <div class="stat-detail">Zéro retard de livraison</div>
         </div>
       </div>
-    </div>
-  </section>
-
-  <!-- Timeline Section -->
-  <section class="section bg-dark-panel">
-    <div class="container content-narrow">
-      <h2 class="section-subtitle-alt">La Timeline 24H</h2>
       
-      <div class="timeline">
-        <div class="timeline-item">
-          <div class="timeline-hour font-mono">H+0</div>
+      <div class="timeline-section" id="timeline">
+        <h2 style="font-family:'Space Grotesk',sans-serif;font-size:2.5rem;font-weight:900;text-transform:uppercase;text-align:center;margin-bottom:4rem;">Timeline <span style="background:linear-gradient(90deg,#FF5500,#FF0000);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">24H Chrono</span></h2>
+        
+        <div class="timeline-step">
+          <div class="timeline-dot"></div>
+          <div class="timeline-time">09:00</div>
+          <h3 class="timeline-heading">Appel de Validation</h3>
           <div class="timeline-content">
-            <h3 class="timeline-title">Sprint Go</h3>
-            <p class="timeline-desc">Brief validé. Le chrono démarre. L'équipe complète se met en mode deepwork.</p>
+            <p>Un membre de l'équipe vous appelle pour vérifier votre brief. On s'assure que tout est clair : objectifs, cibles, références visuelles, contenus. Durée : 20-30 minutes max.</p>
+            <div class="timeline-meta">👤 Intervenant : Chef de Projet</div>
           </div>
         </div>
         
-        <div class="timeline-item">
-          <div class="timeline-hour font-mono">H+4</div>
+        <div class="timeline-step">
+          <div class="timeline-dot"></div>
+          <div class="timeline-time">09:30</div>
+          <h3 class="timeline-heading">Paiement & GO</h3>
           <div class="timeline-content">
-            <h3 class="timeline-title">Wireframe & Copy</h3>
-            <p class="timeline-desc">Structure UX définie. Premier jet du copywriting. Direction artistique arrêtée.</p>
+            <p>Brief validé ? Paiement sécurisé (Stripe). Chronomètre lancé. L'équipe reçoit le dossier complet. Vous recevez un email de confirmation avec timeline prévisionnelle.</p>
+            <div class="timeline-meta">⏱️ Chrono démarre officiellement</div>
           </div>
         </div>
         
-        <div class="timeline-item">
-          <div class="timeline-hour font-mono">H+12</div>
+        <div class="timeline-step">
+          <div class="timeline-dot"></div>
+          <div class="timeline-time">10:00</div>
+          <h3 class="timeline-heading">Stratégie & Benchmark</h3>
           <div class="timeline-content">
-            <h3 class="timeline-title">Design System</h3>
-            <p class="timeline-desc">Identité visuelle créée. Composants designés. Assets générés.</p>
+            <p>Le stratège analyse votre marché, vos concurrents, identifie les best practices UX/UI de votre secteur. Création d'un document stratégique interne (non livré mais utilisé pour briefer l'IA).</p>
+            <div class="timeline-meta">👤 Intervenant : Stratège Senior (15 ans XP)</div>
           </div>
         </div>
         
-        <div class="timeline-item">
-          <div class="timeline-hour font-mono">H+18</div>
+        <div class="timeline-step">
+          <div class="timeline-dot"></div>
+          <div class="timeline-time">11:00</div>
+          <h3 class="timeline-heading">Copywriting & Tonalité</h3>
           <div class="timeline-content">
-            <h3 class="timeline-title">Dev Webflow</h3>
-            <p class="timeline-desc">Intégration complète. Responsive. Animations. SEO technique.</p>
+            <p>Le copywriter rédige vos textes avec psychologie de vente, storytelling et CRO. Chaque phrase est pensée pour convertir. L'IA génère des propositions, l'humain sélectionne et affine.</p>
+            <div class="timeline-meta">👤 Intervenant : Copywriter (5 ans XP Pub)</div>
           </div>
         </div>
         
-        <div class="timeline-item timeline-item-final">
-          <div class="timeline-hour font-mono text-gradient">H+24</div>
+        <div class="timeline-step">
+          <div class="timeline-dot"></div>
+          <div class="timeline-time">12:30</div>
+          <h3 class="timeline-heading">Wireframe UX</h3>
           <div class="timeline-content">
-            <h3 class="timeline-title text-gradient">Live</h3>
-            <p class="timeline-desc">Présentation, validation, mise en ligne. Champagne. Votre site est opérationnel.</p>
+            <p>L'UX Designer crée le wireframe basse-fidélité : zoning, hiérarchie visuelle, parcours utilisateur. Validation interne de la structure avant design. Optimisation CRO appliquée.</p>
+            <div class="timeline-meta">👤 Intervenant : UX Designer (5 ans XP)</div>
+          </div>
+        </div>
+        
+        <div class="timeline-step">
+          <div class="timeline-dot"></div>
+          <div class="timeline-time">14:00</div>
+          <h3 class="timeline-heading">Design System & Maquettes</h3>
+          <div class="timeline-content">
+            <p>Le directeur artistique crée votre identité visuelle : couleurs, typographies, composants. Génération IA des premières pistes, sélection et raffinage humain. Création des maquettes HD sur Figma.</p>
+            <div class="timeline-meta">👤 Intervenant : DA Senior (15 ans XP Branding)</div>
+          </div>
+        </div>
+        
+        <div class="timeline-step">
+          <div class="timeline-dot"></div>
+          <div class="timeline-time">16:00</div>
+          <h3 class="timeline-heading">Développement Webflow</h3>
+          <div class="timeline-content">
+            <p>Intégration pixel-perfect sur Webflow. Animations, responsive, interactions. Code propre, sémantique HTML, optimisations performance. Tests cross-browser.</p>
+            <div class="timeline-meta">👤 Intervenant : Dev Webflow Expert</div>
+          </div>
+        </div>
+        
+        <div class="timeline-step">
+          <div class="timeline-dot"></div>
+          <div class="timeline-time" style="background:#22C55E;">18:00</div>
+          <h3 class="timeline-heading">SEO & Mise en Ligne</h3>
+          <div class="timeline-content">
+            <p>Optimisation SEO on-page : balises meta, structure Hn, sitemap, robots.txt. Tests de performance (Lighthouse 90+). Mise en ligne sur votre domaine. Email de livraison envoyé.</p>
+            <div class="timeline-meta">✅ Site live + Accès Webflow transféré</div>
+          </div>
+        </div>
+        
+        <div class="timeline-step">
+          <div class="timeline-dot"></div>
+          <div class="timeline-time" style="background:#22C55E;">18:30</div>
+          <h3 class="timeline-heading">🍾 Champagne Call</h3>
+          <div class="timeline-content">
+            <p>Présentation du site en visio. Walkthrough des fonctionnalités. Formation rapide Webflow (si besoin). On ouvre le champagne ensemble. Littéralement.</p>
+            <div class="timeline-meta">🥂 Mission accomplie</div>
           </div>
         </div>
       </div>
-    </div>
-  </section>
-
-  <!-- Tools Section -->
-  <section class="section">
-    <div class="container">
-      <h2 class="section-title text-center">
-        Notre Stack<span class="text-gradient">.</span>
-      </h2>
       
-      <div class="tools-grid">
-        <div class="tool-card">
-          <h3 class="tool-name font-mono">WEBFLOW</h3>
-          <p class="tool-desc">CMS no-code le plus puissant du marché</p>
-        </div>
-        
-        <div class="tool-card">
-          <h3 class="tool-name font-mono">FIGMA</h3>
-          <p class="tool-desc">Design collaboratif temps réel</p>
-        </div>
-        
-        <div class="tool-card">
-          <h3 class="tool-name font-mono">RELUME</h3>
-          <p class="tool-desc">Wireframe IA intelligent</p>
-        </div>
-        
-        <div class="tool-card">
-          <h3 class="tool-name font-mono">CLAUDE AI</h3>
-          <p class="tool-desc">Assistant copywriting senior</p>
-        </div>
-        
-        <div class="tool-card">
-          <h3 class="tool-name font-mono">GEMINI PRO</h3>
-          <p class="tool-desc">Analyse de marché profonde</p>
-        </div>
-        
-        <div class="tool-card">
-          <h3 class="tool-name font-mono">VERDENT</h3>
-          <p class="tool-desc">Agent IA dev autonome</p>
-        </div>
-      </div>
     </div>
-  </section>
-
-  <!-- CTA Section -->
-  <section class="section text-center">
-    <div class="container">
-      <p class="cta-title">Prêt à célébrer ?</p>
-      <button class="btn btn-primary btn-large" onclick="openModal()">
-        > Sabrer le champagne Tomorrow !
-      </button>
-      <p class="cta-note font-mono">24H chrono • Qualité garantie</p>
-    </div>
-  </section>
-
+  </div>
+  
   <!-- Footer -->
   <footer class="footer">
     <div class="container">
@@ -290,6 +453,7 @@
         </div>
       </div>
       
+      <!-- Video Footer Link -->
       <div class="footer-video-link">
         <button class="video-link-btn" onclick="openVideoModal()">
           Comment on voit les acheteurs de templates
@@ -306,17 +470,15 @@
       </div>
     </div>
   </footer>
-
+  
   <!-- Modal Formulaire -->
   <div id="bookingModal" class="modal hidden">
     <div class="modal-overlay" onclick="window.closeModal()"></div>
     <div class="modal-container">
-      <div id="modalContent" class="modal-content">
-        <!-- Dynamic content generated by formulaire.js -->
-      </div>
+      <div id="modalContent" class="modal-content"></div>
     </div>
   </div>
-
+  
   <!-- Video Modal -->
   <div id="videoModal" class="modal hidden">
     <div class="modal-overlay" onclick="closeVideoModal()"></div>
@@ -332,25 +494,22 @@
       </div>
     </div>
   </div>
-
+  
   <!-- Scripts -->
   <script src="js/cursor.js"></script>
-  <script src="js/animations.js"></script>
   <script src="js/navigation.js"></script>
-  <script src="js/marquee.js"></script>
-  <script src="js/main.js"></script>
   <script src="js/formulaire.js"></script>
-  <script src="js/submit-netlify.js"></script>
   
   <script>
+    // Init
     if (typeof initCursor === 'function') initCursor();
-    if (typeof initAnimations === 'function') initAnimations();
     if (typeof initSmoothScroll === 'function') initSmoothScroll();
     
+    // Video modal functions
     function openVideoModal() {
       const modal = document.getElementById('videoModal');
       const iframe = document.getElementById('videoIframe');
-      iframe.src = 'https://player.vimeo.com/video/YOUR_VIDEO_ID?autoplay=1&badge=0&autopause=0';
+      iframe.src = 'https://player.vimeo.com/video/1141806002?autoplay=1&badge=0&autopause=0';
       modal.classList.remove('hidden');
       document.body.style.overflow = 'hidden';
     }
@@ -362,6 +521,16 @@
       modal.classList.add('hidden');
       document.body.style.overflow = '';
     }
+    
+    // ESC key to close video
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        const videoModal = document.getElementById('videoModal');
+        if (videoModal && !videoModal.classList.contains('hidden')) {
+          closeVideoModal();
+        }
+      }
+    });
     
     window.openVideoModal = openVideoModal;
     window.closeVideoModal = closeVideoModal;
