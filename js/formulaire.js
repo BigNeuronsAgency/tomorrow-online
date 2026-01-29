@@ -11,8 +11,8 @@ var countdownTimer = null;
 var countdownStarted = false;
 
 // Form action URLs
-const FORM_ACTION_URL = 'https://formsubmit.co/mf.phan@bigneurons.com';
-const FORM_ACTION_URL_UPSELL = 'https://formsubmit.co/mf.phan@bigneurons.com';
+const FORM_ACTION_URL = '/.netlify/functions/submit-brief';
+const FORM_ACTION_URL_UPSELL = '/.netlify/functions/submit-brief';
 const BRAND_RED = '#FF3333';
 
 // Data constants
