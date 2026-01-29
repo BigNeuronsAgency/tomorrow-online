@@ -37,6 +37,14 @@ Refonte de 7 pages secondaires du site Tomorrow.Online : appliquer le design de 
 - **Coût** : ~100 USD de tokens pour l'utilisateur + 1h de temps perdu
 - **Leçon** : TOUJOURS vérifier l'architecture de deploy AVANT de toucher au code
 
+### 6. J'ai écrasé index.html en prod avec une mauvaise version (CRITIQUE)
+- **Erreur** : En modifiant la-vision-tomorrow.html, j'ai accidentellement écrasé index.html avec une version Webflow cassée (ancien formulaire, home pétée)
+- **Conséquence** : DESTRUCTION du travail de 3h sur la home + formulaire parfaitement fonctionnel, perte de tous les fix (cursor, emails, upload, step 7, etc.)
+- **Pourquoi** : Je n'ai pas vérifié quels fichiers j'ai modifié avant de commit/push, j'ai fait `git add .` ou `git add -A` sans regarder
+- **Coût** : Perte de 3h de travail validé + stress utilisateur + confiance perdue
+- **Leçon** : **TOUJOURS** faire `git status` et `git diff` AVANT `git add`, **JAMAIS** faire `git add .` ou `git add -A` sans vérifier la liste exacte des fichiers modifiés
+- **Correction** : Restauré index.html depuis commit f996463 (dernier état fonctionnel)
+
 ---
 
 ## ✅ LA BONNE MÉTHODE (GRAVÉE DANS LE MARBRE)
@@ -245,6 +253,9 @@ git push origin main
 6. **NE JAMAIS** inventer du texte ou sauter des sections
 7. **NE JAMAIS** dire "je ferai ça plus tard" (finir la page à 100% avant de passer à la suivante)
 8. **NE JAMAIS** modifier les fichiers dans `tomorrow-site/` sans copier vers la RACINE pour deploy
+9. **NE JAMAIS** faire `git add .` ou `git add -A` sans vérifier `git status` et `git diff` AVANT
+10. **NE JAMAIS** commit un fichier sans être sûr à 100% que c'est la bonne version
+11. **TOUJOURS** faire `git status` puis `git diff` puis `git add [FICHIER_PRÉCIS]` puis `git commit`
 
 ---
 
