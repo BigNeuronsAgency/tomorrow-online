@@ -944,15 +944,27 @@ window.handleCloseOrBack = function() {
 };
 
 window.openModal = function(plan) {
+  console.log('🔥 openModal CALLED', plan);
+  console.log('🔥 bookingModal element:', document.getElementById('bookingModal'));
+  
   currentStep = 1;
   formData.selectedPack = '';
-  typeConsole('SYSTEM SECURE CONNECTION...');
+  
+  console.log('🔥 Calling draw()...');
   draw();
+  console.log('🔥 draw() completed');
   
   var m = document.getElementById('bookingModal');
+  console.log('🔥 Modal element found:', !!m);
+  console.log('🔥 Modal classList:', m ? m.classList.toString() : 'NULL');
+  
   if (m) {
     m.classList.remove('hidden');
+    console.log('🔥 Removed hidden class, new classList:', m.classList.toString());
     lockScroll();
+    console.log('🔥 Modal should be visible NOW');
+  } else {
+    console.error('🔥 MODAL ELEMENT NOT FOUND!');
   }
 };
 

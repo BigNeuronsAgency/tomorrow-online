@@ -52,7 +52,7 @@
     
     <nav class="nav">
       <div class="nav-logo" onclick="scrollToTop()">
-        <img src="images/TO-logo-new.png" alt="Tomorrow.Online" class="logo">
+        <img src="images/TO-logo.webp" alt="Tomorrow.Online" class="logo">
       </div>
       
       <div class="nav-links">
@@ -708,7 +708,7 @@
     <div class="container">
       <div class="footer-grid">
         <div class="footer-brand">
-          <img src="images/TO-logo-new.png" alt="Tomorrow.Online" class="footer-logo">
+          <img src="images/TO-logo.webp" alt="Tomorrow.Online" class="footer-logo">
           <p class="footer-tagline font-mono">
             La première agence web "NO-WAIT" en France.<br>
             Designed for speed. Powered by intelligence.
@@ -796,26 +796,39 @@
   <script src="js/main.js"></script>
   <script src="js/formulaire.js"></script>
   
-  <!-- Initialize on load -->
+  <!-- Initialize IMMEDIATELY after scripts load -->
   <script>
-    // Ensure openModal is available immediately
-    if (typeof window.openModal === 'undefined') {
-      console.log('Waiting for formulaire.js to load...');
+    console.log('=== INIT START ===');
+    console.log('openModal exists?', typeof window.openModal);
+    console.log('initCursor exists?', typeof initCursor);
+    console.log('initAnimations exists?', typeof initAnimations);
+    console.log('initSmoothScroll exists?', typeof initSmoothScroll);
+    
+    // Call init functions RIGHT NOW (scripts already loaded)
+    try {
+      if (typeof initCursor === 'function') {
+        initCursor();
+        console.log('✓ Cursor initialized');
+      }
+      if (typeof initAnimations === 'function') {
+        initAnimations();
+        console.log('✓ Animations initialized');
+      }
+      if (typeof initSmoothScroll === 'function') {
+        initSmoothScroll();
+        console.log('✓ Smooth scroll initialized');
+      }
+      console.log('=== INIT COMPLETE ===');
+    } catch(e) {
+      console.error('INIT ERROR:', e);
     }
     
-    // Use window.onload instead of DOMContentLoaded since scripts are loaded without defer
-    window.addEventListener('load', () => {
-      console.log('Window loaded, initializing...');
-      if (typeof initCursor === 'function') initCursor();
-      if (typeof initAnimations === 'function') initAnimations();
-      if (typeof initSmoothScroll === 'function') initSmoothScroll();
-      console.log('All initialized');
-    });
-    
-    // Fallback: also try DOMContentLoaded
-    document.addEventListener('DOMContentLoaded', () => {
-      console.log('DOM loaded');
-    });
+    // Test modal immediately
+    setTimeout(() => {
+      console.log('Testing modal after 1s...');
+      console.log('Modal element exists?', !!document.getElementById('bookingModal'));
+      console.log('openModal function?', typeof window.openModal);
+    }, 1000);
     
     // FAQ Toggle Function
     function toggleFaq(element) {

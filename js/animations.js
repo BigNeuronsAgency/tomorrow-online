@@ -30,30 +30,26 @@ function initAnimations() {
     }
   );
   
-  // Scroll skew effect on body - ONLY on fast scroll
-  let skewSetter = gsap.quickSetter('body', 'skewY', 'deg');
-  let clamp = gsap.utils.clamp(-1.5, 1.5); // Réduit de -3/3 à -1.5/1.5
-  const VELOCITY_THRESHOLD = 50; // Only trigger if scroll velocity > 50
+  // Scroll skew effect DISABLED (causait nausée)
+  // let skewSetter = gsap.quickSetter('body', 'skewY', 'deg');
+  // let clamp = gsap.utils.clamp(-1.5, 1.5);
+  // const VELOCITY_THRESHOLD = 50;
   
-  ScrollTrigger.create({
-    onUpdate: (self) => {
-      let velocity = self.getVelocity();
-      
-      // Only apply skew if scrolling fast enough
-      if (Math.abs(velocity) > VELOCITY_THRESHOLD) {
-        let skew = clamp(velocity / -600); // Divisé par 600 au lieu de 300 pour plus subtil
-        skewSetter(skew);
-        
-        // Return to normal slowly
-        gsap.to('body', {
-          skewY: 0,
-          duration: 0.8,
-          ease: 'power3.out',
-          overwrite: true
-        });
-      }
-    }
-  });
+  // ScrollTrigger.create({
+  //   onUpdate: (self) => {
+  //     let velocity = self.getVelocity();
+  //     if (Math.abs(velocity) > VELOCITY_THRESHOLD) {
+  //       let skew = clamp(velocity / -600);
+  //       skewSetter(skew);
+  //       gsap.to('body', {
+  //         skewY: 0,
+  //         duration: 0.8,
+  //         ease: 'power3.out',
+  //         overwrite: true
+  //       });
+  //     }
+  //   }
+  // });
   
   // Manifesto text animation
   ScrollTrigger.create({
