@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Landing Page Haute Conversion - CRO Expert | Tomorrow.Online</title>
+  <meta name="description" content="Landing page optimisée conversion en 24H. Design CRO, copywriting persuasif, A/B testing ready. Taux de conversion x2. Tomorrow.Online.">
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="images/favicon.png">
+  <link rel="apple-touch-icon" href="images/webclip.png">
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700;800;900&family=Syne:wght@700;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+  
+  <!-- CSS -->
+  <link rel="stylesheet" href="css/design-system.css">
+  <link rel="stylesheet" href="css/home.css">
+  <link rel="stylesheet" href="css/formulaire.css">
+  
+  <!-- GSAP -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollToPlugin.min.js"></script>
+  
+  <!-- Lenis Smooth Scroll -->
+  <script src="https://unpkg.com/lenis@1.0.19/dist/lenis.min.js"></script>
+</head>
+<body>
+  
+  <!-- Custom Cursor -->
+  <div class="custom-cursor" id="cursor"></div>
+  
+  <!-- Grid Background -->
+  <div class="bg-grid-fixed"></div>
+  
+  <!-- Header -->
+  <header class="header">
+    <nav class="nav">
+      <div class="nav-logo" onclick="window.location.href='index.html'">
+        <img src="images/TO-logo.webp" alt="Tomorrow.Online" class="logo">
+      </div>
+      
+      <div class="nav-links">
+        <a href="process-24h.html" class="nav-link">Process</a>
+        <a href="realisations.html" class="nav-link">Réalisations</a>
+        <div class="nav-dropdown">
+          <span class="nav-link nav-link-dropdown">
+            Ressources
+            <span class="dropdown-arrow">▼</span>
+          </span>
+          <div class="dropdown-content">
+            <a href="la-vision-tomorrow.html">🔮 Notre Vision</a>
+            <a href="notre-histoire.html">🏢 Qui sommes-nous</a>
+            <a href="comparatif-solutions-web.html">⚡ Comparatif Solutions</a>
+            <a href="migrations.html">🔄 Migrations CMS</a>
+          </div>
+        </div>
+      </div>
+      
+      <div class="nav-cta">
+        <button class="btn btn-primary" onclick="openModal()">
+          Réserver mon créneau
+        </button>
+      </div>
+      
+      <!-- Mobile Menu Button -->
+      <button class="mobile-menu-btn" onclick="toggleMobileMenu()">
+        <span class="hamburger"></span>
+      </button>
+    </nav>
+    
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobileMenu">
+      <a href="process-24h.html">Process</a>
+      <a href="realisations.html">Réalisations</a>
+      <div class="mobile-dropdown" onclick="toggleMobileDropdown(this)">
+        <span>Ressources ▼</span>
+        <div class="mobile-dropdown-content">
+          <a href="la-vision-tomorrow.html">🔮 Notre Vision</a>
+          <a href="notre-histoire.html">🏢 Qui sommes-nous</a>
+          <a href="comparatif-solutions-web.html">⚡ Comparatif Solutions</a>
+          <a href="migrations.html">🔄 Migrations CMS</a>
+        </div>
+      </div>
+      <button class="btn btn-primary" onclick="openModal()">Réserver</button>
+    </div>
+  </header>
+  
+  <!-- Hero Section -->
+  <section class="hero section">
+    <div class="container">
+      <div class="hero-content">
+        <h1 class="hero-title hero-load">
+          LANDING PAGE<br>
+          <span class="text-gradient">HAUTE CONVERSION</span>
+        </h1>
+        
+        <div class="hero-subtitle hero-load">
+          <p class="hero-text">
+            Une landing page qui convertit. Design CRO. Copywriting persuasif. Livrée en 24H.
+          </p>
+        </div>
+        
+        <div class="hero-cta hero-load">
+          <button class="btn btn-primary btn-large" onclick="openModal()">
+            Créer ma landing page
+          </button>
+          <p class="hero-cta-note font-mono">Offre Starter : 980€ au lieu de 1500€</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Content Section -->
+  <section class="section">
+    <div class="container">
+      <div style="max-width: 900px; margin: 0 auto;">
+        <h2 class="section-title" style="margin-bottom: 2rem;">
+          Qu'est-ce qu'une<br>
+          <span class="text-gradient">Landing Page CRO ?</span>
+        </h2>
+
+        <div class="manifesto-text" style="margin-bottom: 3rem;">
+          <p>
+            Une <strong>landing page haute conversion</strong> n'est pas un simple "site d'une page". 
+            C'est une page construite scientifiquement pour transformer un maximum de visiteurs en clients. 
+            Chaque élément est pensé pour la conversion.
+          </p>
+
+          <h3 class="monde-title" style="margin-top: 3rem; margin-bottom: 1rem;">Les 7 éléments d'une landing CRO</h3>
+          <p>
+            <strong>1. Hero puissant</strong> : Titre qui accroche + proposition de valeur claire en 3 secondes<br>
+            <strong>2. Bénéfices explicites</strong> : On ne vend pas des features, on vend des résultats<br>
+            <strong>3. Preuves sociales</strong> : Témoignages, chiffres, logos clients, études de cas<br>
+            <strong>4. Réassurance</strong> : On lève les objections avant qu'elles n'apparaissent<br>
+            <strong>5. Call-to-action stratégiques</strong> : Multiples CTA placés aux bons endroits<br>
+            <strong>6. Urgence & rareté</strong> : On crée le FOMO (Fear Of Missing Out)<br>
+            <strong>7. Design épuré</strong> : Zéro distraction. Un seul objectif : la conversion
+          </p>
+
+          <h3 class="monde-title" style="margin-top: 3rem; margin-bottom: 1rem;">Notre process CRO</h3>
+          <p>
+            Chez <strong>Tomorrow.Online</strong>, nous ne créons pas de belles pages. 
+            Nous créons des pages qui <strong>convertissent</strong>. Notre équipe inclut :
+          </p>
+          <p>
+            → Un <strong>stratège</strong> qui analyse votre marché et trouve l'angle d'attaque<br>
+            → Un <strong>copywriter</strong> formé à la psychologie de vente et au neuromarketing<br>
+            → Un <strong>UX designer</strong> obsédé par les taux de conversion<br>
+            → Un <strong>développeur Webflow</strong> qui intègre tout en code propre et rapide
+          </p>
+
+          <h3 class="monde-title" style="margin-top: 3rem; margin-bottom: 1rem;">Cas d'usage d'une landing page</h3>
+          <p>
+            ✓ <strong>Lancer un produit/service</strong> : Tester le marché rapidement<br>
+            ✓ <strong>Campagne Google Ads / Facebook Ads</strong> : Convertir le trafic payant<br>
+            ✓ <strong>Lever des fonds</strong> : Présenter votre startup aux investisseurs<br>
+            ✓ <strong>Générer des leads B2B</strong> : Capturer des contacts qualifiés<br>
+            ✓ <strong>Vendre une offre limitée</strong> : Formation, événement, prévente
+          </p>
+
+          <h3 class="monde-title" style="margin-top: 3rem; margin-bottom: 1rem;">Résultats attendus</h3>
+          <p>
+            Avec une landing page Tomorrow.Online, vous pouvez espérer :
+          </p>
+          <p>
+            → <strong>Taux de conversion 2x supérieur</strong> à une page classique<br>
+            → <strong>Coût d'acquisition (CAC) réduit</strong> sur vos campagnes payantes<br>
+            → <strong>Temps de chargement < 1 seconde</strong> (Google PageSpeed 95+)<br>
+            → <strong>Mobile-first</strong> : 60% de vos visiteurs sont sur mobile<br>
+            → <strong>A/B testing ready</strong> : Optimisation continue après livraison
+          </p>
+
+          <h3 class="monde-title" style="margin-top: 3rem; margin-bottom: 1rem;">Tarif & Livraison</h3>
+          <p>
+            <strong>Offre Starter</strong> : 980€ HT (au lieu de 1500€)<br>
+            → Landing page complète en 24H<br>
+            → Copywriting CRO inclus<br>
+            → Design sur-mesure<br>
+            → Développement Webflow<br>
+            → SEO technique<br>
+            → Formulaire de capture<br>
+            → Mise en ligne
+          </p>
+          <p>
+            Livraison garantie en <strong>24H</strong> ou vous êtes remboursé.
+          </p>
+        </div>
+
+        <div style="text-align: center; margin-top: 4rem;">
+          <button class="btn btn-primary btn-large" onclick="openModal()">
+            > Créer ma landing page haute conversion
+          </button>
+          <p class="cta-note font-mono">Livraison 24H • CRO Expert • 980€ HT</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <img src="images/TO-logo.webp" alt="Tomorrow.Online" class="footer-logo">
+          <p class="footer-tagline font-mono">
+            La première agence web "NO-WAIT" en France.<br>
+            Designed for speed. Powered by intelligence.
+          </p>
+        </div>
+        
+        <div class="footer-links">
+          <h4 class="footer-title font-mono">Services</h4>
+          <ul class="footer-list">
+            <li><a href="process-24h.html">Process 24H</a></li>
+            <li><a href="realisations.html">Réalisations</a></li>
+            <li><a href="comparatif-solutions-web.html">Comparatif</a></li>
+            <li><a href="migrations.html">Migrations</a></li>
+          </ul>
+        </div>
+        
+        <div class="footer-links">
+          <h4 class="footer-title font-mono">À Propos</h4>
+          <ul class="footer-list">
+            <li><a href="la-vision-tomorrow.html">La Vision</a></li>
+            <li><a href="notre-histoire.html">Notre Histoire</a></li>
+            <li><a href="detail_sprints.html">Détails Sprints</a></li>
+            <li><a href="detail_integrations.html">Intégrations</a></li>
+          </ul>
+        </div>
+        
+        <div class="footer-links">
+          <h4 class="footer-title font-mono">Réseau & Contact</h4>
+          <ul class="footer-list">
+            <li><a href="https://www.bigneurons.com" target="_blank">Groupe Big Neurons <span class="external-icon">↗</span></a></li>
+            <li><a href="mentions-legales.html">Mentions Légales</a></li>
+            <li><a href="mailto:hello@tomorrow.online">Contact Ops</a></li>
+          </ul>
+        </div>
+      </div>
+      
+      <div class="footer-bottom">
+        <p class="footer-copyright font-mono">
+          © 2026 TOMORROW AGENCY. UNE MARQUE DE SAS BIG NEURONS. TOMORROW.ONLINE EST LA PREMIÈRE AGENCE WEB "NO-WAIT" EN FRANCE. DESIGNED FOR SPEED. POWERED BY INTELLIGENCE.
+        </p>
+        <div class="footer-status font-mono">
+          SYSTEM STATUS: OPERATIONAL
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Modal Formulaire 7 Étapes -->
+  <div id="bookingModal" class="modal hidden">
+    <div class="modal-overlay" onclick="window.closeModal()"></div>
+    <div class="modal-container">
+      <div id="modalContent" class="modal-content">
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="js/cursor.js"></script>
+  <script src="js/animations.js"></script>
+  <script src="js/navigation.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/formulaire.js"></script>
+  <script src="js/submit-netlify.js"></script>
+  
+  <script>
+    if (typeof initCursor === 'function') initCursor();
+    if (typeof initAnimations === 'function') initAnimations();
+    if (typeof initSmoothScroll === 'function') initSmoothScroll();
+  </script>
+  
+</body>
+</html>
