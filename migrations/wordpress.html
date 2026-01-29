@@ -14,63 +14,27 @@
   <link href="../images/webclip.png" rel="apple-touch-icon">
 </head>
 <body>
-  <div class="w-embed">
-    <style>
-/* Padding pour compenser le header fixe */
-body {
-  padding-top: 98px !important;
-}
-@media (max-width: 767px) {
-  body {
-    padding-top: 100px !important;
-  }
-}
-/* CSS pour le header */
-.text-gradient{background:linear-gradient(90deg,rgba(255,85,0,1) 0%,rgba(255,0,0,1) 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
-.bg-gradient{background:linear-gradient(90deg,rgba(255,85,0,1) 0%,rgba(255,0,0,1) 100%)}
-.font-heading{font-family:'Space Grotesk',sans-serif}
-.font-mono{font-family:'JetBrains Mono',monospace}
-/* Dropdown menu */
-.dropdown{position:relative;display:inline-block}
-.dropdown-content{display:none;position:absolute;top:100%;left:0;min-width:240px;background:#000;border:1px solid #333;box-shadow:4px 4px 0px 0px #000;z-index:100;margin-top:0}
-.dropdown:hover .dropdown-content{display:block}
-.dropdown-content a{display:block;padding:12px 20px;font-size:13px;border-bottom:1px solid #333;transition:all 0.2s;color:#fff;text-decoration:none}
-.dropdown-content a:last-child{border-bottom:none}
-.dropdown-content a:hover{background:#000;color:#fff;padding-left:24px}
-.dropdown-arrow{display:inline-block;margin-left:4px;transition:transform 0.2s;font-size:10px}
-.dropdown:hover .dropdown-arrow{transform:rotate(180deg)}
-/* Navigation links hover */
-.nav-link{color:#fff;text-decoration:none;transition:color 0.2s;cursor:pointer}
-.nav-link:hover{background:linear-gradient(90deg,rgba(255,85,0,1) 0%,rgba(255,0,0,1) 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
-/* Mobile menu */
-.mobile-menu-btn{display:flex;align-items:center;padding:0 24px;font-size:24px;cursor:pointer;border:none;background:none}
-.mobile-menu{display:none;position:fixed;top:112px;left:0;right:0;background:#000;border-bottom:1px solid #333;z-index:40;padding:1rem}
-.mobile-menu.active{display:block}
-.mobile-menu a,.mobile-menu .dropdown{display:block;padding:1rem;border-bottom:1px solid #333;text-decoration:none;color:#fff;font-weight:bold;text-transform:uppercase;font-size:14px;cursor:pointer}
-.mobile-menu .dropdown-content{position:static;display:none;box-shadow:none;border:none;margin-top:0.5rem}
-.mobile-menu .dropdown.active .dropdown-content{display:block}
-.mobile-menu .dropdown-content a{padding-left:2rem;font-size:13px}
-@media (min-width:768px){.mobile-menu-btn{display:none!important}.mobile-menu{top:160px}}
-</style>
-    <!--  Top Bar  -->
-    <div style="position:fixed;top:0;width:100%;z-index:60;background:#000;color:#fff;height:32px;display:flex;align-items:center">
-      <div style="display:grid;grid-template-columns:1fr 1fr;width:100%;font-family:'JetBrains Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:0.1em;padding:0 24px">
-        <div style="display:flex;align-items:center">Slots disponibles demain : <span style="margin-left:8px">2</span></div>
-        <div style="display:none;align-items:center;justify-content:flex-end">Propulsé par BIG NEURONS™</div>
+  <!-- Custom Cursor -->
+  <div class="custom-cursor" id="cursor"></div>
+  
+  <!-- Grid Background -->
+  <div class="bg-grid-fixed"></div>
+  
+  <!-- Header -->
+  <header class="header">
+    <nav class="nav">
+      <div class="nav-logo" onclick="window.location.href='index.html'">
+        <img src="../images/TO-logo.webp" alt="Tomorrow.Online" class="logo">
       </div>
-    </div>
-    <!--  Navigation  -->
-    <nav style="position:fixed;top:32px;width:100%;z-index:50;background:rgba(0,0,0,0.9);backdrop-filter:blur(12px);border-bottom:1px solid #333;display:flex;justify-content:space-between;align-items:stretch;height:80px">
-      <!--  Logo  -->
-      <a href="../index.html" style="display:flex;align-items:center;padding:0 24px;border-right:1px solid #333;text-decoration:none;transition:background 0.2s">
-        <img src="../images/TO-logo.webp" alt="Tomorrow.online" style="height:48px;width:auto">
-      </a>
-      <!--  Navigation Links  -->
-      <div style="display:none;flex-grow:1;align-items:center;justify-content:flex-end;padding:0 40px;gap:32px;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:14px;text-transform:uppercase;letter-spacing:0.05em">
+      
+      <div class="nav-links">
         <a href="../process-24h.html" class="nav-link">Process</a>
         <a href="../realisations.html" class="nav-link">Réalisations</a>
-        <div class="dropdown">
-          <span class="nav-link">Ressources<span class="dropdown-arrow">▼</span></span>
+        <div class="nav-dropdown">
+          <span class="nav-link nav-link-dropdown">
+            Ressources
+            <span class="dropdown-arrow">▼</span>
+          </span>
           <div class="dropdown-content">
             <a href="../la-vision-tomorrow.html">🔮 Notre Vision</a>
             <a href="../notre-histoire.html">🏢 Qui sommes-nous</a>
@@ -79,45 +43,37 @@ body {
           </div>
         </div>
       </div>
-      <!--  Mobile Menu Button  -->
-      <button class="mobile-menu-btn" onclick="document.getElementById('mobileMenu').classList.toggle('active')">☰</button>
-      <!--  CTA Button  -->
-      <div style="display:flex;align-items:center">
-        <a href="../#pricing" style="height:100%;display:flex;align-items:center;padding:0 48px;background:linear-gradient(90deg,rgba(255,85,0,1) 0%,rgba(255,0,0,1) 100%);color:#fff;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:14px;text-transform:uppercase;text-decoration:none;transition:background 0.2s">> Briefez-nous</a>
+      
+      <div class="nav-cta">
+        <button class="btn btn-primary" onclick="openModal()">
+          Réserver mon créneau
+        </button>
       </div>
+      
+      <!-- Mobile Menu Button -->
+      <button class="mobile-menu-btn" onclick="toggleMobileMenu()">
+        <span class="hamburger"></span>
+      </button>
     </nav>
-    <!--  Mobile Menu  -->
-    <div id="mobileMenu" class="mobile-menu">
+    
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobileMenu">
       <a href="../process-24h.html">Process</a>
       <a href="../realisations.html">Réalisations</a>
-      <div class="dropdown" onclick="this.classList.toggle('active')">
+      <div class="mobile-dropdown" onclick="toggleMobileDropdown(this)">
         <span>Ressources ▼</span>
-        <div class="dropdown-content">
+        <div class="mobile-dropdown-content">
           <a href="../la-vision-tomorrow.html">🔮 Notre Vision</a>
           <a href="../notre-histoire.html">🏢 Qui sommes-nous</a>
           <a href="../comparatif-solutions-web.html">⚡ Comparatif Solutions</a>
           <a href="../migrations.html">🔄 Migrations CMS</a>
         </div>
       </div>
+      <button class="btn btn-primary" onclick="openModal()">Réserver</button>
     </div>
-    <!--  Media Query for Desktop  -->
-    <style>
-@media (min-width: 768px) {
-  nav > div:nth-child(2) {
-    display: flex !important;
-  }
-  div[style*="Propulsé par BIG NEURONS"] {
-    display: flex !important;
-  }
-  nav {
-    height: 128px !important;
-  }
-  nav > a img {
-    height: 96px !important;
-  }
-}
-</style>
-  </div>
+  </header>
+
+  
   <div class="w-embed w-script"><!--  Google Fonts  -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
@@ -310,78 +266,63 @@ body {
   /* Colonne ressources */
 }
 </style>
-    <footer style="background-color: #000; color: #fff; padding: 4rem 1rem; border-top: 1px solid #333; position: relative; z-index: 10;">
-      <div style="max-width: 1280px; margin: 0 auto;">
-        <!--  Main Footer Content  -->
-        <div class="footer-grid">
-          <!--  Logo & Description (Gauche)  -->
-          <div class="footer-col-left">
-            <img src="../images/TO-logo.webp" alt="Tomorrow.online" style="height: 3rem; width: auto; margin-bottom: 1.5rem;">
-            <p style="font-size: 1.125rem; color: #d1d5db; margin-bottom: 1.5rem; line-height: 1.75;">
-              L'agence web commando du réseau <strong>Big Neurons</strong>.<br>
-              Nous concevons et développons des sites haut de gamme en 24-48H.
-            </p>
-            <div style="display: inline-block; border: 1px solid rgba(255,255,255,0.3); padding: 0.5rem 1rem; font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; text-transform: uppercase; margin-bottom: 1.5rem;">
-              <span style="background:linear-gradient(90deg,rgba(255,85,0,1) 0%,rgba(255,0,0,1) 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;">⚡</span> Qualité premium • Vitesse brutale
-            </div>
-            <div style="font-family: 'JetBrains Mono', monospace; font-size: 10px; color: #6b7280; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 1.5rem; line-height: 1.4;">
-              STACK TECHNIQUE: WEBFLOW • FIGMA • RELUME • GEMINI&nbsp;3&nbsp;PRO • CLAUDE&nbsp;SONNET&nbsp;4.5 • VERDENT
-            </div>
-            <!--  Vidéo Template Killer  -->
-            <div onclick="window.openTemplateVideo()" style="font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: #6b7280; cursor: pointer; transition: color 0.2s; display: flex; align-items: center; gap: 0.5rem; width: fit-content;">
-              <span style="font-size: 1.125rem;">💀</span> Les acheteurs de templates VS Tomorrow.online ->
-            </div>
-          </div>
-          <!--  Navigation (Centre)  -->
-          <div class="footer-col-nav">
-            <h4 style="font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: #6b7280; margin-bottom: 1.5rem; text-transform: uppercase; letter-spacing: 0.1em; border-bottom: 1px solid #333; padding-bottom: 0.5rem; width: fit-content;">Navigation</h4>
-            <ul style="list-style: none; padding: 0; margin: 0;">
-              <li style="margin-bottom: 0.75rem;">
-                <a href="../index.html" style="font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 0.875rem; text-transform: uppercase; letter-spacing: 0.05em; color: #fff; text-decoration: none; transition: color 0.2s;">Accueil</a>
-              </li>
-              <li style="margin-bottom: 0.75rem;">
-                <a href="../process-24h.html" style="font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 0.875rem; text-transform: uppercase; letter-spacing: 0.05em; color: #fff; text-decoration: none; transition: color 0.2s;">Process 24H</a>
-              </li>
-              <li style="margin-bottom: 0.75rem;">
-                <a href="../realisations.html" style="font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 0.875rem; text-transform: uppercase; letter-spacing: 0.05em; color: #fff; text-decoration: none; transition: color 0.2s;">Réalisations</a>
-              </li>
-              <li style="margin-bottom: 0.75rem;">
-                <a href="../notre-histoire.html" style="font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 0.875rem; text-transform: uppercase; letter-spacing: 0.05em; color: #fff; text-decoration: none; transition: color 0.2s;">Notre Histoire</a>
-              </li>
-            </ul>
-          </div>
-          <!--  Ressources (Droite)  -->
-          <div class="footer-col-resources">
-            <h4 style="font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: #6b7280; margin-bottom: 1.5rem; text-transform: uppercase; letter-spacing: 0.1em; border-bottom: 1px solid #333; padding-bottom: 0.5rem; width: fit-content;">Ressources</h4>
-            <ul style="list-style: none; padding: 0; margin: 0;">
-              <li style="margin-bottom: 0.75rem;">
-                <a href="../la-vision-tomorrow.html" style="font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 0.875rem; text-transform: uppercase; letter-spacing: 0.05em; color: #fff; text-decoration: none; transition: color 0.2s;">La Vision Tomorrow</a>
-              </li>
-              <li style="margin-bottom: 0.75rem;">
-                <a href="../comparatif-solutions-web.html" style="font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 0.875rem; text-transform: uppercase; letter-spacing: 0.05em; color: #fff; text-decoration: none; transition: color 0.2s;">Comparatif Solutions</a>
-              </li>
-              <li style="margin-bottom: 0.75rem;">
-                <a href="../migrations.html" style="font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 0.875rem; text-transform: uppercase; letter-spacing: 0.05em; color: #fff; text-decoration: none; transition: color 0.2s;">Migrations CMS</a>
-              </li>
-              <li style="margin-bottom: 0.75rem;">
-                <a href="https://www.bigneurons.com" target="_blank" style="font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 0.875rem; text-transform: uppercase; letter-spacing: 0.05em; color: #fff; text-decoration: none; transition: color 0.2s;">Big Neurons ↗</a>
-              </li>
-            </ul>
-          </div>
-        </div>
-        <!--  Bottom Bar  -->
-        <div style="border-top: 1px solid #333; padding-top: 2rem; display: flex; flex-direction: column; justify-content: space-between; align-items: center; gap: 1rem;">
-          <p style="font-size: 0.75rem; color: #6b7280; margin: 0;">
-            © 2025 Tomorrow.Online • Tous droits réservés •
-            <a href="../mentions-legales.html" style="color: #6b7280; text-decoration: none; transition: color 0.2s;">Mentions Légales</a>
+      <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <img src="../images/TO-logo.webp" alt="Tomorrow.Online" class="footer-logo">
+          <p class="footer-tagline font-mono">
+            La première agence web "NO-WAIT" en France.<br>
+            Designed for speed. Powered by intelligence.
           </p>
-          <div style="display: flex; align-items: center; gap: 1.5rem;">
-            <a href="mailto:hello@tomorrow.online" style="font-size: 0.75rem; color: #6b7280; text-decoration: none; transition: color 0.2s;">hello@tomorrow.online</a>
-            <div style="font-size: 0.75rem; color: #6b7280;">Paris, France 🇫🇷</div>
-          </div>
+        </div>
+        
+        <div class="footer-links">
+          <h4 class="footer-title font-mono">Services</h4>
+          <ul class="footer-list">
+            <li><a href="../process-24h.html">Process 24H</a></li>
+            <li><a href="../realisations.html">Réalisations</a></li>
+            <li><a href="../comparatif-solutions-web.html">Comparatif</a></li>
+            <li><a href="../migrations.html">Migrations</a></li>
+          </ul>
+        </div>
+        
+        <div class="footer-links">
+          <h4 class="footer-title font-mono">À Propos</h4>
+          <ul class="footer-list">
+            <li><a href="../la-vision-tomorrow.html">La Vision</a></li>
+            <li><a href="../notre-histoire.html">Notre Histoire</a></li>
+          </ul>
+        </div>
+        
+        <div class="footer-links">
+          <h4 class="footer-title font-mono">Réseau & Contact</h4>
+          <ul class="footer-list">
+            <li><a href="https://www.bigneurons.com" target="_blank">Groupe Big Neurons <span class="external-icon">↗</span></a></li>
+            <li><a href="../mentions-legales.html">Mentions Légales</a></li>
+            <li><a href="mailto:hello@tomorrow.online">Contact Ops</a></li>
+          </ul>
         </div>
       </div>
-    </footer>
+      
+      <!-- Video Footer Link -->
+      <div class="footer-video-link">
+        <button class="video-link-btn" onclick="openVideoModal()">
+          Comment on voit les acheteurs de templates
+        </button>
+      </div>
+      
+      <div class="footer-bottom">
+        <p class="footer-copyright font-mono">
+          © 2026 TOMORROW AGENCY. UNE MARQUE DE SAS BIG NEURONS. TOMORROW.ONLINE EST LA PREMIÈRE AGENCE WEB "NO-WAIT" EN FRANCE. DESIGNED FOR SPEED. POWERED BY INTELLIGENCE.
+        </p>
+        <div class="footer-status font-mono">
+          SYSTEM STATUS: OPERATIONAL
+        </div>
+      </div>
+    </div>
+  </footer>
+
     <!--  Modal Vidéo Template Killer  -->
     <div id="videoEggModal" style="position: fixed; inset: 0; z-index: 9999; display: none; background: rgba(0,0,0,0.95); justify-content: center; align-items: center; padding: 1rem; backdrop-filter: blur(4px);" onclick="window.closeTemplateVideo()">
       <div style="position: relative; width: 100%; max-width: 56rem; aspect-ratio: 16/9; background: #000; overflow: hidden; box-shadow: 0 0 0 1px #333, 0 0 40px rgba(180,7,254,0.3);" onclick="event.stopPropagation()">
