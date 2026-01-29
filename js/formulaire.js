@@ -1057,16 +1057,16 @@ window.submitForm = function() {
     formDataObj.append(key, JSON.stringify(dataToSend[key]));
   }
   
+  // FormSubmit.co ne supporte PAS les fichiers binaires (erreur 500)
+  // On envoie juste les noms de fichiers pour info
   if (fileStore.length > 0) {
-    console.warn('⚠️ FormSubmit.co ne supporte pas les fichiers. Utiliser un service avec upload.');
-    for (let f of fileStore) {
-      formDataObj.append("files[]", f);
-    }
-    formDataObj.append("filesCount", fileStore.length);
-    formDataObj.append("filesNames", fileStore.map(f => f.name).join(', '));
+    formDataObj.append("fichiers_count", fileStore.length);
+    formDataObj.append("fichiers_names", fileStore.map(f => f.name).join(', '));
+    formDataObj.append("fichiers_sizes", fileStore.map(f => (f.size / 1024).toFixed(1) + 'KB').join(', '));
+    console.log('📎 Files info sent:', fileStore.map(f => f.name).join(', '));
   }
   
-  console.log('📧 Sending form with', fileStore.length, 'files');
+  console.log('📧 Sending form with', fileStore.length, 'files info (no upload)');
   
   fetch(FORM_ACTION_URL, { method: 'POST', body: formDataObj })
     .then(response => {

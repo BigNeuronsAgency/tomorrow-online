@@ -215,11 +215,10 @@ p {
   pointer-events: none;
   z-index: var(--z-cursor);
   transition: transform 0.15s ease;
-  transform: translate(-50%, -50%);
 }
 
 .custom-cursor.hover {
-  transform: translate(-50%, -50%) scale(1.5);
+  transform: scale(1.5);
 }
 
 /* === UTILITIES === */

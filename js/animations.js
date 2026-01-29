@@ -52,7 +52,12 @@ function initAnimations() {
           skewY: 0,
           duration: 0.6,
           ease: 'elastic.out(1, 0.5)',
-          overwrite: true
+          overwrite: true,
+          onComplete: () => {
+            // Force reset complet pour éviter tout résidu
+            document.body.style.transform = '';
+            document.body.style.pointerEvents = '';
+          }
         });
         
         // Reset filter
