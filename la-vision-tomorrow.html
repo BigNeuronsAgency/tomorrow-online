@@ -114,8 +114,7 @@
     /* Left side (bad) circles */
     .venn-bad .venn-circle:nth-child(1) {
       top: 20px;
-      left: 50%;
-      transform: translateX(-50%);
+      left: calc(50% - 120px);
       background: rgba(100, 100, 100, 0.3);
       border: 2px solid #444;
       color: #666;
@@ -149,8 +148,7 @@
     /* Right side (good) circles */
     .venn-good .venn-circle:nth-child(1) {
       top: 20px;
-      left: 50%;
-      transform: translateX(-50%);
+      left: calc(50% - 120px);
       background: linear-gradient(135deg, rgba(100, 200, 255, 0.3), rgba(50, 150, 255, 0.4));
       border: 2px solid rgba(100, 200, 255, 0.6);
       color: #6CF;
@@ -393,21 +391,15 @@
       <div class="venn-wrapper venn-bad">
         <div class="venn-circle">
           <span class="circle-text">IA</span>
-          <div class="badge-wrapper">
-            <span class="badge">vide d'âme</span>
-          </div>
+          <span class="badge">vide d'âme</span>
         </div>
         <div class="venn-circle">
           <span class="circle-text">AGENCE</span>
-          <div class="badge-wrapper">
-            <span class="badge">trop cher</span>
-          </div>
+          <span class="badge">trop cher</span>
         </div>
         <div class="venn-circle">
           <span class="circle-text">TEMPLATE</span>
-          <div class="badge-wrapper">
-            <span class="badge">générique</span>
-          </div>
+          <span class="badge">générique</span>
         </div>
         <div class="venn-center">💀</div>
       </div>
