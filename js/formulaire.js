@@ -1022,8 +1022,43 @@ window.submitForm = function() {
   formDataObj.append("_subject", "🚀 NOUVEAU LEAD - " + (dataToSend.brandName || "Projet Inconnu"));
   formDataObj.append("_cc", "mf.phan@bigneurons.com,t.martella@bigneurons.com,a.escare@bigneurons.com");
   
-  for (var key in dataToSend) {
-    formDataObj.append(key, JSON.stringify(dataToSend[key]));
+  // Aplatir les données (PAS de JSON.stringify pour FormSubmit)
+  formDataObj.append("brandName", dataToSend.brandName || '');
+  formDataObj.append("email", dataToSend.email || '');
+  formDataObj.append("phone", dataToSend.phone || '');
+  formDataObj.append("pitch", dataToSend.pitch || '');
+  formDataObj.append("competitors", dataToSend.competitors || '');
+  formDataObj.append("target", dataToSend.target || '');
+  formDataObj.append("problem", dataToSend.problem || '');
+  formDataObj.append("solution", dataToSend.solution || '');
+  formDataObj.append("whyUs", dataToSend.whyUs || '');
+  formDataObj.append("archetype", dataToSend.archetype || '');
+  formDataObj.append("vibeSeriousness", dataToSend.vibeSeriousnessFormatted || '');
+  formDataObj.append("vibeStyle", dataToSend.vibeStyleFormatted || '');
+  formDataObj.append("copywriting", dataToSend.copywriting || '');
+  formDataObj.append("selectedPack", dataToSend.selectedPack || '');
+  formDataObj.append("price", dataToSend.price || '0');
+  formDataObj.append("delay", dataToSend.delay || '0');
+  formDataObj.append("hasDomain", dataToSend.hasDomain ? 'Oui' : 'Non');
+  formDataObj.append("domainName", dataToSend.domainName || '');
+  formDataObj.append("care", dataToSend.care ? 'Oui' : 'Non');
+  
+  // Upsells en texte simple
+  if (dataToSend.upsells && Object.keys(dataToSend.upsells).length > 0) {
+    const upsellsText = Object.keys(dataToSend.upsells)
+      .filter(k => dataToSend.upsells[k])
+      .join(', ');
+    formDataObj.append("upsells", upsellsText);
+  }
+  
+  // Pages supplémentaires
+  if (dataToSend.pagesSupNames && dataToSend.pagesSupNames.length > 0) {
+    formDataObj.append("pagesSupNames", dataToSend.pagesSupNames.join(', '));
+  }
+  
+  // Langues
+  if (dataToSend.multiLangues && dataToSend.multiLangues.length > 0) {
+    formDataObj.append("multiLangues", dataToSend.multiLangues.join(', '));
   }
   
   // Upload fichiers vers tmpfiles.org puis envoyer les liens
