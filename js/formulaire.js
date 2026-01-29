@@ -1076,26 +1076,77 @@ window.submitForm = function() {
 };
 
 function sendFormData(formDataObj, btn) {
-  console.log('📧 Sending form data...');
+  console.log('📧 Sending form data to FormSubmit.co...');
+  console.log('📧 Email destination:', FORM_ACTION_URL);
+  console.log('📧 FormData keys:', Array.from(formDataObj.keys()));
   
   fetch(FORM_ACTION_URL, { method: 'POST', body: formDataObj })
     .then(response => {
       console.log('📧 Response status:', response.status);
-      if (response.ok) {
-        console.log('✅ Form submitted successfully');
-        // SKIP Step 7, go directly to success screen
-        showSuccessScreen();
-      } else {
-        console.error('❌ Form submission failed:', response.statusText);
-        alert("Erreur de transmission. Veuillez réessayer.");
-        if (btn) btn.innerHTML = "Bloquer mon slot 🔒";
-      }
+      console.log('📧 Response ok:', response.ok);
+      console.log('📧 Response headers:', response.headers);
+      
+      return response.text().then(text => {
+        console.log('📧 Response body:', text);
+        
+        if (response.ok || response.status === 200) {
+          console.log('✅ Form submitted successfully to FormSubmit');
+          showSuccessScreen();
+        } else {
+          console.error('❌ Form submission failed:', response.status, response.statusText);
+          
+          // FALLBACK: Créer un mailto avec les données
+          const mailto = createMailtoFallback();
+          window.location.href = mailto;
+          
+          alert("Le formulaire n'a pas pu être envoyé automatiquement. Votre client mail va s'ouvrir.");
+          if (btn) btn.innerHTML = "Bloquer mon slot 🔒";
+        }
+      });
     })
     .catch(error => {
       console.error('❌ Fetch error:', error);
-      alert("Erreur de transmission.");
+      
+      // FALLBACK: Créer un mailto avec les données
+      const mailto = createMailtoFallback();
+      window.location.href = mailto;
+      
+      alert("Erreur réseau. Votre client mail va s'ouvrir pour envoyer le brief.");
       if (btn) btn.innerHTML = "Bloquer mon slot 🔒";
     });
+}
+
+function createMailtoFallback() {
+  const subject = encodeURIComponent('🚀 NOUVEAU LEAD - ' + (formData.brandName || 'Projet Inconnu'));
+  const body = encodeURIComponent(`
+BRIEF CLIENT
+============
+
+Marque: ${formData.brandName}
+Email: ${formData.email}
+Téléphone: ${formData.phone}
+
+BUSINESS:
+- Pitch: ${formData.pitch}
+- Concurrents: ${formData.competitors}
+
+CIBLE:
+- Cible: ${formData.target}
+- Problème: ${formData.problem}
+- Solution: ${formData.solution}
+- Pourquoi nous: ${formData.whyUs}
+
+IDENTITÉ:
+- Archétype: ${formData.archetype}
+- Sérieux/Drôle: ${formatVibeData(formData.vibeSeriousness, 'seriousness')}
+- Style: ${formatVibeData(formData.vibeStyle, 'style')}
+- Copywriting: ${formData.copywriting}
+
+PACK: ${formData.selectedPack}
+Fichiers: ${fileStore.length > 0 ? fileStore.map(f => f.name).join(', ') : 'Aucun'}
+  `);
+  
+  return `mailto:mf.phan@bigneurons.com?cc=t.martella@bigneurons.com,a.escare@bigneurons.com&subject=${subject}&body=${body}`;
 }
 
 function showSuccessScreen() {
