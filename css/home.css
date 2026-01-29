@@ -315,22 +315,24 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding-top: 150px;
+  padding-top: 180px;
+  padding-bottom: 80px;
   position: relative;
   text-align: center;
 }
 
 .hero-content {
-  margin-bottom: 4rem;
+  margin-bottom: 6rem;
   display: flex;
   flex-direction: column;
   align-items: center;
+  gap: 4rem;
 }
 
 .hero-title {
   font-size: clamp(2rem, 9vw, 8rem);
   line-height: 0.85;
-  margin-bottom: 1.5rem;
+  margin-bottom: 0;
   word-wrap: break-word;
 }
 
@@ -340,7 +342,7 @@
 
 .hero-subtitle {
   max-width: 600px;
-  margin-bottom: 3rem;
+  margin-bottom: 0;
 }
 
 .hero-text {
