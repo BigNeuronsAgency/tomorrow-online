@@ -767,9 +767,6 @@ function draw(preserveScroll) {
   var totals = calculateTotals();
   var showTotals = formData.selectedPack !== '';
   
-  // Cacher le footer au Step 7
-  var footerClass = currentStep === 7 ? 'modal-footer hidden' : 'modal-footer';
-  
   container.innerHTML = `
     ${renderHeader(progress)}
     
@@ -777,7 +774,7 @@ function draw(preserveScroll) {
       ${getStepContent()}
     </div>
     
-    <div class="${footerClass}">
+    <div class="modal-footer">
       <div class="modal-console font-mono">
         <div class="console-left">
           <span class="console-slot">VOTRE SLOT: <span id="consoleSlotId">...</span></span>
@@ -1005,6 +1002,7 @@ window.closeModal = function() {
   var m = document.getElementById('bookingModal');
   console.log('🔥 bookingModal element:', m);
   if (m) {
+    m.style.display = 'none';
     m.classList.add('hidden');
     console.log('🔥 Modal hidden');
   }

@@ -1,5 +1,5 @@
 // ========================================
-// MARQUEE DYNAMIQUE - Accélération précise
+// MARQUEE SIMPLE - Vitesse constante
 // ========================================
 
 function initMarqueeSpeed() {
@@ -10,53 +10,10 @@ function initMarqueeSpeed() {
     return;
   }
   
-  const normalSpeed = 30; // 30s
-  const fastSpeed = 4;    // 4s (TRÈS rapide)
+  // Vitesse constante rapide
+  marqueeContent.style.animationDuration = '15s';
   
-  let isAccelerating = false;
-  
-  function checkPosition() {
-    const rect = marqueeContent.getBoundingClientRect();
-    const viewportWidth = window.innerWidth;
-    
-    // Récupérer le texte pour calculer les positions
-    const text = marqueeContent.textContent;
-    
-    // Calculer position approximative du texte dans le défilement
-    // Position de "LA VITESSE EST UNE FONCTIONNALITÉ" dans le texte complet
-    const vitesseIndex = text.indexOf('LA VITESSE EST UNE FONCTIONNALITÉ');
-    const impatientIndex = text.indexOf('SOYEZ IMPATIENT');
-    
-    if (vitesseIndex === -1 || impatientIndex === -1) {
-      requestAnimationFrame(checkPosition);
-      return;
-    }
-    
-    // Calculer le pourcentage de position
-    const totalLength = marqueeContent.scrollWidth / 2; // Divisé par 2 car contenu dupliqué
-    const currentOffset = Math.abs(rect.left);
-    const normalizedOffset = currentOffset % totalLength;
-    
-    // Position relative dans le cycle (0-1)
-    const cyclePosition = normalizedOffset / totalLength;
-    
-    // Position de "FONCTIONNALITÉ" touche bord droit = environ 0.72 du cycle
-    // Position de "SOYEZ IMPATIENT" touche bord gauche = environ 0.95 du cycle
-    const shouldAccelerate = cyclePosition >= 0.72 && cyclePosition <= 0.95;
-    
-    if (shouldAccelerate && !isAccelerating) {
-      isAccelerating = true;
-      marqueeContent.style.animationDuration = `${fastSpeed}s`;
-    } else if (!shouldAccelerate && isAccelerating) {
-      isAccelerating = false;
-      marqueeContent.style.animationDuration = `${normalSpeed}s`;
-    }
-    
-    requestAnimationFrame(checkPosition);
-  }
-  
-  checkPosition();
-  console.log('Marquee speed control initialized');
+  console.log('Marquee speed set to 15s');
 }
 
 window.initMarqueeSpeed = initMarqueeSpeed;

@@ -1118,17 +1118,9 @@
 .step-7 {
   background: var(--void);
   color: var(--white);
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  margin: 0;
-  padding: 1.5rem 1.5rem 1rem 1.5rem;
-  overflow-y: auto;
-  overflow-x: hidden;
-  display: flex;
-  flex-direction: column;
+  margin: -1.5rem;
+  padding: 1.5rem;
+  min-height: calc(100% + 3rem);
 }
 
 .step-7 .step-title {
