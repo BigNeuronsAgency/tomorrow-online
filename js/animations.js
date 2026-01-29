@@ -32,8 +32,8 @@ function initAnimations() {
   
   // Scroll skew effect on body - ONLY on fast scroll
   let skewSetter = gsap.quickSetter('body', 'skewY', 'deg');
-  let clamp = gsap.utils.clamp(-3, 3);
-  const VELOCITY_THRESHOLD = 200; // Only trigger if scroll velocity > 200
+  let clamp = gsap.utils.clamp(-1.5, 1.5); // Réduit de -3/3 à -1.5/1.5
+  const VELOCITY_THRESHOLD = 100; // Only trigger if scroll velocity > 100
   
   ScrollTrigger.create({
     onUpdate: (self) => {
@@ -41,7 +41,7 @@ function initAnimations() {
       
       // Only apply skew if scrolling fast enough
       if (Math.abs(velocity) > VELOCITY_THRESHOLD) {
-        let skew = clamp(velocity / -300);
+        let skew = clamp(velocity / -600); // Divisé par 600 au lieu de 300 pour plus subtil
         skewSetter(skew);
         
         // Return to normal slowly
@@ -95,6 +95,25 @@ function initAnimations() {
       start: 'top top',
       end: 'bottom top',
       scrub: true
+    }
+  });
+  
+  // JEAN-CHARLES GLITCH EFFECT (PUNITION)
+  ScrollTrigger.create({
+    trigger: '.jean-charles',
+    start: 'top 80%',
+    end: 'bottom 20%',
+    onEnter: () => {
+      document.querySelector('.jean-charles').classList.add('glitch-active');
+    },
+    onLeave: () => {
+      document.querySelector('.jean-charles').classList.remove('glitch-active');
+    },
+    onEnterBack: () => {
+      document.querySelector('.jean-charles').classList.add('glitch-active');
+    },
+    onLeaveBack: () => {
+      document.querySelector('.jean-charles').classList.remove('glitch-active');
     }
   });
 }
