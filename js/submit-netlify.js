@@ -1,4 +1,4 @@
-// Submit form via Web3Forms (simple, stable, qui marche à 100%)
+// Submit form via Web3Forms + Cloudinary upload
 window.submitForm = async function() {
   if (!checkValidation()) return;
   
@@ -8,12 +8,60 @@ window.submitForm = async function() {
   
   var totals = calculateTotals();
   
+  // Upload files to Cloudinary FIRST
+  let fileLinks = [];
+  if (fileStore.length > 0) {
+    console.log('📤 Uploading', fileStore.length, 'files to Cloudinary...');
+    btn.innerHTML = "UPLOAD FICHIERS...";
+    
+    for (const file of fileStore) {
+      try {
+        const formData = new FormData();
+        formData.append('file', file);
+        formData.append('upload_preset', 'ml_default'); // Cloudinary unsigned preset
+        formData.append('folder', 'tomorrow-briefs');
+        
+        const response = await fetch('https://api.cloudinary.com/v1_1/dzafqfsbo/auto/upload', {
+          method: 'POST',
+          body: formData
+        });
+        
+        const result = await response.json();
+        
+        if (result.secure_url) {
+          fileLinks.push({
+            name: file.name,
+            url: result.secure_url,
+            size: (file.size / 1024).toFixed(1) + 'KB'
+          });
+          console.log('✅ Uploaded:', file.name);
+        } else {
+          fileLinks.push({
+            name: file.name,
+            url: 'FAILED',
+            size: (file.size / 1024).toFixed(1) + 'KB'
+          });
+          console.error('❌ Upload failed for:', file.name);
+        }
+      } catch (error) {
+        console.error('❌ Upload error for', file.name, error);
+        fileLinks.push({
+          name: file.name,
+          url: 'ERROR',
+          size: (file.size / 1024).toFixed(1) + 'KB'
+        });
+      }
+    }
+  }
+  
+  btn.innerHTML = "ENVOI EMAIL...";
+  
   // Préparer FormData pour Web3Forms
   const formData = new FormData();
   formData.append('access_key', '2aeb47c5-ac88-4de0-9d2e-4025e72d2c9e');
   formData.append('subject', '🚀 NOUVEAU LEAD - ' + (window.formData.brandName || 'Projet'));
   formData.append('from_name', window.formData.brandName || 'Client');
-  formData.append('redirect', 'false'); // Pas de redirect, on gère nous-mêmes
+  formData.append('redirect', 'false');
   
   // Données du brief
   formData.append('Marque', window.formData.brandName || '');
@@ -54,11 +102,11 @@ window.submitForm = async function() {
     formData.append('Langues', window.formData.multiLangues.join(', '));
   }
   
-  // Fichiers (noms seulement)
-  if (fileStore.length > 0) {
-    formData.append('Fichiers_nombres', fileStore.length);
-    formData.append('Fichiers_noms', fileStore.map(f => f.name).join(', '));
-    formData.append('Fichiers_tailles', fileStore.map(f => (f.size / 1024).toFixed(1) + 'KB').join(', '));
+  // Fichiers avec liens Cloudinary
+  if (fileLinks.length > 0) {
+    formData.append('Fichiers_count', fileLinks.length);
+    const filesText = fileLinks.map(f => `${f.name} (${f.size}) : ${f.url}`).join('\n\n');
+    formData.append('Fichiers_liens', filesText);
   }
   
   try {
