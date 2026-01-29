@@ -88,9 +88,6 @@
       width: 240px;
       height: 240px;
       border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
       font-family: 'Space Grotesk', sans-serif;
       font-weight: 900;
       font-size: 0.9rem;
@@ -101,17 +98,12 @@
     }
     
     .circle-text {
-      position: relative;
-      z-index: 1;
-    }
-    
-    .badge-wrapper {
       position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      pointer-events: none;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 1;
+      text-align: center;
     }
     
     .venn-circle:hover {
@@ -202,16 +194,15 @@
       right: 10px;
       background: rgba(255, 0, 0, 0.9);
       color: #FFF;
-      font-size: 0.65rem;
-      padding: 0.25rem 0.5rem;
+      font-size: 0.7rem;
+      padding: 0.35rem 0.65rem;
       border-radius: 4px;
       font-family: 'JetBrains Mono', monospace;
       text-transform: uppercase;
       letter-spacing: 0.05em;
       font-weight: 700;
       z-index: 10;
-      margin: 0;
-      pointer-events: auto;
+      white-space: nowrap;
     }
     
     .vision-title {
