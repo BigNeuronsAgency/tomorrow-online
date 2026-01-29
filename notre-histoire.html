@@ -136,6 +136,19 @@
       width: auto;
     }
     
+    .float-animation {
+      animation: float 3s ease-in-out infinite;
+    }
+    
+    @keyframes float {
+      0%, 100% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(-20px);
+      }
+    }
+    
     .stats-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
