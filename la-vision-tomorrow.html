@@ -188,8 +188,6 @@
     
     .badge {
       position: absolute;
-      top: 10px;
-      right: 10px;
       background: rgba(255, 0, 0, 0.9);
       color: #FFF;
       font-size: 0.7rem;
@@ -201,6 +199,22 @@
       font-weight: 700;
       z-index: 10;
       white-space: nowrap;
+    }
+    
+    /* Badge positions for left side (bad) */
+    .venn-bad .badge-1 {
+      top: 30px;
+      left: calc(50% + 60px);
+    }
+    
+    .venn-bad .badge-2 {
+      top: 150px;
+      left: 130px;
+    }
+    
+    .venn-bad .badge-3 {
+      top: 150px;
+      right: 20px;
     }
     
     .vision-title {
@@ -391,16 +405,19 @@
       <div class="venn-wrapper venn-bad">
         <div class="venn-circle">
           <span class="circle-text">IA</span>
-          <span class="badge">vide d'âme</span>
         </div>
+        <span class="badge badge-1">vide d'âme</span>
+        
         <div class="venn-circle">
           <span class="circle-text">AGENCE</span>
-          <span class="badge">trop cher</span>
         </div>
+        <span class="badge badge-2">trop cher</span>
+        
         <div class="venn-circle">
           <span class="circle-text">TEMPLATE</span>
-          <span class="badge">générique</span>
         </div>
+        <span class="badge badge-3">générique</span>
+        
         <div class="venn-center">💀</div>
       </div>
       
