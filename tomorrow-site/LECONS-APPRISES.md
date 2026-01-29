@@ -30,6 +30,13 @@ Refonte de 7 pages secondaires du site Tomorrow.Online : appliquer le design de 
 - **Conséquence** : Accumulation de bugs, code sale, confusion totale
 - **Pourquoi** : J'avais peur de "perdre du temps" en recommençant from scratch
 
+### 5. J'ai modifié le mauvais répertoire (tomorrow-site/ au lieu de la racine)
+- **Erreur** : J'ai passé 30 min à corriger `tomorrow-site/la-vision-tomorrow.html` alors que Sevalla déploie depuis la RACINE
+- **Conséquence** : 6 commits inutiles, badges non visibles en prod, 100$ de tokens gaspillés
+- **Pourquoi** : Je n'ai pas vérifié quel répertoire Sevalla déploie AVANT de commencer à coder
+- **Coût** : ~100 USD de tokens pour l'utilisateur + 1h de temps perdu
+- **Leçon** : TOUJOURS vérifier l'architecture de deploy AVANT de toucher au code
+
 ---
 
 ## ✅ LA BONNE MÉTHODE (GRAVÉE DANS LE MARBRE)
@@ -195,12 +202,26 @@ open tomorrow-site/[PAGE].html
 
 ### ÉTAPE 4 : COMMIT ET PUSH (5 min)
 ```bash
-# Seulement si le test local est OK
-cd tomorrow-site
-git add [PAGE].html
+# ⚠️ CRITIQUE : SEVALLA DÉPLOIE DEPUIS LA RACINE DU REPO, PAS depuis tomorrow-site/
+# TOUJOURS copier le fichier vers la racine avant de commit/push
+
+# 1. Copier le fichier depuis tomorrow-site/ vers la racine
+cp tomorrow-site/[PAGE].html ./[PAGE].html
+
+# 2. Vérifier que le fichier racine est bien mis à jour
+diff tomorrow-site/[PAGE].html ./[PAGE].html
+
+# 3. Commit les DEUX versions (racine + tomorrow-site)
+git add [PAGE].html tomorrow-site/[PAGE].html
 git commit -m "fix: [PAGE].html refonte complète - 100% copy Webflow + design index.html (header/footer/noir)"
 git push origin main
 ```
+
+**⚠️ ARCHITECTURE DU PROJET** :
+- `./[PAGE].html` (racine) = Fichiers déployés par Sevalla en PROD
+- `./tomorrow-site/[PAGE].html` = Fichiers de travail/backup
+- **Les 2 doivent toujours être identiques**
+- **Ne JAMAIS modifier seulement tomorrow-site/ sans copier vers la racine**
 
 ### ÉTAPE 5 : VÉRIFICATION PROD (5 min)
 ```bash
@@ -223,6 +244,7 @@ git push origin main
 5. **NE JAMAIS** push plusieurs pages d'un coup (faire page par page)
 6. **NE JAMAIS** inventer du texte ou sauter des sections
 7. **NE JAMAIS** dire "je ferai ça plus tard" (finir la page à 100% avant de passer à la suivante)
+8. **NE JAMAIS** modifier les fichiers dans `tomorrow-site/` sans copier vers la RACINE pour deploy
 
 ---
 
@@ -311,6 +333,42 @@ Prendre 1h pour faire UNE page correctement vaut mieux que 20 commits ratés en 
 - Les CSS sont dans `css/design-system.css`, `css/home.css`, `css/formulaire.css`
 - Les JS sont dans `js/cursor.js`, `js/animations.js`, `js/navigation.js`, `js/main.js`, `js/formulaire.js`
 - Sevalla auto-deploy depuis la branche `main` du repo GitHub `BigNeuronsAgency/tomorrow-online`
+
+### ⚠️ ARCHITECTURE CRITIQUE DU DEPLOY
+
+**SEVALLA DÉPLOIE DEPUIS LA RACINE DU REPO (`./`), PAS depuis `tomorrow-site/`**
+
+```
+TOMORROW ONLINE/
+├── index.html                    ← DÉPLOYÉ EN PROD (https://tomorrow.online/)
+├── la-vision-tomorrow.html       ← DÉPLOYÉ EN PROD (https://tomorrow.online/la-vision-tomorrow.html)
+├── migrations.html               ← DÉPLOYÉ EN PROD
+├── [TOUTES LES PAGES].html       ← DÉPLOYÉES EN PROD
+├── css/                          ← DÉPLOYÉ EN PROD
+├── js/                           ← DÉPLOYÉ EN PROD
+├── images/                       ← DÉPLOYÉ EN PROD
+└── tomorrow-site/
+    ├── index.html                ← BACKUP / TRAVAIL (NON DÉPLOYÉ)
+    ├── la-vision-tomorrow.html   ← BACKUP / TRAVAIL (NON DÉPLOYÉ)
+    └── [FICHIERS DE TRAVAIL]     ← NON DÉPLOYÉS
+```
+
+**WORKFLOW OBLIGATOIRE** :
+1. Travailler sur `tomorrow-site/[PAGE].html` (optionnel, pour versionning)
+2. **TOUJOURS copier vers `./[PAGE].html` (racine) avant commit**
+3. Commit/push les DEUX fichiers (racine + tomorrow-site)
+
+**AVANT CHAQUE MODIFICATION** :
+```bash
+# Vérifier où Sevalla déploie (doit être la racine)
+ls -la *.html | head -10
+# Si tous les .html sont à la racine → OK, Sevalla déploie la racine
+
+# Si tu modifies tomorrow-site/[PAGE].html, COPIER vers racine :
+cp tomorrow-site/[PAGE].html ./[PAGE].html
+```
+
+**COÛT DE L'OUBLI** : 2026-01-29, oubli de copier `tomorrow-site/la-vision-tomorrow.html` vers racine → 6 commits ratés, 100 USD tokens gaspillés, 1h perdue.
 
 ---
 
