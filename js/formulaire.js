@@ -609,9 +609,8 @@ function getStepContent() {
               <div class="care-box">
                 <h3 class="care-title">Offre Care</h3>
                 <p class="care-desc">Hébergement, mises à jour de sécurité et modifications mineures (1h/mois).</p>
-                <label class="care-toggle">
+                <label class="care-toggle" onclick="window.toggleCare()">
                   <span class="care-price font-mono">+90€/mois</span>
-                  <input type="checkbox" id="care-toggle" onchange="window.toggleCare()" ${formData.care ? 'checked' : ''}>
                   <span class="care-switch ${formData.care ? 'active' : ''}"></span>
                 </label>
               </div>
@@ -666,6 +665,10 @@ function getStepContent() {
       }
     });
     
+    // Séparer le bundle des autres options
+    var bundleUpsell = UPSELLS_SUCCESS.find(u => u.isBundle);
+    var regularUpsells = UPSELLS_SUCCESS.filter(u => !u.isBundle);
+    
     return `
       <div class="form-step step-7">
         <div class="success-header">
@@ -679,58 +682,14 @@ function getStepContent() {
           </div>
         </div>
         
+        ${bundleUpsell ? `
+          <div class="success-grid-bundle">
+            ${renderSuccessCard(bundleUpsell)}
+          </div>
+        ` : ''}
+        
         <div class="success-grid">
-          ${UPSELLS_SUCCESS.map(u => {
-            var selected = formData.upsellsSuccess[u.id] || false;
-            var isBundle = u.isBundle;
-            return `
-              <div onclick="window.toggleSuccessUpsell('${u.id}')" 
-                class="success-card ${selected ? 'selected' : ''} ${isBundle ? 'bundle' : ''}">
-                ${isBundle ? '<div class="success-badge">BEST DEAL</div>' : ''}
-                <div class="success-main">
-                  <div class="success-check">${selected ? '✓' : ''}</div>
-                  <div class="success-content">
-                    <div class="success-name-row">
-                      <span class="success-name">${u.name}</span>
-                      <span class="success-info" title="${u.tooltip}">ⓘ</span>
-                    </div>
-                    ${u.desc ? `<p class="success-desc">${u.desc}</p>` : ''}
-                    ${isBundle ? 
-                      `<div class="success-price-bundle">
-                        <span class="success-price-old">${u.originalPrice}€</span>
-                        <span class="success-price-new">${u.price}€</span>
-                      </div>` : 
-                      `<div class="success-price">${u.price}€</div>`
-                    }
-                  </div>
-                </div>
-                ${selected && u.hasNetwork ? `
-                  <div class="success-extra">
-                    <label class="form-label-small">Réseau de prédilection :</label>
-                    <div class="network-options">
-                      <label class="network-option">
-                        <input type="radio" name="socialNetwork" value="Instagram" 
-                          ${formData.socialNetwork === 'Instagram' ? 'checked' : ''} 
-                          onchange="formData.socialNetwork = this.value; draw();">
-                        Instagram (8 posts)
-                      </label>
-                      <label class="network-option">
-                        <input type="radio" name="socialNetwork" value="LinkedIn" 
-                          ${formData.socialNetwork === 'LinkedIn' ? 'checked' : ''} 
-                          onchange="formData.socialNetwork = this.value; draw();">
-                        LinkedIn (6 posts)
-                      </label>
-                    </div>
-                    <label class="network-extra">
-                      <input type="checkbox" ${formData.socialNetworkExtra ? 'checked' : ''} 
-                        onchange="formData.socialNetworkExtra = this.checked; draw();">
-                      Ajouter l'autre réseau (+80€)
-                    </label>
-                  </div>
-                ` : ''}
-              </div>
-            `;
-          }).join('')}
+          ${regularUpsells.map(u => renderSuccessCard(u)).join('')}
         </div>
         
         ${totalSuccessUpsells > 0 ? `
@@ -747,6 +706,58 @@ function getStepContent() {
       </div>
     `;
   }
+}
+
+function renderSuccessCard(u) {
+  var selected = formData.upsellsSuccess[u.id] || false;
+  var isBundle = u.isBundle;
+  return `
+    <div onclick="window.toggleSuccessUpsell('${u.id}')" 
+      class="success-card ${selected ? 'selected' : ''} ${isBundle ? 'bundle' : ''}">
+      ${isBundle ? '<div class="success-badge">BEST DEAL</div>' : ''}
+      <div class="success-main">
+        <div class="success-check">${selected ? '✓' : ''}</div>
+        <div class="success-content">
+          <div class="success-name-row">
+            <span class="success-name">${u.name}</span>
+            <span class="success-info" title="${u.tooltip}">ⓘ</span>
+          </div>
+          ${u.desc ? `<p class="success-desc">${u.desc}</p>` : ''}
+          ${isBundle ? 
+            `<div class="success-price-bundle">
+              <span class="success-price-old">${u.originalPrice}€</span>
+              <span class="success-price-new">${u.price}€</span>
+            </div>` : 
+            `<div class="success-price">${u.price}€</div>`
+          }
+        </div>
+      </div>
+      ${selected && u.hasNetwork ? `
+        <div class="success-extra">
+          <label class="form-label-small">Réseau de prédilection :</label>
+          <div class="network-options">
+            <label class="network-option">
+              <input type="radio" name="socialNetwork" value="Instagram" 
+                ${formData.socialNetwork === 'Instagram' ? 'checked' : ''} 
+                onchange="formData.socialNetwork = this.value; draw();">
+              Instagram (8 posts)
+            </label>
+            <label class="network-option">
+              <input type="radio" name="socialNetwork" value="LinkedIn" 
+                ${formData.socialNetwork === 'LinkedIn' ? 'checked' : ''} 
+                onchange="formData.socialNetwork = this.value; draw();">
+              LinkedIn (6 posts)
+            </label>
+          </div>
+          <label class="network-extra">
+            <input type="checkbox" ${formData.socialNetworkExtra ? 'checked' : ''} 
+              onchange="formData.socialNetworkExtra = this.checked; draw();">
+            Ajouter l'autre réseau (+80€)
+          </label>
+        </div>
+      ` : ''}
+    </div>
+  `;
 }
 
 function draw(preserveScroll) {
@@ -959,6 +970,13 @@ window.openModal = function(plan) {
   currentStep = 1;
   formData.selectedPack = '';
   
+  // Cacher WhatsApp widget si présent
+  var whatsappWidget = document.querySelector('.whatsapp-widget, #whatsapp-widget, [class*="whatsapp"], [id*="whatsapp"]');
+  if (whatsappWidget) {
+    whatsappWidget.style.display = 'none';
+    whatsappWidget.dataset.hiddenByModal = 'true';
+  }
+  
   // Montrer le modal AVANT de dessiner (pour éviter les problèmes de timing)
   m.classList.remove('hidden');
   lockScroll();
@@ -978,6 +996,13 @@ window.closeModal = function() {
   var m = document.getElementById('bookingModal');
   if (m) m.classList.add('hidden');
   unlockScroll();
+  
+  // Ré-afficher WhatsApp widget si présent
+  var whatsappWidget = document.querySelector('[data-hidden-by-modal="true"]');
+  if (whatsappWidget) {
+    whatsappWidget.style.display = '';
+    whatsappWidget.removeAttribute('data-hidden-by-modal');
+  }
 };
 
 window.submitForm = function() {
