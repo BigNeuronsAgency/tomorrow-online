@@ -30,26 +30,39 @@ function initAnimations() {
     }
   );
   
-  // Scroll skew effect DISABLED (causait nausée)
-  // let skewSetter = gsap.quickSetter('body', 'skewY', 'deg');
-  // let clamp = gsap.utils.clamp(-1.5, 1.5);
-  // const VELOCITY_THRESHOLD = 50;
+  // ULTRA FAST SCROLL EASTER EGG - Effet hallucinant uniquement sur scroll hyper rapide
+  let skewSetter = gsap.quickSetter('body', 'skewY', 'deg');
+  let clamp = gsap.utils.clamp(-8, 8); // Effet MASSIF
+  const VELOCITY_THRESHOLD = 3000; // Seuil ULTRA élevé (uniquement scroll ULTRA rapide)
   
-  // ScrollTrigger.create({
-  //   onUpdate: (self) => {
-  //     let velocity = self.getVelocity();
-  //     if (Math.abs(velocity) > VELOCITY_THRESHOLD) {
-  //       let skew = clamp(velocity / -600);
-  //       skewSetter(skew);
-  //       gsap.to('body', {
-  //         skewY: 0,
-  //         duration: 0.8,
-  //         ease: 'power3.out',
-  //         overwrite: true
-  //       });
-  //     }
-  //   }
-  // });
+  ScrollTrigger.create({
+    onUpdate: (self) => {
+      let velocity = self.getVelocity();
+      
+      // Easter egg : déclenche uniquement si scroll ULTRA rapide (3000+ velocity)
+      if (Math.abs(velocity) > VELOCITY_THRESHOLD) {
+        let skew = clamp(velocity / -300); // Division faible = effet massif
+        skewSetter(skew);
+        
+        // Shake violent + glow flash
+        document.body.style.filter = 'brightness(1.2) saturate(1.5)';
+        
+        // Return to normal rapidement avec bounce
+        gsap.to('body', {
+          skewY: 0,
+          duration: 0.6,
+          ease: 'elastic.out(1, 0.5)',
+          overwrite: true
+        });
+        
+        // Reset filter
+        gsap.to(document.body, {
+          filter: 'brightness(1) saturate(1)',
+          duration: 0.4
+        });
+      }
+    }
+  });
   
   // Manifesto text animation
   ScrollTrigger.create({
