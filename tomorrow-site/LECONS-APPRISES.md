@@ -399,3 +399,24 @@ cp tomorrow-site/[PAGE].html ./[PAGE].html
 **Date de création** : 2026-01-29 21h40
 **Dernière mise à jour** : 2026-01-29 21h40
 **Statut** : 🔒 GRAVÉ DANS LE MARBRE
+
+## 9. NE JAMAIS TOUCHER AU HEADER/FOOTER UNE FOIS VALIDÉ PAR L'UTILISATEUR
+
+**RÈGLE ABSOLUE** : Une fois que l'utilisateur a validé le header et le footer, **NE PLUS JAMAIS Y TOUCHER** sur aucune page.
+
+**Header/Footer de référence** : `index.html` à la racine
+- Header : lignes 40-92
+- Footer : lignes 700-757
+
+**NE JAMAIS** :
+- Modifier la structure du header/footer
+- Changer le logo (doit être `<img src="images/TO-logo.webp">`)
+- Ajouter/supprimer des liens du menu
+- Modifier le CSS ou les classes du header/footer
+
+**SI l'utilisateur demande une modification** :
+1. Modifier UNIQUEMENT dans `index.html`
+2. Attendre sa validation explicite
+3. ENSUITE copier sur toutes les autres pages EN UNE SEULE FOIS
+
+**Coût de ne pas respecter cette règle** : 192 crédits gaspillés sur `notre-histoire.html` à cause de multiples allers-retours.
