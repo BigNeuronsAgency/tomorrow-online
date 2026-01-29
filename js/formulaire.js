@@ -945,27 +945,33 @@ window.handleCloseOrBack = function() {
 
 window.openModal = function(plan) {
   console.log('🔥 openModal CALLED', plan);
-  console.log('🔥 bookingModal element:', document.getElementById('bookingModal'));
+  
+  var m = document.getElementById('bookingModal');
+  var modalContent = document.getElementById('modalContent');
+  
+  if (!m || !modalContent) {
+    console.error('🔥 MODAL ELEMENTS NOT FOUND!', { modal: !!m, content: !!modalContent });
+    return;
+  }
+  
+  console.log('🔥 bookingModal element:', m);
   
   currentStep = 1;
   formData.selectedPack = '';
   
-  console.log('🔥 Calling draw()...');
+  // Montrer le modal AVANT de dessiner (pour éviter les problèmes de timing)
+  m.classList.remove('hidden');
+  lockScroll();
+  console.log('🔥 Modal shown, now drawing content...');
+  
+  // Force reflow pour que le DOM soit prêt
+  void m.offsetWidth;
+  
+  // Dessiner le contenu
   draw();
   console.log('🔥 draw() completed');
-  
-  var m = document.getElementById('bookingModal');
-  console.log('🔥 Modal element found:', !!m);
-  console.log('🔥 Modal classList:', m ? m.classList.toString() : 'NULL');
-  
-  if (m) {
-    m.classList.remove('hidden');
-    console.log('🔥 Removed hidden class, new classList:', m.classList.toString());
-    lockScroll();
-    console.log('🔥 Modal should be visible NOW');
-  } else {
-    console.error('🔥 MODAL ELEMENT NOT FOUND!');
-  }
+  console.log('🔥 Modal content innerHTML length:', modalContent.innerHTML.length);
+  console.log('🔥 Modal should be visible NOW');
 };
 
 window.closeModal = function() {
