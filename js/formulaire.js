@@ -1061,9 +1061,19 @@ window.submitForm = function() {
     formDataObj.append("multiLangues", dataToSend.multiLangues.join(', '));
   }
   
-  // Upload fichiers vers tmpfiles.org puis envoyer les liens
+  // PRIORITÉ 1 : Envoyer l'email D'ABORD (avec liste des fichiers)
   if (fileStore.length > 0) {
-    console.log('📤 Uploading', fileStore.length, 'files to tmpfiles.org...');
+    formDataObj.append("fichiers_count", fileStore.length);
+    formDataObj.append("fichiers_names", fileStore.map(f => f.name).join(', '));
+    formDataObj.append("fichiers_sizes", fileStore.map(f => (f.size / 1024).toFixed(1) + 'KB').join(', '));
+  }
+  
+  // Envoyer l'email IMMÉDIATEMENT
+  sendFormData(formDataObj, btn);
+  
+  // PRIORITÉ 2 : Upload fichiers en arrière-plan (non-bloquant)
+  if (fileStore.length > 0) {
+    console.log('📤 Uploading', fileStore.length, 'files to tmpfiles.org in background...');
     
     Promise.all(fileStore.map(file => {
       const uploadData = new FormData();
@@ -1076,8 +1086,6 @@ window.submitForm = function() {
       .then(res => res.json())
       .then(data => {
         if (data.status === 'success') {
-          // tmpfiles.org renvoie une URL type: https://tmpfiles.org/123456
-          // Il faut la transformer en https://tmpfiles.org/dl/123456 pour download direct
           const downloadUrl = data.data.url.replace('tmpfiles.org/', 'tmpfiles.org/dl/');
           console.log('✅ Uploaded:', file.name, '→', downloadUrl);
           return { name: file.name, url: downloadUrl, size: (file.size / 1024).toFixed(1) + 'KB' };
@@ -1092,21 +1100,21 @@ window.submitForm = function() {
       });
     }))
     .then(uploadedFiles => {
-      formDataObj.append("fichiers_count", uploadedFiles.length);
-      formDataObj.append("fichiers_links", JSON.stringify(uploadedFiles));
-      console.log('📎 All files uploaded:', uploadedFiles);
+      console.log('📎 All files uploaded (background):', uploadedFiles);
       
-      // Envoyer le formulaire avec les liens
-      sendFormData(formDataObj, btn);
+      // Envoyer un email supplémentaire avec les liens (optionnel)
+      const linksFormData = new FormData();
+      linksFormData.append("_captcha", "false");
+      linksFormData.append("_subject", "📎 FICHIERS - " + (formData.brandName || "Projet Inconnu"));
+      linksFormData.append("fichiers_links", uploadedFiles.map(f => `${f.name}: ${f.url}`).join('\n'));
+      
+      fetch(FORM_ACTION_URL, { method: 'POST', body: linksFormData })
+        .then(() => console.log('✅ Files links email sent'))
+        .catch(err => console.error('❌ Files email failed:', err));
     })
     .catch(err => {
       console.error('❌ Global upload error:', err);
-      alert("Erreur d'upload des fichiers.");
-      if (btn) btn.innerHTML = "Bloquer mon slot 🔒";
     });
-  } else {
-    // Pas de fichiers, envoi direct
-    sendFormData(formDataObj, btn);
   }
 };
 
