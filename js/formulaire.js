@@ -983,6 +983,12 @@ window.openModal = function(plan) {
     currentStep = 1;
     formData.selectedPack = plan || '';
     
+    // Stop Lenis smooth scroll
+    if (window.lenis) {
+      window.lenis.stop();
+      console.log('🔥 Lenis stopped');
+    }
+    
     // Cacher WhatsApp widget si présent
     var whatsappWidget = document.querySelector('.whatsapp-widget, #whatsapp-widget, [class*="whatsapp"], [id*="whatsapp"]');
     if (whatsappWidget) {
@@ -1023,6 +1029,12 @@ window.closeModal = function() {
   }
   unlockScroll();
   
+  // Restart Lenis smooth scroll
+  if (window.lenis) {
+    window.lenis.start();
+    console.log('🔥 Lenis restarted');
+  }
+  
   // Ré-afficher WhatsApp widget si présent
   var whatsappWidget = document.querySelector('[data-hidden-by-modal="true"]');
   if (whatsappWidget) {
@@ -1057,16 +1069,57 @@ window.submitForm = function() {
     formDataObj.append(key, JSON.stringify(dataToSend[key]));
   }
   
-  // FormSubmit.co ne supporte PAS les fichiers binaires (erreur 500)
-  // On envoie juste les noms de fichiers pour info
+  // Upload fichiers vers tmpfiles.org puis envoyer les liens
   if (fileStore.length > 0) {
-    formDataObj.append("fichiers_count", fileStore.length);
-    formDataObj.append("fichiers_names", fileStore.map(f => f.name).join(', '));
-    formDataObj.append("fichiers_sizes", fileStore.map(f => (f.size / 1024).toFixed(1) + 'KB').join(', '));
-    console.log('📎 Files info sent:', fileStore.map(f => f.name).join(', '));
+    console.log('📤 Uploading', fileStore.length, 'files to tmpfiles.org...');
+    
+    Promise.all(fileStore.map(file => {
+      const uploadData = new FormData();
+      uploadData.append('file', file);
+      
+      return fetch('https://tmpfiles.org/api/v1/upload', {
+        method: 'POST',
+        body: uploadData
+      })
+      .then(res => res.json())
+      .then(data => {
+        if (data.status === 'success') {
+          // tmpfiles.org renvoie une URL type: https://tmpfiles.org/123456
+          // Il faut la transformer en https://tmpfiles.org/dl/123456 pour download direct
+          const downloadUrl = data.data.url.replace('tmpfiles.org/', 'tmpfiles.org/dl/');
+          console.log('✅ Uploaded:', file.name, '→', downloadUrl);
+          return { name: file.name, url: downloadUrl, size: (file.size / 1024).toFixed(1) + 'KB' };
+        } else {
+          console.error('❌ Upload failed for', file.name);
+          return { name: file.name, url: 'FAILED', size: (file.size / 1024).toFixed(1) + 'KB' };
+        }
+      })
+      .catch(err => {
+        console.error('❌ Upload error for', file.name, err);
+        return { name: file.name, url: 'ERROR', size: (file.size / 1024).toFixed(1) + 'KB' };
+      });
+    }))
+    .then(uploadedFiles => {
+      formDataObj.append("fichiers_count", uploadedFiles.length);
+      formDataObj.append("fichiers_links", JSON.stringify(uploadedFiles));
+      console.log('📎 All files uploaded:', uploadedFiles);
+      
+      // Envoyer le formulaire avec les liens
+      sendFormData(formDataObj, btn);
+    })
+    .catch(err => {
+      console.error('❌ Global upload error:', err);
+      alert("Erreur d'upload des fichiers.");
+      if (btn) btn.innerHTML = "Bloquer mon slot 🔒";
+    });
+  } else {
+    // Pas de fichiers, envoi direct
+    sendFormData(formDataObj, btn);
   }
-  
-  console.log('📧 Sending form with', fileStore.length, 'files info (no upload)');
+};
+
+function sendFormData(formDataObj, btn) {
+  console.log('📧 Sending form data...');
   
   fetch(FORM_ACTION_URL, { method: 'POST', body: formDataObj })
     .then(response => {
@@ -1086,7 +1139,7 @@ window.submitForm = function() {
       alert("Erreur de transmission.");
       if (btn) btn.innerHTML = "Bloquer mon slot 🔒";
     });
-};
+}
 
 window.skipSuccessUpsells = function() {
   countdownStarted = false;
