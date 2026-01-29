@@ -100,6 +100,11 @@
       transition: all 0.3s ease;
     }
     
+    .circle-text {
+      position: relative;
+      z-index: 1;
+    }
+    
     .venn-circle:hover {
       opacity: 1;
       transform: scale(1.05);
@@ -195,7 +200,8 @@
       text-transform: uppercase;
       letter-spacing: 0.05em;
       font-weight: 700;
-      z-index: 5;
+      z-index: 10;
+      margin: 0;
     }
     
     .vision-title {
@@ -385,15 +391,15 @@
       
       <div class="venn-wrapper venn-bad">
         <div class="venn-circle">
-          IA
+          <span class="circle-text">IA</span>
           <span class="badge">vide d'âme</span>
         </div>
         <div class="venn-circle">
-          AGENCE
+          <span class="circle-text">AGENCE</span>
           <span class="badge">trop cher</span>
         </div>
         <div class="venn-circle">
-          TEMPLATE
+          <span class="circle-text">TEMPLATE</span>
           <span class="badge">générique</span>
         </div>
         <div class="venn-center">💀</div>
