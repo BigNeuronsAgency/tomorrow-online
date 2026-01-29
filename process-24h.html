@@ -75,6 +75,23 @@
   </header>
   
   <!-- CONTENU ORIGINAL -->
+<div class="mobile-menu" id="mobileMenu">
+      <a href="process-24h.html">Process</a>
+      <a href="realisations.html">Réalisations</a>
+      <div class="mobile-dropdown" onclick="toggleMobileDropdown(this)">
+        <span>Ressources ▼</span>
+        <div class="mobile-dropdown-content">
+          <a href="la-vision-tomorrow.html">🔮 Notre Vision</a>
+          <a href="notre-histoire.html">🏢 Qui sommes-nous</a>
+          <a href="comparatif-solutions-web.html">⚡ Comparatif Solutions</a>
+          <a href="migrations.html">🔄 Migrations CMS</a>
+        </div>
+      </div>
+      <button class="btn btn-primary" onclick="openModal()">Réserver</button>
+    </div>
+  </header>
+  
+  <!-- CONTENU ORIGINAL -->
 <div id="mobileMenu" class="mobile-menu">
       <a href="process-24h.html">Process</a>
       <a href="realisations.html">Réalisations</a>
@@ -504,6 +521,8 @@ body{background-color:var(--bg);color:var(--fg);font-family:'Space Grotesk',sans
 }
 </style>
     
+  
+  
   
   <footer class="footer">
     <div class="container">
