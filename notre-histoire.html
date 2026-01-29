@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>La Vision Tomorrow - Tomorrow.Online</title>
-  <meta name="description" content="Notre vision de l'agence web moderne : combiner la vitesse de l'IA, la qualité d'une agence, et la fiabilité d'un template.">
+  <title>Notre Histoire - Tomorrow.Online</title>
+  <meta name="description" content="L'histoire de Tomorrow.Online : de Big Neurons à la révolution IA-augmentée. Équipe mercenaire, process industrialisé, 42 sites en 6 mois.">
   
   <!-- Favicon -->
   <link rel="icon" type="image/png" href="images/favicon.png">
@@ -17,319 +17,299 @@
   
   <!-- CSS -->
   <link rel="stylesheet" href="css/design-system.css">
-  <link rel="stylesheet" href="css/home.css">
   <link rel="stylesheet" href="css/formulaire.css">
   
   <!-- GSAP -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollToPlugin.min.js"></script>
-  
-  <!-- Lenis Smooth Scroll -->
-  <script src="https://unpkg.com/lenis@1.0.19/dist/lenis.min.js"></script>
   
   <style>
-    /* Vision page specific styles */
-    .vision-split {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      min-height: 100vh;
-      padding-top: 100px;
-    }
-    
-    .vision-side {
-      padding: 4rem 3rem;
+    .hero-page {
+      min-height: 60vh;
       display: flex;
-      flex-direction: column;
-      justify-content: flex-start;
       align-items: center;
-      position: relative;
-    }
-    
-    .vision-side-left {
-      background: #111;
-      border-right: 1px solid #222;
-    }
-    
-    .vision-side-right {
+      justify-content: center;
+      text-align: center;
+      padding: 150px 2rem 80px;
       background: #000;
     }
     
-    .vision-label {
+    .hero-page h1 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: clamp(3rem, 8vw, 6rem);
+      font-weight: 900;
+      text-transform: uppercase;
+      line-height: 1.1;
+      color: #FFF;
+      margin-bottom: 2rem;
+    }
+    
+    .hero-page .lead {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.25rem;
+      color: #999;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    
+    .content-section {
+      padding: 80px 2rem;
+      background: #000;
+    }
+    
+    .content-wrapper {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    
+    .section-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      font-weight: 900;
+      text-transform: uppercase;
+      text-align: center;
+      margin-bottom: 3rem;
+      color: #FFF;
+    }
+    
+    .timeline-item {
+      margin-bottom: 60px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+    }
+    
+    .timeline-item:nth-child(even) {
+      direction: rtl;
+    }
+    
+    .timeline-item:nth-child(even) > * {
+      direction: ltr;
+    }
+    
+    .timeline-content h2 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 3rem;
+      font-weight: 900;
+      text-transform: uppercase;
+      margin-bottom: 1.5rem;
+      color: #FFF;
+    }
+    
+    .timeline-content h2 .year {
+      background: linear-gradient(90deg, #FF5500, #FF0000);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    
+    .timeline-content p {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.1rem;
+      line-height: 1.7;
+      color: #CCC;
+      margin-bottom: 1rem;
+    }
+    
+    .timeline-content p strong {
+      color: #FFF;
+      font-weight: 700;
+    }
+    
+    .timeline-image {
+      background: #111;
+      height: 400px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 2px solid #222;
+    }
+    
+    .timeline-image img {
+      max-height: 200px;
+      width: auto;
+    }
+    
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 40px;
+      margin: 60px 0;
+    }
+    
+    .stat-item {
+      text-align: center;
+    }
+    
+    .stat-number {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 4rem;
+      font-weight: 900;
+      background: linear-gradient(90deg, #FF5500, #FF0000);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 0.5rem;
+    }
+    
+    .stat-label {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.1rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      color: #FFF;
+      margin-bottom: 0.5rem;
+    }
+    
+    .stat-desc {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.85rem;
+      color: #666;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 40px;
+      margin-top: 60px;
+    }
+    
+    .team-member {
+      background: #111;
+      border: 2px solid #222;
+      padding: 0;
+      transition: border-color 0.3s ease;
+    }
+    
+    .team-member:hover {
+      border-color: #FF5500;
+    }
+    
+    .team-member.ai-card {
+      background: linear-gradient(135deg, rgba(180,7,254,0.2), rgba(255,10,55,0.2));
+      border-color: #FF5500;
+    }
+    
+    .member-photo {
+      height: 300px;
+      background: #0A0A0A;
+      position: relative;
+      overflow: hidden;
+      filter: grayscale(100%);
+      transition: filter 0.5s ease;
+    }
+    
+    .team-member:hover .member-photo {
+      filter: grayscale(0%);
+    }
+    
+    .member-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    
+    .ai-card .member-photo {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, rgb(180,7,254), rgb(255,10,55));
+      filter: none;
+    }
+    
+    .ai-card .member-photo .ai-icon {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 8rem;
+      font-weight: 900;
+      color: rgba(255,255,255,0.3);
+    }
+    
+    .member-info {
+      padding: 2rem;
+    }
+    
+    .member-role {
       font-family: 'JetBrains Mono', monospace;
       font-size: 0.75rem;
       text-transform: uppercase;
       letter-spacing: 0.1em;
       color: #666;
-      margin-bottom: 3rem;
-      height: 20px;
-      display: flex;
-      align-items: center;
+      margin-bottom: 0.5rem;
     }
     
-    .vision-label.animated-gradient {
-      background: linear-gradient(90deg, #FF5500, #FF0000);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-    
-    /* Venn Diagram Styles */
-    .venn-wrapper {
-      position: relative;
-      width: 400px;
-      height: 400px;
-      margin: 0 auto 2rem;
-      opacity: 1;
-    }
-    
-    .venn-circle {
-      position: absolute;
-      width: 240px;
-      height: 240px;
-      border-radius: 50%;
+    .member-name {
       font-family: 'Space Grotesk', sans-serif;
-      font-weight: 900;
-      font-size: 0.9rem;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      opacity: 0.85;
-      transition: all 0.3s ease;
-    }
-    
-    .circle-text {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      z-index: 1;
-      text-align: center;
-    }
-    
-    .venn-circle:hover {
-      opacity: 1;
-      transform: scale(1.05);
-    }
-    
-    /* Left side (bad) circles */
-    .venn-bad .venn-circle:nth-of-type(1) {
-      top: 20px;
-      left: calc(50% - 120px);
-      background: rgba(100, 100, 100, 0.3);
-      border: 2px solid #444;
-      color: #666;
-    }
-    
-    .venn-bad .venn-circle:nth-of-type(2) {
-      top: 140px;
-      left: 10px;
-      background: rgba(100, 100, 100, 0.3);
-      border: 2px solid #444;
-      color: #666;
-    }
-    
-    .venn-bad .venn-circle:nth-of-type(3) {
-      top: 140px;
-      right: 10px;
-      background: rgba(100, 100, 100, 0.3);
-      border: 2px solid #444;
-      color: #666;
-    }
-    
-    .venn-bad .venn-center {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      font-size: 3rem;
-      z-index: 10;
-    }
-    
-    /* Right side (good) circles */
-    .venn-good .venn-circle:nth-of-type(1) {
-      top: 20px;
-      left: calc(50% - 120px);
-      background: linear-gradient(135deg, rgba(100, 200, 255, 0.3), rgba(50, 150, 255, 0.4));
-      border: 2px solid rgba(100, 200, 255, 0.6);
-      color: #6CF;
-    }
-    
-    .venn-good .venn-circle:nth-of-type(2) {
-      top: 140px;
-      left: 10px;
-      background: linear-gradient(135deg, rgba(150, 100, 255, 0.3), rgba(120, 50, 255, 0.4));
-      border: 2px solid rgba(150, 100, 255, 0.6);
-      color: #B8F;
-    }
-    
-    .venn-good .venn-circle:nth-of-type(3) {
-      top: 140px;
-      right: 10px;
-      background: linear-gradient(135deg, rgba(255, 100, 150, 0.3), rgba(255, 50, 100, 0.4));
-      border: 2px solid rgba(255, 100, 150, 0.6);
-      color: #F9A;
-    }
-    
-    .venn-good .venn-center {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      z-index: 10;
-      font-size: 1.2rem;
-      font-weight: 900;
-      background: linear-gradient(90deg, #FF5500, #FF0000);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-    }
-    
-    .badge {
-      position: absolute;
-      background: rgba(255, 0, 0, 0.9);
-      color: #FFF;
-      font-size: 0.7rem;
-      padding: 0.35rem 0.65rem;
-      border-radius: 4px;
-      font-family: 'JetBrains Mono', monospace;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
+      font-size: 1.75rem;
       font-weight: 700;
-      z-index: 10;
-      white-space: nowrap;
-    }
-    
-    /* Badge positions for left side (bad) */
-    .venn-bad .badge-1 {
-      top: 20px;
-      left: calc(50% - 50px);
-    }
-    
-    .venn-bad .badge-2 {
-      top: 280px;
-      left: 10px;
-    }
-    
-    .venn-bad .badge-3 {
-      top: 280px;
-      right: 10px;
-    }
-    
-    .vision-title {
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: 2.5rem;
-      font-weight: 900;
       text-transform: uppercase;
-      margin: 0 0 1rem;
-      text-align: center;
       color: #FFF;
-      height: 80px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      margin-bottom: 0.5rem;
     }
     
-    .vision-subtitle {
+    .member-xp {
       font-family: 'JetBrains Mono', monospace;
-      font-size: 0.85rem;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      color: #666;
-      margin-bottom: 1.5rem;
-      text-align: center;
-      height: 30px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      font-size: 0.75rem;
+      background: linear-gradient(90deg, #FF5500, #FF0000);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 1rem;
     }
     
-    .vision-text {
+    .member-desc {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 0.9rem;
+      line-height: 1.6;
+      color: #AAA;
+    }
+    
+    .values-list {
+      max-width: 900px;
+      margin: 60px auto 0;
+    }
+    
+    .value-item {
+      border-left: 4px solid #FF5500;
+      padding: 2rem 0 2rem 3rem;
+      margin-bottom: 2rem;
+    }
+    
+    .value-item h3 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      color: #FFF;
+      margin-bottom: 1rem;
+    }
+    
+    .value-item p {
       font-family: 'Space Grotesk', sans-serif;
       font-size: 1.1rem;
-      line-height: 1.6;
-      color: #CCC;
-      text-align: center;
-      max-width: 500px;
-      margin: 0 auto;
+      line-height: 1.7;
+      color: #AAA;
     }
     
-    .vision-text strong {
-      color: #FFF;
-      font-weight: 700;
-    }
-    
-    /* Manifesto Styles */
-    .manifesto-list {
-      list-style: none;
-      padding: 0;
-      margin: 2rem 0;
-      max-width: 500px;
-    }
-    
-    .manifesto-item {
-      border-left: 2px solid #333;
-      padding-left: 1.5rem;
-      margin-bottom: 2rem;
-      position: relative;
-    }
-    
-    .manifesto-number {
-      position: absolute;
-      left: -2.6rem;
-      top: 0;
-      font-family: 'JetBrains Mono', monospace;
-      font-weight: 700;
-      color: #444;
-      font-size: 0.9rem;
-    }
-    
-    .manifesto-item h3 {
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: 1.25rem;
-      font-weight: 900;
-      text-transform: uppercase;
-      margin-bottom: 0.5rem;
-      color: #FFF;
-    }
-    
-    .manifesto-item p {
-      font-size: 0.95rem;
-      color: #CCC;
-      line-height: 1.6;
-    }
-    
-    .vision-cta {
-      margin-top: 2rem;
-      text-align: center;
-    }
-    
-    /* Responsive */
-    @media (max-width: 1024px) {
-      .vision-split {
+    @media (max-width: 768px) {
+      .timeline-item {
         grid-template-columns: 1fr;
+        gap: 30px;
       }
       
-      .vision-side-left {
-        border-right: none;
-        border-bottom: 1px solid #222;
+      .timeline-item:nth-child(even) {
+        direction: ltr;
       }
       
-      .venn-wrapper {
-        width: 320px;
-        height: 320px;
+      .stats-grid {
+        grid-template-columns: 1fr;
+        gap: 30px;
       }
       
-      .venn-circle {
-        width: 180px;
-        height: 180px;
-        font-size: 0.75rem;
-      }
-      
-      .venn-bad .venn-circle:nth-child(1),
-      .venn-good .venn-circle:nth-child(1) {
-        left: 70px;
+      .team-grid {
+        grid-template-columns: 1fr;
       }
     }
   </style>
@@ -368,7 +348,7 @@
       
       <div class="nav-cta">
         <button class="btn btn-primary" onclick="openModal()">
-          Réserver mon créneau
+          Réserver
         </button>
       </div>
       
@@ -456,7 +436,7 @@
           <p><strong>Résultat : 42 sites livrés en 6 mois. Délai moyen 38H. Satisfaction 98%. Game changer.</strong></p>
         </div>
         <div class="timeline-image">
-          <img src="images/beimpatient.png" alt="Tomorrow Kid" style="animation: float 3s ease-in-out infinite; max-height: 250px;">
+          <img src="images/TO-logo-baseline.svg" alt="Tomorrow.Online">
         </div>
       </div>
       
@@ -580,157 +560,54 @@
     </div>
   </section>
   
+  <!-- Footer -->
   <footer class="footer">
-    <div class="container">
-      <div class="footer-grid">
-        <div class="footer-brand">
-          <img src="images/TO-logo.webp" alt="Tomorrow.Online" class="footer-logo">
-          <p class="footer-tagline font-mono">
-            La première agence web "NO-WAIT" en France.<br>
-            Designed for speed. Powered by intelligence.
-          </p>
-        </div>
-        
-        <div class="footer-links">
-          <h4 class="footer-title font-mono">Services</h4>
-          <ul class="footer-list">
-            <li><a href="process-24h.html">Process 24H</a></li>
-            <li><a href="realisations.html">Réalisations</a></li>
-            <li><a href="comparatif-solutions-web.html">Comparatif</a></li>
-            <li><a href="migrations.html">Migrations</a></li>
-          </ul>
-        </div>
-        
-        <div class="footer-links">
-          <h4 class="footer-title font-mono">À Propos</h4>
-          <ul class="footer-list">
-            <li><a href="la-vision-tomorrow.html">La Vision</a></li>
-            <li><a href="notre-histoire.html">Notre Histoire</a></li>
-          </ul>
-        </div>
-        
-        <div class="footer-links">
-          <h4 class="footer-title font-mono">Réseau & Contact</h4>
-          <ul class="footer-list">
-            <li><a href="https://www.bigneurons.com" target="_blank">Groupe Big Neurons <span class="external-icon">↗</span></a></li>
-            <li><a href="mentions-legales.html">Mentions Légales</a></li>
-            <li><a href="mailto:hello@tomorrow.online">Contact Ops</a></li>
-          </ul>
+    <div class="footer-content">
+      <div class="footer-column">
+        <img src="images/TO-logo.webp" alt="Tomorrow.Online" class="footer-logo">
+        <p class="footer-tagline">Site en 24H. Sinon remboursé.</p>
+        <div class="footer-social">
+          <a href="#" class="social-link">LinkedIn</a>
+          <a href="#" class="social-link">Twitter</a>
         </div>
       </div>
       
-      <!-- Video Footer Link -->
-      <div class="footer-video-link">
-        <button class="video-link-btn" onclick="openVideoModal()">
-          Comment on voit les acheteurs de templates
-        </button>
+      <div class="footer-column">
+        <h4 class="footer-title">Produit</h4>
+        <a href="process-24h.html" class="footer-link">Process 24H</a>
+        <a href="realisations.html" class="footer-link">Réalisations</a>
+        <a href="index.html#pricing" class="footer-link">Tarifs</a>
       </div>
       
-      <div class="footer-bottom">
-        <p class="footer-copyright font-mono">
-          © 2026 TOMORROW AGENCY. UNE MARQUE DE SAS BIG NEURONS. TOMORROW.ONLINE EST LA PREMIÈRE AGENCE WEB "NO-WAIT" EN FRANCE. DESIGNED FOR SPEED. POWERED BY INTELLIGENCE.
-        </p>
-        <div class="footer-status font-mono">
-          SYSTEM STATUS: OPERATIONAL
-        </div>
+      <div class="footer-column">
+        <h4 class="footer-title">Ressources</h4>
+        <a href="la-vision-tomorrow.html" class="footer-link">Notre Vision</a>
+        <a href="notre-histoire.html" class="footer-link">Qui sommes-nous</a>
+        <a href="comparatif-solutions-web.html" class="footer-link">Comparatif Solutions</a>
+        <a href="migrations.html" class="footer-link">Migrations CMS</a>
       </div>
+      
+      <div class="footer-column">
+        <h4 class="footer-title">Contact</h4>
+        <a href="mailto:hello@tomorrow.online" class="footer-link">hello@tomorrow.online</a>
+        <a href="tel:+33123456789" class="footer-link">+33 1 23 45 67 89</a>
+        <a href="mentions-legales.html" class="footer-link">Mentions Légales</a>
+      </div>
+    </div>
+    
+    <div class="footer-bottom">
+      <p>&copy; 2025 Tomorrow.Online. Tous droits réservés.</p>
     </div>
   </footer>
   
-  <!-- Modal Formulaire -->
-  <div id="bookingModal" class="modal hidden">
-    <div class="modal-overlay" onclick="window.closeModal()"></div>
-    <div class="modal-container">
-      <div id="modalContent" class="modal-content"></div>
-    </div>
-  </div>
-  
-  <!-- Video Modal -->
-  <div id="videoModal" class="modal hidden">
-    <div class="modal-overlay" onclick="closeVideoModal()"></div>
-    <div class="video-modal-content">
-      <button class="video-modal-close" onclick="closeVideoModal()">✕</button>
-      <div style="padding:56.25% 0 0 0;position:relative;">
-        <iframe id="videoIframe" src="" 
-          frameborder="0" 
-          allow="autoplay; fullscreen; picture-in-picture; clipboard-write" 
-          style="position:absolute;top:0;left:0;width:100%;height:100%;" 
-          title="Tomorrow.Online - Comment on voit les acheteurs de templates">
-        </iframe>
-      </div>
-    </div>
-  </div>
+  <!-- Formulaire Modal (inclus depuis index.html) -->
+  <div id="modal-overlay" class="modal-overlay" onclick="closeModal()"></div>
+  <div id="brief-modal" class="brief-modal"></div>
   
   <!-- Scripts -->
   <script src="js/cursor.js"></script>
   <script src="js/navigation.js"></script>
   <script src="js/formulaire.js"></script>
-  
-  <script>
-    // Init
-    if (typeof initCursor === 'function') initCursor();
-    if (typeof initSmoothScroll === 'function') initSmoothScroll();
-    
-    // Video modal functions
-    function openVideoModal() {
-      const modal = document.getElementById('videoModal');
-      const iframe = document.getElementById('videoIframe');
-      iframe.src = 'https://player.vimeo.com/video/1141806002?autoplay=1&badge=0&autopause=0';
-      modal.classList.remove('hidden');
-      document.body.style.overflow = 'hidden';
-    }
-    
-    function closeVideoModal() {
-      const modal = document.getElementById('videoModal');
-      const iframe = document.getElementById('videoIframe');
-      iframe.src = '';
-      modal.classList.add('hidden');
-      document.body.style.overflow = '';
-    }
-    
-    // ESC key to close video
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape') {
-        const videoModal = document.getElementById('videoModal');
-        if (videoModal && !videoModal.classList.contains('hidden')) {
-          closeVideoModal();
-        }
-      }
-    });
-    
-    window.openVideoModal = openVideoModal;
-    window.closeVideoModal = closeVideoModal;
-    
-    // GSAP Animations (after page load)
-    window.addEventListener('load', () => {
-      if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
-        gsap.from('.venn-wrapper', {
-          scrollTrigger: {
-            trigger: '.vision-split',
-            start: 'top center',
-            toggleActions: 'play none none none'
-          },
-          scale: 0.8,
-          opacity: 0,
-          duration: 1,
-          ease: 'power2.out'
-        });
-        
-        gsap.from('.manifesto-item', {
-          scrollTrigger: {
-            trigger: '.manifesto-list',
-            start: 'top center',
-            toggleActions: 'play none none none'
-          },
-          x: 20,
-          opacity: 0,
-          duration: 0.6,
-          stagger: 0.2,
-          ease: 'power2.out'
-        });
-      }
-    });
-  </script>
   
 </body>
 </html>
