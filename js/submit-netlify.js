@@ -1,4 +1,4 @@
-// Override submitForm to use FormSubmit.co (simple et qui marche)
+// Override submitForm to use Express backend
 window.submitForm = async function() {
   if (!checkValidation()) return;
   
@@ -8,73 +8,83 @@ window.submitForm = async function() {
   
   var totals = calculateTotals();
   
-  // Créer FormData (FormSubmit supporte FormData natif)
-  const formDataObj = new FormData();
-  formDataObj.append("_captcha", "false");
-  formDataObj.append("_template", "table");
-  formDataObj.append("_subject", "🚀 NOUVEAU LEAD - " + (formData.brandName || "Projet"));
-  
-  // Données aplaties
-  formDataObj.append("Marque", formData.brandName || '');
-  formDataObj.append("Email", formData.email || '');
-  formDataObj.append("Téléphone", formData.phone || '');
-  formDataObj.append("Pitch", formData.pitch || '');
-  formDataObj.append("Concurrents", formData.competitors || '');
-  formDataObj.append("Cible", formData.target || '');
-  formDataObj.append("Problème", formData.problem || '');
-  formDataObj.append("Solution", formData.solution || '');
-  formDataObj.append("Pourquoi_vous", formData.whyUs || '');
-  formDataObj.append("Archétype", formData.archetype || '');
-  formDataObj.append("Vibe_Sérieux", formatVibeData(formData.vibeSeriousness, 'seriousness') || '');
-  formDataObj.append("Style_visuel", formatVibeData(formData.vibeStyle, 'style') || '');
-  formDataObj.append("Copywriting", formData.copywriting || '');
-  formDataObj.append("Pack", formData.selectedPack || '');
-  formDataObj.append("Prix", totals.price + '€');
-  formDataObj.append("Délai", totals.delay + 'j');
-  formDataObj.append("Domaine", formData.hasDomain ? 'Oui' : 'Non');
-  if (formData.domainName) formDataObj.append("Nom_domaine", formData.domainName);
-  formDataObj.append("Care", formData.care ? 'Oui' : 'Non');
+  // Préparer les données
+  const dataToSend = {
+    brandName: formData.brandName || '',
+    email: formData.email || '',
+    phone: formData.phone || '',
+    pitch: formData.pitch || '',
+    competitors: formData.competitors || '',
+    target: formData.target || '',
+    problem: formData.problem || '',
+    solution: formData.solution || '',
+    whyUs: formData.whyUs || '',
+    archetype: formData.archetype || '',
+    vibeSeriousness: formatVibeData(formData.vibeSeriousness, 'seriousness') || '',
+    vibeStyle: formatVibeData(formData.vibeStyle, 'style') || '',
+    copywriting: formData.copywriting || '',
+    selectedPack: formData.selectedPack || '',
+    price: totals.price,
+    delay: totals.delay,
+    hasDomain: formData.hasDomain ? 'Oui' : 'Non',
+    domainName: formData.domainName || '',
+    care: formData.care ? 'Oui' : 'Non'
+  };
   
   // Upsells
   if (formData.upsells && Object.keys(formData.upsells).length > 0) {
-    const upsellsText = Object.keys(formData.upsells)
+    dataToSend.upsells = Object.keys(formData.upsells)
       .filter(k => formData.upsells[k])
       .join(', ');
-    formDataObj.append("Options", upsellsText);
   }
   
   // Pages supp
   if (formData.pagesSupNames && formData.pagesSupNames.length > 0) {
-    formDataObj.append("Pages_supp", formData.pagesSupNames.join(', '));
+    dataToSend.pagesSupNames = formData.pagesSupNames.join(', ');
   }
   
   // Langues
   if (formData.multiLangues && formData.multiLangues.length > 0) {
-    formDataObj.append("Langues", formData.multiLangues.join(', '));
+    dataToSend.multiLangues = formData.multiLangues.join(', ');
   }
   
-  // Fichiers (noms seulement, pas d'upload)
-  if (fileStore.length > 0) {
-    formDataObj.append("Fichiers_count", fileStore.length);
-    formDataObj.append("Fichiers_noms", fileStore.map(f => f.name).join(', '));
-    formDataObj.append("Fichiers_tailles", fileStore.map(f => (f.size / 1024).toFixed(1) + 'KB').join(', '));
-  }
+  // Convert files to base64
+  const filePromises = fileStore.map(file => {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = () => {
+        resolve({
+          name: file.name,
+          content: reader.result,
+          size: (file.size / 1024).toFixed(1) + 'KB'
+        });
+      };
+      reader.onerror = reject;
+      reader.readAsDataURL(file);
+    });
+  });
   
   try {
-    console.log('📧 Sending to FormSubmit.co');
+    const files = await Promise.all(filePromises);
+    dataToSend.files = files;
+    console.log('📧 Sending to Express backend with', files.length, 'files');
     
-    const response = await fetch('https://formsubmit.co/t.martella@bigneurons.com', {
+    const response = await fetch('/api/submit-brief', {
       method: 'POST',
-      body: formDataObj
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(dataToSend)
     });
     
     console.log('📧 Response status:', response.status);
+    const result = await response.json();
+    console.log('✅ Result:', result);
     
-    if (response.ok || response.status === 200) {
-      console.log('✅ Form submitted successfully');
+    if (result.success) {
       showSuccessScreen();
     } else {
-      throw new Error('Response status: ' + response.status);
+      throw new Error(result.error || 'Erreur inconnue');
     }
   } catch (error) {
     console.error('❌ Error:', error);
