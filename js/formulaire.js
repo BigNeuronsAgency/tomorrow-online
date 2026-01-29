@@ -698,7 +698,6 @@ function getStepContent() {
         ` : ''}
         
         <div class="success-actions">
-          <div></div>
           <button onclick="window.skipSuccessUpsells()" class="btn btn-outline">PASSER →</button>
         </div>
       </div>
@@ -947,9 +946,24 @@ window.prevStep = function() {
 };
 
 window.handleCloseOrBack = function() {
-  if (currentStep === 1) window.closeModal();
-  else if (currentStep === 7) window.skipSuccessUpsells();
-  else if (confirm("Abandonner le projet ?")) window.closeModal();
+  console.log('🔙 handleCloseOrBack - currentStep:', currentStep);
+  if (currentStep === 1) {
+    console.log('🔙 Step 1 - Closing modal');
+    window.closeModal();
+  }
+  else if (currentStep === 7) {
+    console.log('🔙 Step 7 - Skipping upsells');
+    window.skipSuccessUpsells();
+  }
+  else {
+    console.log('🔙 Other step - Showing confirm');
+    const confirmed = confirm("Abandonner le projet ?");
+    console.log('🔙 Confirm result:', confirmed);
+    if (confirmed) {
+      console.log('🔙 User confirmed - Closing modal');
+      window.closeModal();
+    }
+  }
 };
 
 window.openModal = function(plan) {
@@ -980,17 +994,18 @@ window.openModal = function(plan) {
     m.classList.remove('hidden');
     m.style.display = 'flex';
     lockScroll();
-    console.log('🔥 Modal shown, now drawing content...');
+    console.log('🔥 Modal shown, display:', m.style.display, 'classList:', m.classList.toString());
     
-    // Force reflow pour que le DOM soit prêt
+    // Force reflow + double RAF pour garantir le rendering
     void m.offsetWidth;
     
-    // Dessiner le contenu avec un petit délai pour assurer le rendering
     requestAnimationFrame(() => {
-      draw();
-      console.log('🔥 draw() completed');
-      console.log('🔥 Modal content innerHTML length:', modalContent.innerHTML.length);
-      console.log('🔥 Modal should be visible NOW');
+      requestAnimationFrame(() => {
+        draw();
+        console.log('🔥 draw() completed');
+        console.log('🔥 Modal content innerHTML length:', modalContent.innerHTML.length);
+        console.log('🔥 Modal should be visible NOW');
+      });
     });
   } catch (error) {
     console.error('🔥 ERROR in openModal:', error);
@@ -1051,12 +1066,23 @@ window.submitForm = function() {
     formDataObj.append("filesNames", fileStore.map(f => f.name).join(', '));
   }
   
+  console.log('📧 Sending form with', fileStore.length, 'files');
+  
   fetch(FORM_ACTION_URL, { method: 'POST', body: formDataObj })
     .then(response => {
-      currentStep = 7;
-      draw();
+      console.log('📧 Response status:', response.status);
+      if (response.ok) {
+        console.log('✅ Form submitted successfully');
+        currentStep = 7;
+        draw();
+      } else {
+        console.error('❌ Form submission failed:', response.statusText);
+        alert("Erreur de transmission. Veuillez réessayer.");
+        if (btn) btn.innerHTML = "Bloquer mon slot 🔒";
+      }
     })
     .catch(error => {
+      console.error('❌ Fetch error:', error);
       alert("Erreur de transmission.");
       if (btn) btn.innerHTML = "Bloquer mon slot 🔒";
     });

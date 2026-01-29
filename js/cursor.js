@@ -24,8 +24,8 @@ function initCursor() {
     const dx = mouseX - cursorX;
     const dy = mouseY - cursorY;
     
-    cursorX += dx * 0.25;
-    cursorY += dy * 0.25;
+    cursorX += dx * 0.4;
+    cursorY += dy * 0.4;
     
     // Center the cursor exactly on mouse position
     cursor.style.left = (cursorX - cursor.offsetWidth / 2) + 'px';
