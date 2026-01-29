@@ -33,7 +33,7 @@ function initAnimations() {
   // ULTRA FAST SCROLL EASTER EGG - Effet hallucinant uniquement sur scroll hyper rapide
   let skewSetter = gsap.quickSetter('body', 'skewY', 'deg');
   let clamp = gsap.utils.clamp(-8, 8); // Effet MASSIF
-  const VELOCITY_THRESHOLD = 3000; // Seuil ULTRA élevé (uniquement scroll ULTRA rapide)
+  const VELOCITY_THRESHOLD = 5000; // Seuil ENCORE PLUS élevé (5000 au lieu de 3000)
   
   ScrollTrigger.create({
     onUpdate: (self) => {

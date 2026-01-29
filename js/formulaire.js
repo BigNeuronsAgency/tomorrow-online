@@ -422,9 +422,7 @@ function getStepContent() {
           <p class="step-subtitle font-mono">L'identité de votre marque.</p>
         </div>
         
-        <label class="form-label">Choisissez votre archétype</label>
-        <div class="archetype-grid">
-          ${ARCHETYPES.map(a => `
+        <div class="archetype-grid">${ARCHETYPES.map(a => `
             <div onclick="window.selectArchetype('${a.id}')" 
               id="arch-${a.id}" 
               class="archetype-card ${formData.archetype === a.id ? 'selected' : ''}">
@@ -461,10 +459,36 @@ function getStepContent() {
           <p class="step-subtitle font-mono">Calibrage de votre site.</p>
         </div>
         
-        <div class="step-grid">
+        <div class="step-grid step-grid-4">
+          <div class="form-group">
+            <div class="copywriting-group">
+              <label class="form-label">Copywriting</label>
+              <div class="copy-buttons">
+                <button onclick="window.selectCopy('me')" id="copy-me" 
+                  class="copy-btn ${formData.copywriting === 'me' ? 'selected' : ''}">
+                  J'ai mes textes
+                </button>
+                <button onclick="window.selectCopy('arthur')" id="copy-arthur" 
+                  class="copy-btn ${formData.copywriting === 'arthur' ? 'selected' : ''}">
+                  Arthur s'en charge
+                  <span class="copy-badge">Offert</span>
+                </button>
+              </div>
+            </div>
+            
+            <div class="file-upload">
+              <input type="file" multiple onchange="window.handleFileSelect(this)" class="file-input">
+              <p class="file-label">
+                📂 DRAG & DROP ASSETS<br>
+                <span class="file-sublabel">Logo, Photos, Textes, Charte...</span>
+              </p>
+            </div>
+            ${fileListHTML}
+          </div>
+          
           <div class="form-group">
             <div class="vibe-box">
-              <label class="form-label-small">Vibes du site</label>
+              <label class="form-label-small">Calibrage</label>
               
               <div class="range-group">
                 <div class="range-labels">
@@ -488,32 +512,6 @@ function getStepContent() {
                 <span id="label-style" class="range-value">${formatVibeLabel(formData.vibeStyle, 'style')}</span>
               </div>
             </div>
-            
-            <div class="copywriting-group">
-              <label class="form-label">Copywriting</label>
-              <div class="copy-buttons">
-                <button onclick="window.selectCopy('me')" id="copy-me" 
-                  class="copy-btn ${formData.copywriting === 'me' ? 'selected' : ''}">
-                  J'ai mes textes
-                </button>
-                <button onclick="window.selectCopy('arthur')" id="copy-arthur" 
-                  class="copy-btn ${formData.copywriting === 'arthur' ? 'selected' : ''}">
-                  Arthur s'en charge
-                  <span class="copy-badge">Offert</span>
-                </button>
-              </div>
-            </div>
-          </div>
-          
-          <div class="form-group">
-            <div class="file-upload">
-              <input type="file" multiple onchange="window.handleFileSelect(this)" class="file-input">
-              <p class="file-label">
-                📂 DRAG & DROP ASSETS<br>
-                <span class="file-sublabel">Logo, Photos, Textes, Charte...</span>
-              </p>
-            </div>
-            ${fileListHTML}
           </div>
         </div>
       </div>
