@@ -457,12 +457,23 @@
 
 /* === MANIFESTO === */
 .manifesto {
-  padding: 2.5rem 0;
+  padding: 4rem 0;
+  overflow: hidden;
 }
 
 .manifesto-grid {
-  max-width: 1200px;
+  max-width: 1400px;
   margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 4rem;
+  align-items: center;
+}
+
+@media (min-width: 1024px) {
+  .manifesto-grid {
+    grid-template-columns: 1fr 1fr;
+  }
 }
 
 .manifesto-title {
@@ -476,6 +487,102 @@
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
+}
+
+/* === IMPATIENT KID ANIMATION === */
+.manifesto-logo-container {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 500px;
+}
+
+.logo-glow {
+  position: absolute;
+  width: 400px;
+  height: 400px;
+  background: var(--gradient-rose);
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.2;
+  animation: pulse 3s ease-in-out infinite;
+}
+
+.impatient-kid-wrapper {
+  position: relative;
+  width: 300px;
+  height: 300px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10;
+}
+
+.impatient-kid-logo {
+  width: 100%;
+  height: auto;
+  filter: drop-shadow(0 0 15px rgba(255, 85, 0, 0.5));
+  transition: filter 0.3s ease;
+}
+
+.impatient-kid-logo:hover {
+  filter: drop-shadow(0 0 30px rgba(255, 85, 0, 0.8)) brightness(1.2);
+}
+
+/* Animation de tremblement nerveux */
+@keyframes nervous {
+  0% { transform: translate(0, 0) rotate(0deg); }
+  10% { transform: translate(-2px, -2px) rotate(-1deg); }
+  20% { transform: translate(2px, 2px) rotate(1deg); }
+  30% { transform: translate(-2px, 2px) rotate(0deg); }
+  40% { transform: translate(2px, -2px) rotate(1deg); }
+  50% { transform: translate(-1px, 2px) rotate(-1deg); }
+  60% { transform: translate(3px, 1px) rotate(0deg); }
+  70% { transform: translate(-3px, 1px) rotate(-1deg); }
+  80% { transform: translate(-1px, -1px) rotate(1deg); }
+  90% { transform: translate(1px, 2px) rotate(0deg); }
+  100% { transform: translate(1px, -2px) rotate(-1deg); }
+}
+
+.nervous-shake {
+  animation: nervous 0.5s infinite linear;
+}
+
+.nervous-shake:hover {
+  animation: nervous 0.1s infinite linear;
+}
+
+/* Yeux pour les larmes */
+.tear-eye {
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  z-index: 20;
+  pointer-events: none;
+}
+
+#eye-left {
+  left: 38%;
+  top: 45%;
+}
+
+#eye-right {
+  left: 62%;
+  top: 42%;
+}
+
+/* Style des larmes */
+.tear {
+  position: absolute;
+  width: 6px;
+  height: 15px;
+  background: var(--gradient-rose);
+  border-radius: 50%;
+  opacity: 0.8;
+  pointer-events: none;
+  z-index: 15;
+  box-shadow: 0 0 10px var(--gradient-rose);
 }
 
 .manifesto-text p {
@@ -1646,11 +1753,16 @@
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  transition: color var(--transition-fast);
+  color: var(--white);
+  text-decoration: none;
+  transition: all var(--transition-fast);
 }
 
 .footer-list a:hover {
-  color: var(--gradient-rose);
+  background: var(--gradient-main);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 .external-icon {
