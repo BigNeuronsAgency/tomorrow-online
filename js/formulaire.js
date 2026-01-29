@@ -4,7 +4,7 @@
 
 // Global state
 var currentStep = 1;
-var totalSteps = 7;
+var totalSteps = 6;
 var currentConsoleMessage = 'SYSTEM READY';
 var fileStore = [];
 var countdownTimer = null;

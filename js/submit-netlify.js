@@ -33,10 +33,6 @@ window.submitForm = async function() {
   if (formData.upsells && Object.keys(formData.upsells).length > 0) {
     const upsellsText = Object.keys(formData.upsells)
       .filter(k => formData.upsells[k])
-      .map(k => {
-        const u = UPSELLS.find(up => up.id === k);
-        return u ? u.name : k;
-      })
       .join(', ');
     dataToSend.upsells = upsellsText;
   }
