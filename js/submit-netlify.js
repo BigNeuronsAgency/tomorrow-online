@@ -1,7 +1,5 @@
-// Script pour remplacer la fonction submitForm
-// À ajouter AVANT la fermeture du body dans index.html
-
-window.submitForm = function() {
+// Override submitForm to use Netlify Function
+window.submitForm = async function() {
   if (!checkValidation()) return;
   
   var btn = document.getElementById('submitBtn');
@@ -35,6 +33,10 @@ window.submitForm = function() {
   if (formData.upsells && Object.keys(formData.upsells).length > 0) {
     const upsellsText = Object.keys(formData.upsells)
       .filter(k => formData.upsells[k])
+      .map(k => {
+        const u = UPSELLS.find(up => up.id === k);
+        return u ? u.name : k;
+      })
       .join(', ');
     dataToSend.upsells = upsellsText;
   }
@@ -65,34 +67,31 @@ window.submitForm = function() {
     });
   });
   
-  Promise.all(filePromises)
-    .then(files => {
-      dataToSend.files = files;
-      console.log('📧 Sending to Netlify Function with', files.length, 'files');
-      
-      return fetch('/.netlify/functions/submit-brief', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(dataToSend)
-      });
-    })
-    .then(response => {
-      console.log('📧 Response status:', response.status);
-      return response.json();
-    })
-    .then(result => {
-      console.log('✅ Result:', result);
-      if (result.success) {
-        showSuccessScreen();
-      } else {
-        throw new Error(result.error || 'Erreur inconnue');
-      }
-    })
-    .catch(error => {
-      console.error('❌ Error:', error);
-      alert("Erreur d'envoi du brief : " + error.message);
-      if (btn) btn.innerHTML = "Bloquer mon slot 🔒";
+  try {
+    const files = await Promise.all(filePromises);
+    dataToSend.files = files;
+    console.log('📧 Sending to Netlify Function with', files.length, 'files');
+    
+    const response = await fetch('/.netlify/functions/submit-brief', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(dataToSend)
     });
+    
+    console.log('📧 Response status:', response.status);
+    const result = await response.json();
+    console.log('✅ Result:', result);
+    
+    if (result.success) {
+      showSuccessScreen();
+    } else {
+      throw new Error(result.error || 'Erreur inconnue');
+    }
+  } catch (error) {
+    console.error('❌ Error:', error);
+    alert("Erreur d'envoi du brief : " + error.message);
+    if (btn) btn.innerHTML = "Bloquer mon slot 🔒";
+  }
 };

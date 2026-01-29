@@ -15,7 +15,8 @@ export const handler = async (event) => {
   const headers = {
     'Access-Control-Allow-Origin': '*',
     'Access-Control-Allow-Headers': 'Content-Type',
-    'Access-Control-Allow-Methods': 'POST, OPTIONS'
+    'Access-Control-Allow-Methods': 'POST, OPTIONS',
+    'Content-Type': 'application/json'
   };
 
   // Handle preflight
@@ -27,26 +28,28 @@ export const handler = async (event) => {
     return {
       statusCode: 405,
       headers,
-      body: JSON.stringify({ error: 'Method not allowed' })
+      body: JSON.stringify({ success: false, error: 'Method not allowed' })
     };
   }
 
   try {
+    console.log('📧 Function called');
+    console.log('📧 Body:', event.body?.substring(0, 200));
+    
     const data = JSON.parse(event.body);
-    console.log('📧 Received form data:', Object.keys(data));
+    console.log('📧 Parsed data keys:', Object.keys(data));
 
     // Upload files to Cloudinary if present
     let fileLinks = [];
     if (data.files && data.files.length > 0) {
-      console.log('📤 Uploading', data.files.length, 'files to Cloudinary...');
+      console.log('📤 Uploading', data.files.length, 'files');
       
       for (const file of data.files) {
         try {
-          // file.content is base64
           const result = await cloudinary.uploader.upload(file.content, {
             folder: 'tomorrow-briefs',
             resource_type: 'auto',
-            public_id: `${Date.now()}_${file.name}`
+            public_id: `${Date.now()}_${file.name.replace(/[^a-zA-Z0-9]/g, '_')}`
           });
           
           fileLinks.push({
@@ -55,9 +58,9 @@ export const handler = async (event) => {
             size: file.size
           });
           
-          console.log('✅ Uploaded:', file.name, '→', result.secure_url);
+          console.log('✅ Uploaded:', file.name);
         } catch (uploadErr) {
-          console.error('❌ Upload failed for', file.name, uploadErr);
+          console.error('❌ Upload failed:', uploadErr.message);
           fileLinks.push({
             name: file.name,
             url: 'UPLOAD_FAILED',
@@ -74,19 +77,18 @@ export const handler = async (event) => {
       <head>
         <meta charset="utf-8">
         <style>
-          body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; line-height: 1.6; color: #333; }
-          .container { max-width: 800px; margin: 0 auto; padding: 20px; }
-          .header { background: linear-gradient(135deg, #FF5500 0%, #FF0000 100%); color: white; padding: 30px; border-radius: 8px 8px 0 0; }
+          body { font-family: -apple-system, sans-serif; line-height: 1.6; color: #333; margin: 0; padding: 0; }
+          .container { max-width: 800px; margin: 0 auto; }
+          .header { background: linear-gradient(135deg, #FF5500 0%, #FF0000 100%); color: white; padding: 30px; }
           .header h1 { margin: 0; font-size: 24px; }
-          .content { background: #f9f9f9; padding: 30px; border-radius: 0 0 8px 8px; }
+          .content { background: #f9f9f9; padding: 30px; }
           .section { background: white; padding: 20px; margin-bottom: 20px; border-radius: 8px; border-left: 4px solid #FF5500; }
           .section h2 { margin-top: 0; color: #FF5500; font-size: 18px; }
           .field { margin-bottom: 15px; }
-          .label { font-weight: 600; color: #666; font-size: 12px; text-transform: uppercase; letter-spacing: 0.5px; }
+          .label { font-weight: 600; color: #666; font-size: 12px; text-transform: uppercase; }
           .value { margin-top: 5px; font-size: 16px; }
           .files { background: #fff3e0; padding: 15px; border-radius: 6px; margin-top: 10px; }
-          .file-link { display: block; color: #FF5500; text-decoration: none; margin: 8px 0; font-weight: 500; }
-          .file-link:hover { text-decoration: underline; }
+          .file-link { display: block; color: #FF5500; margin: 8px 0; font-weight: 500; }
         </style>
       </head>
       <body>
@@ -115,7 +117,7 @@ export const handler = async (event) => {
             <div class="section">
               <h2>💼 BUSINESS</h2>
               <div class="field">
-                <div class="label">Pitch (1 ligne)</div>
+                <div class="label">Pitch</div>
                 <div class="value">${data.pitch || '-'}</div>
               </div>
               <div class="field">
@@ -125,58 +127,50 @@ export const handler = async (event) => {
             </div>
 
             <div class="section">
-              <h2>🎯 CIBLE & PROPOSITION</h2>
+              <h2>🎯 CIBLE</h2>
               <div class="field">
                 <div class="label">Cible</div>
                 <div class="value">${data.target || '-'}</div>
               </div>
               <div class="field">
-                <div class="label">Problème client</div>
+                <div class="label">Problème</div>
                 <div class="value">${data.problem || '-'}</div>
               </div>
               <div class="field">
-                <div class="label">Solution apportée</div>
+                <div class="label">Solution</div>
                 <div class="value">${data.solution || '-'}</div>
               </div>
               <div class="field">
-                <div class="label">Pourquoi vous ?</div>
+                <div class="label">Pourquoi vous</div>
                 <div class="value">${data.whyUs || '-'}</div>
               </div>
             </div>
 
             <div class="section">
-              <h2>🎨 IDENTITÉ & STYLE</h2>
+              <h2>🎨 IDENTITÉ</h2>
               <div class="field">
-                <div class="label">Archétype de marque</div>
+                <div class="label">Archétype</div>
                 <div class="value">${data.archetype || '-'}</div>
               </div>
               <div class="field">
-                <div class="label">Vibe Sérieux/Drôle</div>
-                <div class="value">${data.vibeSeriousness || '-'}</div>
+                <div class="label">Vibe</div>
+                <div class="value">${data.vibeSeriousness || '-'} / ${data.vibeStyle || '-'}</div>
               </div>
               <div class="field">
-                <div class="label">Style visuel</div>
-                <div class="value">${data.vibeStyle || '-'}</div>
-              </div>
-              <div class="field">
-                <div class="label">Style copywriting</div>
+                <div class="label">Copywriting</div>
                 <div class="value">${data.copywriting || '-'}</div>
               </div>
             </div>
 
             <div class="section">
-              <h2>📦 PACK & OPTIONS</h2>
+              <h2>📦 PACK</h2>
               <div class="field">
-                <div class="label">Pack sélectionné</div>
+                <div class="label">Pack</div>
                 <div class="value"><strong>${data.selectedPack || '-'}</strong></div>
               </div>
               <div class="field">
-                <div class="label">Prix</div>
-                <div class="value">${data.price || '0'}€</div>
-              </div>
-              <div class="field">
-                <div class="label">Délai</div>
-                <div class="value">${data.delay || '0'} jours</div>
+                <div class="label">Prix / Délai</div>
+                <div class="value">${data.price || '0'}€ / ${data.delay || '0'}j</div>
               </div>
               ${data.upsells ? `
               <div class="field">
@@ -184,34 +178,16 @@ export const handler = async (event) => {
                 <div class="value">${data.upsells}</div>
               </div>
               ` : ''}
-              ${data.pagesSupNames ? `
-              <div class="field">
-                <div class="label">Pages supplémentaires</div>
-                <div class="value">${data.pagesSupNames}</div>
-              </div>
-              ` : ''}
-              ${data.multiLangues ? `
-              <div class="field">
-                <div class="label">Langues</div>
-                <div class="value">${data.multiLangues}</div>
-              </div>
-              ` : ''}
             </div>
 
             <div class="section">
-              <h2>🌐 DOMAINE & CARE</h2>
+              <h2>🌐 DOMAINE</h2>
               <div class="field">
-                <div class="label">Possède un domaine</div>
-                <div class="value">${data.hasDomain || 'Non'}</div>
+                <div class="label">Domaine</div>
+                <div class="value">${data.hasDomain || 'Non'} ${data.domainName ? `(${data.domainName})` : ''}</div>
               </div>
-              ${data.domainName ? `
               <div class="field">
-                <div class="label">Nom de domaine</div>
-                <div class="value">${data.domainName}</div>
-              </div>
-              ` : ''}
-              <div class="field">
-                <div class="label">Tomorrow Care (maintenance)</div>
+                <div class="label">Care</div>
                 <div class="value">${data.care || 'Non'}</div>
               </div>
             </div>
@@ -236,6 +212,7 @@ export const handler = async (event) => {
     `;
 
     // Send email via Resend
+    console.log('📧 Sending email...');
     const emailResult = await resend.emails.send({
       from: 'Tomorrow Online <onboarding@resend.dev>',
       to: ['t.martella@bigneurons.com'],
@@ -245,9 +222,9 @@ export const handler = async (event) => {
       html: emailHTML
     });
 
-    console.log('✅ Email sent via Resend:', emailResult.id);
+    console.log('✅ Email sent:', emailResult.id);
 
-    // Send auto-response to client
+    // Send auto-response
     await resend.emails.send({
       from: 'Tomorrow Online <onboarding@resend.dev>',
       to: [data.email],
@@ -255,28 +232,26 @@ export const handler = async (event) => {
       html: `
         <div style="font-family: sans-serif; max-width: 600px; margin: 0 auto; padding: 40px 20px;">
           <h1 style="color: #FF5500;">Merci pour votre confiance !</h1>
-          <p style="font-size: 16px; line-height: 1.6;">
+          <p style="font-size: 16px;">
             Votre brief a bien été reçu par notre équipe.
           </p>
-          <p style="font-size: 16px; line-height: 1.6;">
-            <strong>Un membre de notre équipe vous appellera demain matin entre 09h00 et 10h00</strong> 
-            pour valider les détails de votre projet.
-          </p>
-          <p style="font-size: 14px; color: #666; margin-top: 40px;">
-            À très vite,<br>
-            L'équipe Tomorrow Online
+          <p style="font-size: 16px;">
+            <strong>Un membre de notre équipe vous appellera demain matin entre 09h00 et 10h00</strong>.
           </p>
         </div>
       `
     });
+
+    console.log('✅ All done');
 
     return {
       statusCode: 200,
       headers,
       body: JSON.stringify({
         success: true,
-        message: 'Brief envoyé avec succès',
-        files: fileLinks.length
+        message: 'Brief envoyé',
+        files: fileLinks.length,
+        emailId: emailResult.id
       })
     };
 
