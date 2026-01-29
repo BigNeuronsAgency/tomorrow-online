@@ -42,6 +42,7 @@
       line-height: 1.1;
       color: #FFF;
       margin-bottom: 2rem;
+      word-break: keep-all;
     }
     
     .hero-page .lead {
@@ -312,6 +313,15 @@
         grid-template-columns: 1fr;
       }
     }
+    
+    @keyframes float {
+      0%, 100% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(-20px);
+      }
+    }
   </style>
 </head>
 <body>
@@ -436,7 +446,7 @@
           <p><strong>Résultat : 42 sites livrés en 6 mois. Délai moyen 38H. Satisfaction 98%. Game changer.</strong></p>
         </div>
         <div class="timeline-image">
-          <img src="images/TO-logo-baseline.svg" alt="Tomorrow.Online">
+          <img src="images/TO-logo-baseline.svg" alt="Tomorrow.Online" style="animation: float 3s ease-in-out infinite;">
         </div>
       </div>
       
@@ -600,9 +610,9 @@
     </div>
   </footer>
   
-  <!-- Formulaire Modal (inclus depuis index.html) -->
-  <div id="modal-overlay" class="modal-overlay" onclick="closeModal()"></div>
-  <div id="brief-modal" class="brief-modal"></div>
+  <!-- Formulaire Modal -->
+  <div id="modal-overlay" class="modal-overlay" onclick="closeModal()" style="display: none;"></div>
+  <div id="brief-modal" class="brief-modal" style="display: none;"></div>
   
   <!-- Scripts -->
   <script src="js/cursor.js"></script>
