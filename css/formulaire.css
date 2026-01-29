@@ -1484,7 +1484,7 @@
   align-items: center;
 }
 
-.btn-outline {
+.modal .btn-outline {
   background: none;
   border: 2px solid var(--void);
   padding: 0.75rem 1.5rem;
@@ -1498,12 +1498,12 @@
   border-radius: 4px;
 }
 
-.btn-outline:hover {
+.modal .btn-outline:hover {
   background: var(--void);
   color: var(--white);
 }
 
-.btn-primary {
+.modal .btn-primary {
   background: var(--void);
   border: 2px solid var(--void);
   padding: 0.75rem 1.5rem;
@@ -1517,7 +1517,7 @@
   border-radius: 4px;
 }
 
-.btn-primary:hover {
+.modal .btn-primary:hover {
   background: transparent;
   color: var(--void);
 }
