@@ -30,23 +30,42 @@ function initAnimations() {
     }
   );
   
-  // Scroll skew effect on body
+  // ULTRA FAST SCROLL EASTER EGG - Effet hallucinant uniquement sur scroll hyper rapide
   let skewSetter = gsap.quickSetter('body', 'skewY', 'deg');
-  let clamp = gsap.utils.clamp(-3, 3);
+  let clamp = gsap.utils.clamp(-8, 8); // Effet MASSIF
+  const VELOCITY_THRESHOLD = 5000; // Seuil ENCORE PLUS élevé (5000 au lieu de 3000)
   
   ScrollTrigger.create({
     onUpdate: (self) => {
       let velocity = self.getVelocity();
-      let skew = clamp(velocity / -300);
-      skewSetter(skew);
       
-      // Return to normal slowly
-      gsap.to('body', {
-        skewY: 0,
-        duration: 0.8,
-        ease: 'power3.out',
-        overwrite: true
-      });
+      // Easter egg : déclenche uniquement si scroll ULTRA rapide (3000+ velocity)
+      if (Math.abs(velocity) > VELOCITY_THRESHOLD) {
+        let skew = clamp(velocity / -300); // Division faible = effet massif
+        skewSetter(skew);
+        
+        // Shake violent + glow flash
+        document.body.style.filter = 'brightness(1.2) saturate(1.5)';
+        
+        // Return to normal rapidement avec bounce
+        gsap.to('body', {
+          skewY: 0,
+          duration: 0.6,
+          ease: 'elastic.out(1, 0.5)',
+          overwrite: true,
+          onComplete: () => {
+            // Force reset complet pour éviter tout résidu
+            document.body.style.transform = '';
+            document.body.style.pointerEvents = '';
+          }
+        });
+        
+        // Reset filter
+        gsap.to(document.body, {
+          filter: 'brightness(1) saturate(1)',
+          duration: 0.4
+        });
+      }
     }
   });
   
@@ -90,6 +109,25 @@ function initAnimations() {
       start: 'top top',
       end: 'bottom top',
       scrub: true
+    }
+  });
+  
+  // JEAN-CHARLES GLITCH EFFECT (PUNITION)
+  ScrollTrigger.create({
+    trigger: '.jean-charles',
+    start: 'top 80%',
+    end: 'bottom 20%',
+    onEnter: () => {
+      document.querySelector('.jean-charles').classList.add('glitch-active');
+    },
+    onLeave: () => {
+      document.querySelector('.jean-charles').classList.remove('glitch-active');
+    },
+    onEnterBack: () => {
+      document.querySelector('.jean-charles').classList.add('glitch-active');
+    },
+    onLeaveBack: () => {
+      document.querySelector('.jean-charles').classList.remove('glitch-active');
     }
   });
 }

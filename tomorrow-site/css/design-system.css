@@ -1,7 +1,17 @@
 /* ========================================
    TOMORROW.ONLINE - DESIGN SYSTEM
-   Dark Theme avec Gradient Rose→Violet
+   Living Braise Theme
    ======================================== */
+
+/* === KEYFRAMES === */
+@keyframes braise-heat {
+  0%, 100% {
+    filter: drop-shadow(0 0 25px rgba(255, 85, 0, 0.7)) brightness(1.2);
+  }
+  50% {
+    filter: drop-shadow(0 0 10px rgba(153, 0, 0, 0.5)) brightness(0.9);
+  }
+}
 
 /* === VARIABLES === */
 :root {
@@ -12,10 +22,10 @@
   --white-soft: #EAEAEA;
   --white-ghost: rgba(255, 255, 255, 0.6);
   
-  /* Gradient rose→violet (accent principal) */
-  --gradient-main: linear-gradient(90deg, rgba(180, 7, 254, 1) 0%, rgba(255, 10, 55, 1) 100%);
-  --gradient-violet: rgba(180, 7, 254, 1);
-  --gradient-rose: rgba(255, 10, 55, 1);
+  /* Gradient "Living Braise" (orange vif→rouge sang→rouge noir) */
+  --gradient-main: linear-gradient(to right, #FF5500 0%, #FF0000 60%, #660000 100%);
+  --gradient-violet: #FF5500;
+  --gradient-rose: #FF0000;
   
   /* Grille */
   --grid: rgba(255, 255, 255, 0.05);
@@ -107,6 +117,8 @@ p {
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
+  animation: braise-heat 3s ease-in-out infinite;
+  will-change: filter;
 }
 
 /* === BUTTONS === */
@@ -197,16 +209,16 @@ p {
   height: 40px;
   border-radius: 50%;
   background: var(--white);
+  border: 2px solid var(--white);
   mix-blend-mode: difference;
-  position: fixed;
+  position: absolute;
   pointer-events: none;
   z-index: var(--z-cursor);
   transition: transform 0.15s ease;
-  transform: translate(-50%, -50%);
 }
 
 .custom-cursor.hover {
-  transform: translate(-50%, -50%) scale(1.5);
+  transform: scale(1.5);
 }
 
 /* === UTILITIES === */

@@ -48,6 +48,11 @@ function createLanguageSwitcher() {
 document.addEventListener('DOMContentLoaded', () => {
   createWhatsAppButton();
   
+  // Initialize marquee speed control
+  if (typeof initMarqueeSpeed !== 'undefined') {
+    initMarqueeSpeed();
+  }
+  
   // Wait for Weglot to load
   if (typeof Weglot !== 'undefined') {
     createLanguageSwitcher();

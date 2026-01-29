@@ -1,0 +1,58 @@
+╔═══════════════════════════════════════════════════════════════════════════╗
+║                                                                           ║
+║         📋 FICHIERS À COLLER DANS WEBFLOW - ORDRE EXACT                 ║
+║                                                                           ║
+╚═══════════════════════════════════════════════════════════════════════════╝
+
+⚠️  IMPORTANT : Ces fichiers sont TON index.html actuel avec juste
+    les couleurs changées (magenta/rose → cyan).
+    
+    Layout, animations, URLs, logo = TOUT INTACT ✅
+
+═══════════════════════════════════════════════════════════════════════════
+
+📦 COLLER DANS CET ORDRE :
+
+1️⃣  EMBED_1_CYAN.html   (32,938 chars)
+    → Head + styles + Hero (partie 1)
+
+2️⃣  EMBED_2_CYAN.html   (21,804 chars)
+    → Hero suite + Work
+
+3️⃣  EMBED_3_CYAN.html   (19,585 chars)
+    → Pricing + Jean-Charles + 3 Mondes
+
+4️⃣  EMBED_4_CYAN.html   (21,849 chars)
+    → FAQ + Modales
+
+5️⃣  EMBED_5_CYAN.html   (17,755 chars)
+    → Config formulaire (variables PACKS, UPSELLS)
+
+6️⃣  EMBED_6_CYAN.html   (34,035 chars)
+    → Formulaire complet (7 étapes)
+
+7️⃣  EMBED_7_CYAN.html   (78 chars)
+    → Footer + scripts Webflow
+
+═══════════════════════════════════════════════════════════════════════════
+
+✅ GARANTIES :
+
+  • Ton layout actuel préservé
+  • Tes animations préservées
+  • Ton logo préservé
+  • Tes URLs préservées
+  • JUSTE les couleurs changées (magenta/rose → cyan)
+  • 0 trace de magenta/rose
+  • Tous les embeds < 50,000 caractères
+
+═══════════════════════════════════════════════════════════════════════════
+
+🚀 PROCÉDURE :
+
+1. Dans Webflow, supprime tous les embeds actuels
+2. Ajoute 7 nouveaux embeds HTML
+3. Colle le contenu des fichiers dans l'ordre ci-dessus
+4. Sauvegarde après chaque
+5. Publie
+

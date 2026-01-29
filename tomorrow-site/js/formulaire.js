@@ -4,15 +4,15 @@
 
 // Global state
 var currentStep = 1;
-var totalSteps = 7;
+var totalSteps = 6;
 var currentConsoleMessage = 'SYSTEM READY';
 var fileStore = [];
 var countdownTimer = null;
 var countdownStarted = false;
 
 // Form action URLs
-const FORM_ACTION_URL = 'https://formsubmit.co/mf.phan@bigneurons.com';
-const FORM_ACTION_URL_UPSELL = 'https://formsubmit.co/mf.phan@bigneurons.com';
+const FORM_ACTION_URL = '/.netlify/functions/submit-brief';
+const FORM_ACTION_URL_UPSELL = '/.netlify/functions/submit-brief';
 const BRAND_RED = '#FF3333';
 
 // Data constants
@@ -648,61 +648,7 @@ function getStepContent() {
     `;
   }
   
-  // Step 7: Success Upsells
-  if (currentStep === 7) {
-    var totalSuccessUpsells = 0;
-    var bundleSelected = formData.upsellsSuccess['tomorrowSucces'];
-    UPSELLS_SUCCESS.forEach(u => {
-      if (formData.upsellsSuccess[u.id]) {
-        if (u.id === 'tomorrowSucces') {
-          totalSuccessUpsells += u.price;
-        } else if (!bundleSelected) {
-          totalSuccessUpsells += u.price;
-          if (u.id === 'socialMedia' && formData.socialNetworkExtra) totalSuccessUpsells += 80;
-        }
-      }
-    });
-    
-    // Séparer le bundle des autres options
-    var bundleUpsell = UPSELLS_SUCCESS.find(u => u.isBundle);
-    var regularUpsells = UPSELLS_SUCCESS.filter(u => !u.isBundle);
-    
-    return `
-      <div class="form-step step-7">
-        <div class="success-header">
-          <div>
-            <h2 class="step-title">BOOSTEZ VOTRE LANCEMENT</h2>
-            <p class="success-subtitle">Profitez d'options exclusives pour maximiser l'impact de votre nouveau site</p>
-          </div>
-          <div class="countdown-box">
-            <div class="countdown-label font-mono">Offre limitée</div>
-            <div id="countdown" class="countdown font-mono">02:00</div>
-          </div>
-        </div>
-        
-        <div class="success-grid">
-          ${regularUpsells.map(u => renderSuccessCard(u)).join('')}
-        </div>
-        
-        ${bundleUpsell ? `
-          <div class="success-grid-bundle">
-            ${renderSuccessCard(bundleUpsell)}
-          </div>
-        ` : ''}
-        
-        ${totalSuccessUpsells > 0 ? `
-          <div class="success-total">
-            <span class="success-total-label">TOTAL OPTIONS</span>
-            <span class="success-total-value">${totalSuccessUpsells}€</span>
-          </div>
-        ` : ''}
-        
-        <div class="success-actions">
-          <button onclick="window.skipSuccessUpsells()" class="btn btn-outline">PASSER →</button>
-        </div>
-      </div>
-    `;
-  }
+  // Step 7 SUPPRIMÉ - On passe direct au success screen après submit
 }
 
 function renderSuccessCard(u) {
@@ -983,6 +929,23 @@ window.openModal = function(plan) {
     currentStep = 1;
     formData.selectedPack = plan || '';
     
+    // Force clear any stale styles/transforms
+    document.body.style.transform = '';
+    document.body.style.filter = '';
+    document.body.style.skewY = '';
+    document.body.style.pointerEvents = '';
+    
+    // Stop Lenis smooth scroll
+    if (window.lenis) {
+      window.lenis.stop();
+      console.log('🔥 Lenis stopped');
+    }
+    
+    // Stop GSAP animations
+    if (typeof gsap !== 'undefined') {
+      gsap.killTweensOf(document.body);
+    }
+    
     // Cacher WhatsApp widget si présent
     var whatsappWidget = document.querySelector('.whatsapp-widget, #whatsapp-widget, [class*="whatsapp"], [id*="whatsapp"]');
     if (whatsappWidget) {
@@ -1023,6 +986,12 @@ window.closeModal = function() {
   }
   unlockScroll();
   
+  // Restart Lenis smooth scroll
+  if (window.lenis) {
+    window.lenis.start();
+    console.log('🔥 Lenis restarted');
+  }
+  
   // Ré-afficher WhatsApp widget si présent
   var whatsappWidget = document.querySelector('[data-hidden-by-modal="true"]');
   if (whatsappWidget) {
@@ -1053,40 +1022,222 @@ window.submitForm = function() {
   formDataObj.append("_subject", "🚀 NOUVEAU LEAD - " + (dataToSend.brandName || "Projet Inconnu"));
   formDataObj.append("_cc", "mf.phan@bigneurons.com,t.martella@bigneurons.com,a.escare@bigneurons.com");
   
-  for (var key in dataToSend) {
-    formDataObj.append(key, JSON.stringify(dataToSend[key]));
+  // Aplatir les données (PAS de JSON.stringify pour FormSubmit)
+  formDataObj.append("brandName", dataToSend.brandName || '');
+  formDataObj.append("email", dataToSend.email || '');
+  formDataObj.append("phone", dataToSend.phone || '');
+  formDataObj.append("pitch", dataToSend.pitch || '');
+  formDataObj.append("competitors", dataToSend.competitors || '');
+  formDataObj.append("target", dataToSend.target || '');
+  formDataObj.append("problem", dataToSend.problem || '');
+  formDataObj.append("solution", dataToSend.solution || '');
+  formDataObj.append("whyUs", dataToSend.whyUs || '');
+  formDataObj.append("archetype", dataToSend.archetype || '');
+  formDataObj.append("vibeSeriousness", dataToSend.vibeSeriousnessFormatted || '');
+  formDataObj.append("vibeStyle", dataToSend.vibeStyleFormatted || '');
+  formDataObj.append("copywriting", dataToSend.copywriting || '');
+  formDataObj.append("selectedPack", dataToSend.selectedPack || '');
+  formDataObj.append("price", dataToSend.price || '0');
+  formDataObj.append("delay", dataToSend.delay || '0');
+  formDataObj.append("hasDomain", dataToSend.hasDomain ? 'Oui' : 'Non');
+  formDataObj.append("domainName", dataToSend.domainName || '');
+  formDataObj.append("care", dataToSend.care ? 'Oui' : 'Non');
+  
+  // Upsells en texte simple
+  if (dataToSend.upsells && Object.keys(dataToSend.upsells).length > 0) {
+    const upsellsText = Object.keys(dataToSend.upsells)
+      .filter(k => dataToSend.upsells[k])
+      .join(', ');
+    formDataObj.append("upsells", upsellsText);
   }
   
+  // Pages supplémentaires
+  if (dataToSend.pagesSupNames && dataToSend.pagesSupNames.length > 0) {
+    formDataObj.append("pagesSupNames", dataToSend.pagesSupNames.join(', '));
+  }
+  
+  // Langues
+  if (dataToSend.multiLangues && dataToSend.multiLangues.length > 0) {
+    formDataObj.append("multiLangues", dataToSend.multiLangues.join(', '));
+  }
+  
+  // PRIORITÉ 1 : Envoyer l'email D'ABORD (avec liste des fichiers)
   if (fileStore.length > 0) {
-    console.warn('⚠️ FormSubmit.co ne supporte pas les fichiers. Utiliser un service avec upload.');
-    for (let f of fileStore) {
-      formDataObj.append("files[]", f);
-    }
-    formDataObj.append("filesCount", fileStore.length);
-    formDataObj.append("filesNames", fileStore.map(f => f.name).join(', '));
+    formDataObj.append("fichiers_count", fileStore.length);
+    formDataObj.append("fichiers_names", fileStore.map(f => f.name).join(', '));
+    formDataObj.append("fichiers_sizes", fileStore.map(f => (f.size / 1024).toFixed(1) + 'KB').join(', '));
   }
   
-  console.log('📧 Sending form with', fileStore.length, 'files');
+  // Envoyer l'email IMMÉDIATEMENT
+  sendFormData(formDataObj, btn);
+  
+  // PRIORITÉ 2 : Upload fichiers en arrière-plan (non-bloquant)
+  if (fileStore.length > 0) {
+    console.log('📤 Uploading', fileStore.length, 'files to tmpfiles.org in background...');
+    
+    Promise.all(fileStore.map(file => {
+      const uploadData = new FormData();
+      uploadData.append('file', file);
+      
+      return fetch('https://tmpfiles.org/api/v1/upload', {
+        method: 'POST',
+        body: uploadData
+      })
+      .then(res => res.json())
+      .then(data => {
+        if (data.status === 'success') {
+          const downloadUrl = data.data.url.replace('tmpfiles.org/', 'tmpfiles.org/dl/');
+          console.log('✅ Uploaded:', file.name, '→', downloadUrl);
+          return { name: file.name, url: downloadUrl, size: (file.size / 1024).toFixed(1) + 'KB' };
+        } else {
+          console.error('❌ Upload failed for', file.name);
+          return { name: file.name, url: 'FAILED', size: (file.size / 1024).toFixed(1) + 'KB' };
+        }
+      })
+      .catch(err => {
+        console.error('❌ Upload error for', file.name, err);
+        return { name: file.name, url: 'ERROR', size: (file.size / 1024).toFixed(1) + 'KB' };
+      });
+    }))
+    .then(uploadedFiles => {
+      console.log('📎 All files uploaded (background):', uploadedFiles);
+      
+      // Envoyer un email supplémentaire avec les liens (optionnel)
+      const linksFormData = new FormData();
+      linksFormData.append("_captcha", "false");
+      linksFormData.append("_subject", "📎 FICHIERS - " + (formData.brandName || "Projet Inconnu"));
+      linksFormData.append("fichiers_links", uploadedFiles.map(f => `${f.name}: ${f.url}`).join('\n'));
+      
+      fetch(FORM_ACTION_URL, { method: 'POST', body: linksFormData })
+        .then(() => console.log('✅ Files links email sent'))
+        .catch(err => console.error('❌ Files email failed:', err));
+    })
+    .catch(err => {
+      console.error('❌ Global upload error:', err);
+    });
+  }
+};
+
+function sendFormData(formDataObj, btn) {
+  console.log('📧 Sending form data to FormSubmit.co...');
+  console.log('📧 Email destination:', FORM_ACTION_URL);
+  console.log('📧 FormData keys:', Array.from(formDataObj.keys()));
   
   fetch(FORM_ACTION_URL, { method: 'POST', body: formDataObj })
     .then(response => {
       console.log('📧 Response status:', response.status);
-      if (response.ok) {
-        console.log('✅ Form submitted successfully');
-        currentStep = 7;
-        draw();
-      } else {
-        console.error('❌ Form submission failed:', response.statusText);
-        alert("Erreur de transmission. Veuillez réessayer.");
-        if (btn) btn.innerHTML = "Bloquer mon slot 🔒";
-      }
+      console.log('📧 Response ok:', response.ok);
+      console.log('📧 Response headers:', response.headers);
+      
+      return response.text().then(text => {
+        console.log('📧 Response body:', text);
+        
+        if (response.ok || response.status === 200) {
+          console.log('✅ Form submitted successfully to FormSubmit');
+          showSuccessScreen();
+        } else {
+          console.error('❌ Form submission failed:', response.status, response.statusText);
+          
+          // FALLBACK: Créer un mailto avec les données
+          const mailto = createMailtoFallback();
+          window.location.href = mailto;
+          
+          alert("Le formulaire n'a pas pu être envoyé automatiquement. Votre client mail va s'ouvrir.");
+          if (btn) btn.innerHTML = "Bloquer mon slot 🔒";
+        }
+      });
     })
     .catch(error => {
       console.error('❌ Fetch error:', error);
-      alert("Erreur de transmission.");
+      
+      // FALLBACK: Créer un mailto avec les données
+      const mailto = createMailtoFallback();
+      window.location.href = mailto;
+      
+      alert("Erreur réseau. Votre client mail va s'ouvrir pour envoyer le brief.");
       if (btn) btn.innerHTML = "Bloquer mon slot 🔒";
     });
-};
+}
+
+function createMailtoFallback() {
+  const subject = encodeURIComponent('🚀 NOUVEAU LEAD - ' + (formData.brandName || 'Projet Inconnu'));
+  const body = encodeURIComponent(`
+BRIEF CLIENT
+============
+
+Marque: ${formData.brandName}
+Email: ${formData.email}
+Téléphone: ${formData.phone}
+
+BUSINESS:
+- Pitch: ${formData.pitch}
+- Concurrents: ${formData.competitors}
+
+CIBLE:
+- Cible: ${formData.target}
+- Problème: ${formData.problem}
+- Solution: ${formData.solution}
+- Pourquoi nous: ${formData.whyUs}
+
+IDENTITÉ:
+- Archétype: ${formData.archetype}
+- Sérieux/Drôle: ${formatVibeData(formData.vibeSeriousness, 'seriousness')}
+- Style: ${formatVibeData(formData.vibeStyle, 'style')}
+- Copywriting: ${formData.copywriting}
+
+PACK: ${formData.selectedPack}
+Fichiers: ${fileStore.length > 0 ? fileStore.map(f => f.name).join(', ') : 'Aucun'}
+  `);
+  
+  return `mailto:mf.phan@bigneurons.com?cc=t.martella@bigneurons.com,a.escare@bigneurons.com&subject=${subject}&body=${body}`;
+}
+
+function showSuccessScreen() {
+  document.getElementById('modalContent').innerHTML = `
+    <div class="success-screen">
+      <div class="success-check-icon">✓</div>
+      <h1 class="success-title">BRIEF BIEN REÇU !</h1>
+      <p class="success-subtitle">Merci pour votre confiance.</p>
+      
+      <div class="success-report">
+        <div class="report-badge">WORKFLOW AUTOMATISÉ</div>
+        <div class="report-items">
+          <div class="report-item done">
+            <span class="report-icon">✓</span>
+            <span class="report-text">Brief transmis à l'équipe</span>
+          </div>
+          <div class="report-item active">
+            <span class="report-icon">⏳</span>
+            <span class="report-text">Analyse & validation du projet</span>
+          </div>
+          <div class="report-item">
+            <span class="report-icon">○</span>
+            <span class="report-text">Appel de confirmation</span>
+          </div>
+          <div class="report-item">
+            <span class="report-icon">○</span>
+            <span class="report-text">Lancement de production</span>
+          </div>
+        </div>
+      </div>
+      
+      <div class="success-next">
+        <h3 class="success-next-title">ET MAINTENANT ?</h3>
+        <p class="success-next-text">
+          Un membre de notre équipe vous appellera <strong>demain matin entre 09h00 et 10h00</strong> 
+          pour valider les détails de votre projet.
+        </p>
+        <p class="success-next-note">
+          Consultez votre boîte mail, vous avez reçu une confirmation.
+        </p>
+      </div>
+      
+      <button onclick="window.closeModal()" class="btn btn-primary">
+        RETOUR AU SITE →
+      </button>
+    </div>
+  `;
+}
 
 window.skipSuccessUpsells = function() {
   countdownStarted = false;

@@ -1,0 +1,532 @@
+<link rel="preconnect" href="https://cdn.tailwindcss.com">
+<link rel="preconnect" href="https://cdnjs.cloudflare.com">
+<script defer src="https://cdn.tailwindcss.com"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollToPlugin.min.js"></script>
+<style>
+:root{--bg:#FFFFFF;--fg:#000000;--accent:#00F0FF;--grid:#E5E5E5}
+html,body{overflow-x:hidden;max-width:100vw;width:100%;margin:0;padding:0}
+body{background-color:var(--bg);color:var(--fg);font-family:'Spacegrotesk',sans-serif}
+.font-heading{font-family:'Spacegrotesk',sans-serif}
+.font-mono{font-family:'Spacegrotesk',sans-serif}
+.title-giant{font-size:clamp(2.5rem,11vw,10rem);line-height:.85;letter-spacing:-.03em;font-weight:900;text-transform:uppercase;word-wrap:break-word}
+.tech-grid{background-size:60px 60px;background-image:linear-gradient(to right,var(--grid) 1px,transparent 1px),linear-gradient(to bottom,var(--grid) 1px,transparent 1px);mask-image:linear-gradient(to bottom,black 80%,transparent 100%)}
+.b-r{border-right:1px solid var(--grid)}.b-b{border-bottom:1px solid var(--grid)}.b-t{border-top:1px solid var(--grid)}.b-l{border-left:1px solid var(--grid)}
+.btn-primary{font-family:'Spacegrotesk',sans-serif;font-weight:700;text-transform:uppercase;padding:1rem 2rem;background:linear-gradient(90deg,rgba(180,7,254,1) 0%,rgba(255,10,55,1) 100%);color:#FFF;cursor:pointer;border-radius:0;border-top:1px solid rgba(180,7,254,1);border-left:1px solid rgba(180,7,254,1);border-bottom:1px solid rgba(255,10,55,1);border-right:1px solid rgba(255,10,55,1);transition:all .3s ease}
+.btn-primary:hover{border-top:2px solid rgba(180,7,254,1);border-left:2px solid rgba(180,7,254,1);border-bottom:2px solid rgba(255,10,55,1);border-right:2px solid rgba(255,10,55,1);box-shadow:rgba(180,7,254,.4) 5px 5px,rgba(255,10,55,.3) 10px 10px,rgba(180,7,254,.2) 15px 15px;transform:translateY(-2px)}
+.btn-outline{border:1px solid black;transition:all .2s ease;cursor:pointer}
+.btn-outline:hover{background-color:black;color:white}
+.marquee-container{overflow:hidden;white-space:nowrap}
+.marquee-content{display:inline-block}
+.modal-overlay{backdrop-filter:blur(10px)}
+.hide-scroll::-webkit-scrollbar{height:4px}
+.hide-scroll::-webkit-scrollbar-track{background:#f1f1f1}
+.hide-scroll::-webkit-scrollbar-thumb{background:linear-gradient(90deg,rgba(180,7,254,1) 0%,rgba(255,10,55,1) 100%)}
+.hide-scroll{cursor:grab}
+.hide-scroll:active{cursor:grabbing}
+.step-content{display:none;animation:fadeIn .4s ease-out}
+.step-content.active{display:block}
+@keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+.detail-link{font-family:'Spacegrotesk',sans-serif;font-size:12px;color:#525252;text-transform:uppercase;cursor:pointer;min-height:44px;min-width:44px;display:inline-flex;align-items:center;justify-content:center;padding:.5rem .75rem;transition:color .2s,background .2s}
+.detail-link:hover{background:linear-gradient(90deg,rgba(180,7,254,1) 0%,rgba(255,10,55,1) 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;text-decoration:underline}
+@media (max-width:767px){.detail-link{font-size:14px;padding:.75rem 1rem;min-height:48px;min-width:48px}}
+.detail-link-on-dark{color:rgba(255,255,255,.9)}
+.detail-link-on-dark:hover{color:#fff;background:none!important;-webkit-background-clip:unset;background-clip:unset;-webkit-text-fill-color:inherit;text-decoration:underline}
+.logo-white{filter:invert(1) brightness(100)}
+.care-option{border:1px solid #E5E5E5;padding:1rem;cursor:pointer;transition:all .2s}
+.care-option:hover{border-color:#000}
+.care-option.selected{border-color:rgba(180,7,254,1);background-color:#FFF5F5}
+.success-check{width:80px;height:80px;border-radius:50%;background:#000;color:#fff;display:flex;align-items:center;justify-content:center;font-size:40px;margin:0 auto 20px;animation:scaleIn .5s cubic-bezier(.175,.885,.32,1.275)}
+@keyframes scaleIn{from{transform:scale(0)}to{transform:scale(1)}}
+@media (min-width:768px){
+#pricing-top .grid:hover>div{opacity:.4;filter:grayscale(100%);transform:scale(.98)}
+#pricing-top .grid:hover>div:hover{opacity:1;filter:grayscale(0%);transform:scale(1.02);box-shadow:0 20px 40px rgba(0,0,0,.1);z-index:10}
+#pricing-top .grid>div{transition:all .4s cubic-bezier(.25,.46,.45,.94)}
+#pricing .grid:hover>div{opacity:.4;filter:grayscale(100%);transform:scale(.98)}
+#pricing .grid:hover>div:hover{opacity:1;filter:grayscale(0%);transform:scale(1.02);box-shadow:0 20px 40px rgba(0,0,0,.1);z-index:10}
+#pricing .grid>div{transition:all .4s cubic-bezier(.25,.46,.45,.94)}
+}
+.video-modal-border{box-shadow:0 0 0 1px #333,0 0 40px rgba(255,51,51,.2)}
+.input-error{border-color:#00F0FF !important;background-color:#FFF5F5 !important}
+.input-error::placeholder{color:#00F0FF}
+.feature-card{border:1px solid #E5E5E5;padding:1rem;cursor:pointer;transition:all .2s;display:flex;justify-content:space-between;items-center;background:white}
+.feature-card:hover{border-color:#999}
+.feature-card.selected{border-color:black;background-color:#F9F9F9;box-shadow:0 4px 10px rgba(0,0,0,.05)}
+.feature-check{width:20px;height:20px;border:1px solid #ccc;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;color:transparent}
+.feature-card.selected .feature-check{background:black;border-color:black;color:white}
+section#faq{overflow:visible !important}
+.price-strike{text-decoration:line-through;opacity:.5;font-size:.8em}
+.card-popular .price-strike{opacity:.85}
+.price-badge{display:inline-block;background:linear-gradient(90deg,rgba(180,7,254,1) 0%,rgba(255,10,55,1) 100%);color:white;font-size:12px;padding:3px 8px;margin-left:6px;font-weight:bold;text-transform:uppercase;transform:rotate(-2deg)}
+.text-\[\#00F0FF\]{background:linear-gradient(90deg,rgba(180,7,254,1) 0%,rgba(255,10,55,1) 100%)!important;-webkit-background-clip:text!important;background-clip:text!important;-webkit-text-fill-color:transparent!important}
+.hover\:text-\[\#00F0FF\]:hover{background:linear-gradient(90deg,rgba(180,7,254,1) 0%,rgba(255,10,55,1) 100%)!important;-webkit-background-clip:text!important;background-clip:text!important;-webkit-text-fill-color:transparent!important}
+.group:hover .group-hover\:text-\[\#00F0FF\]{background:linear-gradient(90deg,rgba(180,7,254,1) 0%,rgba(255,10,55,1) 100%)!important;-webkit-background-clip:text!important;background-clip:text!important;-webkit-text-fill-color:transparent!important}
+.bg-\[\#00F0FF\]{background:linear-gradient(90deg,rgba(180,7,254,1) 0%,rgba(255,10,55,1) 100%)!important}
+.hover\:bg-\[\#00F0FF\]:hover{background:linear-gradient(90deg,rgba(180,7,254,1) 0%,rgba(255,10,55,1) 100%)!important}
+.border-\[\#00F0FF\]{border-color:rgba(180,7,254,1)!important}
+.border-l-4.border-\[\#00F0FF\]{border-left:4px solid transparent!important;border-image:linear-gradient(90deg,rgba(180,7,254,1) 0%,rgba(255,10,55,1) 100%) 1!important}
+.hover\:border-\[\#00F0FF\]:hover{border-color:rgba(180,7,254,1)!important}
+.from-\[\#00F0FF\]{--tw-gradient-from:rgba(180,7,254,1) var(--tw-gradient-from-position)!important;--tw-gradient-to:rgba(255,10,55,0) var(--tw-gradient-to-position)!important;--tw-gradient-stops:var(--tw-gradient-from),var(--tw-gradient-to)!important}
+.bg-\[\#00F0FF\] .bg-[#030303]{background:linear-gradient(90deg,rgba(180,7,254,1) 0%,rgba(255,10,55,1) 100%)!important}
+.bg-\[\#00F0FF\] .text-\[\#00F0FF\]{color:white!important;background:none!important;-webkit-text-fill-color:white!important}
+#arch-innocent.bg-[#000000],#arch-explorer.bg-[#000000],#arch-sage.bg-[#000000],#arch-hero.bg-[#000000],#arch-outlaw.bg-[#000000],#arch-magician.bg-[#000000],#arch-everyman.bg-[#000000],#arch-lover.bg-[#000000],#arch-jester.bg-[#000000],#arch-caregiver.bg-[#000000],#arch-creator.bg-[#000000],#arch-ruler.bg-[#000000]{background:linear-gradient(90deg,rgba(180,7,254,1) 0%,rgba(255,10,55,1) 100%)!important}
+#copy-me.bg-[#000000],#copy-arthur.bg-[#000000]{background:linear-gradient(90deg,rgba(180,7,254,1) 0%,rgba(255,10,55,1) 100%)!important}
+.shadow-\[4px_4px_0px_0px_\#00F0FF\]{box-shadow:4px 4px 0px 0px rgba(180,7,254,1)!important}
+.shadow-\[8px_8px_0px_0px_\#00F0FF\]{box-shadow:8px 8px 0px 0px rgba(180,7,254,1)!important}
+.text-transparent.bg-clip-text.bg-gradient-to-r.from-\[\#00F0FF\].to-black{background:linear-gradient(90deg,rgba(180,7,254,1) 0%,rgba(255,10,55,1) 100%)!important;-webkit-background-clip:text!important;background-clip:text!important;-webkit-text-fill-color:transparent!important}
+.accent-\[\#00F0FF\]{accent-color:rgba(180,7,254,1)!important}
+input[type="range"].accent-\[\#00F0FF\]::-webkit-slider-thumb{background:linear-gradient(90deg,rgba(180,7,254,1) 0%,rgba(255,10,55,1) 100%)!important}
+input[type="range"].accent-\[\#00F0FF\]::-moz-range-thumb{background:linear-gradient(90deg,rgba(180,7,254,1) 0%,rgba(255,10,55,1) 100%)!important}
+.focus\:border-\[\#00F0FF\]:focus{border-color:rgba(180,7,254,1)!important}
+.dropdown{position:relative;display:inline-block}
+.dropdown-content{display:none;position:absolute;top:100%;left:0;min-width:240px;background:#fff;border:1px solid #E5E5E5;box-shadow:4px 4px 0px 0px #000;z-index:100;margin-top:0}
+.dropdown:hover .dropdown-content{display:block}
+.dropdown-content a{display:block;padding:12px 20px;font-size:14px;border-bottom:1px solid #E5E5E5;transition:all 0.2s;color:#000;text-decoration:none}
+.dropdown-content a:last-child{border-bottom:none}
+.dropdown-content a:hover{background:#000;color:#fff;padding-left:24px}
+.dropdown-arrow{display:inline-block;margin-left:4px;transition:transform 0.2s;font-size:12px}
+.dropdown:hover .dropdown-arrow{transform:rotate(180deg)}
+.nav-link{color:#000;text-decoration:none;transition:color 0.2s;cursor:pointer}
+.nav-link:hover{background:linear-gradient(90deg,rgba(180,7,254,1) 0%,rgba(255,10,55,1) 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.mobile-menu-btn{display:block}
+.mobile-menu{display:none;position:fixed;top:88px;left:0;right:0;background:#fff;border-bottom:1px solid #E5E5E5;z-index:40;padding:1rem}
+.mobile-menu.active{display:block}
+.mobile-menu a,.mobile-menu .dropdown{display:block;padding:1rem;border-bottom:1px solid #E5E5E5;text-decoration:none;color:#000;font-weight:bold;text-transform:uppercase;font-size:14px}
+.mobile-menu .dropdown-content{position:static;display:none;box-shadow:none;border:none;margin-top:0.5rem}
+.mobile-menu .dropdown.active .dropdown-content{display:block}
+.mobile-menu .dropdown-content a{padding-left:2rem;font-size:14px}
+@media (min-width:768px){.mobile-menu-btn{display:none}}
+</style>
+<div class="fixed inset-0 tech-grid pointer-events-none z-0"></div>
+<div class="fixed top-0 w-full z-[60] bg-[#000000] text-white h-8 flex items-center">
+<div class="grid grid-cols-2 w-full font-mono text-xs uppercase tracking-widest px-6 md:px-10">
+<div id="live-slot" class="flex items-center">Slots disponibles par jour : <span class="ml-2">3</span></div>
+<div class="hidden md:flex items-center justify-end">Propulsé par BIG NEURONS™</div>
+</div>
+</div>
+<nav class="fixed top-8 w-full z-50 bg-[#030303]/90 backdrop-blur-md b-b flex justify-between items-stretch h-20 md:h-32">
+<div onclick="window.scrollToTop()" class="flex items-center px-6 md:px-10 b-r hover:bg-[#0A0A0A] cursor-pointer transition-colors">
+<img src="https://cdn.prod.website-files.com/69296dff64369c09698b8e09/694e7d5052d78ac95e576d22_TO-logo-baseline.svg" alt="Tomorrow.Online - Agence Web 24H Webflow Paris" class="h-12 md:h-24 w-auto" width="200" height="96">
+</div>
+<div class="hidden md:flex flex-grow items-center justify-end px-10 gap-8 font-heading font-bold text-sm uppercase tracking-wide">
+<a href="/process-24h" class="nav-link">Process</a>
+<a href="/realisations" class="nav-link">Réalisations</a>
+<div class="dropdown">
+<span class="nav-link">Ressources<span class="dropdown-arrow">▼</span></span>
+<div class="dropdown-content">
+<a href="/la-vision-tomorrow">🔮 Notre Vision</a>
+<a href="/notre-histoire">🏢 Qui sommes-nous</a>
+<a href="/comparatif-solutions-web">⚡ Comparatif Solutions</a>
+<a href="/migrations">🔄 Migrations CMS</a>
+</div>
+</div>
+</div>
+<div class="md:hidden flex items-center px-6">
+<button class="mobile-menu-btn text-2xl" onclick="document.getElementById('mobileMenu').classList.toggle('active')">☰</button>
+</div>
+<div class="flex items-center">
+<div onclick="window.openModal()" class="h-full flex items-center px-6 md:px-12 bg-[#00F0FF] text-white font-heading font-bold text-xs md:text-sm uppercase hover:bg-[#000000] transition-colors cursor-pointer">Réserver mon créneau</div>
+</div>
+</nav>
+<div id="mobileMenu" class="mobile-menu">
+<a href="/process-24h">Process</a>
+<a href="/realisations">Réalisations</a>
+<div class="dropdown" onclick="this.classList.toggle('active')">
+<span>Ressources ▼</span>
+<div class="dropdown-content">
+<a href="/la-vision-tomorrow">🔮 Notre Vision</a>
+<a href="/notre-histoire">🏢 Qui sommes-nous</a>
+<a href="/comparatif-solutions-web">⚡ Comparatif Solutions</a>
+<a href="/migrations">🔄 Migrations CMS</a>
+</div>
+</div>
+</div>
+<header class="relative pt-[112px] md:pt-[160px] min-h-screen flex flex-col justify-between z-10">
+<div class="flex-grow flex flex-col justify-center px-4 md:px-10 py-12 md:py-24">
+<h1 class="title-giant text-[#EAEAEA] mb-6 reveal-text">ON CONSTRUIT<br>VOTRE SITE<br><span class="text-[#00F0FF]">EN 24H<span class="text-[#00F0FF] font-bold">*" style="text-shadow: 0 0 20px rgba(0,240,255,0.6);"</span></span></h1>
+<div class="md:w-1/3 reveal-text delay-100">
+<p class="text-xl md:text-2xl font-medium leading-tight mb-8 pl-4 border-l-4 border-[#00F0FF]"><span class="text-[#00F0FF] font-bold">*" style="text-shadow: 0 0 20px rgba(0,240,255,0.6);"</span>Sinon <span class="bg-[#000000] text-white px-1">on vous rembourse.</span><br>La lenteur est un choix.</p>
+<div class="flex flex-col md:flex-row gap-4">
+<div onclick="window.openModal()" class="btn-primary px-8 py-4 font-heading font-bold uppercase tracking-wide text-center">Démarrer mon projet en 24H</div>
+<p class="mt-2 font-mono text-xs text-[#EAEAEA]/50">Formulaire rapide en 2 min</p>
+</div>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 b-t bg-[#030303] relative z-20">
+<div class="p-8 b-r md:h-48 flex flex-col justify-between hover:bg-[#0A0A0A] transition group"><span class="font-mono text-xs text-[#EAEAEA]/60 group-hover:text-[#00F0FF]">01 / SQUAD</span><span class="font-heading font-bold text-2xl uppercase">Seniors Only.<br>Pas de Juniors.</span></div>
+<div class="p-8 b-r md:h-48 flex flex-col justify-between hover:bg-[#0A0A0A] transition group"><span class="font-mono text-xs text-[#EAEAEA]/60 group-hover:text-[#00F0FF]">02 / STACK</span><span class="font-heading font-bold text-2xl uppercase">Human Art.<br>Boost IA.</span></div>
+<div class="p-8 md:h-48 flex flex-col justify-between hover:bg-[#0A0A0A] transition group"><span class="font-mono text-xs text-[#EAEAEA]/60 group-hover:text-[#00F0FF]">03 / PROMISE</span><span class="font-heading font-bold text-2xl uppercase">Tomorrow<br>en ligne.</span></div>
+</div>
+</header>
+<div class="text-white py-6 b-t b-b z-20 relative marquee-container" style="background:linear-gradient(90deg,rgba(180,7,254,1) 0%,rgba(255,10,55,1) 100%);">
+<div class="marquee-content font-heading font-black text-4xl md:text-6xl uppercase tracking-tighter">SOYEZ IMPATIENTS : L'ATTENTE EST UN BUG. <span class="text-white mx-4">///</span> QUALITÉ CHIRURGICALE. <span class="text-white mx-4">///</span> VITESSE BRUTALE. <span class="text-white mx-4">///</span> EXPERTISE HUMAINE. <span class="text-white mx-4">///</span>LA VITESSE EST UNE FONCTIONNALITÉ. <span class="text-white mx-4">///</span></div>
+</div>
+<section id="manifesto" class="py-8 md:py-12 px-4 md:px-10 bg-[#030303] relative z-10 border-t border-[rgba(0,240,255,0.2)]">
+<div class="grid md:grid-cols-12 gap-10">
+<div class="md:col-span-8">
+<h2 class="font-heading font-black text-5xl md:text-8xl uppercase mb-10 leading-[0.9]"><span class="text-transparent bg-clip-text bg-gradient-to-r from-[#00F0FF] to-black">BE IMPATIENT</span></h2>
+<div class="text-xl md:text-2xl font-medium leading-relaxed space-y-8">
+<p>Hier, il était normal de patienter 5 semaines pour un site,<BR>comme il était commun d'attendre 2 semaines pour développer une photo. 
+</p>
+<p class="text-[#EAEAEA]/60 italic border-l-2 border-[rgba(0,240,255,0.2)] pl-4">Mais les avancées tech' et les exigences du nouveau monde — toujours plus rapide — interdisent ce genre de délais.</p>
+<p>Et si certaines agences préfèrent vous facturer le temps passé à la machine à café,<strong> Tomorrow.Online </strong> ne vous vend que des résultats.
+</p>
+<p class="font-bold border-l-4 border-[rgba(0,240,255,0.3)] pl-4">
+<br>Pas dans 1 mois. Ni dans 1 semaine.<br>Tomorrow.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="pricing-top" class="py-8 md:py-12 px-4 md:px-10 bg-[#030303] relative z-10">
+<h2 class="font-heading font-black text-5xl md:text-7xl uppercase mb-4">3 Offres<span class="text-[#00F0FF]">.</span></h2>
+<p class="font-mono text-sm text-[#EAEAEA]/60 mb-16 uppercase">2 créneaux par jour. 1 site sur mesure.</p>
+<div class="grid grid-cols-1 md:grid-cols-3 border-t border-l border-[rgba(0,240,255,0.2)]">
+<div class="border-r border-b border-[rgba(0,240,255,0.2)] p-8 md:p-8 hover:bg-[#0A0A0A] transition group flex flex-col relative">
+<div onclick="window.openDetails('MAQUETTE')" class="detail-link absolute top-2 right-2 md:top-4 md:right-4">Détails [ + ]</div>
+<div class="font-mono text-xs border border-gray-400 text-[#EAEAEA]/60 w-fit px-3 py-1 mb-8 rounded-full uppercase">Maquette</div>
+<div class="font-heading font-black text-5xl mb-2">12H</div>
+<div class="font-heading font-bold text-2xl text-[#00F0FF] mb-8">900€ " style="text-shadow: 0 0 20px rgba(0,240,255,0.6);"<span class="text-sm text-[#EAEAEA]/40 font-normal">HT</span></div>
+<div class="font-bold text-sm mb-4">Design Only</div>
+<ul class="space-y-4 mb-12 flex-grow text-sm">
+<li class="flex gap-3"><span class="w-1.5 h-1.5 bg-[#000000]"></span> Maquette intégrable</li>
+<li class="flex gap-3"><span class="w-1.5 h-1.5 bg-[#000000]"></span> UX/UI CRO</li>
+<li class="flex gap-3"><span class="w-1.5 h-1.5 bg-[#000000]"></span> Copy + visuels</li>
+<li class="flex gap-3 opacity-50"><span class="w-1.5 h-1.5 bg-gray-300"></span> Sans code</li>
+</ul>
+<div onclick="window.openModal()" class="block w-full py-4 border-2 border-[rgba(0,240,255,0.3)] text-center font-heading font-bold uppercase text-xs hover:bg-[#000000] hover:text-[#000000] transition-colors cursor-pointer">>Bloquer mon slot</div>
+</div>
+<div class="card-popular border-r border-b border-[rgba(0,240,255,0.2)] p-8 md:p-8 bg-[#00F0FF] text-white transition group flex flex-col relative">
+<div class="absolute top-6 right-6 bg-[#000000] text-white text-xs font-bold px-2 py-1 uppercase">Populaire</div>
+<div onclick="window.openDetails('STARTER')" class="detail-link detail-link-on-dark absolute top-2 right-2 md:top-6 md:right-28 border-b border-transparent hover:border-white transition-all">Détails [ + ]</div>
+<div class="font-mono text-xs bg-[#000000] text-white w-fit px-3 py-1 mb-8 rounded-full uppercase">Starter</div>
+<div class="font-heading font-black text-5xl mb-2">24H</div>
+<div class="font-heading font-bold text-2xl text-white mb-8"><span class="price-strike">1500€</span> 980€ <span class="text-sm text-white font-normal">HT</span> <span class="price-badge">Offre du mois</span></div>
+<div class="font-bold text-sm mb-4">Conversions instantanées</div>
+<ul class="space-y-4 mb-12 flex-grow text-sm text-white">
+<li class="flex gap-3"><span class="w-1.5 h-1.5 bg-[#030303]"></span> One page / Landing</li>
+<li class="flex gap-3"><span class="w-1.5 h-1.5 bg-[#030303]"></span> UX/UI CRO</li>
+<li class="flex gap-3"><span class="w-1.5 h-1.5 bg-[#030303]"></span> Copy + visuels</li>
+<li class="flex gap-3"><span class="w-1.5 h-1.5 bg-[#030303]"></span> Dev Webflow</li>
+</ul>
+<div onclick="window.openModal()" class="block w-full py-4 bg-[#030303] text-[#00F0FF] text-center font-heading font-bold uppercase text-xs hover:bg-[#000000] hover:text-[#000000] transition-colors cursor-pointer">>Bloquer mon slot" style="text-shadow: 0 0 20px rgba(0,240,255,0.6);"</div>
+</div>
+<div class="border-r border-b border-[rgba(0,240,255,0.2)] p-8 md:p-8 hover:bg-[#0A0A0A] transition group flex flex-col relative">
+<div onclick="window.openDetails('BUSINESS')" class="detail-link absolute top-2 right-2 md:top-4 md:right-4 border-b border-transparent hover:border-[rgba(0,240,255,0.3)] transition-all">Détails [ + ]</div>
+<div class="font-mono text-xs border border-gray-400 text-[#EAEAEA]/60 w-fit px-3 py-1 mb-8 rounded-full uppercase">Business</div>
+<div class="font-heading font-black text-5xl mb-2">48H</div>
+<div class="font-heading font-bold text-2xl text-[#00F0FF] mb-8">2200€ " style="text-shadow: 0 0 20px rgba(0,240,255,0.6);"<span class="text-sm text-[#EAEAEA]/40 font-normal">HT</span></div>
+<div class="font-bold text-sm mb-4">Réassurance +</div>
+<ul class="space-y-4 mb-12 flex-grow text-sm">
+<li class="flex gap-3"><span class="w-1.5 h-1.5 bg-[#000000]"></span> Max 5 pages</li>
+<li class="flex gap-3"><span class="w-1.5 h-1.5 bg-[#000000]"></span> UX/CRO</li>
+<li class="flex gap-3"><span class="w-1.5 h-1.5 bg-[#000000]"></span> Copy + visuels</li>
+<li class="flex gap-3"><span class="w-1.5 h-1.5 bg-[#000000]"></span> Dev Webflow</li>
+</ul>
+<div onclick="window.openModal()" class="block w-full py-4 border-2 border-[rgba(0,240,255,0.3)] text-center font-heading font-bold uppercase text-xs hover:bg-[#000000] hover:text-[#000000] transition-colors cursor-pointer">>Bloquer mon slot</div>
+</div>
+</div>
+<a href="https://www.bigneurons.com" target="_blank" class="block w-full border-l border-r border-b border-[rgba(0,240,255,0.2)] p-6 md:p-8 flex items-center justify-between group hover:bg-[#000000] hover:text-[#000000] transition cursor-pointer">
+<div>
+<div class="font-bold text-lg uppercase">Projet complexe ?</div>
+<p class="text-xs text-[#EAEAEA]/60 group-hover:text-[#EAEAEA]/50">Scale, SaaS, E-commerce</p>
+</div>
+<div class="text-sm border-b border-[rgba(0,240,255,0.3)] group-hover:border-white">Big Neurons ↗</div>
+</a>
+</section>
+<section id="process" class="py-8 md:py-12 px-4 md:px-10 bg-[#030303] relative z-10 border-t border-[rgba(0,240,255,0.2)]">
+<div class="max-w-7xl mx-auto mb-16">
+<div class="flex justify-between items-start mb-6">
+<h2 class="font-heading font-black text-4xl md:text-7xl uppercase leading-[0.95]">Comment on fait ?<br>On triche ?<br><span class="text-[#00F0FF]">Oui.</span></h2>
+<div onclick="window.openProcessDetails()" class="detail-link hidden md:inline-flex border-b border-transparent hover:border-[rgba(0,240,255,0.3)] transition-all">Détails [ + ]</div>
+</div>
+<p class="text-base md:text-lg max-w-4xl text-gray-700">Pendant que certains refusent l'IA ou produisent de la soupe déshumanisée, nous avons créé un process où humain et machine ne font qu'un.</p>
+<div onclick="window.openProcessDetails()" class="detail-link md:hidden mt-6 border-b border-transparent hover:border-[rgba(0,240,255,0.3)] transition-all inline-flex">Détails [ + ]</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-4 gap-0 border-t border-l border-[rgba(0,240,255,0.2)] max-w-7xl mx-auto">
+<div class="border-r border-b border-[rgba(0,240,255,0.2)] p-8 md:p-10 bg-[#0A0A0A] hover:bg-[#030303] transition group relative">
+<div class="absolute top-4 right-4 w-8 h-8 rounded-full bg-[#000000] text-white flex items-center justify-center font-heading font-bold text-sm group-hover:bg-[#00F0FF] transition-colors">1</div>
+<div class="mb-6">
+<div class="font-mono text-xs font-bold text-[#EAEAEA]/40 mb-2 uppercase">Étape 1</div>
+<h3 class="font-heading font-bold text-3xl uppercase mb-3 group-hover:text-[#00F0FF] transition-colors">Brief" style="text-shadow: 0 0 20px rgba(0,240,255,0.6);"</h3>
+</div>
+<p class="text-sm text-gray-700">Vous remplissez notre questionnaire détaillé. On veut tout savoir sur votre site, marché, concurrents, vision.</p>
+</div>
+<div class="border-r border-b border-[rgba(0,240,255,0.2)] p-8 md:p-10 bg-[#0A0A0A] hover:bg-[#030303] transition group relative">
+<div class="absolute top-4 right-4 w-8 h-8 rounded-full bg-[#000000] text-white flex items-center justify-center font-heading font-bold text-sm group-hover:bg-[#00F0FF] transition-colors">2</div>
+<div class="mb-6">
+<div class="font-mono text-xs font-bold text-[#EAEAEA]/40 mb-2 uppercase">Étape 2</div>
+<h3 class="font-heading font-bold text-3xl uppercase mb-3 group-hover:text-[#00F0FF] transition-colors">Call" style="text-shadow: 0 0 20px rgba(0,240,255,0.6);"</h3>
+</div>
+<p class="text-sm text-gray-700">Notre équipe vous contacte. On confirme le brief. Le paiement se fait à ce moment, si tout est validé.</p>
+</div>
+<div class="border-r border-b border-[rgba(0,240,255,0.2)] p-8 md:p-10 bg-[#0A0A0A] hover:bg-[#030303] transition group relative">
+<div class="absolute top-4 right-4 w-8 h-8 rounded-full bg-[#000000] text-white flex items-center justify-center font-heading font-bold text-sm group-hover:bg-[#00F0FF] transition-colors">3</div>
+<div class="mb-6">
+<div class="font-mono text-xs font-bold text-[#EAEAEA]/40 mb-2 uppercase">Étape 3</div>
+<h3 class="font-heading font-bold text-3xl uppercase mb-3 group-hover:text-[#00F0FF] transition-colors">Deepwork" style="text-shadow: 0 0 20px rgba(0,240,255,0.6);"</h3>
+</div>
+<p class="text-sm text-gray-700">On rédige vos textes, crée vos visuels, génère wireframe et design system. Humain + IA en symbiose.</p>
+</div>
+<div class="border-r border-b border-[rgba(0,240,255,0.2)] p-8 md:p-10 bg-[#0A0A0A] hover:bg-[#030303] transition group relative">
+<div class="absolute top-4 right-4 w-8 h-8 rounded-full bg-[#00F0FF] text-white flex items-center justify-center font-heading font-bold text-sm group-hover:scale-110 transition-transform">4</div>
+<div class="mb-6">
+<div class="font-mono text-xs font-bold text-[#EAEAEA]/40 mb-2 uppercase">Étape 4</div>
+<h3 class="font-heading font-bold text-3xl uppercase mb-3 group-hover:text-[#00F0FF] transition-colors">Champagne" style="text-shadow: 0 0 20px rgba(0,240,255,0.6);"</h3>
+</div>
+<p class="text-sm text-gray-700">Présentation visio, SEO, mise en ligne. On ouvre le Dom Pérignon. Votre site est live.</p>
+</div>
+</div>
+<div class="max-w-7xl mx-auto mt-16 text-center border-t-2 border-[rgba(0,240,255,0.3)] pt-12">
+<p class="font-heading font-bold text-2xl md:text-3xl uppercase mb-6">Prêt à célébrer ?</p>
+<div onclick="window.openModal()" class="inline-block px-12 py-5 bg-[#00F0FF] text-white font-heading font-black text-lg uppercase hover:bg-[#000000] transition-all cursor-pointer shadow-[8px_8px_0px_0px_#000000] hover:translate-y-1 hover:shadow-none">> Sabrer le champagne Tomorrow !</div>
+<p class="mt-6 font-mono text-xs text-[#EAEAEA]/40 uppercase">24H chrono • Qualité garantie</p>
+</div>
+</section>
+<section id="squad" class="py-8 md:py-12 bg-[#030303] relative z-10 overflow-hidden">
+<div class="px-4 md:px-10 mb-10 flex justify-between items-end">
+<h2 class="font-heading font-black text-4xl md:text-6xl uppercase leading-tight">Votre équipe<br><span class="text-[#00F0FF]">(de mercenaires)</span><br>pour les prochaines 24H.</h2>
+<div class="flex items-center gap-2 font-mono text-xs text-[#00F0FF] animate-pulse">" style="text-shadow: 0 0 20px rgba(0,240,255,0.6);"<span class="hidden md:inline">DRAG TO EXPLORE</span><span class="inline md:hidden">SWIPE</span>-></div>
+</div>
+<div class="relative">
+<div class="absolute right-0 top-0 h-full w-24 bg-gradient-to-l from-white to-transparent z-10 pointer-events-none md:hidden"></div>
+<div class="flex overflow-x-auto hide-scroll border-t border-b border-[rgba(0,240,255,0.2)] snap-x snap-mandatory">
+<div class="min-w-[85vw] md:min-w-[25vw] border-r border-[rgba(0,240,255,0.2)] p-10 hover:bg-[#0A0A0A] transition group snap-center flex flex-col justify-between">
+<div>
+<div class="font-mono text-xs text-[#EAEAEA]/40 mb-6">STRATÉGIE</div>
+<div class="h-64 bg-[#121212] mb-6 relative overflow-hidden grayscale group-hover:grayscale-0 transition duration-500"><img src="https://cdn.prod.website-files.com/69296dff64369c09698b8e09/6929b3ba12f3501c3c46a2fd_38a6efb078a6394b16be6bd39d3acd44_PPTIMTOMORROW.jpeg.webp" loading="lazy" class="object-cover w-full h-full" alt="Stratège Senior - 15 ans d'expérience - Tomorrow.Online"></div>
+<h3 class="font-heading font-bold text-2xl uppercase mb-2">Le Stratège</h3>
+<p class="font-mono text-xs mb-4">15 ans d'XP • Ex-Codir</p>
+<p class="text-sm opacity-80">Il analyse votre marché, trouve la faille et briefe l'IA.</p>
+</div>
+</div>
+<div class="min-w-[85vw] md:min-w-[25vw] border-r border-[rgba(0,240,255,0.2)] p-10 hover:bg-[#0A0A0A] transition group snap-center flex flex-col justify-between">
+<div>
+<div class="font-mono text-xs text-[#EAEAEA]/40 mb-6">COPYWRITING</div>
+<div class="h-64 bg-[#121212] mb-6 relative overflow-hidden grayscale group-hover:grayscale-0 transition duration-500"><img src="https://cdn.prod.website-files.com/69296dff64369c09698b8e09/6929b3bbdc040886082b723a_9e4e58e2c7437379a7b01ad76aa3b8b4_PPARTHURTOMORROW.webp" loading="lazy" class="object-cover w-full h-full" alt="Copywriter Publicitaire - 5 ans d'expérience - Tomorrow.Online"></div>
+<h3 class="font-heading font-bold text-2xl uppercase mb-2">Le Publicitaire</h3>
+<p class="font-mono text-xs mb-4">5 ans d'XP • Focus Vente</p>
+<p class="text-sm opacity-80">Il injecte émotion et psycho de vente.</p>
+</div>
+</div>
+<div class="min-w-[85vw] md:min-w-[25vw] border-r border-[rgba(0,240,255,0.2)] p-10 hover:bg-[#0A0A0A] transition group snap-center flex flex-col justify-between">
+<div>
+<div class="font-mono text-xs text-[#EAEAEA]/40 mb-6">UX DESIGN</div>
+<div class="h-64 bg-[#121212] mb-6 relative overflow-hidden grayscale group-hover:grayscale-0 transition duration-500"><img src="https://cdn.prod.website-files.com/69296dff64369c09698b8e09/6929b3baa5fe9626cb9515ab_3c5b0f2d74be2cbc4138bb98f950341b_PPMARIIATOMORROW.webp" loading="lazy" class="object-cover w-full h-full" alt="UX Designer Architecte - 5 ans d'expérience - Tomorrow.Online"></div>
+<h3 class="font-heading font-bold text-2xl uppercase mb-2">L'Architecte</h3>
+<p class="font-mono text-xs mb-4">5 ans d'XP • Pixel Perfect</p>
+<p class="text-sm opacity-80">Elle ne laisse rien au hasard : UX, Wireframe, CRO.</p>
+</div>
+</div>
+<div class="min-w-[85vw] md:min-w-[25vw] border-r border-[rgba(0,240,255,0.2)] p-10 hover:bg-[#0A0A0A] transition group snap-center flex flex-col justify-between">
+<div>
+<div class="font-mono text-xs text-[#EAEAEA]/40 mb-6">ART & ASSETS</div>
+<div class="h-64 bg-[#121212] mb-6 relative overflow-hidden grayscale group-hover:grayscale-0 transition duration-500"><img src="https://cdn.prod.website-files.com/69296dff64369c09698b8e09/6929b3bb9d273975e576c5ed_c79248edd2c5bab1d884534531f6055e_PPHAMIDTOMORROW.webp" loading="lazy" class="object-cover w-full h-full" alt="Directeur Artistique - 15 ans d'expérience - Tomorrow.Online"></div>
+<h3 class="font-heading font-bold text-2xl uppercase mb-2">L'Artiste</h3>
+<p class="font-mono text-xs mb-4">15 ans d'XP • Brutal Branding</p>
+<p class="text-sm opacity-80">Il crée l'identité visuelle et les assets qui frappent.</p>
+</div>
+</div>
+<div class="min-w-[85vw] md:min-w-[25vw] border-r border-[rgba(0,240,255,0.2)] p-10 hover:bg-[#0A0A0A] transition group snap-center flex flex-col justify-between">
+<div>
+<div class="font-mono text-xs text-[#EAEAEA]/40 mb-6">PILOTAGE</div>
+<div class="h-64 bg-[#121212] mb-6 relative overflow-hidden grayscale group-hover:grayscale-0 transition duration-500"><img src="https://cdn.prod.website-files.com/69296dff64369c09698b8e09/6929b3ba2589776800f492e4_1dc93e9427611ad5ca0fb0cd9fdf54cd_PPMARIEFRANCINETOMORROW.webp" loading="lazy" class="object-cover w-full h-full" alt="Chef de Projet Caporale - 10 ans d'expérience - Tomorrow.Online"></div>
+<h3 class="font-heading font-bold text-2xl uppercase mb-2">La Caporale</h3>
+<p class="font-mono text-xs mb-4">10 ans d'XP • Ops Master</p>
+<p class="text-sm opacity-80">Elle veille au respect de la deadline et vous appelle pour sabrer le champagne.</p>
+</div>
+</div>
+<div class="min-w-[85vw] md:min-w-[25vw] border-r border-[rgba(0,240,255,0.2)] p-10 bg-[#000000] text-white transition group snap-center flex flex-col justify-between">
+<div>
+<div class="font-mono text-xs text-[#EAEAEA]/40 mb-6">STACK IA</div>
+<div class="h-64 mb-6 relative overflow-hidden flex items-center justify-center" style="background:linear-gradient(135deg,rgba(180,7,254,1) 0%,rgba(255,10,55,1) 100%);">
+<div class="font-heading font-black text-9xl text-white opacity-30">AI</div>
+</div>
+<h3 class="font-heading font-bold text-2xl uppercase mb-2">La stack IA</h3>
+<p class="font-mono text-xs mb-4 text-[#EAEAEA]/30">La secret sauce Tomorrow.Online</p>
+<p class="text-sm text-gray-200">Chaque expert a paramétré nos IA pendant des semaines pour l'assister dans ses missions.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="work" class="py-12 md:py-16 px-4 md:px-10 bg-[#030303] relative z-10 border-t border-[rgba(0,240,255,0.2)]">
+<div class="max-w-7xl mx-auto">
+<div class="mb-12 md:mb-16">
+<div class="flex flex-col md:flex-row justify-between items-start md:items-end gap-8 mb-8">
+<div>
+<div class="inline-block border border-[#00F0FF] px-4 py-2 mb-4">
+<span class="font-mono text-xs font-bold text-[#00F0FF] uppercase tracking-widest">/// PROOF" style="text-shadow: 0 0 20px rgba(0,240,255,0.6);"</span>
+</div>
+<h2 class="font-heading font-black text-4xl md:text-7xl uppercase leading-[0.9] mb-4">
+Ils l'ont fait<br><span class="text-[#00F0FF]">en 24-48H.</span>
+</h2>
+<p class="text-lg md:text-xl text-[#EAEAEA]/60 max-w-2xl">Voici ce que nos clients ont accompli pendant que leurs concurrents attendaient leurs devis.</p>
+</div>
+<div class="grid grid-cols-3 gap-6 md:gap-8">
+<div class="text-center">
+<div class="font-heading font-black text-3xl md:text-5xl text-[#00F0FF] mb-1">42" style="text-shadow: 0 0 20px rgba(0,240,255,0.6);"</div>
+<div class="font-mono text-xs uppercase text-[#EAEAEA]/50">Sites livrés</div>
+</div>
+<div class="text-center">
+<div class="font-heading font-black text-3xl md:text-5xl text-[#00F0FF] mb-1">38H" style="text-shadow: 0 0 20px rgba(0,240,255,0.6);"</div>
+<div class="font-mono text-xs uppercase text-[#EAEAEA]/50">Délai moyen</div>
+</div>
+<div class="text-center">
+<div class="font-heading font-black text-3xl md:text-5xl text-[#00F0FF] mb-1">98%" style="text-shadow: 0 0 20px rgba(0,240,255,0.6);"</div>
+<div class="font-mono text-xs uppercase text-[#EAEAEA]/50">Satisfaction</div>
+</div>
+</div>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-12 gap-6 mb-12">
+<div class="md:col-span-7 group border-2 border-[rgba(0,240,255,0.2)] bg-[#030303] hover:border-[rgba(0,240,255,0.3)] transition-all duration-300 overflow-hidden">
+<div class="p-6 md:p-8">
+<div class="flex items-start justify-between mb-6">
+<div class="flex items-center gap-4">
+<div class="w-14 h-14 bg-[#000000] flex items-center justify-center font-heading font-black text-white text-xl">PPF</div>
+<div>
+<h3 class="font-heading font-bold text-xl uppercase">Préservation Patrimoine Français</h3>
+<p class="font-mono text-xs text-[#EAEAEA]/40 uppercase">Leader amélioration énergétique</p>
+</div>
+</div>
+<div class="bg-[#000000] text-white px-3 py-1 font-mono text-[10px] font-bold uppercase whitespace-nowrap">43H 12MIN</div>
+</div>
+<div class="grid grid-cols-3 gap-4 mb-6 pb-6 border-b border-[rgba(0,240,255,0.2)]">
+<div>
+<div class="font-heading font-black text-2xl text-[#00F0FF] mb-1">+247%" style="text-shadow: 0 0 20px rgba(0,240,255,0.6);"</div>
+<div class="text-xs text-[#EAEAEA]/60">Leads qualifiés</div>
+</div>
+<div>
+<div class="font-heading font-black text-2xl text-[#00F0FF] mb-1">12" style="text-shadow: 0 0 20px rgba(0,240,255,0.6);"</div>
+<div class="text-xs text-[#EAEAEA]/60">Pages créées</div>
+</div>
+<div>
+<div class="font-heading font-black text-2xl text-[#00F0FF] mb-1">4.2s" style="text-shadow: 0 0 20px rgba(0,240,255,0.6);"</div>
+<div class="text-xs text-[#EAEAEA]/60">Load time</div>
+</div>
+</div>
+<div class="bg-[#0A0A0A] border-l-4 border-[#00F0FF] p-4 mb-6">
+<p class="text-sm italic mb-3">"J'ai briefé Tomorrow.online le lundi matin. Le mercredi soir, mes 12 landing étaient prêtes. ROI immédiat : les taux de conversion ont explosés dès la première semaine."</p>
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 bg-gray-300 rounded-full"></div>
+<div>
+<div class="font-bold text-sm">Vincent Druesne</div>
+<div class="text-xs text-[#EAEAEA]/50">CMO, PPF</div>
+</div>
+</div>
+</div>
+<div class="flex flex-wrap gap-2">
+<span class="px-2 py-1 bg-[#121212] text-xs font-mono uppercase">B2B</span>
+<span class="px-2 py-1 bg-[#121212] text-xs font-mono uppercase">Énergie</span>
+<span class="px-2 py-1 bg-[#121212] text-xs font-mono uppercase">Maquettes</span>
+</div>
+</div>
+<div class="h-48 md:h-64 bg-[#121212] relative overflow-hidden">
+<img src="https://cdn.prod.website-files.com/69296dff64369c09698b8e09/6953d2bdf7f4bb60be3b117f_aa428416659b17ff2f3b4a6cba242dad_landing%20page%2024h.webp" loading="lazy" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700" alt="PPF Project">
+<div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+</div>
+</div>
+<div class="md:col-span-5 group border-2 border-[rgba(0,240,255,0.2)] bg-[#030303] hover:border-[rgba(0,240,255,0.3)] transition-all duration-300 overflow-hidden">
+<div class="h-48 md:h-56 bg-[#121212] relative overflow-hidden">
+<img src="https://cdn.prod.website-files.com/69296dff64369c09698b8e09/69552de98330f1988c121760_image.webp" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700" alt="Moubandje Academy">
+<div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+</div>
+<div class="p-6">
+<div class="flex items-start justify-between mb-4">
+<div class="flex items-center gap-3">
+<div class="w-12 h-12 bg-[#000000] flex items-center justify-center font-heading font-black text-white text-sm">MA</div>
+<div>
+<h3 class="font-heading font-bold text-lg uppercase leading-tight">Moubandje Academy</h3>
+<p class="font-mono text-[10px] text-[#EAEAEA]/40 uppercase">Académie football</p>
+</div>
+</div>
+<div class="bg-[#000000] text-white px-2 py-1 font-mono text-[9px] font-bold uppercase">23H 30M</div>
+</div>
+<div class="grid grid-cols-2 gap-3 mb-4">
+<div>
+<div class="font-heading font-black text-xl text-[#00F0FF]">+80%</div>
+<div class="text-xs text-[#EAEAEA]/60">Inscriptions</div>
+</div>
+<div>
+<div class="font-heading font-black text-xl text-[#00F0FF]">2</div>
+<div class="text-xs text-[#EAEAEA]/60">Pages</div>
+</div>
+</div>
+<div class="bg-[#0A0A0A] border-l-4 border-[#00F0FF] p-3 mb-4">
+<p class="text-xs italic mb-2">"Site professionnel qui booste notre image. Parents convaincus dès la première visite."</p>
+<div class="font-bold text-xs">JF MOUBANDJE, Fondateur</div>
+</div>
+<div class="flex flex-wrap gap-2">
+<span class="px-2 py-1 bg-[#121212] text-[10px] font-mono uppercase">Sport</span>
+<span class="px-2 py-1 bg-[#121212] text-[10px] font-mono uppercase">B2C</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="border-t-2 border-[rgba(0,240,255,0.2)] pt-12">
+<div class="text-center mb-8">
+<div class="font-mono text-xs text-[#EAEAEA]/40 uppercase mb-4">Ils nous font confiance</div>
+<div class="flex flex-wrap justify-center items-center gap-8 md:gap-12 opacity-40 grayscale">
+<div class="font-heading font-black text-2xl">PPF</div>
+<div class="font-heading font-black text-2xl">ANALYSE & ACTION</div>
+<div class="font-heading font-black text-2xl">GROUPE CORSO</div>
+<div class="font-heading font-black text-2xl">WILD CODE SCHOOL</div>
+<div class="font-heading font-black text-2xl">MAISON DU MENUISIER</div>
+</div>
+</div>
+<div class="bg-[#000000] text-white p-8 md:p-12 text-center">
+<div class="max-w-3xl mx-auto">
+<div class="flex justify-center mb-4">
+<div class="flex gap-1">
+<span class="text-[#00F0FF] text-2xl">★" style="text-shadow: 0 0 20px rgba(0,240,255,0.6);"</span>
+<span class="text-[#00F0FF] text-2xl">★" style="text-shadow: 0 0 20px rgba(0,240,255,0.6);"</span>
+<span class="text-[#00F0FF] text-2xl">★" style="text-shadow: 0 0 20px rgba(0,240,255,0.6);"</span>
+<span class="text-[#00F0FF] text-2xl">★" style="text-shadow: 0 0 20px rgba(0,240,255,0.6);"</span>
+<span class="text-[#00F0FF] text-2xl">★" style="text-shadow: 0 0 20px rgba(0,240,255,0.6);"</span>
+</div>
+</div>
+<p class="font-heading font-bold text-2xl md:text-3xl uppercase mb-6">Prochain success story :<br><span class="text-[#00F0FF]">La vôtre ?</span></p>
+<div onclick="window.openModal()" class="inline-block px-12 py-5 bg-[#00F0FF] text-white font-heading font-black text-lg uppercase hover:bg-[#030303] hover:text-[#EAEAEA] transition-all cursor-pointer shadow-[8px_8px_0px_0px_rgba(255,255,255,0.2)] hover:translate-y-1 hover:shadow-none">
+> Rejoindre ces winners
+</div>
+<p class="mt-6 font-mono text-xs text-[#EAEAEA]/50 uppercase">3 slots disponibles par jour • Paiement après validation du brief</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<div id="processDetailsModal" class="fixed inset-0 z-[160] hidden">
+<div class="absolute inset-0 bg-[#000000]/90" onclick="window.closeProcessDetails()"></div>
+<div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[95%] md:w-[800px] max-h-[90vh] bg-[#000000] border-2 border-[#00F0FF] flex flex-col overflow-hidden text-white">
+<div class="p-6 border-b border-[#00F0FF] flex justify-between items-center">
+<div class="font-heading font-black text-2xl uppercase">Détails Process 24H</div>
+<button onclick="window.closeProcessDetails()" class="text-xs uppercase hover:text-[#00F0FF] border border-gray-600 px-4 py-2">Fermer" style="text-shadow: 0 0 20px rgba(0,240,255,0.6);"</button>
+</div>
+<div class="flex-grow overflow-y-auto p-6 md:p-8">
+<div class="mb-8">
+<h3 class="font-bold text-sm uppercase text-[#00F0FF] mb-4">Timeline" style="text-shadow: 0 0 20px rgba(0,240,255,0.6);"</h3>
+<div class="space-y-3 text-sm">
+<div class="flex gap-4"><span class="font-bold text-[#00F0FF]">09:00</span><span>Appel de validation. Paiement. Chronomètre démarre.</span></div>
+<div class="flex gap-4"><span class="font-bold text-[#EAEAEA]/40">14:00</span><span>Production : Copy, Design, Dev. Zéro réunion.</span></div>
+<div class="flex gap-4"><span class="font-bold text-green-500">18:00</span><span>Livraison. SEO. Mise en ligne. Champagne.</span></div>
+</div>
+</div>
+<div class="mb-8">
+<h3 class="font-bold text-sm uppercase text-[#00F0FF] mb-4">Livrables" style="text-shadow: 0 0 20px rgba(0,240,255,0.6);"</h3>
+<div class="grid md:grid-cols-3 gap-4 text-xs">
+<div class="p-4 bg-zinc-900 border border-zinc-800"><strong>MAQUETTE</strong><br>Figma source + Design System</div>
+<div class="p-4 bg-zinc-900 border-2 border-[#00F0FF]"><strong>STARTER</strong><br>Site One Page Webflow + SEO</div>
+<div class="p-4 bg-zinc-900 border border-zinc-800"><strong>BUSINESS</strong><br>5 Pages + CMS + Formation</div>
+</div>
+</div>
+<div class="text-xs text-[#EAEAEA]/40">
+<p>✓ Direction Artistique Senior • ✓ Copywriting • ✓ Images • ✓ Cession PI</p>
+</div>
+</div>
+<div class="p-6 border-t border-[#00F0FF] flex justify-center">
+<button onclick="window.closeProcessDetails();window.openModal()" class="bg-[#00F0FF] text-white px-8 py-4 font-heading font-bold uppercase hover:bg-[#030303] hover:text-[#EAEAEA] transition-colors">Démarrer ma mission</button>
+</div>
+</div>
+</div>
