@@ -6,34 +6,151 @@
   <title>Agence Webflow Rapide - Livraison 24H | Tomorrow.Online</title>
   <meta name="description" content="Agence Webflow ultra-rapide. Livraison en 24H garantie ou remboursé. Équipe senior + IA. Sites Webflow professionnels dès 980€. Tomorrow.Online.">
   
-  <!-- Favicon -->
   <link rel="icon" type="image/png" href="images/favicon.png">
   <link rel="apple-touch-icon" href="images/webclip.png">
   
-  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700;800;900&family=Syne:wght@700;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
   
-  <!-- CSS -->
   <link rel="stylesheet" href="css/design-system.css">
   <link rel="stylesheet" href="css/home.css">
   <link rel="stylesheet" href="css/formulaire.css">
   
-  <!-- GSAP -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollToPlugin.min.js"></script>
-  
-  <!-- Lenis Smooth Scroll -->
   <script src="https://unpkg.com/lenis@1.0.19/dist/lenis.min.js"></script>
+  
+  <style>
+    .seo-page {
+      background: #000;
+      min-height: 100vh;
+      padding: 150px 2rem 80px;
+    }
+    
+    .seo-container {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    
+    .seo-header {
+      margin-bottom: 80px;
+      padding-bottom: 40px;
+      border-bottom: 1px solid #222;
+    }
+    
+    .seo-meta {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.75rem;
+      color: #666;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 1.5rem;
+    }
+    
+    .seo-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      font-weight: 900;
+      text-transform: uppercase;
+      line-height: 1.1;
+      color: #FFF;
+      margin-bottom: 2rem;
+    }
+    
+    .seo-intro {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.25rem;
+      line-height: 1.6;
+      color: #CCC;
+      padding-left: 1.5rem;
+      border-left: 4px solid #FF5500;
+    }
+    
+    .seo-section {
+      margin-bottom: 4rem;
+      padding-bottom: 4rem;
+      border-bottom: 1px solid #222;
+    }
+    
+    .seo-section:last-child {
+      border-bottom: none;
+    }
+    
+    .seo-section h2 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.75rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      color: #FFF;
+      margin-bottom: 1.5rem;
+    }
+    
+    .seo-section h3 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: #FFF;
+      margin-top: 2rem;
+      margin-bottom: 1rem;
+    }
+    
+    .seo-section p {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1rem;
+      line-height: 1.8;
+      color: #CCC;
+      margin-bottom: 1.5rem;
+    }
+    
+    .seo-section p strong {
+      color: #FFF;
+      font-weight: 700;
+    }
+    
+    .cta-box {
+      text-align: center;
+      margin: 4rem 0;
+      padding: 3rem 2rem;
+      background: #111;
+      border: 2px solid #FF5500;
+    }
+    
+    .cta-box button {
+      margin-bottom: 1rem;
+    }
+    
+    .cta-note {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.85rem;
+      color: #666;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+    
+    @media (max-width: 768px) {
+      .seo-page {
+        padding: 120px 1.5rem 60px;
+      }
+      
+      .seo-title {
+        font-size: 2rem;
+      }
+      
+      .seo-intro {
+        font-size: 1.1rem;
+      }
+      
+      .seo-section h2 {
+        font-size: 1.5rem;
+      }
+    }
+  </style>
 </head>
 <body>
   
-  <!-- Custom Cursor -->
   <div class="custom-cursor" id="cursor"></div>
-  
-  <!-- Grid Background -->
   <div class="bg-grid-fixed"></div>
   
   <!-- Header -->
@@ -89,95 +206,80 @@
     </div>
   </header>
   
-  <!-- Hero Section -->
-  <section class="hero section">
-    <div class="container">
-      <div class="hero-content">
-        <h1 class="hero-title hero-load">
-          AGENCE WEBFLOW<br>
-          <span class="text-gradient">ULTRA-RAPIDE</span>
-        </h1>
-        
-        <div class="hero-subtitle hero-load">
-          <p class="hero-text">
-            La première agence Webflow qui livre en 24H. Sinon on vous rembourse.
-          </p>
-        </div>
-        
-        <div class="hero-cta hero-load">
-          <button class="btn btn-primary btn-large" onclick="openModal()">
-            Démarrer mon projet Webflow
-          </button>
-          <p class="hero-cta-note font-mono">Livraison garantie en 24H</p>
-        </div>
+  <!-- SEO Content -->
+  <div class="seo-page">
+    <div class="seo-container">
+      
+      <div class="seo-header">
+        <div class="seo-meta">Agence Webflow • Livraison Express</div>
+        <h1 class="seo-title">AGENCE WEBFLOW<br>ULTRA-RAPIDE<span class="text-gradient">.</span></h1>
+        <p class="seo-intro">
+          La première agence Webflow qui livre en 24H. Sinon on vous rembourse.
+        </p>
       </div>
-    </div>
-  </section>
-
-  <!-- Content Section -->
-  <section class="section">
-    <div class="container">
-      <div style="max-width: 900px; margin: 0 auto;">
-        <h2 class="section-title" style="margin-bottom: 2rem;">
-          Pourquoi choisir<br>
-          <span class="text-gradient">Tomorrow.Online ?</span>
-        </h2>
-
-        <div class="manifesto-text" style="margin-bottom: 3rem;">
-          <p>
-            <strong>Tomorrow.Online</strong> est la première agence Webflow "NO-WAIT" en France. 
-            Nous avons révolutionné la création de sites web en combinant expertise humaine senior et puissance de l'IA.
-          </p>
-          
-          <p>
-            Contrairement aux agences traditionnelles qui vous font patienter 4 à 8 semaines, 
-            nous livrons votre site Webflow complet en <strong>24 à 48 heures</strong>. 
-            Et si on dépasse le délai, vous êtes remboursé.
-          </p>
-
-          <h3 class="monde-title" style="margin-top: 3rem; margin-bottom: 1rem;">Notre Process Webflow</h3>
-          <p>
-            1. <strong>Brief détaillé</strong> : Vous remplissez notre questionnaire intelligent<br>
-            2. <strong>Call de validation</strong> : On confirme les objectifs et on lance le chrono<br>
-            3. <strong>Deepwork squad</strong> : L'équipe complète se met en mode deepwork<br>
-            4. <strong>Livraison & champagne</strong> : Votre site Webflow est live
-          </p>
-
-          <h3 class="monde-title" style="margin-top: 3rem; margin-bottom: 1rem;">Pourquoi Webflow ?</h3>
-          <p>
-            <strong>Webflow</strong> est le CMS le plus puissant du marché pour créer des sites rapides, 
-            sécurisés et évolutifs. Contrairement à WordPress (lent, buggé), Wix (limité) ou Squarespace (figé), 
-            Webflow offre une liberté totale sans compromis sur la performance.
-          </p>
-
-          <p>
-            Notre équipe maîtrise Webflow depuis des années. Nous connaissons toutes les best practices 
-            pour livrer des sites optimisés SEO, ultra-rapides (Google PageSpeed 95+), et 100% responsive.
-          </p>
-
-          <h3 class="monde-title" style="margin-top: 3rem; margin-bottom: 1rem;">Nos Tarifs Webflow</h3>
-          <p>
-            <strong>Maquette</strong> : 900€ HT - Design intégrable en 12H<br>
-            <strong>Starter</strong> : 980€ HT - Landing page complète en 24H<br>
-            <strong>Business</strong> : 2200€ HT - Site jusqu'à 5 pages en 48H
-          </p>
-
-          <p>
-            Tout est inclus : copywriting, visuels, développement Webflow, SEO technique, mise en ligne. 
-            Pas de surprises. Pas de devis à rallonge.
-          </p>
-        </div>
-
-        <div style="text-align: center; margin-top: 4rem;">
-          <button class="btn btn-primary btn-large" onclick="openModal()">
-            > Lancer mon projet Webflow
-          </button>
-          <p class="cta-note font-mono">Réponse en moins de 2H</p>
-        </div>
+      
+      <div class="seo-section">
+        <h2>Pourquoi choisir Tomorrow.Online ?</h2>
+        <p>
+          <strong>Tomorrow.Online</strong> est la première agence Webflow "NO-WAIT" en France. 
+          Nous avons révolutionné la création de sites web en combinant expertise humaine senior et puissance de l'IA.
+        </p>
+        
+        <p>
+          Contrairement aux agences traditionnelles qui vous font patienter 4 à 8 semaines, 
+          nous livrons votre site Webflow complet en <strong>24 à 48 heures</strong>. 
+          Et si on dépasse le délai, vous êtes remboursé.
+        </p>
       </div>
-    </div>
-  </section>
+      
+      <div class="seo-section">
+        <h2>Notre Process Webflow</h2>
+        <p>
+          1. <strong>Brief détaillé</strong> : Vous remplissez notre questionnaire intelligent<br>
+          2. <strong>Call de validation</strong> : On confirme les objectifs et on lance le chrono<br>
+          3. <strong>Deepwork squad</strong> : L'équipe complète se met en mode deepwork<br>
+          4. <strong>Livraison & champagne</strong> : Votre site Webflow est live
+        </p>
+      </div>
+      
+      <div class="seo-section">
+        <h2>Pourquoi Webflow ?</h2>
+        <p>
+          <strong>Webflow</strong> est le CMS le plus puissant du marché pour créer des sites rapides, 
+          sécurisés et évolutifs. Contrairement à WordPress (lent, buggé), Wix (limité) ou Squarespace (figé), 
+          Webflow offre une liberté totale sans compromis sur la performance.
+        </p>
 
+        <p>
+          Notre équipe maîtrise Webflow depuis des années. Nous connaissons toutes les best practices 
+          pour livrer des sites optimisés SEO, ultra-rapides (Google PageSpeed 95+), et 100% responsive.
+        </p>
+      </div>
+      
+      <div class="seo-section">
+        <h2>Nos Tarifs Webflow</h2>
+        <p>
+          <strong>Maquette</strong> : 900€ HT - Design intégrable en 12H<br>
+          <strong>Starter</strong> : 980€ HT - Landing page complète en 24H<br>
+          <strong>Business</strong> : 2200€ HT - Site jusqu'à 5 pages en 48H
+        </p>
+
+        <p>
+          Tout est inclus : copywriting, visuels, développement Webflow, SEO technique, mise en ligne. 
+          Pas de surprises. Pas de devis à rallonge.
+        </p>
+      </div>
+      
+      <div class="cta-box">
+        <button class="btn btn-primary btn-large" onclick="openModal()">
+          Lancer mon projet Webflow
+        </button>
+        <p class="cta-note">Réponse en moins de 2H</p>
+      </div>
+      
+    </div>
+  </div>
+  
   <!-- Footer -->
   <footer class="footer">
     <div class="container">
@@ -205,8 +307,8 @@
           <ul class="footer-list">
             <li><a href="la-vision-tomorrow.html">La Vision</a></li>
             <li><a href="notre-histoire.html">Notre Histoire</a></li>
-            <li><a href="detail_sprints.html">Détails Sprints</a></li>
-            <li><a href="detail_integrations.html">Intégrations</a></li>
+            
+            
           </ul>
         </div>
         
@@ -220,6 +322,13 @@
         </div>
       </div>
       
+      <!-- Video Footer Link -->
+      <div class="footer-video-link">
+        <button class="video-link-btn" onclick="openVideoModal()">
+          Comment on voit les acheteurs de templates
+        </button>
+      </div>
+      
       <div class="footer-bottom">
         <p class="footer-copyright font-mono">
           © 2026 TOMORROW AGENCY. UNE MARQUE DE SAS BIG NEURONS. TOMORROW.ONLINE EST LA PREMIÈRE AGENCE WEB "NO-WAIT" EN FRANCE. DESIGNED FOR SPEED. POWERED BY INTELLIGENCE.
@@ -230,28 +339,70 @@
       </div>
     </div>
   </footer>
-
-  <!-- Modal Formulaire 7 Étapes -->
+  
+  <!-- Modal Formulaire -->
   <div id="bookingModal" class="modal hidden">
     <div class="modal-overlay" onclick="window.closeModal()"></div>
     <div class="modal-container">
-      <div id="modalContent" class="modal-content">
+      <div id="modalContent" class="modal-content"></div>
+    </div>
+  </div>
+  
+  <!-- Video Modal -->
+  <div id="videoModal" class="modal hidden">
+    <div class="modal-overlay" onclick="closeVideoModal()"></div>
+    <div class="video-modal-content">
+      <button class="video-modal-close" onclick="closeVideoModal()">✕</button>
+      <div style="padding:56.25% 0 0 0;position:relative;">
+        <iframe id="videoIframe" src="" 
+          frameborder="0" 
+          allow="autoplay; fullscreen; picture-in-picture; clipboard-write" 
+          style="position:absolute;top:0;left:0;width:100%;height:100%;" 
+          title="Tomorrow.Online - Comment on voit les acheteurs de templates">
+        </iframe>
       </div>
     </div>
   </div>
-
+  
   <!-- Scripts -->
   <script src="js/cursor.js"></script>
-  <script src="js/animations.js"></script>
   <script src="js/navigation.js"></script>
-  <script src="js/main.js"></script>
   <script src="js/formulaire.js"></script>
-  <script src="js/submit-netlify.js"></script>
   
   <script>
+    // Init
     if (typeof initCursor === 'function') initCursor();
-    if (typeof initAnimations === 'function') initAnimations();
     if (typeof initSmoothScroll === 'function') initSmoothScroll();
+    
+    // Video modal functions
+    function openVideoModal() {
+      const modal = document.getElementById('videoModal');
+      const iframe = document.getElementById('videoIframe');
+      iframe.src = 'https://player.vimeo.com/video/1141806002?autoplay=1&badge=0&autopause=0';
+      modal.classList.remove('hidden');
+      document.body.style.overflow = 'hidden';
+    }
+    
+    function closeVideoModal() {
+      const modal = document.getElementById('videoModal');
+      const iframe = document.getElementById('videoIframe');
+      iframe.src = '';
+      modal.classList.add('hidden');
+      document.body.style.overflow = '';
+    }
+    
+    // ESC key to close video
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        const videoModal = document.getElementById('videoModal');
+        if (videoModal && !videoModal.classList.contains('hidden')) {
+          closeVideoModal();
+        }
+      }
+    });
+    
+    window.openVideoModal = openVideoModal;
+    window.closeVideoModal = closeVideoModal;
   </script>
   
 </body>
