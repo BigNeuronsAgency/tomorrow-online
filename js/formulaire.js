@@ -682,15 +682,15 @@ function getStepContent() {
           </div>
         </div>
         
+        <div class="success-grid">
+          ${regularUpsells.map(u => renderSuccessCard(u)).join('')}
+        </div>
+        
         ${bundleUpsell ? `
           <div class="success-grid-bundle">
             ${renderSuccessCard(bundleUpsell)}
           </div>
         ` : ''}
-        
-        <div class="success-grid">
-          ${regularUpsells.map(u => renderSuccessCard(u)).join('')}
-        </div>
         
         ${totalSuccessUpsells > 0 ? `
           <div class="success-total">
@@ -806,7 +806,7 @@ function draw(preserveScroll) {
         
         <div class="nav-buttons">
           ${currentStep > 1 && currentStep < 7 ? 
-            `<button onclick="window.prevStep()" class="btn btn-outline">PRÉCÉDENT</button>` : 
+            `<button onclick="window.prevStep()" class="btn btn-outline">← PRÉCÉDENT</button>` : 
             ''
           }
           ${currentStep < 6 ? 
@@ -957,39 +957,46 @@ window.handleCloseOrBack = function() {
 window.openModal = function(plan) {
   console.log('🔥 openModal CALLED', plan);
   
-  var m = document.getElementById('bookingModal');
-  var modalContent = document.getElementById('modalContent');
-  
-  if (!m || !modalContent) {
-    console.error('🔥 MODAL ELEMENTS NOT FOUND!', { modal: !!m, content: !!modalContent });
-    return;
+  try {
+    var m = document.getElementById('bookingModal');
+    var modalContent = document.getElementById('modalContent');
+    
+    if (!m || !modalContent) {
+      console.error('🔥 MODAL ELEMENTS NOT FOUND!', { modal: !!m, content: !!modalContent });
+      return;
+    }
+    
+    console.log('🔥 bookingModal element:', m);
+    
+    currentStep = 1;
+    formData.selectedPack = plan || '';
+    
+    // Cacher WhatsApp widget si présent
+    var whatsappWidget = document.querySelector('.whatsapp-widget, #whatsapp-widget, [class*="whatsapp"], [id*="whatsapp"]');
+    if (whatsappWidget) {
+      whatsappWidget.style.display = 'none';
+      whatsappWidget.dataset.hiddenByModal = 'true';
+    }
+    
+    // Montrer le modal AVANT de dessiner
+    m.classList.remove('hidden');
+    m.style.display = 'flex';
+    lockScroll();
+    console.log('🔥 Modal shown, now drawing content...');
+    
+    // Force reflow pour que le DOM soit prêt
+    void m.offsetWidth;
+    
+    // Dessiner le contenu avec un petit délai pour assurer le rendering
+    requestAnimationFrame(() => {
+      draw();
+      console.log('🔥 draw() completed');
+      console.log('🔥 Modal content innerHTML length:', modalContent.innerHTML.length);
+      console.log('🔥 Modal should be visible NOW');
+    });
+  } catch (error) {
+    console.error('🔥 ERROR in openModal:', error);
   }
-  
-  console.log('🔥 bookingModal element:', m);
-  
-  currentStep = 1;
-  formData.selectedPack = '';
-  
-  // Cacher WhatsApp widget si présent
-  var whatsappWidget = document.querySelector('.whatsapp-widget, #whatsapp-widget, [class*="whatsapp"], [id*="whatsapp"]');
-  if (whatsappWidget) {
-    whatsappWidget.style.display = 'none';
-    whatsappWidget.dataset.hiddenByModal = 'true';
-  }
-  
-  // Montrer le modal AVANT de dessiner (pour éviter les problèmes de timing)
-  m.classList.remove('hidden');
-  lockScroll();
-  console.log('🔥 Modal shown, now drawing content...');
-  
-  // Force reflow pour que le DOM soit prêt
-  void m.offsetWidth;
-  
-  // Dessiner le contenu
-  draw();
-  console.log('🔥 draw() completed');
-  console.log('🔥 Modal content innerHTML length:', modalContent.innerHTML.length);
-  console.log('🔥 Modal should be visible NOW');
 };
 
 window.closeModal = function() {

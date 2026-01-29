@@ -99,9 +99,8 @@
 /* === BODY === */
 .modal-body {
   flex: 1;
-  overflow-y: auto;
-  overflow-x: hidden;
-  padding: 2rem 1.5rem;
+  overflow: hidden;
+  padding: 1.5rem;
   background: var(--white);
   display: flex;
   flex-direction: column;
@@ -109,12 +108,15 @@
 
 /* === FORM STEP === */
 .form-step {
-  max-width: 1200px;
+  width: 100%;
+  max-width: 1400px;
   margin: 0 auto;
   animation: fadeIn 0.3s ease-out;
   flex: 1;
   display: flex;
   flex-direction: column;
+  overflow-y: auto;
+  overflow-x: hidden;
 }
 
 .step-header {
@@ -465,8 +467,8 @@
 /* === PACK SELECTION === */
 .pack-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 2rem;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
   margin-top: 2rem;
 }
 
@@ -480,12 +482,13 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  min-height: 200px;
 }
 
 .pack-card:hover {
   border-color: var(--void);
   background: rgba(0, 0, 0, 0.02);
-  transform: translateY(-8px);
+  transform: translateY(-4px);
 }
 
 .pack-header {
@@ -780,28 +783,28 @@
 }
 
 .care-box {
-  background: linear-gradient(135deg, rgba(59, 130, 246, 0.08) 0%, rgba(37, 99, 235, 0.12) 100%);
-  border: 2px solid rgba(59, 130, 246, 0.3);
+  background: rgba(0, 0, 0, 0.02);
+  border: 2px solid rgba(0, 0, 0, 0.1);
   padding: 2rem;
   border-radius: 4px;
-  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.1);
 }
 
 .care-title {
   font-size: 1rem;
   font-weight: 800;
   text-transform: uppercase;
-  color: #1e40af;
+  color: var(--void);
   margin-bottom: 0.5rem;
   letter-spacing: 0.05em;
 }
 
 .care-desc {
   font-size: 0.875rem;
-  color: #1e40af;
+  color: var(--void);
   margin-bottom: 1.5rem;
   line-height: 1.6;
   font-weight: 500;
+  opacity: 0.8;
 }
 
 .care-toggle {
@@ -811,22 +814,21 @@
   cursor: pointer;
   padding: 1rem;
   background: rgba(255, 255, 255, 0.8);
-  border: 2px solid rgba(59, 130, 246, 0.2);
+  border: 2px solid rgba(0, 0, 0, 0.15);
   border-radius: 4px;
   transition: all var(--transition-base);
 }
 
 .care-toggle:hover {
   background: rgba(255, 255, 255, 1);
-  border-color: #3b82f6;
-  box-shadow: 0 2px 8px rgba(59, 130, 246, 0.2);
+  border-color: rgba(0, 0, 0, 0.3);
 }
 
 .care-price {
   font-size: 1rem;
   font-weight: 800;
   text-transform: uppercase;
-  color: #1e40af;
+  color: var(--void);
   letter-spacing: 0.05em;
 }
 
@@ -854,8 +856,7 @@
 }
 
 .care-switch.active {
-  background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
-  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2), 0 0 8px rgba(59, 130, 246, 0.4);
+  background: var(--void);
 }
 
 .care-switch.active::after {
@@ -967,13 +968,18 @@
 .step-7 {
   background: var(--void);
   color: var(--white);
-  margin: -2rem -1.5rem;
-  padding: 3rem 1.5rem;
-  min-height: calc(100vh - 200px);
+  margin: -1.5rem;
+  padding: 2rem 1.5rem;
+  min-height: 100%;
+  overflow-y: auto;
 }
 
 .step-7 .step-title {
   color: var(--white);
+}
+
+.step-7 .step-header {
+  border-image: linear-gradient(to right, #FF5500 0%, #FF0000 60%, #660000 100%) 1;
 }
 
 .success-header {
@@ -1432,14 +1438,12 @@
   border-top: 1px solid rgba(0, 0, 0, 0.1);
   padding: 1.5rem var(--spacing-md);
   box-shadow: 0 -5px 20px rgba(0, 0, 0, 0.05);
-}
-
-.modal-actions > div {
-  max-width: 1400px;
-  margin: 0 auto;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  max-width: 1400px;
+  margin: 0 auto;
+  width: 100%;
 }
 
 .btn-back {
@@ -1476,8 +1480,46 @@
 
 .nav-buttons {
   display: flex;
-  gap: 1.5rem;
-  margin-left: auto;
+  gap: 1rem;
+  align-items: center;
+}
+
+.btn-outline {
+  background: none;
+  border: 2px solid var(--void);
+  padding: 0.75rem 1.5rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--void);
+  cursor: pointer;
+  letter-spacing: 0.1em;
+  transition: all var(--transition-fast);
+  border-radius: 4px;
+}
+
+.btn-outline:hover {
+  background: var(--void);
+  color: var(--white);
+}
+
+.btn-primary {
+  background: var(--void);
+  border: 2px solid var(--void);
+  padding: 0.75rem 1.5rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--white);
+  cursor: pointer;
+  letter-spacing: 0.1em;
+  transition: all var(--transition-fast);
+  border-radius: 4px;
+}
+
+.btn-primary:hover {
+  background: transparent;
+  color: var(--void);
 }
 
 /* === RESPONSIVE === */
