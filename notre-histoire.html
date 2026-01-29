@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Notre Histoire - Tomorrow.Online | Qui sommes-nous ?</title>
+  <meta name="description" content="L'histoire de Tomorrow.Online. Une équipe de mercenaires seniors qui révolutionne la création web. Découvrez qui nous sommes et ce qui nous anime.">
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="images/favicon.png">
+  <link rel="apple-touch-icon" href="images/webclip.png">
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700;800;900&family=Syne:wght@700;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+  
+  <!-- CSS -->
+  <link rel="stylesheet" href="css/design-system.css">
+  <link rel="stylesheet" href="css/home.css">
+  <link rel="stylesheet" href="css/formulaire.css">
+  
+  <!-- GSAP -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollToPlugin.min.js"></script>
+  
+  <!-- Lenis Smooth Scroll -->
+  <script src="https://unpkg.com/lenis@1.0.19/dist/lenis.min.js"></script>
+</head>
+<body>
+  
+  <!-- Custom Cursor -->
+  <div class="custom-cursor" id="cursor"></div>
+  
+  <!-- Grid Background -->
+  <div class="bg-grid-fixed"></div>
+  
+  <!-- Header -->
+  <header class="header">
+    <nav class="nav">
+      <div class="nav-logo" onclick="window.location.href='index.html'">
+        <img src="images/TO-logo.webp" alt="Tomorrow.Online" class="logo">
+      </div>
+      
+      <div class="nav-links">
+        <a href="process-24h.html" class="nav-link">Process</a>
+        <a href="realisations.html" class="nav-link">Réalisations</a>
+        <div class="nav-dropdown">
+          <span class="nav-link nav-link-dropdown">
+            Ressources
+            <span class="dropdown-arrow">▼</span>
+          </span>
+          <div class="dropdown-content">
+            <a href="la-vision-tomorrow.html">🔮 Notre Vision</a>
+            <a href="notre-histoire.html">🏢 Qui sommes-nous</a>
+            <a href="comparatif-solutions-web.html">⚡ Comparatif Solutions</a>
+            <a href="migrations.html">🔄 Migrations CMS</a>
+          </div>
+        </div>
+      </div>
+      
+      <div class="nav-cta">
+        <button class="btn btn-primary" onclick="openModal()">
+          Réserver mon créneau
+        </button>
+      </div>
+      
+      <!-- Mobile Menu Button -->
+      <button class="mobile-menu-btn" onclick="toggleMobileMenu()">
+        <span class="hamburger"></span>
+      </button>
+    </nav>
+    
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobileMenu">
+      <a href="process-24h.html">Process</a>
+      <a href="realisations.html">Réalisations</a>
+      <div class="mobile-dropdown" onclick="toggleMobileDropdown(this)">
+        <span>Ressources ▼</span>
+        <div class="mobile-dropdown-content">
+          <a href="la-vision-tomorrow.html">🔮 Notre Vision</a>
+          <a href="notre-histoire.html">🏢 Qui sommes-nous</a>
+          <a href="comparatif-solutions-web.html">⚡ Comparatif Solutions</a>
+          <a href="migrations.html">🔄 Migrations CMS</a>
+        </div>
+      </div>
+      <button class="btn btn-primary" onclick="openModal()">Réserver</button>
+    </div>
+  </header>
+  
+  <!-- Hero Section -->
+  <section class="hero section">
+    <div class="container">
+      <div class="hero-content">
+        <h1 class="hero-title hero-load">
+          VOTRE ÉQUIPE<br>
+          <span class="text-gradient">DE MERCENAIRES</span>
+        </h1>
+        
+        <div class="hero-subtitle hero-load">
+          <p class="hero-text">
+            Seniors only. Boost IA. Human Art.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Squad Section -->
+  <section class="section squad">
+    <div class="container-full">
+      <div class="squad-scroll">
+        <div class="squad-grid">
+          <!-- Le Stratège -->
+          <div class="squad-card">
+            <div class="squad-role font-mono">STRATÉGIE</div>
+            <div class="squad-image">
+              <img src="images/PPTIMTOMORROW.jpeg" alt="Le Stratège">
+            </div>
+            <h3 class="squad-name">Le Stratège</h3>
+            <p class="squad-xp font-mono">15 ans d'XP • Ex-Codir</p>
+            <p class="squad-desc">Il analyse votre marché, trouve la faille et briefe l'IA.</p>
+          </div>
+          
+          <!-- Le Publicitaire -->
+          <div class="squad-card">
+            <div class="squad-role font-mono">COPYWRITING</div>
+            <div class="squad-image">
+              <img src="images/PPARTHURTOMORROW.jpeg" alt="Le Publicitaire">
+            </div>
+            <h3 class="squad-name">Le Publicitaire</h3>
+            <p class="squad-xp font-mono">5 ans d'XP • Focus Vente</p>
+            <p class="squad-desc">Il injecte émotion et psycho de vente.</p>
+          </div>
+          
+          <!-- L'Architecte -->
+          <div class="squad-card">
+            <div class="squad-role font-mono">UX DESIGN</div>
+            <div class="squad-image">
+              <img src="images/PPMARIIATOMORROW.jpeg" alt="L'Architecte">
+            </div>
+            <h3 class="squad-name">L'Architecte</h3>
+            <p class="squad-xp font-mono">5 ans d'XP • Pixel Perfect</p>
+            <p class="squad-desc">Elle ne laisse rien au hasard : UX, Wireframe, CRO.</p>
+          </div>
+          
+          <!-- L'Artiste -->
+          <div class="squad-card">
+            <div class="squad-role font-mono">ART & ASSETS</div>
+            <div class="squad-image">
+              <img src="images/PPHAMIDTOMORROW.png" alt="L'Artiste">
+            </div>
+            <h3 class="squad-name">L'Artiste</h3>
+            <p class="squad-xp font-mono">15 ans d'XP • Brutal Branding</p>
+            <p class="squad-desc">Il crée l'identité visuelle et les assets qui frappent.</p>
+          </div>
+          
+          <!-- La Caporale -->
+          <div class="squad-card">
+            <div class="squad-role font-mono">PILOTAGE</div>
+            <div class="squad-image">
+              <img src="images/PPMARIEFRANCINETOMORROW.jpg" alt="La Caporale">
+            </div>
+            <h3 class="squad-name">La Caporale</h3>
+            <p class="squad-xp font-mono">10 ans d'XP • Ops Master</p>
+            <p class="squad-desc">Elle veille au respect de la deadline et vous appelle pour sabrer le champagne.</p>
+          </div>
+          
+          <!-- La Stack IA -->
+          <div class="squad-card squad-card-ai">
+            <div class="squad-role font-mono">STACK IA</div>
+            <div class="squad-image squad-image-ai">
+              <div class="ai-icon">AI</div>
+            </div>
+            <h3 class="squad-name">La stack IA</h3>
+            <p class="squad-xp font-mono opacity-60">La secret sauce Tomorrow.Online</p>
+            <p class="squad-desc">Chaque expert a paramétré nos IA pendant des semaines pour l'assister dans ses missions.</p>
+          </div>
+        </div>
+      </div>
+      
+      <div style="text-align: center; margin-top: 4rem;">
+        <button class="btn btn-primary btn-large" onclick="openModal()">
+          > Travailler avec cette équipe
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <img src="images/TO-logo.webp" alt="Tomorrow.Online" class="footer-logo">
+          <p class="footer-tagline font-mono">
+            La première agence web "NO-WAIT" en France.<br>
+            Designed for speed. Powered by intelligence.
+          </p>
+        </div>
+        
+        <div class="footer-links">
+          <h4 class="footer-title font-mono">Services</h4>
+          <ul class="footer-list">
+            <li><a href="process-24h.html">Process 24H</a></li>
+            <li><a href="realisations.html">Réalisations</a></li>
+            <li><a href="comparatif-solutions-web.html">Comparatif</a></li>
+            <li><a href="migrations.html">Migrations</a></li>
+          </ul>
+        </div>
+        
+        <div class="footer-links">
+          <h4 class="footer-title font-mono">À Propos</h4>
+          <ul class="footer-list">
+            <li><a href="la-vision-tomorrow.html">La Vision</a></li>
+            <li><a href="notre-histoire.html">Notre Histoire</a></li>
+            <li><a href="detail_sprints.html">Détails Sprints</a></li>
+            <li><a href="detail_integrations.html">Intégrations</a></li>
+          </ul>
+        </div>
+        
+        <div class="footer-links">
+          <h4 class="footer-title font-mono">Réseau & Contact</h4>
+          <ul class="footer-list">
+            <li><a href="https://www.bigneurons.com" target="_blank">Groupe Big Neurons <span class="external-icon">↗</span></a></li>
+            <li><a href="mentions-legales.html">Mentions Légales</a></li>
+            <li><a href="mailto:hello@tomorrow.online">Contact Ops</a></li>
+          </ul>
+        </div>
+      </div>
+      
+      <div class="footer-bottom">
+        <p class="footer-copyright font-mono">
+          © 2026 TOMORROW AGENCY. UNE MARQUE DE SAS BIG NEURONS. TOMORROW.ONLINE EST LA PREMIÈRE AGENCE WEB "NO-WAIT" EN FRANCE. DESIGNED FOR SPEED. POWERED BY INTELLIGENCE.
+        </p>
+        <div class="footer-status font-mono">
+          SYSTEM STATUS: OPERATIONAL
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Modal Formulaire 7 Étapes -->
+  <div id="bookingModal" class="modal hidden">
+    <div class="modal-overlay" onclick="window.closeModal()"></div>
+    <div class="modal-container">
+      <div id="modalContent" class="modal-content">
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="js/cursor.js"></script>
+  <script src="js/animations.js"></script>
+  <script src="js/navigation.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/formulaire.js"></script>
+  <script src="js/submit-netlify.js"></script>
+  
+  <script>
+    if (typeof initCursor === 'function') initCursor();
+    if (typeof initAnimations === 'function') initAnimations();
+    if (typeof initSmoothScroll === 'function') initSmoothScroll();
+  </script>
+  
+</body>
+</html>
