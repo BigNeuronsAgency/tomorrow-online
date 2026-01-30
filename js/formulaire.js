@@ -955,6 +955,7 @@ window.openModal = function(plan) {
     document.body.style.top = `-${scrollY}px`;
     document.body.style.width = '100%';
     document.body.dataset.scrollPosition = scrollY;
+    document.body.classList.add('modal-open');
     
     // Stop GSAP animations
     if (typeof gsap !== 'undefined') {
@@ -1005,6 +1006,7 @@ window.closeModal = function() {
   document.body.style.position = '';
   document.body.style.top = '';
   document.body.style.width = '';
+  document.body.classList.remove('modal-open');
   window.scrollTo(0, parseInt(scrollY, 10));
   
   unlockScroll();

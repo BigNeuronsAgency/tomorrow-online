@@ -46,7 +46,7 @@
 }
 
 /* Cacher le toggle quand formulaire ouvert */
-#bookingModal:not(.hidden) ~ * .theme-toggle {
+body.modal-open .theme-toggle {
   display: none !important;
 }
 
