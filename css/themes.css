@@ -1,0 +1,323 @@
+/* ========================================
+   THEME SYSTEM - DARK / WHITE / RAINBOW
+   ======================================== */
+
+/* Theme Toggle Button */
+.theme-toggle {
+  position: fixed;
+  top: 24px;
+  right: 24px;
+  z-index: 9999;
+  display: flex;
+  gap: 12px;
+  background: rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(10px);
+  padding: 8px 12px;
+  border-radius: 50px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.theme-toggle .label {
+  display: flex;
+  cursor: pointer;
+}
+
+.theme-toggle .label input {
+  display: none;
+}
+
+.theme-toggle .label .check {
+  width: 36px;
+  height: 36px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.05);
+  font-size: 18px;
+}
+
+.theme-toggle .label .check:hover {
+  border-color: #FF5500;
+  background: rgba(255, 85, 0, 0.1);
+  transform: scale(1.05);
+}
+
+.theme-toggle .label input:checked + .check {
+  border-color: #FF5500;
+  background: rgba(255, 85, 0, 0.2);
+  box-shadow: 
+    0 0 20px rgba(255, 85, 0, 0.4),
+    inset 0 2px 4px rgba(0, 0, 0, 0.3);
+  transform: scale(1.1);
+}
+
+/* ========================================
+   WHITE MODE
+   ======================================== */
+
+body[data-theme="white"] {
+  background: #FFFFFF !important;
+  color: #000000 !important;
+}
+
+/* Backgrounds blancs → noirs et vice-versa */
+body[data-theme="white"] .hero,
+body[data-theme="white"] section,
+body[data-theme="white"] .content-section {
+  background: #FFFFFF !important;
+}
+
+body[data-theme="white"] .header,
+body[data-theme="white"] .footer {
+  background: #FFFFFF !important;
+  border-color: #E5E5E5 !important;
+}
+
+/* Textes blancs → noirs */
+body[data-theme="white"] h1,
+body[data-theme="white"] h2,
+body[data-theme="white"] h3,
+body[data-theme="white"] h4,
+body[data-theme="white"] h5,
+body[data-theme="white"] h6,
+body[data-theme="white"] p,
+body[data-theme="white"] span,
+body[data-theme="white"] li,
+body[data-theme="white"] a,
+body[data-theme="white"] .text-white,
+body[data-theme="white"] .nav-link {
+  color: #000000 !important;
+}
+
+/* Éléments noirs → blancs */
+body[data-theme="white"] .pricing-card,
+body[data-theme="white"] .modal-overlay {
+  background: #F5F5F5 !important;
+}
+
+/* Bordures */
+body[data-theme="white"] .pricing-card,
+body[data-theme="white"] .team-member,
+body[data-theme="white"] .value-item {
+  border-color: #E5E5E5 !important;
+}
+
+/* Buttons outline blanc → noir */
+body[data-theme="white"] .btn-outline {
+  border-color: #000000 !important;
+  color: #000000 !important;
+}
+
+body[data-theme="white"] .btn-outline:hover {
+  background: #000000 !important;
+  color: #FFFFFF !important;
+}
+
+/* Logo inversion */
+body[data-theme="white"] .logo,
+body[data-theme="white"] img[src*="logo"] {
+  filter: invert(1) brightness(0);
+}
+
+/* Cursor custom */
+body[data-theme="white"] .cursor {
+  border-color: #000000 !important;
+}
+
+body[data-theme="white"] .cursor-dot {
+  background: #000000 !important;
+}
+
+/* Timeline */
+body[data-theme="white"] .timeline-item {
+  border-color: #E5E5E5 !important;
+}
+
+body[data-theme="white"] .year {
+  color: #FF5500 !important;
+}
+
+/* Venn diagrams */
+body[data-theme="white"] .venn-circle {
+  background: #F0F0F0 !important;
+  border-color: #000000 !important;
+  color: #000000 !important;
+}
+
+body[data-theme="white"] .venn-bad .venn-center {
+  background: #8B5A3C !important;
+  color: #FFFFFF !important;
+}
+
+/* ========================================
+   RAINBOW MODE (PSYCHEDELIC)
+   ======================================== */
+
+@keyframes rainbow-bg {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes rainbow-text {
+  0% { color: #FF0080; }
+  14% { color: #FF0000; }
+  28% { color: #FF8000; }
+  42% { color: #FFFF00; }
+  57% { color: #00FF00; }
+  71% { color: #00FFFF; }
+  85% { color: #0080FF; }
+  100% { color: #FF0080; }
+}
+
+@keyframes rainbow-border {
+  0% { border-color: #FF0080; }
+  14% { border-color: #FF0000; }
+  28% { border-color: #FF8000; }
+  42% { border-color: #FFFF00; }
+  57% { border-color: #00FF00; }
+  71% { border-color: #00FFFF; }
+  85% { border-color: #0080FF; }
+  100% { border-color: #FF0080; }
+}
+
+body[data-theme="rainbow"] {
+  background: linear-gradient(
+    45deg,
+    #FF0080 0%,
+    #FF8000 25%,
+    #FFFF00 50%,
+    #00FF00 75%,
+    #00FFFF 100%
+  ) !important;
+  background-size: 400% 400% !important;
+  animation: rainbow-bg 8s ease infinite !important;
+}
+
+body[data-theme="rainbow"] .header,
+body[data-theme="rainbow"] .footer {
+  background: rgba(0, 0, 0, 0.8) !important;
+  backdrop-filter: blur(20px) saturate(180%) !important;
+  border: 2px solid !important;
+  animation: rainbow-border 3s linear infinite !important;
+}
+
+body[data-theme="rainbow"] h1,
+body[data-theme="rainbow"] h2,
+body[data-theme="rainbow"] .hero-title {
+  animation: rainbow-text 3s linear infinite !important;
+  text-shadow: 
+    0 0 10px currentColor,
+    0 0 20px currentColor,
+    0 0 40px currentColor !important;
+}
+
+body[data-theme="rainbow"] .pricing-card,
+body[data-theme="rainbow"] .team-member,
+body[data-theme="rainbow"] .value-item {
+  background: rgba(0, 0, 0, 0.7) !important;
+  border: 2px solid !important;
+  animation: rainbow-border 4s linear infinite !important;
+  backdrop-filter: blur(10px) !important;
+}
+
+body[data-theme="rainbow"] .btn-primary {
+  background: linear-gradient(
+    90deg,
+    #FF0080 0%,
+    #FF8000 50%,
+    #FF0080 100%
+  ) !important;
+  background-size: 200% 100% !important;
+  animation: rainbow-bg 2s linear infinite !important;
+  border: none !important;
+  box-shadow: 
+    0 0 20px rgba(255, 0, 128, 0.6),
+    0 0 40px rgba(255, 128, 0, 0.4) !important;
+}
+
+body[data-theme="rainbow"] .btn-outline {
+  border: 2px solid !important;
+  animation: rainbow-border 3s linear infinite !important;
+  background: rgba(0, 0, 0, 0.5) !important;
+}
+
+body[data-theme="rainbow"] .logo,
+body[data-theme="rainbow"] img[src*="logo"] {
+  filter: 
+    hue-rotate(0deg) 
+    saturate(200%) 
+    brightness(1.2);
+  animation: rainbow-hue 4s linear infinite;
+}
+
+@keyframes rainbow-hue {
+  0% { filter: hue-rotate(0deg) saturate(200%) brightness(1.2); }
+  100% { filter: hue-rotate(360deg) saturate(200%) brightness(1.2); }
+}
+
+body[data-theme="rainbow"] .cursor {
+  border-color: #FF0080 !important;
+  animation: rainbow-border 2s linear infinite !important;
+  box-shadow: 0 0 20px currentColor !important;
+}
+
+body[data-theme="rainbow"] .cursor-dot {
+  background: #FF0080 !important;
+  animation: rainbow-border 2s linear infinite !important;
+  box-shadow: 0 0 10px currentColor !important;
+}
+
+/* Venn diagrams rainbow */
+body[data-theme="rainbow"] .venn-circle {
+  border: 3px solid !important;
+  animation: rainbow-border 3s linear infinite !important;
+  background: rgba(0, 0, 0, 0.6) !important;
+  backdrop-filter: blur(10px) !important;
+}
+
+body[data-theme="rainbow"] .venn-center {
+  animation: rainbow-text 2s linear infinite !important;
+  text-shadow: 0 0 20px currentColor !important;
+}
+
+/* Marquee rainbow */
+body[data-theme="rainbow"] .marquee-text {
+  animation: rainbow-text 4s linear infinite !important;
+}
+
+/* Timeline rainbow */
+body[data-theme="rainbow"] .timeline-item {
+  border: 2px solid !important;
+  animation: rainbow-border 5s linear infinite !important;
+}
+
+body[data-theme="rainbow"] .year {
+  animation: rainbow-text 3s linear infinite !important;
+}
+
+/* Modal rainbow */
+body[data-theme="rainbow"] .modal-overlay {
+  background: rgba(0, 0, 0, 0.9) !important;
+  backdrop-filter: blur(20px) saturate(200%) !important;
+}
+
+body[data-theme="rainbow"] .modal-content {
+  border: 3px solid !important;
+  animation: rainbow-border 4s linear infinite !important;
+  background: rgba(0, 0, 0, 0.8) !important;
+}
+
+/* Theme toggle en rainbow mode */
+body[data-theme="rainbow"] .theme-toggle {
+  border: 2px solid !important;
+  animation: rainbow-border 2s linear infinite !important;
+  background: rgba(0, 0, 0, 0.8) !important;
+  box-shadow: 
+    0 0 20px rgba(255, 0, 128, 0.4),
+    0 0 40px rgba(0, 255, 255, 0.2) !important;
+}

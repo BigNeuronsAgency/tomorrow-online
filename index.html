@@ -19,6 +19,7 @@
   <link rel="stylesheet" href="css/design-system.css">
   <link rel="stylesheet" href="css/home.css">
   <link rel="stylesheet" href="css/formulaire.css">
+  <link rel="stylesheet" href="css/themes.css">
   
   <!-- GSAP -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
@@ -29,6 +30,22 @@
   <script src="https://unpkg.com/lenis@1.0.19/dist/lenis.min.js"></script>
 </head>
 <body>
+  
+  <!-- Theme Toggle -->
+  <div class="theme-toggle">
+    <label class="label">
+      <input type="radio" name="theme" value="dark" checked>
+      <span class="check" title="Mode Sombre">🌙</span>
+    </label>
+    <label class="label">
+      <input type="radio" name="theme" value="white">
+      <span class="check" title="Mode Clair">☀️</span>
+    </label>
+    <label class="label">
+      <input type="radio" name="theme" value="rainbow">
+      <span class="check" title="Mode Arc-en-ciel">🌈</span>
+    </label>
+  </div>
   
   <!-- Custom Cursor -->
   <div class="custom-cursor" id="cursor"></div>
@@ -942,6 +959,7 @@
   </div>
 
   <!-- Scripts -->
+  <script src="js/themes.js"></script>
   <script src="js/cursor.js"></script>
   <script src="js/animations.js"></script>
   <script src="js/navigation.js"></script>
