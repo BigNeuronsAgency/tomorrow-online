@@ -522,8 +522,8 @@ html.lenis {
   gap: 20px;
 }
 
-/* Centrer le toggle entre Ressources et CTA */
+/* Centrer le toggle entre Ressources et CTA - Home */
 .nav-links .theme-toggle {
-  margin-left: 3rem;
-  margin-right: 3rem;
+  margin-left: 4rem;
+  margin-right: 2rem;
 }
