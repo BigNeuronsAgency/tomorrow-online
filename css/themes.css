@@ -30,12 +30,12 @@ body > .theme-toggle {
   margin: 0 !important;
   padding: 0.5rem !important;
   border-radius: 8px !important;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3) !important;
 }
 
 /* Fond noir uniquement en white mode */
 body[data-theme="white"] > .theme-toggle {
-  background: rgba(0, 0, 0, 0.9) !important;
+  background: rgba(0, 0, 0, 0.95) !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4) !important;
 }
 
 .theme-toggle .label {
@@ -111,6 +111,18 @@ body[data-theme="white"] div:not(.pricing-card):not(.pricing-card-popular):not(.
 /* Dropdown - AUCUNE RÈGLE (reste identique au dark) */
 
 /* Footer - AUCUNE RÈGLE (reste identique au dark) */
+
+/* FORCE: Footer TOUJOURS comme dark mode */
+body[data-theme="white"] .footer,
+body[data-theme="white"] .footer *,
+body[data-theme="rainbow"] .footer,
+body[data-theme="rainbow"] .footer * {
+  background-color: revert !important;
+  color: revert !important;
+  border-color: revert !important;
+  opacity: revert !important;
+  filter: none !important;
+}
 
 /* Textes noirs SAUF éléments spéciaux ET FORMULAIRE ET HEADER ET FOOTER ET MARQUEE */
 body[data-theme="white"] h1:not(.pricing-card h1):not(.pricing-card-popular h1):not(.modal h1):not(#bookingModal h1):not(.header h1):not(.footer h1):not(.marquee h1),
