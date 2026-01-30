@@ -1787,6 +1787,32 @@
   -webkit-text-fill-color: transparent;
 }
 
+/* Footer Build Info */
+.footer-build-info {
+  text-align: center;
+  margin: 3rem 0;
+  padding: 2rem;
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+}
+
+.build-badge {
+  font-size: 1.125rem;
+  font-weight: 700;
+  background: linear-gradient(to right, #FF5500 0%, #FF0000 60%, #660000 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 1rem;
+  text-transform: uppercase;
+}
+
+.stack-tech {
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.4);
+  letter-spacing: 0.1em;
+}
+
 /* Video Modal */
 .video-modal-content {
   position: relative;
