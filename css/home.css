@@ -1924,6 +1924,11 @@
   cursor: pointer;
 }
 
+/* Ne pas fermer la modale si c'est le formulaire */
+#modalFormulaire .modal-overlay {
+  pointer-events: none;
+}
+
 .modal-container {
   position: relative;
   z-index: 1;

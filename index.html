@@ -1043,7 +1043,11 @@
       const modal = document.getElementById(modalId);
       if(modal) {
         modal.classList.remove('hidden');
-        if(window.lenis) window.lenis.stop();
+        if(window.lenis) {
+          setTimeout(() => {
+            if(window.lenis && window.lenis.stop) window.lenis.stop();
+          }, 100);
+        }
       }
     }
 
@@ -1051,7 +1055,11 @@
       const modal = document.getElementById(modalId);
       if(modal) {
         modal.classList.add('hidden');
-        if(window.lenis) window.lenis.start();
+        if(window.lenis) {
+          setTimeout(() => {
+            if(window.lenis && window.lenis.start) window.lenis.start();
+          }, 100);
+        }
       }
     }
     
