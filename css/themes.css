@@ -24,10 +24,14 @@
 /* Toggle fixe sur pages secondaires (body direct child) */
 body > .theme-toggle {
   position: fixed !important;
-  top: 1.5rem !important;
+  top: 2rem !important;
   right: 18rem !important;
   z-index: 1000 !important;
   margin: 0 !important;
+  padding: 0.5rem !important;
+  background: rgba(0, 0, 0, 0.9) !important;
+  border-radius: 8px !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3) !important;
 }
 
 .theme-toggle .label {
@@ -87,14 +91,14 @@ body[data-theme="white"] body {
   background: #FAF9F6 !important;
 }
 
-body[data-theme="white"] section:not(.header):not(.footer):not(#bookingModal):not(#bookingModal *),
-body[data-theme="white"] .content-section:not(.footer):not(.footer *),
-body[data-theme="white"] .hero:not(.footer):not(.footer *),
-body[data-theme="white"] main:not(.footer):not(.footer *),
-body[data-theme="white"] article:not(.footer):not(.footer *),
-body[data-theme="white"] .page-wrapper:not(.footer):not(.footer *),
-body[data-theme="white"] .container:not(.footer):not(.footer *),
-body[data-theme="white"] div:not(.pricing-card):not(.pricing-card-popular):not(.pricing-card *):not(.pricing-card-popular *):not(#bookingModal):not(#bookingModal *):not(.modal):not(.modal *):not(.header):not(.header *):not(.footer):not(.footer *):not(.dropdown-content):not(.dropdown-content *) {
+body[data-theme="white"] section:not(.header):not(.footer):not(#bookingModal):not(#bookingModal *):not(.marquee),
+body[data-theme="white"] .content-section:not(.footer):not(.footer *):not(.marquee):not(.marquee *),
+body[data-theme="white"] .hero:not(.footer):not(.footer *):not(.marquee):not(.marquee *),
+body[data-theme="white"] main:not(.footer):not(.footer *):not(.marquee):not(.marquee *),
+body[data-theme="white"] article:not(.footer):not(.footer *):not(.marquee):not(.marquee *),
+body[data-theme="white"] .page-wrapper:not(.footer):not(.footer *):not(.marquee):not(.marquee *),
+body[data-theme="white"] .container:not(.footer):not(.footer *):not(.marquee):not(.marquee *),
+body[data-theme="white"] div:not(.pricing-card):not(.pricing-card-popular):not(.pricing-card *):not(.pricing-card-popular *):not(#bookingModal):not(#bookingModal *):not(.modal):not(.modal *):not(.header):not(.header *):not(.footer):not(.footer *):not(.dropdown-content):not(.dropdown-content *):not(.marquee):not(.marquee *) {
   background: #FAF9F6 !important;
 }
 
@@ -104,20 +108,21 @@ body[data-theme="white"] div:not(.pricing-card):not(.pricing-card-popular):not(.
 
 /* Footer - AUCUNE RÈGLE (reste identique au dark) */
 
-/* Textes noirs SAUF éléments spéciaux ET FORMULAIRE ET HEADER ET FOOTER */
-body[data-theme="white"] h1:not(.pricing-card h1):not(.pricing-card-popular h1):not(.modal h1):not(#bookingModal h1):not(.header h1):not(.footer h1),
-body[data-theme="white"] h2:not(.pricing-card h2):not(.pricing-card-popular h2):not(.modal h2):not(#bookingModal h2):not(.header h2):not(.footer h2),
-body[data-theme="white"] h3:not(.pricing-card h3):not(.pricing-card-popular h3):not(.modal h3):not(#bookingModal h3):not(.header h3):not(.footer h3),
-body[data-theme="white"] h4:not(.modal h4):not(#bookingModal h4):not(.header h4):not(.footer h4),
-body[data-theme="white"] h5:not(.modal h5):not(#bookingModal h5):not(.header h5):not(.footer h5),
-body[data-theme="white"] h6:not(.modal h6):not(#bookingModal h6):not(.header h6):not(.footer h6),
-body[data-theme="white"] p:not(.pricing-card p):not(.pricing-card-popular p):not(.footer p):not(.modal p):not(#bookingModal p):not(.header p),
-body[data-theme="white"] li:not(.pricing-card li):not(.pricing-card-popular li):not(.modal li):not(#bookingModal li):not(.header li):not(.footer li),
-body[data-theme="white"] span:not(.pricing-card span):not(.pricing-card-popular span):not(.modal span):not(#bookingModal span):not(.header span):not(.footer span),
-body[data-theme="white"] label:not(.modal label):not(#bookingModal label):not(.header label):not(.footer label),
-body[data-theme="white"] input:not(.modal input):not(#bookingModal input):not(.header input):not(.footer input),
-body[data-theme="white"] button:not(.modal button):not(#bookingModal button):not(.header button):not(.footer button),
-body[data-theme="white"] a:not(.pricing-card a):not(.pricing-card-popular a):not(.modal a):not(#bookingModal a):not(.header a):not(.footer a):not(.dropdown-content a) {
+/* Textes noirs SAUF éléments spéciaux ET FORMULAIRE ET HEADER ET FOOTER ET MARQUEE */
+body[data-theme="white"] h1:not(.pricing-card h1):not(.pricing-card-popular h1):not(.modal h1):not(#bookingModal h1):not(.header h1):not(.footer h1):not(.marquee h1),
+body[data-theme="white"] h2:not(.pricing-card h2):not(.pricing-card-popular h2):not(.modal h2):not(#bookingModal h2):not(.header h2):not(.footer h2):not(.marquee h2),
+body[data-theme="white"] h3:not(.pricing-card h3):not(.pricing-card-popular h3):not(.modal h3):not(#bookingModal h3):not(.header h3):not(.footer h3):not(.marquee h3),
+body[data-theme="white"] h4:not(.modal h4):not(#bookingModal h4):not(.header h4):not(.footer h4):not(.marquee h4),
+body[data-theme="white"] h5:not(.modal h5):not(#bookingModal h5):not(.header h5):not(.footer h5):not(.marquee h5),
+body[data-theme="white"] h6:not(.modal h6):not(#bookingModal h6):not(.header h6):not(.footer h6):not(.marquee h6),
+body[data-theme="white"] p:not(.pricing-card p):not(.pricing-card-popular p):not(.footer p):not(.modal p):not(#bookingModal p):not(.header p):not(.marquee p),
+body[data-theme="white"] li:not(.pricing-card li):not(.pricing-card-popular li):not(.modal li):not(#bookingModal li):not(.header li):not(.footer li):not(.marquee li),
+body[data-theme="white"] span:not(.pricing-card span):not(.pricing-card-popular span):not(.modal span):not(#bookingModal span):not(.header span):not(.footer span):not(.marquee span),
+body[data-theme="white"] label:not(.modal label):not(#bookingModal label):not(.header label):not(.footer label):not(.marquee label),
+body[data-theme="white"] input:not(.modal input):not(#bookingModal input):not(.header input):not(.footer input):not(.marquee input),
+body[data-theme="white"] button:not(.modal button):not(#bookingModal button):not(.header button):not(.footer button):not(.marquee button),
+body[data-theme="white"] a:not(.pricing-card a):not(.pricing-card-popular a):not(.modal a):not(#bookingModal a):not(.header a):not(.footer a):not(.dropdown-content a):not(.marquee a),
+body[data-theme="white"] div:not(.pricing-card):not(.pricing-card-popular):not(.pricing-card *):not(.pricing-card-popular *):not(#bookingModal):not(#bookingModal *):not(.modal):not(.modal *):not(.header):not(.header *):not(.footer):not(.footer *):not(.dropdown-content):not(.dropdown-content *):not(.marquee):not(.marquee *) {
   color: #000000 !important;
 }
 
