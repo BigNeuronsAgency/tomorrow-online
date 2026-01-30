@@ -4,17 +4,9 @@
 
 /* Theme Toggle Button */
 .theme-toggle {
-  position: fixed;
-  top: 24px;
-  right: 24px;
-  z-index: 9999;
   display: flex;
-  gap: 12px;
-  background: rgba(0, 0, 0, 0.3);
-  backdrop-filter: blur(10px);
-  padding: 8px 12px;
-  border-radius: 50px;
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  gap: 8px;
+  align-items: center;
 }
 
 .theme-toggle .label {
@@ -27,8 +19,8 @@
 }
 
 .theme-toggle .label .check {
-  width: 36px;
-  height: 36px;
+  width: 28px;
+  height: 28px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -37,7 +29,7 @@
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   border: 2px solid rgba(255, 255, 255, 0.2);
   background: rgba(255, 255, 255, 0.05);
-  font-size: 18px;
+  font-size: 14px;
 }
 
 .theme-toggle .label .check:hover {
@@ -49,11 +41,352 @@
 .theme-toggle .label input:checked + .check {
   border-color: #FF5500;
   background: rgba(255, 85, 0, 0.2);
-  box-shadow: 
-    0 0 20px rgba(255, 85, 0, 0.4),
-    inset 0 2px 4px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 0 12px rgba(255, 85, 0, 0.3);
   transform: scale(1.1);
 }
+
+/* Cacher le toggle dans le formulaire */
+#bookingModal:not(.hidden) ~ .header .theme-toggle,
+body:has(#bookingModal:not(.hidden)) .theme-toggle {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* ========================================
+   WHITE MODE
+   ======================================== */
+
+body[data-theme="white"] {
+  background: #FFFFFF !important;
+  color: #000000 !important;
+}
+
+/* Backgrounds */
+body[data-theme="white"] section,
+body[data-theme="white"] .content-section,
+body[data-theme="white"] .hero {
+  background: #FFFFFF !important;
+}
+
+body[data-theme="white"] .header {
+  background: rgba(255, 255, 255, 0.95) !important;
+  backdrop-filter: blur(20px) !important;
+  border-bottom: 1px solid #E5E5E5 !important;
+}
+
+body[data-theme="white"] .footer {
+  background: #F8F8F8 !important;
+  border-top: 1px solid #E5E5E5 !important;
+}
+
+/* Textes */
+body[data-theme="white"] h1,
+body[data-theme="white"] h2,
+body[data-theme="white"] h3,
+body[data-theme="white"] h4,
+body[data-theme="white"] h5,
+body[data-theme="white"] h6,
+body[data-theme="white"] p,
+body[data-theme="white"] span:not(.badge):not(.popular-badge):not(.pricing-badge),
+body[data-theme="white"] li,
+body[data-theme="white"] a,
+body[data-theme="white"] .nav-link {
+  color: #000000 !important;
+}
+
+/* Logo en white mode - JUSTE inversion */
+body[data-theme="white"] .logo img,
+body[data-theme="white"] img[src*="logo"] {
+  filter: brightness(0) invert(0);
+}
+
+/* Pricing cards */
+body[data-theme="white"] .pricing-card {
+  background: #FFFFFF !important;
+  border: 2px solid #E5E5E5 !important;
+}
+
+body[data-theme="white"] .pricing-card-popular {
+  border: 2px solid #FF5500 !important;
+  box-shadow: 0 0 40px rgba(255, 85, 0, 0.15) !important;
+}
+
+body[data-theme="white"] .popular-badge {
+  background: #FF5500 !important;
+  color: #FFFFFF !important;
+}
+
+body[data-theme="white"] .pricing-badge {
+  color: #000000 !important;
+}
+
+body[data-theme="white"] .pricing-badge-light {
+  background: #FF5500 !important;
+  color: #FFFFFF !important;
+}
+
+/* Buttons */
+body[data-theme="white"] .btn-outline {
+  border-color: #000000 !important;
+  color: #000000 !important;
+  background: transparent !important;
+}
+
+body[data-theme="white"] .btn-outline:hover {
+  background: #000000 !important;
+  color: #FFFFFF !important;
+}
+
+body[data-theme="white"] .btn-primary {
+  background: #FF5500 !important;
+  color: #FFFFFF !important;
+}
+
+/* Footer liens */
+body[data-theme="white"] .footer-link {
+  color: #666666 !important;
+}
+
+body[data-theme="white"] .footer-link:hover {
+  color: #FF5500 !important;
+}
+
+body[data-theme="white"] .footer-title {
+  color: #000000 !important;
+}
+
+/* Texte "Comment on voit les acheteurs" */
+body[data-theme="white"] .text-gray-400,
+body[data-theme="white"] .text-gray-500,
+body[data-theme="white"] .text-gray-600 {
+  color: #666666 !important;
+}
+
+/* Cursor */
+body[data-theme="white"] .cursor {
+  border-color: #000000 !important;
+}
+
+body[data-theme="white"] .cursor-dot {
+  background: #000000 !important;
+}
+
+/* Timeline */
+body[data-theme="white"] .timeline-item {
+  border-color: #E5E5E5 !important;
+}
+
+body[data-theme="white"] .year {
+  color: #FF5500 !important;
+}
+
+/* Team cards */
+body[data-theme="white"] .team-member {
+  background: #FFFFFF !important;
+  border: 2px solid #E5E5E5 !important;
+}
+
+/* Venn diagrams */
+body[data-theme="white"] .venn-circle {
+  background: #F5F5F5 !important;
+  border-color: #000000 !important;
+  color: #000000 !important;
+}
+
+body[data-theme="white"] .venn-bad .venn-center {
+  background: #8B5A3C !important;
+  color: #FFFFFF !important;
+}
+
+/* Formulaire doit rester en dark */
+body[data-theme="white"] #bookingModal,
+body[data-theme="white"] #bookingModal *,
+body[data-theme="white"] .modal-overlay,
+body[data-theme="white"] .modal-container,
+body[data-theme="white"] .modal-content {
+  background: initial !important;
+  color: initial !important;
+  border-color: initial !important;
+}
+
+/* ========================================
+   RAINBOW MODE (Matrix Style)
+   ======================================== */
+
+@keyframes matrix-rain {
+  0% { transform: translateY(-100%); opacity: 0; }
+  10% { opacity: 1; }
+  90% { opacity: 1; }
+  100% { transform: translateY(100vh); opacity: 0; }
+}
+
+@keyframes matrix-glow {
+  0%, 100% { 
+    text-shadow: 0 0 5px #00ff41, 0 0 10px #00ff41;
+  }
+  50% { 
+    text-shadow: 0 0 10px #00ff41, 0 0 20px #00ff41, 0 0 30px #00ff41;
+  }
+}
+
+@keyframes rainbow-shift {
+  0% { filter: hue-rotate(0deg); }
+  100% { filter: hue-rotate(360deg); }
+}
+
+body[data-theme="rainbow"] {
+  background: #0d0208 !important;
+  color: #00ff41 !important;
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* Matrix background subtle */
+body[data-theme="rainbow"]::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: 
+    linear-gradient(transparent 0%, rgba(0, 255, 65, 0.03) 50%, transparent 100%),
+    repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 2px,
+      rgba(0, 255, 65, 0.03) 2px,
+      rgba(0, 255, 65, 0.03) 4px
+    );
+  pointer-events: none;
+  z-index: 1;
+  animation: matrix-rain 20s linear infinite;
+}
+
+body[data-theme="rainbow"] .header,
+body[data-theme="rainbow"] .footer {
+  background: rgba(13, 2, 8, 0.95) !important;
+  backdrop-filter: blur(10px) !important;
+  border-color: #00ff41 !important;
+  box-shadow: 0 0 20px rgba(0, 255, 65, 0.2) !important;
+}
+
+body[data-theme="rainbow"] h1,
+body[data-theme="rainbow"] h2,
+body[data-theme="rainbow"] .hero-title {
+  color: #00ff41 !important;
+  animation: matrix-glow 2s ease-in-out infinite !important;
+  font-weight: 700 !important;
+}
+
+body[data-theme="rainbow"] h3,
+body[data-theme="rainbow"] h4,
+body[data-theme="rainbow"] h5,
+body[data-theme="rainbow"] h6 {
+  color: #39ff14 !important;
+}
+
+body[data-theme="rainbow"] p,
+body[data-theme="rainbow"] span,
+body[data-theme="rainbow"] li {
+  color: #cccccc !important;
+}
+
+body[data-theme="rainbow"] .pricing-card,
+body[data-theme="rainbow"] .team-member,
+body[data-theme="rainbow"] .value-item {
+  background: rgba(0, 0, 0, 0.8) !important;
+  border: 1px solid #00ff41 !important;
+  box-shadow: 
+    0 0 10px rgba(0, 255, 65, 0.3),
+    inset 0 0 10px rgba(0, 255, 65, 0.05) !important;
+}
+
+body[data-theme="rainbow"] .pricing-card-popular {
+  border: 2px solid #00ff41 !important;
+  box-shadow: 
+    0 0 30px rgba(0, 255, 65, 0.5),
+    inset 0 0 20px rgba(0, 255, 65, 0.1) !important;
+}
+
+body[data-theme="rainbow"] .btn-primary {
+  background: linear-gradient(135deg, #00ff41 0%, #39ff14 100%) !important;
+  color: #000000 !important;
+  border: none !important;
+  box-shadow: 0 0 20px rgba(0, 255, 65, 0.5) !important;
+  font-weight: 700 !important;
+}
+
+body[data-theme="rainbow"] .btn-primary:hover {
+  box-shadow: 0 0 30px rgba(0, 255, 65, 0.8) !important;
+  transform: translateY(-2px);
+}
+
+body[data-theme="rainbow"] .btn-outline {
+  border: 2px solid #00ff41 !important;
+  color: #00ff41 !important;
+  background: rgba(0, 0, 0, 0.5) !important;
+}
+
+body[data-theme="rainbow"] .btn-outline:hover {
+  background: #00ff41 !important;
+  color: #000000 !important;
+}
+
+body[data-theme="rainbow"] .logo,
+body[data-theme="rainbow"] img[src*="logo"] {
+  filter: 
+    brightness(0) 
+    invert(1) 
+    sepia(1) 
+    hue-rotate(60deg) 
+    saturate(1000%);
+}
+
+body[data-theme="rainbow"] .cursor {
+  border-color: #00ff41 !important;
+  box-shadow: 0 0 10px rgba(0, 255, 65, 0.5) !important;
+}
+
+body[data-theme="rainbow"] .cursor-dot {
+  background: #00ff41 !important;
+  box-shadow: 0 0 5px rgba(0, 255, 65, 0.8) !important;
+}
+
+body[data-theme="rainbow"] .venn-circle {
+  border: 2px solid #00ff41 !important;
+  background: rgba(0, 0, 0, 0.6) !important;
+  color: #00ff41 !important;
+  box-shadow: 0 0 15px rgba(0, 255, 65, 0.3) !important;
+}
+
+body[data-theme="rainbow"] .venn-center {
+  color: #00ff41 !important;
+  text-shadow: 0 0 10px #00ff41 !important;
+}
+
+body[data-theme="rainbow"] .year,
+body[data-theme="rainbow"] .text-gradient {
+  color: #00ff41 !important;
+  animation: matrix-glow 2s ease-in-out infinite !important;
+}
+
+body[data-theme="rainbow"] .popular-badge,
+body[data-theme="rainbow"] .pricing-badge-light {
+  background: #00ff41 !important;
+  color: #000000 !important;
+  font-weight: 700 !important;
+}
+
+/* Formulaire doit rester en dark */
+body[data-theme="rainbow"] #bookingModal,
+body[data-theme="rainbow"] #bookingModal *,
+body[data-theme="rainbow"] .modal-overlay,
+body[data-theme="rainbow"] .modal-container,
+body[data-theme="rainbow"] .modal-content {
+  background: initial !important;
+  color: initial !important;
+  border-color: initial !important;
+  animation: none !important;
+}
+
 
 /* ========================================
    WHITE MODE

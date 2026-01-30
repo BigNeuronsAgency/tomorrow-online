@@ -15,8 +15,8 @@
     document.body.setAttribute('data-theme', theme);
     localStorage.setItem('theme', theme);
     
-    // Update radio buttons
-    document.querySelectorAll('.theme-toggle input[type="radio"]').forEach(radio => {
+    // Update tous les radio buttons (desktop + mobile)
+    document.querySelectorAll('input[type="radio"][name^="theme"]').forEach(radio => {
       radio.checked = radio.value === theme;
     });
     
@@ -31,13 +31,12 @@
   document.addEventListener('DOMContentLoaded', function() {
     // S'assurer que le bon radio est checked
     const currentTheme = document.body.getAttribute('data-theme') || 'dark';
-    const radioToCheck = document.querySelector(`.theme-toggle input[value="${currentTheme}"]`);
-    if (radioToCheck) {
-      radioToCheck.checked = true;
-    }
+    document.querySelectorAll('input[type="radio"][name^="theme"]').forEach(radio => {
+      radio.checked = radio.value === currentTheme;
+    });
     
-    // Écouter les changements
-    document.querySelectorAll('.theme-toggle input[type="radio"]').forEach(radio => {
+    // Écouter les changements sur tous les toggles
+    document.querySelectorAll('input[type="radio"][name^="theme"]').forEach(radio => {
       radio.addEventListener('change', function() {
         if (this.checked) {
           setTheme(this.value);
