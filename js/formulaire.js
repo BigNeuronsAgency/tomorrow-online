@@ -930,29 +930,24 @@ window.openModal = function(plan) {
     formData.selectedPack = plan || '';
     
     // Force clear any stale styles/transforms
-    document.body.style.transform = '';
-    document.body.style.filter = '';
-    document.body.style.skewY = '';
+    document.body.style.transform = 'none';
+    document.body.style.filter = 'none';
+    document.body.style.skewY = 'none';
     document.body.style.pointerEvents = '';
+    document.documentElement.style.transform = 'none';
     
     // Stop Lenis smooth scroll with timeout to avoid race
     setTimeout(() => {
       if (window.lenis) {
         try {
           if (typeof window.lenis.stop === 'function') {
-            // Scroll to top AVANT de stopper
-            window.lenis.scrollTo(0, { immediate: true });
             window.lenis.stop();
-            console.log('🔥 Lenis scrolled to top and stopped');
+            console.log('🔥 Lenis stopped');
           }
         } catch (e) {
           console.warn('🔥 Lenis stop error:', e);
         }
       }
-      // Forcer le scroll à 0 aussi en natif
-      window.scrollTo(0, 0);
-      document.documentElement.scrollTop = 0;
-      document.body.scrollTop = 0;
     }, 50);
     
     // Stop GSAP animations
