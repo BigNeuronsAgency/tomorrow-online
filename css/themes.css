@@ -115,54 +115,26 @@ body[data-theme="white"] div:not(.pricing-card):not(.pricing-card-popular):not(.
 
 /* Dropdown - AUCUNE RÈGLE (reste identique au dark) */
 
-/* Textes noirs PARTOUT sauf exceptions */
-body[data-theme="white"] *:not(.stat-value):not(.theme-toggle):not(.theme-toggle *) {
+/* Footer - AUCUNE RÈGLE (reste identique au dark) */
+
+/* Textes NOIRS uniquement sur le CONTENU PRINCIPAL (fond blanc) */
+body[data-theme="white"] main *:not(.pricing-card *):not(.pricing-card-popular *):not(.stat-value),
+body[data-theme="white"] .hero *:not(.stat-value),
+body[data-theme="white"] section:not(.header):not(.footer) *:not(.pricing-card *):not(.pricing-card-popular *):not(.stat-value):not(.marquee *),
+body[data-theme="white"] .realisations-content *:not(.stat-value),
+body[data-theme="white"] .content-section *:not(.stat-value) {
   color: #000000 !important;
-}
-
-/* EXCEPTIONS : Garder en blanc - DOIT VENIR APRÈS pour override */
-body[data-theme="white"] .header *,
-body[data-theme="white"] .footer *,
-body[data-theme="white"] .pricing-card *,
-body[data-theme="white"] .pricing-card-popular *,
-body[data-theme="white"] .marquee *,
-body[data-theme="white"] #bookingModal *,
-body[data-theme="white"] .modal * {
-  color: inherit !important;
-}
-
-/* Footer - FORCE TOUS TEXTES EN BLANC (override le inherit) */
-body[data-theme="white"] .footer h1,
-body[data-theme="white"] .footer h2,
-body[data-theme="white"] .footer h3,
-body[data-theme="white"] .footer h4,
-body[data-theme="white"] .footer p,
-body[data-theme="white"] .footer span,
-body[data-theme="white"] .footer a,
-body[data-theme="white"] .footer li,
-body[data-theme="white"] .footer div,
-body[data-theme="white"] .footer-link,
-body[data-theme="white"] .footer-copyright {
-  color: rgba(255, 255, 255, 0.6) !important;
-}
-
-body[data-theme="white"] .footer-title {
-  color: #FFFFFF !important;
-}
-
-body[data-theme="white"] .footer .build-badge {
-  background: linear-gradient(to right, #FF5500 0%, #FF0000 60%, #660000 100%) !important;
-  -webkit-background-clip: text !important;
-  background-clip: text !important;
-  -webkit-text-fill-color: transparent !important;
 }
 
 /* Restaurer les couleurs spécifiques nécessaires */
 body[data-theme="white"] .accent,
-body[data-theme="white"] .text-gradient,
-body[data-theme="white"] .year {
+body[data-theme="white"] .text-gradient {
   color: #FF5500 !important;
   -webkit-text-fill-color: unset !important;
+}
+
+body[data-theme="white"] .year {
+  color: #FF5500 !important;
 }
 
 /* Pricing cards IDENTIQUES mode dark */
