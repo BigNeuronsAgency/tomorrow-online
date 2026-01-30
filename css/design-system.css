@@ -16,7 +16,7 @@
 /* === VARIABLES === */
 :root {
   /* Couleurs principales */
-  --void: #000000;
+  --void: #202020;
   --void-soft: #0A0A0A;
   --white: #FFFFFF;
   --white-soft: #EAEAEA;
@@ -140,18 +140,16 @@ p {
 .btn-primary {
   background: var(--gradient-main);
   color: var(--white);
-  box-shadow: 0 4px 0 0 var(--gradient-violet);
 }
 
 .btn-primary:hover {
   transform: translateY(-2px);
-  box-shadow: 0 8px 0 0 var(--gradient-violet),
-              0 12px 30px rgba(180, 7, 254, 0.4);
+  box-shadow: 0 4px 12px rgba(255, 85, 0, 0.4);
 }
 
 .btn-primary:active {
-  transform: translateY(2px);
-  box-shadow: 0 2px 0 0 var(--gradient-violet);
+  transform: translateY(0);
+  box-shadow: none;
 }
 
 .btn-outline {
