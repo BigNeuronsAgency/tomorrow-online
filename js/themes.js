@@ -1,5 +1,5 @@
 // ========================================
-// THEME SYSTEM - DARK / WHITE / RAINBOW
+// THEME SYSTEM - DARK / RAINBOW UNIQUEMENT
 // ========================================
 
 (function() {
@@ -15,25 +15,14 @@
     document.body.setAttribute('data-theme', theme);
     localStorage.setItem('theme', theme);
     
-    // Update tous les radio buttons (desktop + mobile)
+    // Update tous les radio buttons
     document.querySelectorAll('input[type="radio"][name^="theme"]').forEach(radio => {
       radio.checked = radio.value === theme;
     });
-    
-    // Pas d'effet de transition (respiration désactivée)
   };
-  
-  // Afficher les actions mobiles sur petit écran
-  function updateMobileActions() {
-    const mobileActions = document.querySelector('.mobile-bottom-actions');
-    if (mobileActions) {
-      mobileActions.style.display = window.innerWidth <= 768 ? 'flex' : 'none';
-    }
-  }
   
   // Init au chargement
   document.addEventListener('DOMContentLoaded', function() {
-    // S'assurer que le bon radio est checked
     const currentTheme = document.body.getAttribute('data-theme') || 'dark';
     document.querySelectorAll('input[type="radio"][name^="theme"]').forEach(radio => {
       radio.checked = radio.value === currentTheme;
@@ -47,12 +36,5 @@
         }
       });
     });
-    
-    // Gérer l'affichage mobile
-    updateMobileActions();
-    window.addEventListener('resize', updateMobileActions);
-    
-    console.log('🎨 Theme system initialized. Current theme:', currentTheme);
   });
-  
 })();
