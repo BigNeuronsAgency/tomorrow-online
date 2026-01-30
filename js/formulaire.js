@@ -11,8 +11,8 @@ var countdownTimer = null;
 var countdownStarted = false;
 
 // Form action URLs
-const FORM_ACTION_URL = '/.netlify/functions/submit-brief';
-const FORM_ACTION_URL_UPSELL = '/.netlify/functions/submit-brief';
+const FORM_ACTION_URL = 'https://formspree.io/f/YOUR_FORM_ID'; // À configurer
+const FORM_ACTION_URL_UPSELL = 'https://formspree.io/f/YOUR_FORM_ID'; // À configurer
 const BRAND_RED = '#FF3333';
 
 // Data constants
