@@ -524,6 +524,6 @@ html.lenis {
 
 /* Centrer le toggle entre Ressources et CTA - Home */
 .nav-links .theme-toggle {
-  margin-left: 4rem;
-  margin-right: 2rem;
+  margin-left: 2.5rem;
+  margin-right: 2.5rem;
 }

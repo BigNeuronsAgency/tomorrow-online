@@ -2,11 +2,11 @@
    THEME SYSTEM - DARK / RAINBOW
    ======================================== */
 
-/* Toggle sur pages secondaires - centré entre Ressources et CTA */
+/* Toggle sur pages secondaires - CENTRÉ entre Ressources et CTA */
 body > .theme-toggle {
   position: fixed !important;
   top: 1.8rem !important;
-  right: 14rem !important;
+  right: 19rem !important;
   z-index: 1000 !important;
 }
 
@@ -41,30 +41,6 @@ body[data-theme="rainbow"] .btn-outline {
   border: 2px solid #00FFFF !important;
   color: #00FFFF !important;
   background-color: rgba(0, 0, 0, 0.5) !important;
-}
-
-/* ===== GLOW ARC-EN-CIEL autour tête enfant ===== */
-/* Utilise un pseudo-element pour l'animation car border-radius + blur cache la rotation */
-body[data-theme="rainbow"] .logo-glow {
-  background: linear-gradient(45deg, 
-    #FF1493 0%, 
-    #FF4500 14%, 
-    #FFD700 28%, 
-    #00FF00 42%, 
-    #00FFFF 57%, 
-    #9400D3 71%, 
-    #FF1493 85%,
-    #FF4500 100%) !important;
-  background-size: 400% 400% !important;
-  animation: rainbow-glow-shift 2s ease infinite !important;
-  opacity: 0.6 !important;
-  filter: blur(60px) !important;
-}
-
-@keyframes rainbow-glow-shift {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
 }
 
 /* ===== Photos équipe ROSE GAY ===== */
