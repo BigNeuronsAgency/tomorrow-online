@@ -21,7 +21,6 @@ body > .theme-toggle {
 
 body[data-theme="white"] {
   background: #FAF9F6 !important;
-  background-color: #FAF9F6 !important;
 }
 
 
@@ -31,7 +30,6 @@ body[data-theme="white"] section:not(.header):not(.footer),
 body[data-theme="white"] article,
 body[data-theme="white"] .page-wrapper {
   background: #FAF9F6 !important;
-  background-color: #FAF9F6 !important;
 }
 
 /* Header NOIR textes BLANCS */
