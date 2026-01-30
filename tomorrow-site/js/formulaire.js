@@ -935,11 +935,13 @@ window.openModal = function(plan) {
     document.body.style.skewY = '';
     document.body.style.pointerEvents = '';
     
-    // Stop Lenis smooth scroll
-    if (window.lenis) {
-      window.lenis.stop();
-      console.log('🔥 Lenis stopped');
-    }
+    // Stop Lenis smooth scroll with timeout to avoid race
+    setTimeout(() => {
+      if (window.lenis) {
+        window.lenis.stop();
+        console.log('🔥 Lenis stopped');
+      }
+    }, 100);
     
     // Stop GSAP animations
     if (typeof gsap !== 'undefined') {
@@ -952,6 +954,24 @@ window.openModal = function(plan) {
       whatsappWidget.style.display = 'none';
       whatsappWidget.dataset.hiddenByModal = 'true';
     }
+    
+    // Empêcher l'overlay de fermer le formulaire - retirer l'onclick
+    var overlay = m.querySelector('.modal-overlay');
+    if (overlay) {
+      overlay.onclick = null;
+      overlay.addEventListener('click', function(e) {
+        // Ne rien faire - bloquer la fermeture au clic sur overlay
+        e.stopPropagation();
+      });
+    }
+    
+    // Bloquer aussi les clics sur le container principal sauf fermeture explicite
+    m.addEventListener('click', function(e) {
+      // Ne fermer QUE si c'est le modal lui-même (pas ses enfants)
+      if (e.target === m) {
+        e.stopPropagation();
+      }
+    });
     
     // Montrer le modal AVANT de dessiner
     m.classList.remove('hidden');
@@ -986,11 +1006,13 @@ window.closeModal = function() {
   }
   unlockScroll();
   
-  // Restart Lenis smooth scroll
-  if (window.lenis) {
-    window.lenis.start();
-    console.log('🔥 Lenis restarted');
-  }
+  // Restart Lenis smooth scroll with timeout to avoid race
+  setTimeout(() => {
+    if (window.lenis) {
+      window.lenis.start();
+      console.log('🔥 Lenis restarted');
+    }
+  }, 200);
   
   // Ré-afficher WhatsApp widget si présent
   var whatsappWidget = document.querySelector('[data-hidden-by-modal="true"]');
