@@ -27,6 +27,14 @@
     }, 500);
   };
   
+  // Afficher les actions mobiles sur petit écran
+  function updateMobileActions() {
+    const mobileActions = document.querySelector('.mobile-bottom-actions');
+    if (mobileActions) {
+      mobileActions.style.display = window.innerWidth <= 768 ? 'flex' : 'none';
+    }
+  }
+  
   // Init au chargement
   document.addEventListener('DOMContentLoaded', function() {
     // S'assurer que le bon radio est checked
@@ -43,6 +51,10 @@
         }
       });
     });
+    
+    // Gérer l'affichage mobile
+    updateMobileActions();
+    window.addEventListener('resize', updateMobileActions);
     
     console.log('🎨 Theme system initialized. Current theme:', currentTheme);
   });

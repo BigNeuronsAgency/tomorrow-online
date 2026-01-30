@@ -45,12 +45,362 @@
   transform: scale(1.1);
 }
 
-/* Cacher le toggle dans le formulaire */
-#bookingModal:not(.hidden) ~ .header .theme-toggle,
+/* Cacher le toggle quand formulaire ouvert */
 body:has(#bookingModal:not(.hidden)) .theme-toggle {
   opacity: 0;
   pointer-events: none;
 }
+
+/* ========================================
+   WHITE MODE
+   ======================================== */
+
+body[data-theme="white"] {
+  background: #FFFFFF !important;
+  color: #000000 !important;
+}
+
+/* Backgrounds */
+body[data-theme="white"] section:not(#bookingModal *),
+body[data-theme="white"] .content-section,
+body[data-theme="white"] .hero {
+  background: #FFFFFF !important;
+}
+
+/* Header reste noir mais logo et textes blancs */
+body[data-theme="white"] .header {
+  background: rgba(0, 0, 0, 0.95) !important;
+}
+
+body[data-theme="white"] .header .logo,
+body[data-theme="white"] .header img[src*="logo"],
+body[data-theme="white"] .header .nav-link,
+body[data-theme="white"] .header .hamburger-icon span {
+  filter: none !important;
+  color: #FFFFFF !important;
+}
+
+/* Footer */
+body[data-theme="white"] .footer {
+  background: #F8F8F8 !important;
+  border-top: 1px solid #E5E5E5 !important;
+}
+
+body[data-theme="white"] .footer-title {
+  color: #000000 !important;
+}
+
+body[data-theme="white"] .footer-link {
+  color: #666666 !important;
+}
+
+body[data-theme="white"] .footer-link:hover {
+  color: #FF5500 !important;
+}
+
+body[data-theme="white"] .footer p,
+body[data-theme="white"] .footer span {
+  color: #666666 !important;
+}
+
+/* Textes */
+body[data-theme="white"] h1,
+body[data-theme="white"] h2,
+body[data-theme="white"] h3,
+body[data-theme="white"] h4,
+body[data-theme="white"] h5,
+body[data-theme="white"] h6,
+body[data-theme="white"] p:not(.footer *),
+body[data-theme="white"] span:not(.badge):not(.popular-badge):not(.pricing-badge):not(.footer *),
+body[data-theme="white"] li,
+body[data-theme="white"] a:not(.footer-link):not(.nav-link) {
+  color: #000000 !important;
+}
+
+/* Pricing cards */
+body[data-theme="white"] .pricing-card {
+  background: #FFFFFF !important;
+  border: 2px solid #E5E5E5 !important;
+}
+
+body[data-theme="white"] .pricing-card-popular {
+  border: 2px solid #FF5500 !important;
+  box-shadow: 0 0 40px rgba(255, 85, 0, 0.15) !important;
+}
+
+body[data-theme="white"] .popular-badge {
+  background: #FF5500 !important;
+  color: #FFFFFF !important;
+}
+
+body[data-theme="white"] .pricing-badge {
+  color: #000000 !important;
+}
+
+body[data-theme="white"] .pricing-badge-light {
+  background: #FF5500 !important;
+  color: #FFFFFF !important;
+}
+
+/* Buttons */
+body[data-theme="white"] .btn-outline {
+  border-color: #000000 !important;
+  color: #000000 !important;
+  background: transparent !important;
+}
+
+body[data-theme="white"] .btn-outline:hover {
+  background: #000000 !important;
+  color: #FFFFFF !important;
+}
+
+body[data-theme="white"] .btn-primary {
+  background: #FF5500 !important;
+  color: #FFFFFF !important;
+}
+
+/* Cursor */
+body[data-theme="white"] .cursor {
+  border-color: #000000 !important;
+}
+
+body[data-theme="white"] .cursor-dot {
+  background: #000000 !important;
+}
+
+/* Timeline */
+body[data-theme="white"] .timeline-item {
+  border-color: #E5E5E5 !important;
+}
+
+body[data-theme="white"] .year {
+  color: #FF5500 !important;
+}
+
+/* Team cards */
+body[data-theme="white"] .team-member {
+  background: #FFFFFF !important;
+  border: 2px solid #E5E5E5 !important;
+}
+
+/* Venn diagrams */
+body[data-theme="white"] .venn-circle {
+  background: #F5F5F5 !important;
+  border-color: #000000 !important;
+  color: #000000 !important;
+}
+
+body[data-theme="white"] .venn-bad .venn-center {
+  background: #8B5A3C !important;
+  color: #FFFFFF !important;
+}
+
+/* IMPORTANT : Formulaire DOIT rester inchangé */
+body[data-theme="white"] #bookingModal,
+body[data-theme="white"] #bookingModal *,
+body[data-theme="white"] .modal-overlay,
+body[data-theme="white"] .modal-container,
+body[data-theme="white"] .modal-content,
+body[data-theme="white"] .modal-content * {
+  all: revert !important;
+}
+
+/* ========================================
+   RAINBOW MODE (Colorful Vibrant)
+   ======================================== */
+
+body[data-theme="rainbow"] {
+  background: #000000 !important;
+  color: #FFFFFF !important;
+}
+
+body[data-theme="rainbow"] .header,
+body[data-theme="rainbow"] .footer {
+  background: rgba(0, 0, 0, 0.95) !important;
+  border-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+/* Titre hero en rose vif */
+body[data-theme="rainbow"] .hero h1,
+body[data-theme="rainbow"] .hero-title {
+  color: #FF1493 !important;
+  text-shadow: 0 0 20px rgba(255, 20, 147, 0.5) !important;
+}
+
+/* H2 en cyan */
+body[data-theme="rainbow"] h2 {
+  color: #00FFFF !important;
+  text-shadow: 0 0 15px rgba(0, 255, 255, 0.4) !important;
+}
+
+/* H3 en jaune */
+body[data-theme="rainbow"] h3 {
+  color: #FFD700 !important;
+}
+
+/* H4 en vert lime */
+body[data-theme="rainbow"] h4 {
+  color: #00FF00 !important;
+}
+
+/* Pricing cards avec bordures colorées */
+body[data-theme="rainbow"] .pricing-card:nth-child(1) {
+  background: rgba(0, 0, 0, 0.8) !important;
+  border: 2px solid #FF1493 !important;
+  box-shadow: 0 0 20px rgba(255, 20, 147, 0.3) !important;
+}
+
+body[data-theme="rainbow"] .pricing-card:nth-child(2) {
+  background: rgba(0, 0, 0, 0.8) !important;
+  border: 2px solid #00FFFF !important;
+  box-shadow: 0 0 20px rgba(0, 255, 255, 0.3) !important;
+}
+
+body[data-theme="rainbow"] .pricing-card:nth-child(3) {
+  background: rgba(0, 0, 0, 0.8) !important;
+  border: 2px solid #FFD700 !important;
+  box-shadow: 0 0 20px rgba(255, 215, 0, 0.3) !important;
+}
+
+body[data-theme="rainbow"] .pricing-card-popular {
+  border: 3px solid #FF1493 !important;
+  box-shadow: 0 0 40px rgba(255, 20, 147, 0.5) !important;
+}
+
+/* Badges colorés */
+body[data-theme="rainbow"] .popular-badge {
+  background: linear-gradient(135deg, #FF1493, #FF69B4) !important;
+  color: #FFFFFF !important;
+}
+
+body[data-theme="rainbow"] .pricing-badge {
+  background: linear-gradient(135deg, #00FFFF, #00CED1) !important;
+  color: #000000 !important;
+  font-weight: 700 !important;
+}
+
+body[data-theme="rainbow"] .pricing-badge-light {
+  background: linear-gradient(135deg, #FFD700, #FFA500) !important;
+  color: #000000 !important;
+  font-weight: 700 !important;
+}
+
+/* Buttons colorés */
+body[data-theme="rainbow"] .btn-primary {
+  background: linear-gradient(135deg, #FF1493 0%, #FF69B4 50%, #FFD700 100%) !important;
+  color: #FFFFFF !important;
+  border: none !important;
+  box-shadow: 0 0 20px rgba(255, 20, 147, 0.5) !important;
+  font-weight: 700 !important;
+}
+
+body[data-theme="rainbow"] .btn-outline {
+  border: 2px solid #00FFFF !important;
+  color: #00FFFF !important;
+  background: rgba(0, 0, 0, 0.5) !important;
+}
+
+body[data-theme="rainbow"] .btn-outline:hover {
+  background: #00FFFF !important;
+  color: #000000 !important;
+}
+
+/* Team cards colorés */
+body[data-theme="rainbow"] .team-member:nth-child(1) {
+  border: 2px solid #FF1493 !important;
+  box-shadow: 0 0 15px rgba(255, 20, 147, 0.3) !important;
+}
+
+body[data-theme="rainbow"] .team-member:nth-child(2) {
+  border: 2px solid #00FFFF !important;
+  box-shadow: 0 0 15px rgba(0, 255, 255, 0.3) !important;
+}
+
+body[data-theme="rainbow"] .team-member:nth-child(3) {
+  border: 2px solid #FFD700 !important;
+  box-shadow: 0 0 15px rgba(255, 215, 0, 0.3) !important;
+}
+
+body[data-theme="rainbow"] .team-member:nth-child(4) {
+  border: 2px solid #00FF00 !important;
+  box-shadow: 0 0 15px rgba(0, 255, 0, 0.3) !important;
+}
+
+body[data-theme="rainbow"] .team-member:nth-child(5) {
+  border: 2px solid #FF69B4 !important;
+  box-shadow: 0 0 15px rgba(255, 105, 180, 0.3) !important;
+}
+
+body[data-theme="rainbow"] .team-member:nth-child(6) {
+  border: 2px solid #9370DB !important;
+  box-shadow: 0 0 15px rgba(147, 112, 219, 0.3) !important;
+}
+
+/* Venn diagrams colorés */
+body[data-theme="rainbow"] .venn-circle:nth-child(1) {
+  border: 3px solid #FF1493 !important;
+  color: #FF1493 !important;
+  box-shadow: 0 0 20px rgba(255, 20, 147, 0.4) !important;
+}
+
+body[data-theme="rainbow"] .venn-circle:nth-child(2) {
+  border: 3px solid #00FFFF !important;
+  color: #00FFFF !important;
+  box-shadow: 0 0 20px rgba(0, 255, 255, 0.4) !important;
+}
+
+body[data-theme="rainbow"] .venn-circle:nth-child(3) {
+  border: 3px solid #FFD700 !important;
+  color: #FFD700 !important;
+  box-shadow: 0 0 20px rgba(255, 215, 0, 0.4) !important;
+}
+
+body[data-theme="rainbow"] .venn-center {
+  color: #FF69B4 !important;
+  text-shadow: 0 0 15px rgba(255, 105, 180, 0.6) !important;
+}
+
+/* Cursor coloré */
+body[data-theme="rainbow"] .cursor {
+  border-color: #FF1493 !important;
+  box-shadow: 0 0 10px rgba(255, 20, 147, 0.5) !important;
+}
+
+body[data-theme="rainbow"] .cursor-dot {
+  background: #FF1493 !important;
+}
+
+/* Year en orange vif */
+body[data-theme="rainbow"] .year {
+  color: #FF5500 !important;
+}
+
+/* Timeline items colorés */
+body[data-theme="rainbow"] .timeline-item:nth-child(odd) {
+  border-left: 3px solid #FF1493 !important;
+}
+
+body[data-theme="rainbow"] .timeline-item:nth-child(even) {
+  border-left: 3px solid #00FFFF !important;
+}
+
+/* Pas d'encadré vert autour du toggle */
+body[data-theme="rainbow"] .theme-toggle {
+  border: none !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+/* IMPORTANT : Formulaire DOIT rester inchangé */
+body[data-theme="rainbow"] #bookingModal,
+body[data-theme="rainbow"] #bookingModal *,
+body[data-theme="rainbow"] .modal-overlay,
+body[data-theme="rainbow"] .modal-container,
+body[data-theme="rainbow"] .modal-content,
+body[data-theme="rainbow"] .modal-content * {
+  all: revert !important;
+}
+
 
 /* ========================================
    WHITE MODE

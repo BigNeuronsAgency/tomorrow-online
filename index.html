@@ -102,9 +102,11 @@
           <a href="migrations.html">🔄 Migrations CMS</a>
         </div>
       </div>
-      
-      <!-- Theme Toggle Mobile -->
-      <div class="theme-toggle" style="justify-content: center; margin: 16px 0;">
+    </div>
+    
+    <!-- Theme Toggle + CTA Mobile (outside burger) -->
+    <div class="mobile-bottom-actions" style="position: fixed; bottom: 20px; left: 20px; right: 20px; z-index: 9998; display: none; gap: 12px; align-items: center; justify-content: space-between; background: rgba(0,0,0,0.95); padding: 12px 16px; border-radius: 16px; backdrop-filter: blur(10px);">
+      <div class="theme-toggle">
         <label class="label">
           <input type="radio" name="theme-mobile" value="dark" checked>
           <span class="check" title="Mode Sombre">🌙</span>
@@ -118,8 +120,7 @@
           <span class="check" title="Mode Arc-en-ciel">🌈</span>
         </label>
       </div>
-      
-      <button class="btn btn-primary" onclick="openModal()">Réserver</button>
+      <button class="btn btn-primary" onclick="openModal()" style="flex-shrink: 0;">Réserver</button>
     </div>
   </header>
   
