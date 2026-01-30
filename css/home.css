@@ -1934,28 +1934,70 @@
   padding: 48px;
   max-width: 700px;
   width: 100%;
-  border: 2px solid #222;
+  border: 2px solid #FF5500;
   position: relative;
-  max-height: 90vh;
+  max-height: 85vh;
   overflow-y: auto;
+}
+
+.modal-close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  width: 48px;
+  height: 48px;
+  background: rgba(255, 85, 0, 0.1);
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-close:hover {
+  background: rgb(211, 21, 21);
+}
+
+.modal-close:active {
+  background: rgb(130, 0, 0);
+}
+
+.modal-close::before,
+.modal-close::after {
+  content: "";
+  position: absolute;
+  width: 24px;
+  height: 2px;
+  background-color: #fff;
+}
+
+.modal-close::before {
+  transform: rotate(45deg);
+}
+
+.modal-close::after {
+  transform: rotate(-45deg);
 }
 
 .modal-content-details h2 {
   font-family: 'Space Grotesk', sans-serif;
   font-weight: 900;
-  font-size: 36px;
+  font-size: 32px;
   text-transform: uppercase;
   margin-bottom: 32px;
   color: #fff;
+  padding-right: 60px;
 }
 
 .modal-content-details h3 {
-  font-family: 'Space Grotesk', sans-serif;
+  font-family: 'JetBrains Mono', monospace;
   font-weight: 700;
-  font-size: 16px;
+  font-size: 14px;
   text-transform: uppercase;
   margin: 24px 0 16px;
-  color: #fff;
+  letter-spacing: 0.05em;
 }
 
 .modal-grid {
@@ -2011,10 +2053,11 @@
   .modal-content-details {
     padding: 32px 24px;
     max-width: 90%;
+    max-height: 90vh;
   }
   
   .modal-content-details h2 {
-    font-size: 28px;
+    font-size: 24px;
   }
   
   .modal-grid {
