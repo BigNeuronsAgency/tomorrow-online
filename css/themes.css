@@ -107,7 +107,7 @@ body[data-theme="white"] main:not(.footer):not(.footer *):not(.marquee):not(.mar
 body[data-theme="white"] article:not(.footer):not(.footer *):not(.marquee):not(.marquee *),
 body[data-theme="white"] .page-wrapper:not(.footer):not(.footer *):not(.marquee):not(.marquee *),
 body[data-theme="white"] .container:not(.footer):not(.footer *):not(.marquee):not(.marquee *),
-body[data-theme="white"] div:not(.pricing-card):not(.pricing-card-popular):not(.pricing-card *):not(.pricing-card-popular *):not(#bookingModal):not(#bookingModal *):not(.modal):not(.modal *):not(.header):not(.header *):not(.footer):not(.footer *):not(.dropdown-content):not(.dropdown-content *):not(.marquee):not(.marquee *) {
+body[data-theme="white"] div:not(.pricing-card):not(.pricing-card-popular):not(.pricing-card *):not(.pricing-card-popular *):not(#bookingModal):not(#bookingModal *):not(.modal):not(.modal *):not(.header):not(.header *):not(.footer):not(.footer *):not(.dropdown-content):not(.dropdown-content *):not(.marquee):not(.marquee *):not(.theme-toggle):not(.theme-toggle *) {
   background: #FAF9F6 !important;
 }
 
@@ -116,7 +116,7 @@ body[data-theme="white"] div:not(.pricing-card):not(.pricing-card-popular):not(.
 /* Dropdown - AUCUNE RÈGLE (reste identique au dark) */
 
 /* Textes noirs PARTOUT sauf exceptions */
-body[data-theme="white"] * {
+body[data-theme="white"] *:not(.stat-value):not(.theme-toggle):not(.theme-toggle *) {
   color: #000000 !important;
 }
 
