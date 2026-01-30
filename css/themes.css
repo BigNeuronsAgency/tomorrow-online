@@ -39,6 +39,11 @@ body[data-theme="white"] > .theme-toggle {
   border: 1px solid rgba(255, 255, 255, 0.2) !important;
 }
 
+body[data-theme="white"] > .theme-toggle .check {
+  background: rgba(0, 0, 0, 0.8) !important;
+  border-color: rgba(255, 255, 255, 0.3) !important;
+}
+
 .theme-toggle .label {
   display: flex;
   cursor: pointer;
@@ -152,7 +157,7 @@ body[data-theme="rainbow"] .footer .build-badge {
 
 /* Dropdown - AUCUNE RÈGLE (reste identique au dark) */
 
-/* Textes noirs SAUF pricing, modal, header, footer, marquee */
+/* Textes noirs SAUF pricing, modal, header, footer, marquee, step-number */
 body[data-theme="white"] .hero h1,
 body[data-theme="white"] .hero h2,
 body[data-theme="white"] .hero p,
@@ -162,7 +167,7 @@ body[data-theme="white"] main h3,
 body[data-theme="white"] main h4,
 body[data-theme="white"] main p:not(.pricing-card p):not(.pricing-card-popular p),
 body[data-theme="white"] main li:not(.pricing-card li):not(.pricing-card-popular li),
-body[data-theme="white"] main span:not(.pricing-card span):not(.pricing-card-popular span),
+body[data-theme="white"] main span:not(.pricing-card span):not(.pricing-card-popular span):not(.step-number):not(.step-number *),
 body[data-theme="white"] section:not(.header):not(.footer) h1,
 body[data-theme="white"] section:not(.header):not(.footer) h2,
 body[data-theme="white"] section:not(.header):not(.footer) h3,
@@ -186,8 +191,15 @@ body[data-theme="white"] .pricing-card p,
 body[data-theme="white"] .pricing-card li,
 body[data-theme="white"] .pricing-card span,
 body[data-theme="white"] .pricing-card .feature-text,
-body[data-theme="white"] .pricing-card .btn {
+body[data-theme="white"] .pricing-card .btn,
+body[data-theme="white"] .pricing-card .complex-subtitle {
   color: #FFFFFF !important;
+}
+
+body[data-theme="white"] .pricing-card .btn-outline,
+body[data-theme="white"] .pricing-card button {
+  color: #FFFFFF !important;
+  border-color: #FFFFFF !important;
 }
 
 body[data-theme="white"] .pricing-card .btn-outline {
