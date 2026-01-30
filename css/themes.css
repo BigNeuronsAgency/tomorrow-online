@@ -2,7 +2,6 @@
    THEME TOGGLE BASE
    ======================================== */
 
-/* Toggle fixe sur pages secondaires */
 body > .theme-toggle {
   position: fixed !important;
   top: 2rem !important;
@@ -16,100 +15,88 @@ body > .theme-toggle {
 }
 
 /* ========================================
-   MODE WHITE - RÈGLE SIMPLE
-   Fond NOIR → texte BLANC ou ORANGE
-   Fond BLANC → texte NOIR ou ORANGE
+   MODE WHITE
+   fond BLANC header/footer NOIR
    ======================================== */
 
-/* Fond général crème */
 body[data-theme="white"] {
   background: #FAF9F6 !important;
 }
 
-/* Header NOIR - textes BLANCS */
+/* Header NOIR textes BLANCS */
 body[data-theme="white"] .header {
   background: #000000 !important;
 }
-
-body[data-theme="white"] .header *,
-body[data-theme="white"] .nav-link,
-body[data-theme="white"] .logo {
+body[data-theme="white"] .header * {
   color: #FFFFFF !important;
 }
 
-/* Footer NOIR - textes BLANCS */
+/* Footer NOIR textes BLANCS */
 body[data-theme="white"] .footer {
   background: #000000 !important;
 }
-
-body[data-theme="white"] .footer *,
-body[data-theme="white"] .footer-link,
-body[data-theme="white"] .footer-title {
-  color: rgba(255, 255, 255, 0.8) !important;
+body[data-theme="white"] .footer * {
+  color: rgba(255,255,255,0.8) !important;
 }
 
-/* Pricing cards NOIRES - textes BLANCS */
-body[data-theme="white"] .pricing-card,
-body[data-theme="white"] .pricing-card-popular {
+/* Pricing cards NOIRES textes BLANCS */
+body[data-theme="white"] .pricing-card {
   background: #000000 !important;
 }
-
-body[data-theme="white"] .pricing-card *,
+body[data-theme="white"] .pricing-card * {
+  color: #FFFFFF !important;
+}
+body[data-theme="white"] .pricing-card-popular {
+  background: linear-gradient(135deg,#FF5500 0%,#FF0000 50%,#660000 100%) !important;
+}
 body[data-theme="white"] .pricing-card-popular * {
   color: #FFFFFF !important;
 }
 
-body[data-theme="white"] .pricing-card-popular {
-  background: linear-gradient(135deg, #FF5500 0%, #FF0000 50%, #660000 100%) !important;
-}
-
-/* Marquee GRADIENT - textes BLANCS */
+/* Marquee GRADIENT textes BLANCS */
 body[data-theme="white"] .marquee {
   background: var(--gradient-main) !important;
 }
-
 body[data-theme="white"] .marquee * {
   color: #FFFFFF !important;
 }
 
-/* Contenu sur FOND BLANC/CRÈME - textes NOIRS */
+/* Contenu BLANC/CRÈME textes NOIRS ou ORANGE */
 body[data-theme="white"] main,
 body[data-theme="white"] .hero,
 body[data-theme="white"] section:not(.header):not(.footer) {
   background: #FAF9F6 !important;
+}
+
+body[data-theme="white"] main *:not(.pricing-card *):not(.pricing-card-popular *):not(.marquee *):not(.header *):not(.footer *):not(.text-gradient):not(.stat-value),
+body[data-theme="white"] .hero *:not(.text-gradient):not(.stat-value),
+body[data-theme="white"] section:not(.header):not(.footer) *:not(.pricing-card *):not(.pricing-card-popular *):not(.marquee *):not(.text-gradient):not(.stat-value) {
   color: #000000 !important;
 }
 
-body[data-theme="white"] h1:not(.header *):not(.footer *):not(.pricing-card *):not(.pricing-card-popular *):not(.marquee *),
-body[data-theme="white"] h2:not(.header *):not(.footer *):not(.pricing-card *):not(.pricing-card-popular *):not(.marquee *),
-body[data-theme="white"] h3:not(.header *):not(.footer *):not(.pricing-card *):not(.pricing-card-popular *):not(.marquee *),
-body[data-theme="white"] h4:not(.header *):not(.footer *):not(.pricing-card *):not(.pricing-card-popular *):not(.marquee *),
-body[data-theme="white"] p:not(.header *):not(.footer *):not(.pricing-card *):not(.pricing-card-popular *):not(.marquee *),
-body[data-theme="white"] li:not(.header *):not(.footer *):not(.pricing-card *):not(.pricing-card-popular *):not(.marquee *),
-body[data-theme="white"] span:not(.header *):not(.footer *):not(.pricing-card *):not(.pricing-card-popular *):not(.marquee *):not(.text-gradient),
-body[data-theme="white"] div:not(.header *):not(.footer *):not(.pricing-card *):not(.pricing-card-popular *):not(.marquee *):not(.stat-value) {
-  color: #000000 !important;
-}
-
-/* ORANGE pour les accents */
-body[data-theme="white"] .accent,
+/* Gradients ORANGE */
 body[data-theme="white"] .text-gradient {
-  color: #FF5500 !important;
-}
-
-/* Work-stats cards BLANCHES bordure NOIRE */
-body[data-theme="white"] .work-stat {
-  background: #FFFFFF !important;
-  border: 2px solid #000000 !important;
-}
-
-body[data-theme="white"] .work-stat .stat-value {
-  background: linear-gradient(135deg, #000000 0%, #333333 100%) !important;
+  background: var(--gradient-main) !important;
   -webkit-background-clip: text !important;
   background-clip: text !important;
   -webkit-text-fill-color: transparent !important;
 }
 
+body[data-theme="white"] .accent {
+  color: #FF5500 !important;
+}
+
+/* Work-stats BLANCHES bordure NOIRE */
+body[data-theme="white"] .work-stat {
+  background: #FFFFFF !important;
+  border: 2px solid #000000 !important;
+}
+body[data-theme="white"] .work-stat .stat-value {
+  background: linear-gradient(135deg,#000000 0%,#333333 100%) !important;
+  -webkit-background-clip: text !important;
+  background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+}
 body[data-theme="white"] .work-stat .stat-label {
   color: #666666 !important;
 }
@@ -119,24 +106,21 @@ body[data-theme="white"] .btn-primary {
   background: #FF5500 !important;
   color: #FFFFFF !important;
 }
-
 body[data-theme="white"] .btn-outline {
   border: 2px solid #000000 !important;
   color: #000000 !important;
 }
-
 body[data-theme="white"] .btn-outline:hover {
   background: #000000 !important;
   color: #FFFFFF !important;
 }
 
-/* Process steps NOIRS avec BLANC */
+/* Process steps NOIRS texte BLANC */
 body[data-theme="white"] .step-number {
   background: #000000 !important;
   border-color: #000000 !important;
   color: #FFFFFF !important;
 }
-
 body[data-theme="white"] .process-step:hover .step-number {
   background: var(--gradient-main) !important;
 }
@@ -145,7 +129,6 @@ body[data-theme="white"] .process-step:hover .step-number {
 body[data-theme="white"] .cursor {
   border-color: #000000 !important;
 }
-
 body[data-theme="white"] .cursor-dot {
   background: #000000 !important;
 }
@@ -158,13 +141,14 @@ body[data-theme="rainbow"] {
   background: #000000 !important;
 }
 
-body[data-theme="rainbow"] h1,
-body[data-theme="rainbow"] h2,
-body[data-theme="rainbow"] h3 {
-  background: linear-gradient(90deg, #FF1493 0%, #00FFFF 25%, #FFD700 50%, #00FF00 75%, #FF1493 100%) !important;
+body[data-theme="rainbow"] h1:not(.header *):not(.footer *):not(.pricing-card *):not(.pricing-card-popular *),
+body[data-theme="rainbow"] h2:not(.header *):not(.footer *):not(.pricing-card *):not(.pricing-card-popular *),
+body[data-theme="rainbow"] h3:not(.header *):not(.footer *):not(.pricing-card *):not(.pricing-card-popular *) {
+  background: linear-gradient(90deg,#FF1493 0%,#00FFFF 25%,#FFD700 50%,#00FF00 75%,#FF1493 100%) !important;
   -webkit-background-clip: text !important;
   background-clip: text !important;
   -webkit-text-fill-color: transparent !important;
+  background-size: 200% auto !important;
   animation: rainbow-shift 3s linear infinite !important;
 }
 
@@ -174,10 +158,8 @@ body[data-theme="rainbow"] h3 {
 }
 
 body[data-theme="rainbow"] .btn-primary {
-  background: linear-gradient(135deg, #FF1493 0%, #FF69B4 50%, #FFD700 100%) !important;
+  background: linear-gradient(135deg,#FF1493 0%,#FF69B4 50%,#FFD700 100%) !important;
   color: #FFFFFF !important;
-  border: none !important;
-  box-shadow: 0 0 20px rgba(255, 20, 147, 0.5) !important;
   pointer-events: auto !important;
   cursor: pointer !important;
   z-index: 10 !important;
@@ -186,7 +168,6 @@ body[data-theme="rainbow"] .btn-primary {
 body[data-theme="rainbow"] .btn-outline {
   border: 2px solid #00FFFF !important;
   color: #00FFFF !important;
-  background: rgba(0, 0, 0, 0.5) !important;
   pointer-events: auto !important;
   cursor: pointer !important;
   z-index: 10 !important;
