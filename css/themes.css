@@ -67,13 +67,20 @@ body[data-theme="white"] {
 }
 
 /* Fond crème pâle PARTOUT sauf exceptions */
+body[data-theme="white"],
+body[data-theme="white"] html,
+body[data-theme="white"] body {
+  background: #FAF9F6 !important;
+}
+
 body[data-theme="white"] section:not(.header):not(.footer):not(#bookingModal):not(#bookingModal *),
 body[data-theme="white"] .content-section,
 body[data-theme="white"] .hero,
 body[data-theme="white"] main,
 body[data-theme="white"] article,
 body[data-theme="white"] .page-wrapper,
-body[data-theme="white"] .container {
+body[data-theme="white"] .container,
+body[data-theme="white"] div:not(.pricing-card):not(.pricing-card-popular):not(.pricing-card *):not(.pricing-card-popular *):not(#bookingModal):not(#bookingModal *):not(.header):not(.header *):not(.footer):not(.footer *):not(.dropdown-content):not(.dropdown-content *) {
   background: #FAF9F6 !important;
 }
 
@@ -105,10 +112,14 @@ body[data-theme="white"] .dropdown-content a:hover {
   color: #FF5500 !important;
 }
 
-/* Footer NOIR comme mode dark */
+/* Footer NOIR IDENTIQUE au mode dark */
 body[data-theme="white"] .footer {
   background: rgba(0, 0, 0, 0.95) !important;
   border-top: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
+
+body[data-theme="white"] .footer * {
+  color: rgba(255, 255, 255, 0.6) !important;
 }
 
 body[data-theme="white"] .footer-title {
@@ -123,12 +134,13 @@ body[data-theme="white"] .footer-link:hover {
   color: #FF5500 !important;
 }
 
-body[data-theme="white"] .footer p,
-body[data-theme="white"] .footer span,
-body[data-theme="white"] .footer div,
-body[data-theme="white"] .footer button,
-body[data-theme="white"] .video-link-btn {
-  color: rgba(255, 255, 255, 0.6) !important;
+body[data-theme="white"] .footer img {
+  filter: none !important;
+  opacity: 1 !important;
+}
+
+body[data-theme="white"] .footer .status-indicator {
+  background: #00FF00 !important;
 }
 
 /* Textes noirs SAUF éléments spéciaux */
@@ -231,6 +243,13 @@ body[data-theme="white"] .cursor {
 
 body[data-theme="white"] .cursor-dot {
   background: #000000 !important;
+}
+
+/* Process steps - numéros visibles */
+body[data-theme="white"] .step-number {
+  background: #000000 !important;
+  border-color: #000000 !important;
+  color: #FFFFFF !important;
 }
 
 /* Timeline */
@@ -463,6 +482,27 @@ body[data-theme="rainbow"] .timeline-item:nth-child(odd) {
 
 body[data-theme="rainbow"] .timeline-item:nth-child(even) {
   border-left: 3px solid #00FFFF !important;
+}
+
+/* X-ray photos en rose gay */
+body[data-theme="rainbow"] .xray-img {
+  filter: grayscale(0%) hue-rotate(290deg) saturate(2) !important;
+}
+
+body[data-theme="rainbow"] .xray-scanline {
+  background: linear-gradient(to bottom, 
+    transparent 0%, 
+    rgba(255, 20, 147, 0.8) 50%, 
+    transparent 100%) !important;
+}
+
+/* Effet de lumière rainbow derrière images */
+body[data-theme="rainbow"] img[style*="box-shadow"],
+body[data-theme="rainbow"] .timeline-image,
+body[data-theme="rainbow"] .hero-visual img {
+  filter: drop-shadow(0 0 60px rgba(255, 20, 147, 0.8)) 
+          drop-shadow(0 0 40px rgba(0, 255, 255, 0.6)) 
+          drop-shadow(0 0 20px rgba(255, 215, 0, 0.6)) !important;
 }
 
 /* Pas d'encadré vert autour du toggle */
