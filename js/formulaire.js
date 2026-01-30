@@ -930,25 +930,31 @@ window.openModal = function(plan) {
     formData.selectedPack = plan || '';
     
     // Force clear any stale styles/transforms
+    // Stopper Lenis IMMÉDIATEMENT pour éviter le décalage
+    if (window.lenis) {
+      try {
+        if (typeof window.lenis.stop === 'function') {
+          window.lenis.stop();
+          console.log('🔥 Lenis stopped IMMEDIATELY');
+        }
+      } catch (e) {
+        console.warn('🔥 Lenis stop error:', e);
+      }
+    }
+    
+    // Retirer TOUS les transforms qui peuvent décaler la modal
     document.body.style.transform = 'none';
     document.body.style.filter = 'none';
     document.body.style.skewY = 'none';
     document.body.style.pointerEvents = '';
     document.documentElement.style.transform = 'none';
     
-    // Stop Lenis smooth scroll with timeout to avoid race
-    setTimeout(() => {
-      if (window.lenis) {
-        try {
-          if (typeof window.lenis.stop === 'function') {
-            window.lenis.stop();
-            console.log('🔥 Lenis stopped');
-          }
-        } catch (e) {
-          console.warn('🔥 Lenis stop error:', e);
-        }
-      }
-    }, 50);
+    // Forcer le body à rester en place
+    const scrollY = window.scrollY || window.pageYOffset;
+    document.body.style.position = 'fixed';
+    document.body.style.top = `-${scrollY}px`;
+    document.body.style.width = '100%';
+    document.body.dataset.scrollPosition = scrollY;
     
     // Stop GSAP animations
     if (typeof gsap !== 'undefined') {
@@ -993,6 +999,14 @@ window.closeModal = function() {
     m.classList.add('hidden');
     console.log('🔥 Modal hidden');
   }
+  
+  // Restaurer la position du body
+  const scrollY = document.body.dataset.scrollPosition || 0;
+  document.body.style.position = '';
+  document.body.style.top = '';
+  document.body.style.width = '';
+  window.scrollTo(0, parseInt(scrollY, 10));
+  
   unlockScroll();
   
   // Restart Lenis smooth scroll with timeout to avoid race
