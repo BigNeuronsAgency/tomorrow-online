@@ -4,7 +4,7 @@
 
 /* Theme Toggle Button */
 .theme-toggle {
-  display: flex;
+  display: flex !important;
   gap: 8px;
   align-items: center;
   margin-left: 4rem;
@@ -12,6 +12,8 @@
   border: none !important;
   background: transparent !important;
   box-shadow: none !important;
+  visibility: visible !important;
+  opacity: 1 !important;
 }
 
 .theme-toggle .label {
@@ -103,18 +105,18 @@ body[data-theme="white"] .dropdown-content a:hover {
   color: #FF5500 !important;
 }
 
-/* Footer gris clair */
+/* Footer NOIR comme mode dark */
 body[data-theme="white"] .footer {
-  background: #F8F8F8 !important;
-  border-top: 1px solid #E5E5E5 !important;
+  background: rgba(0, 0, 0, 0.95) !important;
+  border-top: 1px solid rgba(255, 255, 255, 0.1) !important;
 }
 
 body[data-theme="white"] .footer-title {
-  color: #000000 !important;
+  color: #FFFFFF !important;
 }
 
 body[data-theme="white"] .footer-link {
-  color: #666666 !important;
+  color: rgba(255, 255, 255, 0.6) !important;
 }
 
 body[data-theme="white"] .footer-link:hover {
@@ -126,7 +128,7 @@ body[data-theme="white"] .footer span,
 body[data-theme="white"] .footer div,
 body[data-theme="white"] .footer button,
 body[data-theme="white"] .video-link-btn {
-  color: #666666 !important;
+  color: rgba(255, 255, 255, 0.6) !important;
 }
 
 /* Textes noirs SAUF éléments spéciaux */
@@ -149,10 +151,24 @@ body[data-theme="white"] .pricing-card {
 
 body[data-theme="white"] .pricing-card h3,
 body[data-theme="white"] .pricing-card .pricing-price,
+body[data-theme="white"] .pricing-card .pricing-time,
+body[data-theme="white"] .pricing-card .pricing-badge,
 body[data-theme="white"] .pricing-card p,
 body[data-theme="white"] .pricing-card li,
-body[data-theme="white"] .pricing-card span {
+body[data-theme="white"] .pricing-card span,
+body[data-theme="white"] .pricing-card .feature-text,
+body[data-theme="white"] .pricing-card .btn {
   color: #FFFFFF !important;
+}
+
+body[data-theme="white"] .pricing-card .btn-outline {
+  border-color: #FFFFFF !important;
+  color: #FFFFFF !important;
+}
+
+body[data-theme="white"] .pricing-card .btn-outline:hover {
+  background: #FFFFFF !important;
+  color: #000000 !important;
 }
 
 body[data-theme="white"] .pricing-card-popular {
@@ -163,9 +179,17 @@ body[data-theme="white"] .pricing-card-popular {
 
 body[data-theme="white"] .pricing-card-popular h3,
 body[data-theme="white"] .pricing-card-popular .pricing-price,
+body[data-theme="white"] .pricing-card-popular .pricing-time,
+body[data-theme="white"] .pricing-card-popular .pricing-badge,
 body[data-theme="white"] .pricing-card-popular p,
 body[data-theme="white"] .pricing-card-popular li,
-body[data-theme="white"] .pricing-card-popular span {
+body[data-theme="white"] .pricing-card-popular span,
+body[data-theme="white"] .pricing-card-popular .feature-text {
+  color: #FFFFFF !important;
+}
+
+body[data-theme="white"] .pricing-card-popular .btn-primary {
+  background: #FF5500 !important;
   color: #FFFFFF !important;
 }
 
