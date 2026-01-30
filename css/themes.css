@@ -64,7 +64,12 @@ body[data-theme="white"] {
   color: #000000 !important;
 }
 
-/* Backgrounds TOUS les éléments en blanc */
+/* Backgrounds TOUS les éléments en blanc - HAUTE PRIORITÉ */
+body[data-theme="white"],
+body[data-theme="white"] *:not(#bookingModal):not(#bookingModal *):not(.modal):not(.modal *):not(.dropdown-content):not(.dropdown-content *):not(.header):not(.header *):not(.pricing-card):not(.pricing-card *):not(.pricing-card-popular):not(.pricing-card-popular *) {
+  background: #FFFFFF !important;
+}
+
 body[data-theme="white"] section:not(#bookingModal):not(#bookingModal *),
 body[data-theme="white"] .content-section,
 body[data-theme="white"] .hero,
