@@ -32,10 +32,11 @@ body > .theme-toggle {
   border-radius: 8px !important;
 }
 
-/* Fond noir uniquement en white mode */
+/* Fond noir + shadow UNIQUEMENT en white mode */
 body[data-theme="white"] > .theme-toggle {
-  background: rgba(0, 0, 0, 0.95) !important;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4) !important;
+  background: rgba(0, 0, 0, 0.98) !important;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.6) !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
 }
 
 .theme-toggle .label {
@@ -106,7 +107,46 @@ body[data-theme="white"] div:not(.pricing-card):not(.pricing-card-popular):not(.
   background: #FAF9F6 !important;
 }
 
-/* Footer - AUCUNE RÈGLE (reste identique au dark) */
+/* Footer - FORCE TOUS TEXTES EN BLANC */
+body[data-theme="white"] .footer h1,
+body[data-theme="white"] .footer h2,
+body[data-theme="white"] .footer h3,
+body[data-theme="white"] .footer h4,
+body[data-theme="white"] .footer p,
+body[data-theme="white"] .footer span,
+body[data-theme="white"] .footer a,
+body[data-theme="white"] .footer li,
+body[data-theme="white"] .footer div,
+body[data-theme="white"] .footer-title,
+body[data-theme="white"] .footer-link,
+body[data-theme="white"] .footer-copyright,
+body[data-theme="rainbow"] .footer h1,
+body[data-theme="rainbow"] .footer h2,
+body[data-theme="rainbow"] .footer h3,
+body[data-theme="rainbow"] .footer h4,
+body[data-theme="rainbow"] .footer p,
+body[data-theme="rainbow"] .footer span,
+body[data-theme="rainbow"] .footer a,
+body[data-theme="rainbow"] .footer li,
+body[data-theme="rainbow"] .footer div,
+body[data-theme="rainbow"] .footer-title,
+body[data-theme="rainbow"] .footer-link,
+body[data-theme="rainbow"] .footer-copyright {
+  color: rgba(255, 255, 255, 0.6) !important;
+}
+
+body[data-theme="white"] .footer-title,
+body[data-theme="rainbow"] .footer-title {
+  color: #FFFFFF !important;
+}
+
+body[data-theme="white"] .footer .build-badge,
+body[data-theme="rainbow"] .footer .build-badge {
+  background: linear-gradient(to right, #FF5500 0%, #FF0000 60%, #660000 100%) !important;
+  -webkit-background-clip: text !important;
+  background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+}
 
 /* Header - AUCUNE RÈGLE (reste identique au dark) */
 
@@ -137,6 +177,7 @@ body[data-theme="white"] .pricing-card {
   border: 2px solid rgba(255, 255, 255, 0.1) !important;
 }
 
+body[data-theme="white"] .pricing-card *,
 body[data-theme="white"] .pricing-card h3,
 body[data-theme="white"] .pricing-card .pricing-price,
 body[data-theme="white"] .pricing-card .pricing-time,
