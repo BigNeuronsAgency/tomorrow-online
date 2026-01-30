@@ -106,38 +106,28 @@ body[data-theme="white"] div:not(.pricing-card):not(.pricing-card-popular):not(.
   background: #FAF9F6 !important;
 }
 
+/* Footer - AUCUNE RÈGLE (reste identique au dark) */
+
 /* Header - AUCUNE RÈGLE (reste identique au dark) */
 
 /* Dropdown - AUCUNE RÈGLE (reste identique au dark) */
 
-/* Footer - AUCUNE RÈGLE (reste identique au dark) */
-
-/* FORCE: Footer TOUJOURS comme dark mode */
-body[data-theme="white"] .footer,
-body[data-theme="white"] .footer *,
-body[data-theme="rainbow"] .footer,
-body[data-theme="rainbow"] .footer * {
-  background-color: revert !important;
-  color: revert !important;
-  border-color: revert !important;
-  opacity: revert !important;
-  filter: none !important;
-}
-
-/* Textes noirs SAUF éléments spéciaux ET FORMULAIRE ET HEADER ET FOOTER ET MARQUEE */
-body[data-theme="white"] h1:not(.pricing-card h1):not(.pricing-card-popular h1):not(.modal h1):not(#bookingModal h1):not(.header h1):not(.footer h1):not(.marquee h1),
-body[data-theme="white"] h2:not(.pricing-card h2):not(.pricing-card-popular h2):not(.modal h2):not(#bookingModal h2):not(.header h2):not(.footer h2):not(.marquee h2),
-body[data-theme="white"] h3:not(.pricing-card h3):not(.pricing-card-popular h3):not(.modal h3):not(#bookingModal h3):not(.header h3):not(.footer h3):not(.marquee h3),
-body[data-theme="white"] h4:not(.modal h4):not(#bookingModal h4):not(.header h4):not(.footer h4):not(.marquee h4),
-body[data-theme="white"] h5:not(.modal h5):not(#bookingModal h5):not(.header h5):not(.footer h5):not(.marquee h5),
-body[data-theme="white"] h6:not(.modal h6):not(#bookingModal h6):not(.header h6):not(.footer h6):not(.marquee h6),
-body[data-theme="white"] p:not(.pricing-card p):not(.pricing-card-popular p):not(.footer p):not(.modal p):not(#bookingModal p):not(.header p):not(.marquee p),
-body[data-theme="white"] li:not(.pricing-card li):not(.pricing-card-popular li):not(.modal li):not(#bookingModal li):not(.header li):not(.footer li):not(.marquee li),
-body[data-theme="white"] span:not(.pricing-card span):not(.pricing-card-popular span):not(.modal span):not(#bookingModal span):not(.header span):not(.footer span):not(.marquee span),
-body[data-theme="white"] label:not(.modal label):not(#bookingModal label):not(.header label):not(.footer label):not(.marquee label),
-body[data-theme="white"] input:not(.modal input):not(#bookingModal input):not(.header input):not(.footer input):not(.marquee input),
-body[data-theme="white"] a:not(.pricing-card a):not(.pricing-card-popular a):not(.modal a):not(#bookingModal a):not(.header a):not(.footer a):not(.dropdown-content a):not(.marquee a),
-body[data-theme="white"] div:not(.pricing-card):not(.pricing-card-popular):not(.pricing-card *):not(.pricing-card-popular *):not(#bookingModal):not(#bookingModal *):not(.modal):not(.modal *):not(.header):not(.header *):not(.footer):not(.footer *):not(.dropdown-content):not(.dropdown-content *):not(.marquee):not(.marquee *) {
+/* Textes noirs SAUF pricing, modal, header, footer, marquee */
+body[data-theme="white"] .hero h1,
+body[data-theme="white"] .hero h2,
+body[data-theme="white"] .hero p,
+body[data-theme="white"] main h1,
+body[data-theme="white"] main h2,
+body[data-theme="white"] main h3,
+body[data-theme="white"] main h4,
+body[data-theme="white"] main p:not(.pricing-card p):not(.pricing-card-popular p),
+body[data-theme="white"] main li:not(.pricing-card li):not(.pricing-card-popular li),
+body[data-theme="white"] main span:not(.pricing-card span):not(.pricing-card-popular span),
+body[data-theme="white"] section:not(.header):not(.footer) h1,
+body[data-theme="white"] section:not(.header):not(.footer) h2,
+body[data-theme="white"] section:not(.header):not(.footer) h3,
+body[data-theme="white"] section:not(.header):not(.footer) p:not(.pricing-card p):not(.pricing-card-popular p):not(.marquee p),
+body[data-theme="white"] section:not(.header):not(.footer) li:not(.pricing-card li):not(.pricing-card-popular li) {
   color: #000000 !important;
 }
 
