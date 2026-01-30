@@ -13,6 +13,7 @@ body > .theme-toggle {
    MODE RAINBOW
    ======================================== */
 
+/* Titres en gradient arc-en-ciel animé */
 body[data-theme="rainbow"] h1:not(.header *):not(.footer *):not(.pricing-card *):not(.pricing-card-popular *),
 body[data-theme="rainbow"] h2:not(.header *):not(.footer *):not(.pricing-card *):not(.pricing-card-popular *),
 body[data-theme="rainbow"] h3:not(.header *):not(.footer *):not(.pricing-card *):not(.pricing-card-popular *) {
@@ -29,6 +30,7 @@ body[data-theme="rainbow"] h3:not(.header *):not(.footer *):not(.pricing-card *)
   100% { background-position: 200% 50%; }
 }
 
+/* Buttons rainbow */
 body[data-theme="rainbow"] .btn-primary {
   background: linear-gradient(135deg, #FF1493 0%, #FF69B4 50%, #FFD700 100%) !important;
   color: #FFFFFF !important;
@@ -40,19 +42,12 @@ body[data-theme="rainbow"] .btn-outline {
   background-color: rgba(0, 0, 0, 0.5) !important;
 }
 
-/* Gradient ARC-EN-CIEL autour tête enfant (pas orange!) */
-body[data-theme="rainbow"] .hero-image::after {
-  content: "";
-  position: absolute;
-  inset: -30px;
-  background: linear-gradient(45deg, #FF1493, #00FFFF, #FFD700, #00FF00, #9400D3, #FF1493);
-  background-size: 400% 400%;
-  border-radius: 50%;
-  filter: blur(40px);
-  opacity: 0.8;
-  animation: rainbow-glow 4s ease infinite;
-  z-index: -1;
-  pointer-events: none;
+/* ===== GLOW ARC-EN-CIEL autour tête enfant ===== */
+body[data-theme="rainbow"] .logo-glow {
+  background: linear-gradient(45deg, #FF1493, #00FFFF, #FFD700, #00FF00, #9400D3, #FF1493) !important;
+  background-size: 400% 400% !important;
+  animation: rainbow-glow 4s ease infinite !important;
+  opacity: 0.4 !important;
 }
 
 @keyframes rainbow-glow {
@@ -61,14 +56,11 @@ body[data-theme="rainbow"] .hero-image::after {
   100% { background-position: 0% 50%; }
 }
 
-/* Photos équipe ROSE GAY (pas orange!) */
-body[data-theme="rainbow"] .team-member img,
+/* ===== Photos équipe ROSE GAY ===== */
+body[data-theme="rainbow"] .xray-img,
+body[data-theme="rainbow"] .team-card img,
 body[data-theme="rainbow"] img[src*="PP"],
-body[data-theme="rainbow"] img[src*="TOMORROW"] {
+body[data-theme="rainbow"] img[src*="TOMORROW"],
+body[data-theme="rainbow"] img[src*="arthur"] {
   filter: hue-rotate(320deg) saturate(2) brightness(1.1) !important;
-}
-
-/* Hero image doit être relative pour le gradient */
-body[data-theme="rainbow"] .hero-image {
-  position: relative !important;
 }
