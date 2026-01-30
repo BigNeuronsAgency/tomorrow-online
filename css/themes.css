@@ -39,3 +39,29 @@ body[data-theme="rainbow"] .btn-outline {
   color: #00FFFF !important;
   background-color: rgba(0, 0, 0, 0.5) !important;
 }
+
+/* Rainbow mode - Gradient arc-en-ciel sur tête enfant */
+body[data-theme="rainbow"] .hero-image::before {
+  content: "";
+  position: absolute;
+  inset: -20px;
+  background: linear-gradient(45deg, #FF1493, #00FFFF, #FFD700, #00FF00, #FF1493);
+  background-size: 400% 400%;
+  border-radius: 50%;
+  filter: blur(30px);
+  opacity: 0.6;
+  animation: rainbow-glow 3s ease infinite;
+  z-index: -1;
+}
+
+@keyframes rainbow-glow {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Rainbow mode - Photos équipe en rose gay */
+body[data-theme="rainbow"] .team-card img,
+body[data-theme="rainbow"] .hero-image img {
+  filter: hue-rotate(290deg) saturate(1.5) !important;
+}
