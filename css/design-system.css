@@ -521,3 +521,9 @@ html.lenis {
   margin-left: auto;
   margin-right: 2rem;
 }
+
+/* État sélectionné TRÈS visible */
+.radio-input .label input:checked + .check {
+  background: rgba(255, 85, 0, 0.3) !important;
+  border-color: #FF5500 !important;
+}

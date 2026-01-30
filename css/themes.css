@@ -67,3 +67,8 @@ body[data-theme="rainbow"] img[src*="PP"],
 body[data-theme="rainbow"] img[src*="TOMORROW"] {
   filter: hue-rotate(320deg) saturate(2) brightness(1.1) !important;
 }
+
+/* Hero image doit être relative pour le gradient */
+body[data-theme="rainbow"] .hero-image {
+  position: relative !important;
+}
