@@ -728,8 +728,9 @@
           <ul class="footer-list">
             <li><a href="la-vision-tomorrow.html">La Vision</a></li>
             <li><a href="notre-histoire.html">Notre Histoire</a></li>
-            
-            
+            <li><a href="process-24h.html">Process</a></li>
+            <li><a href="realisations.html">Réalisations</a></li>
+            <li><a href="comparatif-solutions-web.html">Comparatif</a></li>
           </ul>
         </div>
         
@@ -737,6 +738,7 @@
           <h4 class="footer-title font-mono">Réseau & Contact</h4>
           <ul class="footer-list">
             <li><a href="https://www.bigneurons.com" target="_blank">Groupe Big Neurons <span class="external-icon">↗</span></a></li>
+            <li><a href="https://getraw.ai" target="_blank">GetRaw.ai <span class="external-icon">↗</span></a></li>
             <li><a href="mentions-legales.html">Mentions Légales</a></li>
             <li><a href="mailto:hello@tomorrow.online">Contact Ops</a></li>
           </ul>
@@ -755,7 +757,7 @@
           © 2026 TOMORROW AGENCY. UNE MARQUE DE SAS BIG NEURONS. TOMORROW.ONLINE EST LA PREMIÈRE AGENCE WEB "NO-WAIT" EN FRANCE. DESIGNED FOR SPEED. POWERED BY INTELLIGENCE.
         </p>
         <div class="footer-status font-mono">
-          SYSTEM STATUS: OPERATIONAL
+          SYSTEM STATUS: <span class="status-operational">OPERATIONAL</span>
         </div>
       </div>
     </div>
@@ -769,26 +771,32 @@
     <div class="modal-container">
       <div class="modal-content-details">
         <button class="modal-close" onclick="closeModalDetails('modalMaquette')">✕</button>
-        <h2>MAQUETTE<span class="text-gradient">.</span></h2>
-        <p class="modal-price">900€ HT</p>
+        <h2>PACK MAQUETTE (12H)</h2>
         
-        <h3>Inclus :</h3>
-        <ul>
-          <li>Maquette Figma intégrable</li>
-          <li>UX/UI optimisé pour la conversion (CRO)</li>
-          <li>Copywriting + sélection visuels</li>
-          <li>Design system complet</li>
-          <li>Livraison 12H</li>
-        </ul>
+        <div class="modal-grid">
+          <div class="modal-section-inclus">
+            <h3 style="color: #00FF00;">/// CE QUI EST INCLUS</h3>
+            <ul>
+              <li>Design Figma Complet</li>
+              <li>Direction Artistique Senior</li>
+              <li>Maquettes Desktop & Mobile</li>
+              <li>Fichiers Sources</li>
+              <li>Cession des droits</li>
+            </ul>
+          </div>
+          
+          <div class="modal-section-pas-inclus">
+            <h3 style="color: #FF0055;">/// CE QUI N'EST PAS INCLUS</h3>
+            <ul style="color: #666;">
+              <li>Intégration Webflow</li>
+              <li>Animations</li>
+              <li>SEO Technique</li>
+              <li>Mise en ligne</li>
+            </ul>
+          </div>
+        </div>
         
-        <h3>Limites :</h3>
-        <ul>
-          <li>Sans développement (maquette uniquement)</li>
-          <li>Pas de code exportable</li>
-          <li>Intégration à votre charge</li>
-        </ul>
-        
-        <button class="btn btn-primary" onclick="openModal()">Commander Maquette</button>
+        <button class="btn btn-primary" onclick="closeModalDetails('modalMaquette'); openModal();">JE CHOISIS CE PACK</button>
       </div>
     </div>
   </div>
@@ -799,28 +807,31 @@
     <div class="modal-container">
       <div class="modal-content-details">
         <button class="modal-close" onclick="closeModalDetails('modalStarter')">✕</button>
-        <h2>STARTER<span class="text-gradient">.</span></h2>
-        <p class="modal-price">980€ HT <span style="font-size: 16px; opacity: 0.7;">(offre du mois)</span></p>
+        <h2>PACK STARTER (24H)</h2>
         
-        <h3>Inclus :</h3>
-        <ul>
-          <li>One page / Landing page complète</li>
-          <li>UX/UI optimisé pour la conversion (CRO)</li>
-          <li>Copywriting + sélection visuels</li>
-          <li>Développement Webflow responsive</li>
-          <li>Formulaire de contact intégré</li>
-          <li>SEO de base (balises, meta)</li>
-          <li>Livraison 24H</li>
-        </ul>
+        <div class="modal-grid">
+          <div class="modal-section-inclus">
+            <h3 style="color: #00FF00;">/// CE QUI EST INCLUS</h3>
+            <ul>
+              <li>Design Premium</li>
+              <li>Développement Webflow</li>
+              <li>Responsive Perfect</li>
+              <li>Optimisation SEO de base</li>
+              <li>Copywriting (Textes)</li>
+            </ul>
+          </div>
+          
+          <div class="modal-section-pas-inclus">
+            <h3 style="color: #FF0055;">/// CE QUI N'EST PAS INCLUS</h3>
+            <ul style="color: #666;">
+              <li>Système de Blog/CMS</li>
+              <li>Filtres avancés</li>
+              <li>E-commerce</li>
+            </ul>
+          </div>
+        </div>
         
-        <h3>Limites :</h3>
-        <ul>
-          <li>1 seule page (format landing)</li>
-          <li>Pas de CMS dynamique</li>
-          <li>Pas de système multilingue</li>
-        </ul>
-        
-        <button class="btn btn-primary" onclick="openModal()">Commander Starter</button>
+        <button class="btn btn-primary" onclick="closeModalDetails('modalStarter'); openModal();">JE CHOISIS CE PACK</button>
       </div>
     </div>
   </div>
@@ -831,29 +842,30 @@
     <div class="modal-container">
       <div class="modal-content-details">
         <button class="modal-close" onclick="closeModalDetails('modalBusiness')">✕</button>
-        <h2>BUSINESS<span class="text-gradient">.</span></h2>
-        <p class="modal-price">2200€ HT</p>
+        <h2>PACK BUSINESS (48H)</h2>
         
-        <h3>Inclus :</h3>
-        <ul>
-          <li>Site multi-pages (max 5 pages)</li>
-          <li>UX/UI optimisé pour la conversion (CRO)</li>
-          <li>Copywriting + sélection visuels</li>
-          <li>Développement Webflow responsive</li>
-          <li>CMS dynamique (blog, actualités)</li>
-          <li>Formulaires avancés</li>
-          <li>SEO optimisé (structure complète)</li>
-          <li>Livraison 48H</li>
-        </ul>
+        <div class="modal-grid">
+          <div class="modal-section-inclus">
+            <h3 style="color: #00FF00;">/// CE QUI EST INCLUS</h3>
+            <ul>
+              <li>Site Multi-pages (max 5)</li>
+              <li>CMS (Blog/Réalisations)</li>
+              <li>Animations Avancées (GSAP)</li>
+              <li>SEO Technique Avancé</li>
+              <li>Formation Admin</li>
+            </ul>
+          </div>
+          
+          <div class="modal-section-pas-inclus">
+            <h3 style="color: #FF0055;">/// CE QUI N'EST PAS INCLUS</h3>
+            <ul style="color: #666;">
+              <li>E-commerce complexe</li>
+              <li>Espace Membre</li>
+            </ul>
+          </div>
+        </div>
         
-        <h3>Limites :</h3>
-        <ul>
-          <li>Maximum 5 pages</li>
-          <li>1 seule langue</li>
-          <li>Pas d'e-commerce</li>
-        </ul>
-        
-        <button class="btn btn-primary" onclick="openModal()">Commander Business</button>
+        <button class="btn btn-primary" onclick="closeModalDetails('modalBusiness'); openModal();">JE CHOISIS CE PACK</button>
       </div>
     </div>
   </div>
@@ -862,30 +874,55 @@
   <div id="modalProcess" class="modal hidden">
     <div class="modal-overlay" onclick="closeModalDetails('modalProcess')"></div>
     <div class="modal-container">
-      <div class="modal-content-details">
+      <div class="modal-content-details" style="background: #000; border: 2px solid #B407FE;">
         <button class="modal-close" onclick="closeModalDetails('modalProcess')">✕</button>
-        <h2>COMMENT ON FAIT<span class="text-gradient">.</span></h2>
-        <p style="margin-bottom: 32px; color: #999;">Notre secret : humain + IA en symbiose.</p>
+        <h2>DÉTAILS PROCESS 24H</h2>
         
-        <div style="margin-bottom: 32px;">
-          <h3>1. IA Structure (2H)</h3>
-          <p style="color: #999; margin-bottom: 24px;">Claude Sonnet 4.5 génère la structure HTML/CSS de base depuis votre brief. On gagne 80% du temps de codage.</p>
+        <div style="margin-bottom: 40px;">
+          <h3 style="color: #B407FE; font-family: 'JetBrains Mono', monospace; font-size: 14px; text-transform: uppercase; margin-bottom: 24px;">TIMELINE</h3>
           
-          <h3>2. Designer Senior Webflow (6H)</h3>
-          <p style="color: #999; margin-bottom: 24px;">Un vrai humain retravaille le design, ajuste la typo, les espacements, les animations. On garde l'âme, on vire la soupe.</p>
+          <div style="margin-bottom: 16px;">
+            <span style="color: #B407FE; font-weight: 700; margin-right: 16px;">09:00</span>
+            <span style="color: #fff;">Appel de validation. Paiement. Chronomètre démarre.</span>
+          </div>
           
-          <h3>3. Copywriter (4H)</h3>
-          <p style="color: #999; margin-bottom: 24px;">Réécriture des textes pour conversion, ton de voix, storytelling. L'IA propose, l'humain tranche.</p>
+          <div style="margin-bottom: 16px;">
+            <span style="color: #999; font-weight: 700; margin-right: 16px;">14:00</span>
+            <span style="color: #999;">Production : Copy, Design, Dev. Zéro réunion.</span>
+          </div>
           
-          <h3>4. QA & Deploy (2H)</h3>
-          <p style="color: #999; margin-bottom: 24px;">Tests cross-browser, mobile, performance, puis mise en ligne. Webflow hosting ultra-rapide.</p>
+          <div style="margin-bottom: 16px;">
+            <span style="color: #00FF00; font-weight: 700; margin-right: 16px;">18:00</span>
+            <span style="color: #fff;">Livraison. SEO. Mise en ligne. Champagne.</span>
+          </div>
         </div>
         
-        <p style="font-weight: 700; font-size: 18px; margin-bottom: 24px;">
-          <strong>Total : 14H de travail réel pour un résultat qui prend normalement 2 semaines.</strong>
-        </p>
+        <div style="margin-bottom: 40px;">
+          <h3 style="color: #B407FE; font-family: 'JetBrains Mono', monospace; font-size: 14px; text-transform: uppercase; margin-bottom: 24px;">LIVRABLES</h3>
+          
+          <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 32px;">
+            <div style="background: #111; padding: 16px; text-align: center; border: 1px solid #222;">
+              <div style="font-weight: 700; margin-bottom: 8px;">MAQUETTE</div>
+              <div style="font-size: 14px; color: #999;">Figma source + Design System</div>
+            </div>
+            
+            <div style="background: #111; padding: 16px; text-align: center; border: 2px solid #B407FE;">
+              <div style="font-weight: 700; margin-bottom: 8px;">STARTER</div>
+              <div style="font-size: 14px; color: #999;">Site One Page Webflow + SEO</div>
+            </div>
+            
+            <div style="background: #111; padding: 16px; text-align: center; border: 1px solid #222;">
+              <div style="font-weight: 700; margin-bottom: 8px;">BUSINESS</div>
+              <div style="font-size: 14px; color: #999;">5 Pages + CMS + Formation</div>
+            </div>
+          </div>
+          
+          <div style="text-align: center; color: #999; font-size: 14px; margin-bottom: 24px;">
+            ✓ Direction Artistique Senior • ✓ Copywriting • ✓ Images • ✓ Cession PI
+          </div>
+        </div>
         
-        <button class="btn btn-primary" onclick="openModal()">Démarrer mon projet</button>
+        <button class="btn btn-primary" onclick="closeModalDetails('modalProcess'); openModal();">DÉMARRER MA MISSION</button>
       </div>
     </div>
   </div>
@@ -1009,7 +1046,7 @@
       const modal = document.getElementById(modalId);
       if(modal) {
         modal.classList.remove('hidden');
-        document.body.style.overflow = 'hidden';
+        if(window.lenis) window.lenis.stop();
       }
     }
 
@@ -1017,7 +1054,7 @@
       const modal = document.getElementById(modalId);
       if(modal) {
         modal.classList.add('hidden');
-        document.body.style.overflow = '';
+        if(window.lenis) window.lenis.start();
       }
     }
     
