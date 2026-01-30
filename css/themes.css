@@ -237,19 +237,27 @@ body[data-theme="white"] .venn-bad .venn-center {
   color: #FFFFFF !important;
 }
 
-/* IMPORTANT : Formulaire DOIT rester inchangé */
+/* IMPORTANT : Formulaire DOIT rester inchangé - ISOLATION TOTALE */
 body[data-theme="white"] .modal,
-body[data-theme="white"] .modal *,
+body[data-theme="white"] .modal::before,
+body[data-theme="white"] .modal::after,
 body[data-theme="white"] .modal-overlay,
 body[data-theme="white"] .modal-container,
 body[data-theme="white"] .modal-content,
-body[data-theme="white"] .modal-content *,
 body[data-theme="white"] #bookingModal,
+body[data-theme="white"] #bookingModal::before,
+body[data-theme="white"] #bookingModal::after,
 body[data-theme="white"] #bookingModal * {
-  background-color: revert !important;
+  all: revert !important;
+  background: revert !important;
   color: revert !important;
-  border-color: revert !important;
-  filter: revert !important;
+  border: revert !important;
+  box-shadow: revert !important;
+  filter: none !important;
+  opacity: revert !important;
+  display: revert !important;
+  visibility: visible !important;
+  pointer-events: revert !important;
 }
 
 /* ========================================
@@ -450,17 +458,25 @@ body[data-theme="rainbow"] .theme-toggle {
   box-shadow: none !important;
 }
 
-/* IMPORTANT : Formulaire DOIT rester inchangé */
+/* IMPORTANT : Formulaire DOIT rester inchangé - ISOLATION TOTALE */
 body[data-theme="rainbow"] .modal,
-body[data-theme="rainbow"] .modal *,
+body[data-theme="rainbow"] .modal::before,
+body[data-theme="rainbow"] .modal::after,
 body[data-theme="rainbow"] .modal-overlay,
 body[data-theme="rainbow"] .modal-container,
 body[data-theme="rainbow"] .modal-content,
-body[data-theme="rainbow"] .modal-content *,
 body[data-theme="rainbow"] #bookingModal,
+body[data-theme="rainbow"] #bookingModal::before,
+body[data-theme="rainbow"] #bookingModal::after,
 body[data-theme="rainbow"] #bookingModal * {
-  background-color: revert !important;
+  all: revert !important;
+  background: revert !important;
   color: revert !important;
-  border-color: revert !important;
-  filter: revert !important;
+  border: revert !important;
+  box-shadow: revert !important;
+  filter: none !important;
+  opacity: revert !important;
+  display: revert !important;
+  visibility: visible !important;
+  pointer-events: revert !important;
 }

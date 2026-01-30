@@ -611,6 +611,7 @@
   padding: 2.5rem;
   border-right: 1px solid var(--grid);
   border-bottom: 1px solid var(--grid);
+  border-radius: 8px;
   display: flex;
   flex-direction: column;
   position: relative;
@@ -630,6 +631,7 @@
   background: var(--void);
   color: var(--white);
   padding: 0.25rem 0.75rem;
+  border-radius: 8px;
   font-size: 0.75rem;
   font-weight: 700;
   text-transform: uppercase;
@@ -682,6 +684,7 @@
 .pricing-badge {
   display: inline-block;
   border: 1px solid var(--grid);
+  border-radius: 8px;
   padding: 0.5rem 1rem;
   font-size: 0.75rem;
   font-weight: 700;
@@ -695,6 +698,7 @@
   background: var(--void);
   color: var(--white);
   border-color: var(--void);
+  border-radius: 8px;
 }
 
 .pricing-time {

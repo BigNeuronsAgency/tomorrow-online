@@ -131,6 +131,7 @@ p {
   text-transform: uppercase;
   text-decoration: none;
   border: none;
+  border-radius: 8px;
   cursor: pointer;
   transition: all var(--transition-base);
   position: relative;
