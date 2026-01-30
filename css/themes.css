@@ -28,25 +28,19 @@ body > .theme-toggle {
   right: 18rem !important;
   z-index: 1000 !important;
   margin: 0 !important;
-  padding: 0.5rem !important;
-  border-radius: 8px !important;
-  /* TOUJOURS fond noir visible */
-  background: rgba(0, 0, 0, 0.98) !important;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.6) !important;
-  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  padding: 0 !important;
+  border-radius: 0 !important;
+  /* PAS de fond, PAS d'encadré - transparent comme sur la home */
+  background: transparent !important;
+  box-shadow: none !important;
+  border: none !important;
 }
 
-/* Override toggle fixe en white mode (déjà noir donc OK) */
+/* En white mode AUSSI : PAS d'encadré blanc */
 body[data-theme="white"] > .theme-toggle {
-  background: rgba(0, 0, 0, 0.98) !important;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.6) !important;
-  border: 1px solid rgba(255, 255, 255, 0.2) !important;
-}
-
-body[data-theme="white"] > .theme-toggle .check,
-body[data-theme="white"] .nav-links .theme-toggle .check {
-  background: rgba(255, 255, 255, 0.95) !important;
-  border-color: rgba(255, 255, 255, 0.4) !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  border: none !important;
 }
 
 .theme-toggle .label {
@@ -117,7 +111,27 @@ body[data-theme="white"] div:not(.pricing-card):not(.pricing-card-popular):not(.
   background: #FAF9F6 !important;
 }
 
-/* Footer - FORCE TOUS TEXTES EN BLANC */
+/* Header - AUCUNE RÈGLE (reste identique au dark) */
+
+/* Dropdown - AUCUNE RÈGLE (reste identique au dark) */
+
+/* Textes noirs PARTOUT sauf exceptions */
+body[data-theme="white"] * {
+  color: #000000 !important;
+}
+
+/* EXCEPTIONS : Garder en blanc - DOIT VENIR APRÈS pour override */
+body[data-theme="white"] .header *,
+body[data-theme="white"] .footer *,
+body[data-theme="white"] .pricing-card *,
+body[data-theme="white"] .pricing-card-popular *,
+body[data-theme="white"] .marquee *,
+body[data-theme="white"] #bookingModal *,
+body[data-theme="white"] .modal * {
+  color: inherit !important;
+}
+
+/* Footer - FORCE TOUS TEXTES EN BLANC (override le inherit) */
 body[data-theme="white"] .footer h1,
 body[data-theme="white"] .footer h2,
 body[data-theme="white"] .footer h3,
@@ -127,67 +141,28 @@ body[data-theme="white"] .footer span,
 body[data-theme="white"] .footer a,
 body[data-theme="white"] .footer li,
 body[data-theme="white"] .footer div,
-body[data-theme="white"] .footer-title,
 body[data-theme="white"] .footer-link,
-body[data-theme="white"] .footer-copyright,
-body[data-theme="rainbow"] .footer h1,
-body[data-theme="rainbow"] .footer h2,
-body[data-theme="rainbow"] .footer h3,
-body[data-theme="rainbow"] .footer h4,
-body[data-theme="rainbow"] .footer p,
-body[data-theme="rainbow"] .footer span,
-body[data-theme="rainbow"] .footer a,
-body[data-theme="rainbow"] .footer li,
-body[data-theme="rainbow"] .footer div,
-body[data-theme="rainbow"] .footer-title,
-body[data-theme="rainbow"] .footer-link,
-body[data-theme="rainbow"] .footer-copyright {
+body[data-theme="white"] .footer-copyright {
   color: rgba(255, 255, 255, 0.6) !important;
 }
 
-body[data-theme="white"] .footer-title,
-body[data-theme="rainbow"] .footer-title {
+body[data-theme="white"] .footer-title {
   color: #FFFFFF !important;
 }
 
-body[data-theme="white"] .footer .build-badge,
-body[data-theme="rainbow"] .footer .build-badge {
+body[data-theme="white"] .footer .build-badge {
   background: linear-gradient(to right, #FF5500 0%, #FF0000 60%, #660000 100%) !important;
   -webkit-background-clip: text !important;
   background-clip: text !important;
   -webkit-text-fill-color: transparent !important;
 }
 
-/* Header - AUCUNE RÈGLE (reste identique au dark) */
-
-/* Dropdown - AUCUNE RÈGLE (reste identique au dark) */
-
-/* Textes noirs SAUF pricing, modal, header, footer, marquee, step-number */
-body[data-theme="white"] .hero h1,
-body[data-theme="white"] .hero h2,
-body[data-theme="white"] .hero p,
-body[data-theme="white"] main h1,
-body[data-theme="white"] main h2,
-body[data-theme="white"] main h3,
-body[data-theme="white"] main h4,
-body[data-theme="white"] main p:not(.pricing-card p):not(.pricing-card-popular p),
-body[data-theme="white"] main li:not(.pricing-card li):not(.pricing-card-popular li),
-body[data-theme="white"] main span:not(.pricing-card span):not(.pricing-card-popular span):not(.step-number):not(.step-number *),
-body[data-theme="white"] section:not(.header):not(.footer) h1,
-body[data-theme="white"] section:not(.header):not(.footer) h2,
-body[data-theme="white"] section:not(.header):not(.footer) h3,
-body[data-theme="white"] section:not(.header):not(.footer) p:not(.pricing-card p):not(.pricing-card-popular p):not(.marquee p),
-body[data-theme="white"] section:not(.header):not(.footer) li:not(.pricing-card li):not(.pricing-card-popular li),
-body[data-theme="white"] .realisations-title,
-body[data-theme="white"] .realisations-subtitle,
-body[data-theme="white"] .realisations-badge,
-body[data-theme="white"] .stat-mini-number,
-body[data-theme="white"] .stat-mini-label,
-body[data-theme="white"] .case-tag,
-body[data-theme="white"] .case-title,
-body[data-theme="white"] .case-subtitle,
-body[data-theme="white"] .case-description {
-  color: #000000 !important;
+/* Restaurer les couleurs spécifiques nécessaires */
+body[data-theme="white"] .accent,
+body[data-theme="white"] .text-gradient,
+body[data-theme="white"] .year {
+  color: #FF5500 !important;
+  -webkit-text-fill-color: unset !important;
 }
 
 /* Pricing cards IDENTIQUES mode dark */
