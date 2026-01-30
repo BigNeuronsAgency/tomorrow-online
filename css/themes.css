@@ -1,5 +1,5 @@
 /* ========================================
-   THEME TOGGLE - Style de base
+   THEME TOGGLE - Style de base avec emojis
    ======================================== */
 
 body > .theme-toggle {
@@ -16,27 +16,35 @@ body > .theme-toggle {
 
 /* ========================================
    MODE WHITE
-   Fond BLANC + Header/Footer NOIR
+   FOND BLANC partout + Header/Footer NOIR
    ======================================== */
 
-body[data-theme="white"] {
+body[data-theme="white"],
+body[data-theme="white"] * {
   background: #FAF9F6 !important;
   background-color: #FAF9F6 !important;
 }
 
-
-body[data-theme="white"] main,
-body[data-theme="white"] .hero,
-body[data-theme="white"] section:not(.header):not(.footer),
-body[data-theme="white"] article,
-body[data-theme="white"] .page-wrapper {
-  background: #FAF9F6 !important;
-  background-color: #FAF9F6 !important;
+/* EXCEPTIONS - Garder fond NOIR */
+body[data-theme="white"] .header,
+body[data-theme="white"] .header *,
+body[data-theme="white"] .footer,
+body[data-theme="white"] .footer *,
+body[data-theme="white"] .pricing-card,
+body[data-theme="white"] .pricing-card *,
+body[data-theme="white"] .pricing-card-popular,
+body[data-theme="white"] .pricing-card-popular *,
+body[data-theme="white"] .step-number,
+body[data-theme="white"] .marquee,
+body[data-theme="white"] .marquee * {
+  background: unset !important;
+  background-color: unset !important;
 }
 
 /* Header NOIR textes BLANCS */
 body[data-theme="white"] .header {
   background: #000000 !important;
+  background-color: #000000 !important;
 }
 
 body[data-theme="white"] .header *,
@@ -48,6 +56,7 @@ body[data-theme="white"] .logo {
 /* Footer NOIR textes BLANCS */
 body[data-theme="white"] .footer {
   background: #000000 !important;
+  background-color: #000000 !important;
 }
 
 body[data-theme="white"] .footer *,
@@ -63,6 +72,7 @@ body[data-theme="white"] .footer li {
 /* Pricing cards NOIRES textes BLANCS */
 body[data-theme="white"] .pricing-card {
   background: #000000 !important;
+  background-color: #000000 !important;
 }
 
 body[data-theme="white"] .pricing-card *,
@@ -90,7 +100,7 @@ body[data-theme="white"] .marquee * {
   color: #FFFFFF !important;
 }
 
-/* Contenu sur fond BLANC = textes NOIRS ou ORANGE */
+/* Textes sur fond BLANC = NOIRS ou ORANGE */
 body[data-theme="white"] main h1:not(.text-gradient):not(.text-gradient *),
 body[data-theme="white"] main h2:not(.text-gradient):not(.text-gradient *),
 body[data-theme="white"] main h3:not(.text-gradient):not(.text-gradient *),
@@ -134,6 +144,7 @@ body[data-theme="white"] .accent {
 /* Work-stats BLANCHES bordure NOIRE */
 body[data-theme="white"] .work-stat {
   background: #FFFFFF !important;
+  background-color: #FFFFFF !important;
   border: 2px solid #000000 !important;
 }
 
@@ -168,6 +179,7 @@ body[data-theme="white"] .btn-outline:hover {
 /* Process steps NOIRS texte BLANC */
 body[data-theme="white"] .step-number {
   background: #000000 !important;
+  background-color: #000000 !important;
   border-color: #000000 !important;
   color: #FFFFFF !important;
 }
@@ -183,6 +195,7 @@ body[data-theme="white"] .cursor {
 
 body[data-theme="white"] .cursor-dot {
   background: #000000 !important;
+  background-color: #000000 !important;
 }
 
 /* ========================================
