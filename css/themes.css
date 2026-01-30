@@ -46,9 +46,8 @@
 }
 
 /* Cacher le toggle quand formulaire ouvert */
-body:has(#bookingModal:not(.hidden)) .theme-toggle {
-  opacity: 0;
-  pointer-events: none;
+#bookingModal:not(.hidden) ~ * .theme-toggle {
+  display: none !important;
 }
 
 /* ========================================
@@ -75,9 +74,24 @@ body[data-theme="white"] .header {
 body[data-theme="white"] .header .logo,
 body[data-theme="white"] .header img[src*="logo"],
 body[data-theme="white"] .header .nav-link,
-body[data-theme="white"] .header .hamburger-icon span {
+body[data-theme="white"] .header .nav-link-dropdown,
+body[data-theme="white"] .header .hamburger span {
   filter: none !important;
   color: #FFFFFF !important;
+}
+
+/* Dropdown reste visible */
+body[data-theme="white"] .dropdown-content {
+  background: rgba(0, 0, 0, 0.95) !important;
+}
+
+body[data-theme="white"] .dropdown-content a {
+  color: #FFFFFF !important;
+}
+
+body[data-theme="white"] .dropdown-content a:hover {
+  background: rgba(255, 85, 0, 0.1) !important;
+  color: #FF5500 !important;
 }
 
 /* Footer */
@@ -99,7 +113,8 @@ body[data-theme="white"] .footer-link:hover {
 }
 
 body[data-theme="white"] .footer p,
-body[data-theme="white"] .footer span {
+body[data-theme="white"] .footer span,
+body[data-theme="white"] .footer div {
   color: #666666 !important;
 }
 
@@ -212,6 +227,14 @@ body[data-theme="white"] .modal-content * {
 body[data-theme="rainbow"] {
   background: #000000 !important;
   color: #FFFFFF !important;
+}
+
+body[data-theme="rainbow"] .hero {
+  background: #000000 !important;
+}
+
+body[data-theme="rainbow"] .bg-grid-fixed {
+  opacity: 0.05 !important;
 }
 
 body[data-theme="rainbow"] .header,

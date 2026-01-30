@@ -625,8 +625,8 @@
 .popular-badge {
   position: absolute;
   top: 1.5rem;
-  left: 50%;
-  transform: translateX(-50%);
+  right: 1.5rem;
+  transform: none;
   background: var(--void);
   color: var(--white);
   padding: 0.25rem 0.75rem;
