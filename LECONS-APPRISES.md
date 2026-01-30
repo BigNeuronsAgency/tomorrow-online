@@ -30,6 +30,21 @@ Refonte de 7 pages secondaires du site Tomorrow.Online : appliquer le design de 
 - **Conséquence** : Accumulation de bugs, code sale, confusion totale
 - **Pourquoi** : J'avais peur de "perdre du temps" en recommençant from scratch
 
+### 5. J'ai modifié le mauvais répertoire (tomorrow-site/ au lieu de la racine)
+- **Erreur** : J'ai passé 30 min à corriger `tomorrow-site/la-vision-tomorrow.html` alors que Sevalla déploie depuis la RACINE
+- **Conséquence** : 6 commits inutiles, badges non visibles en prod, 100$ de tokens gaspillés
+- **Pourquoi** : Je n'ai pas vérifié quel répertoire Sevalla déploie AVANT de commencer à coder
+- **Coût** : ~100 USD de tokens pour l'utilisateur + 1h de temps perdu
+- **Leçon** : TOUJOURS vérifier l'architecture de deploy AVANT de toucher au code
+
+### 6. J'ai écrasé index.html en prod avec une mauvaise version (CRITIQUE)
+- **Erreur** : En modifiant la-vision-tomorrow.html, j'ai accidentellement écrasé index.html avec une version Webflow cassée (ancien formulaire, home pétée)
+- **Conséquence** : DESTRUCTION du travail de 3h sur la home + formulaire parfaitement fonctionnel, perte de tous les fix (cursor, emails, upload, step 7, etc.)
+- **Pourquoi** : Je n'ai pas vérifié quels fichiers j'ai modifié avant de commit/push, j'ai fait `git add .` ou `git add -A` sans regarder
+- **Coût** : Perte de 3h de travail validé + stress utilisateur + confiance perdue
+- **Leçon** : **TOUJOURS** faire `git status` et `git diff` AVANT `git add`, **JAMAIS** faire `git add .` ou `git add -A` sans vérifier la liste exacte des fichiers modifiés
+- **Correction** : Restauré index.html depuis commit f996463 (dernier état fonctionnel)
+
 ---
 
 ## ✅ LA BONNE MÉTHODE (GRAVÉE DANS LE MARBRE)
@@ -91,6 +106,17 @@ file_read /tmp/[PAGE]-webflow.html offset=101 limit=100
 - La structure complète de la page
 
 ### ÉTAPE 2 : CRÉATION DU NOUVEAU HTML (1h MAX)
+
+**RÈGLES ABSOLUES** :
+1. Créer le fichier **À LA RACINE** du repo (`/Users/secondmac/Downloads/TOMORROW ONLINE/`)
+2. **OBLIGATOIRE** : Inclure les 3 CSS dans cet ordre :
+   ```html
+   <link rel="stylesheet" href="css/design-system.css">
+   <link rel="stylesheet" href="css/home.css">  <!-- NE JAMAIS OUBLIER -->
+   <link rel="stylesheet" href="css/formulaire.css">
+   ```
+3. Copier header/footer EXACTEMENT depuis `index.html` (racine, pas tomorrow-site/)
+
 ```html
 <!DOCTYPE html>
 <html lang="fr">
@@ -195,12 +221,26 @@ open tomorrow-site/[PAGE].html
 
 ### ÉTAPE 4 : COMMIT ET PUSH (5 min)
 ```bash
-# Seulement si le test local est OK
-cd tomorrow-site
-git add [PAGE].html
+# ⚠️ CRITIQUE : SEVALLA DÉPLOIE DEPUIS LA RACINE DU REPO, PAS depuis tomorrow-site/
+# TOUJOURS copier le fichier vers la racine avant de commit/push
+
+# 1. Copier le fichier depuis tomorrow-site/ vers la racine
+cp tomorrow-site/[PAGE].html ./[PAGE].html
+
+# 2. Vérifier que le fichier racine est bien mis à jour
+diff tomorrow-site/[PAGE].html ./[PAGE].html
+
+# 3. Commit les DEUX versions (racine + tomorrow-site)
+git add [PAGE].html tomorrow-site/[PAGE].html
 git commit -m "fix: [PAGE].html refonte complète - 100% copy Webflow + design index.html (header/footer/noir)"
 git push origin main
 ```
+
+**⚠️ ARCHITECTURE DU PROJET** :
+- `./[PAGE].html` (racine) = Fichiers déployés par Sevalla en PROD
+- `./tomorrow-site/[PAGE].html` = Fichiers de travail/backup
+- **Les 2 doivent toujours être identiques**
+- **Ne JAMAIS modifier seulement tomorrow-site/ sans copier vers la racine**
 
 ### ÉTAPE 5 : VÉRIFICATION PROD (5 min)
 ```bash
@@ -223,6 +263,12 @@ git push origin main
 5. **NE JAMAIS** push plusieurs pages d'un coup (faire page par page)
 6. **NE JAMAIS** inventer du texte ou sauter des sections
 7. **NE JAMAIS** dire "je ferai ça plus tard" (finir la page à 100% avant de passer à la suivante)
+8. **NE JAMAIS** modifier les fichiers dans `tomorrow-site/` sans copier vers la RACINE pour deploy
+9. **NE JAMAIS** faire `git add .` ou `git add -A` sans vérifier `git status` et `git diff` AVANT
+10. **NE JAMAIS** commit un fichier sans être sûr à 100% que c'est la bonne version
+11. **TOUJOURS** faire `git status` puis `git diff` puis `git add [FICHIER_PRÉCIS]` puis `git commit`
+12. **NE JAMAIS** faire "les trucs à ma façon" - **RESPECTER LA CONSIGNE À LA LETTRE**
+13. **NE JAMAIS** inventer, innover, ou "améliorer" si la consigne ne le demande pas explicitement
 
 ---
 
@@ -312,8 +358,65 @@ Prendre 1h pour faire UNE page correctement vaut mieux que 20 commits ratés en 
 - Les JS sont dans `js/cursor.js`, `js/animations.js`, `js/navigation.js`, `js/main.js`, `js/formulaire.js`
 - Sevalla auto-deploy depuis la branche `main` du repo GitHub `BigNeuronsAgency/tomorrow-online`
 
+### ⚠️ ARCHITECTURE CRITIQUE DU DEPLOY
+
+**SEVALLA DÉPLOIE DEPUIS LA RACINE DU REPO (`./`), PAS depuis `tomorrow-site/`**
+
+```
+TOMORROW ONLINE/
+├── index.html                    ← DÉPLOYÉ EN PROD (https://tomorrow.online/)
+├── la-vision-tomorrow.html       ← DÉPLOYÉ EN PROD (https://tomorrow.online/la-vision-tomorrow.html)
+├── migrations.html               ← DÉPLOYÉ EN PROD
+├── [TOUTES LES PAGES].html       ← DÉPLOYÉES EN PROD
+├── css/                          ← DÉPLOYÉ EN PROD
+├── js/                           ← DÉPLOYÉ EN PROD
+├── images/                       ← DÉPLOYÉ EN PROD
+└── tomorrow-site/
+    ├── index.html                ← BACKUP / TRAVAIL (NON DÉPLOYÉ)
+    ├── la-vision-tomorrow.html   ← BACKUP / TRAVAIL (NON DÉPLOYÉ)
+    └── [FICHIERS DE TRAVAIL]     ← NON DÉPLOYÉS
+```
+
+**WORKFLOW OBLIGATOIRE** :
+1. Travailler sur `tomorrow-site/[PAGE].html` (optionnel, pour versionning)
+2. **TOUJOURS copier vers `./[PAGE].html` (racine) avant commit**
+3. Commit/push les DEUX fichiers (racine + tomorrow-site)
+
+**AVANT CHAQUE MODIFICATION** :
+```bash
+# Vérifier où Sevalla déploie (doit être la racine)
+ls -la *.html | head -10
+# Si tous les .html sont à la racine → OK, Sevalla déploie la racine
+
+# Si tu modifies tomorrow-site/[PAGE].html, COPIER vers racine :
+cp tomorrow-site/[PAGE].html ./[PAGE].html
+```
+
+**COÛT DE L'OUBLI** : 2026-01-29, oubli de copier `tomorrow-site/la-vision-tomorrow.html` vers racine → 6 commits ratés, 100 USD tokens gaspillés, 1h perdue.
+
 ---
 
 **Date de création** : 2026-01-29 21h40
 **Dernière mise à jour** : 2026-01-29 21h40
 **Statut** : 🔒 GRAVÉ DANS LE MARBRE
+
+## 9. NE JAMAIS TOUCHER AU HEADER/FOOTER UNE FOIS VALIDÉ PAR L'UTILISATEUR
+
+**RÈGLE ABSOLUE** : Une fois que l'utilisateur a validé le header et le footer, **NE PLUS JAMAIS Y TOUCHER** sur aucune page.
+
+**Header/Footer de référence** : `index.html` à la racine
+- Header : lignes 40-92
+- Footer : lignes 700-757
+
+**NE JAMAIS** :
+- Modifier la structure du header/footer
+- Changer le logo (doit être `<img src="images/TO-logo.webp">`)
+- Ajouter/supprimer des liens du menu
+- Modifier le CSS ou les classes du header/footer
+
+**SI l'utilisateur demande une modification** :
+1. Modifier UNIQUEMENT dans `index.html`
+2. Attendre sa validation explicite
+3. ENSUITE copier sur toutes les autres pages EN UNE SEULE FOIS
+
+**Coût de ne pas respecter cette règle** : 192 crédits gaspillés sur `notre-histoire.html` à cause de multiples allers-retours.
