@@ -1,5 +1,5 @@
 /* ========================================
-   THEME TOGGLE - Dark / Rainbow UNIQUEMENT
+   THEME SYSTEM - DARK / RAINBOW
    ======================================== */
 
 body > .theme-toggle {
@@ -10,7 +10,7 @@ body > .theme-toggle {
 }
 
 /* ========================================
-   MODE RAINBOW - Fond NOIR avec textes colorés
+   MODE RAINBOW
    ======================================== */
 
 body[data-theme="rainbow"] h1:not(.header *):not(.footer *):not(.pricing-card *):not(.pricing-card-popular *),
@@ -40,18 +40,19 @@ body[data-theme="rainbow"] .btn-outline {
   background-color: rgba(0, 0, 0, 0.5) !important;
 }
 
-/* Rainbow mode - Gradient arc-en-ciel sur tête enfant */
-body[data-theme="rainbow"] .hero-image::before {
+/* Gradient ARC-EN-CIEL autour tête enfant (pas orange!) */
+body[data-theme="rainbow"] .hero-image::after {
   content: "";
   position: absolute;
-  inset: -20px;
-  background: linear-gradient(45deg, #FF1493, #00FFFF, #FFD700, #00FF00, #FF1493);
+  inset: -30px;
+  background: linear-gradient(45deg, #FF1493, #00FFFF, #FFD700, #00FF00, #9400D3, #FF1493);
   background-size: 400% 400%;
   border-radius: 50%;
-  filter: blur(30px);
-  opacity: 0.6;
-  animation: rainbow-glow 3s ease infinite;
+  filter: blur(40px);
+  opacity: 0.8;
+  animation: rainbow-glow 4s ease infinite;
   z-index: -1;
+  pointer-events: none;
 }
 
 @keyframes rainbow-glow {
@@ -60,8 +61,9 @@ body[data-theme="rainbow"] .hero-image::before {
   100% { background-position: 0% 50%; }
 }
 
-/* Rainbow mode - Photos équipe en rose gay */
-body[data-theme="rainbow"] .team-card img,
-body[data-theme="rainbow"] .hero-image img {
-  filter: hue-rotate(290deg) saturate(1.5) !important;
+/* Photos équipe ROSE GAY (pas orange!) */
+body[data-theme="rainbow"] .team-member img,
+body[data-theme="rainbow"] img[src*="PP"],
+body[data-theme="rainbow"] img[src*="TOMORROW"] {
+  filter: hue-rotate(320deg) saturate(2) brightness(1.1) !important;
 }

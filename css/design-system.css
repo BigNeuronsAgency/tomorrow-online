@@ -515,3 +515,9 @@ html.lenis {
   display: flex;
   gap: 20px;
 }
+
+/* Centrer le toggle entre Ressources et CTA */
+.nav-links .theme-toggle {
+  margin-left: auto;
+  margin-right: 2rem;
+}
