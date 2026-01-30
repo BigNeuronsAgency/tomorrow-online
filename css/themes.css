@@ -80,7 +80,7 @@ body[data-theme="white"] main,
 body[data-theme="white"] article,
 body[data-theme="white"] .page-wrapper,
 body[data-theme="white"] .container,
-body[data-theme="white"] div:not(.pricing-card):not(.pricing-card-popular):not(.pricing-card *):not(.pricing-card-popular *):not(#bookingModal):not(#bookingModal *):not(.header):not(.header *):not(.footer):not(.footer *):not(.dropdown-content):not(.dropdown-content *) {
+body[data-theme="white"] div:not(.pricing-card):not(.pricing-card-popular):not(.pricing-card *):not(.pricing-card-popular *):not(#bookingModal):not(#bookingModal *):not(.modal):not(.modal *):not(.header):not(.header *):not(.footer):not(.footer *):not(.dropdown-content):not(.dropdown-content *) {
   background: #FAF9F6 !important;
 }
 
@@ -112,46 +112,24 @@ body[data-theme="white"] .dropdown-content a:hover {
   color: #FF5500 !important;
 }
 
-/* Footer NOIR IDENTIQUE au mode dark */
+/* Footer NOIR IDENTIQUE au mode dark - AUCUNE MODIFICATION */
 body[data-theme="white"] .footer {
-  background: rgba(0, 0, 0, 0.95) !important;
-  border-top: 1px solid rgba(255, 255, 255, 0.1) !important;
+  /* Pas de règles - laisse le style par défaut */
 }
 
-body[data-theme="white"] .footer * {
-  color: rgba(255, 255, 255, 0.6) !important;
-}
-
-body[data-theme="white"] .footer-title {
-  color: #FFFFFF !important;
-}
-
-body[data-theme="white"] .footer-link {
-  color: rgba(255, 255, 255, 0.6) !important;
-}
-
-body[data-theme="white"] .footer-link:hover {
-  color: #FF5500 !important;
-}
-
-body[data-theme="white"] .footer img {
-  filter: none !important;
-  opacity: 1 !important;
-}
-
-body[data-theme="white"] .footer .status-indicator {
-  background: #00FF00 !important;
-}
-
-/* Textes noirs SAUF éléments spéciaux */
-body[data-theme="white"] h1:not(.pricing-card h1):not(.pricing-card-popular h1),
-body[data-theme="white"] h2:not(.pricing-card h2):not(.pricing-card-popular h2),
-body[data-theme="white"] h3:not(.pricing-card h3):not(.pricing-card-popular h3),
-body[data-theme="white"] h4,
-body[data-theme="white"] h5,
-body[data-theme="white"] h6,
-body[data-theme="white"] p:not(.pricing-card p):not(.pricing-card-popular p):not(.footer *),
-body[data-theme="white"] li:not(.pricing-card li):not(.pricing-card-popular li) {
+/* Textes noirs SAUF éléments spéciaux ET FORMULAIRE */
+body[data-theme="white"] h1:not(.pricing-card h1):not(.pricing-card-popular h1):not(.modal h1):not(#bookingModal h1),
+body[data-theme="white"] h2:not(.pricing-card h2):not(.pricing-card-popular h2):not(.modal h2):not(#bookingModal h2),
+body[data-theme="white"] h3:not(.pricing-card h3):not(.pricing-card-popular h3):not(.modal h3):not(#bookingModal h3),
+body[data-theme="white"] h4:not(.modal h4):not(#bookingModal h4),
+body[data-theme="white"] h5:not(.modal h5):not(#bookingModal h5),
+body[data-theme="white"] h6:not(.modal h6):not(#bookingModal h6),
+body[data-theme="white"] p:not(.pricing-card p):not(.pricing-card-popular p):not(.footer *):not(.modal p):not(#bookingModal p),
+body[data-theme="white"] li:not(.pricing-card li):not(.pricing-card-popular li):not(.modal li):not(#bookingModal li),
+body[data-theme="white"] span:not(.pricing-card span):not(.pricing-card-popular span):not(.modal span):not(#bookingModal span),
+body[data-theme="white"] label:not(.modal label):not(#bookingModal label),
+body[data-theme="white"] input:not(.modal input):not(#bookingModal input),
+body[data-theme="white"] button:not(.modal button):not(#bookingModal button) {
   color: #000000 !important;
 }
 
@@ -279,18 +257,12 @@ body[data-theme="white"] .venn-bad .venn-center {
   color: #FFFFFF !important;
 }
 
-/* FORMULAIRE : TOTALEMENT ISOLÉ, IDENTIQUE AU MODE DARK */
+/* FORMULAIRE : AUCUNE RÈGLE - RESTE IDENTIQUE AU DARK MODE */
 body[data-theme="white"] #bookingModal,
 body[data-theme="white"] #bookingModal *,
-body[data-theme="white"] .modal.hidden,
-body[data-theme="white"] #bookingModal .modal-overlay,
-body[data-theme="white"] #bookingModal .modal-container,
-body[data-theme="white"] #bookingModal .modal-content {
-  background: inherit !important;
-  color: inherit !important;
-  border: inherit !important;
-  box-shadow: inherit !important;
-  filter: none !important;
+body[data-theme="white"] .modal,
+body[data-theme="white"] .modal * {
+  /* Aucune règle - le formulaire garde son style d'origine */
 }
 
 /* ========================================
@@ -498,11 +470,13 @@ body[data-theme="rainbow"] .xray-scanline {
 
 /* Effet de lumière rainbow derrière images */
 body[data-theme="rainbow"] img[style*="box-shadow"],
-body[data-theme="rainbow"] .timeline-image,
+body[data-theme="rainbow"] .timeline-image img,
+body[data-theme="rainbow"] .float-animation,
 body[data-theme="rainbow"] .hero-visual img {
-  filter: drop-shadow(0 0 60px rgba(255, 20, 147, 0.8)) 
-          drop-shadow(0 0 40px rgba(0, 255, 255, 0.6)) 
-          drop-shadow(0 0 20px rgba(255, 215, 0, 0.6)) !important;
+  filter: drop-shadow(0 0 80px rgba(255, 20, 147, 0.9)) 
+          drop-shadow(0 0 60px rgba(0, 255, 255, 0.8)) 
+          drop-shadow(0 0 40px rgba(255, 215, 0, 0.7)) 
+          drop-shadow(0 0 20px rgba(147, 112, 219, 0.6)) !important;
 }
 
 /* Pas d'encadré vert autour du toggle */
@@ -512,16 +486,10 @@ body[data-theme="rainbow"] .theme-toggle {
   box-shadow: none !important;
 }
 
-/* FORMULAIRE : TOTALEMENT ISOLÉ, IDENTIQUE AU MODE DARK */
+/* FORMULAIRE : AUCUNE RÈGLE - RESTE IDENTIQUE AU DARK MODE */
 body[data-theme="rainbow"] #bookingModal,
 body[data-theme="rainbow"] #bookingModal *,
-body[data-theme="rainbow"] .modal.hidden,
-body[data-theme="rainbow"] #bookingModal .modal-overlay,
-body[data-theme="rainbow"] #bookingModal .modal-container,
-body[data-theme="rainbow"] #bookingModal .modal-content {
-  background: inherit !important;
-  color: inherit !important;
-  border: inherit !important;
-  box-shadow: inherit !important;
-  filter: none !important;
+body[data-theme="rainbow"] .modal,
+body[data-theme="rainbow"] .modal * {
+  /* Aucune règle - le formulaire garde son style d'origine */
 }
