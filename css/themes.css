@@ -30,23 +30,22 @@ body > .theme-toggle {
   margin: 0 !important;
   padding: 0.5rem !important;
   border-radius: 8px !important;
+  /* TOUJOURS fond noir visible */
+  background: rgba(0, 0, 0, 0.98) !important;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.6) !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
 }
 
-/* Fond noir + shadow UNIQUEMENT en white mode */
+/* Override toggle fixe en white mode (déjà noir donc OK) */
 body[data-theme="white"] > .theme-toggle {
   background: rgba(0, 0, 0, 0.98) !important;
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.6) !important;
   border: 1px solid rgba(255, 255, 255, 0.2) !important;
 }
 
-body[data-theme="white"] > .theme-toggle .check {
-  background: rgba(0, 0, 0, 0.95) !important;
-  border-color: rgba(255, 255, 255, 0.4) !important;
-}
-
-/* Fix check background AUSSI pour le toggle dans nav-links */
+body[data-theme="white"] > .theme-toggle .check,
 body[data-theme="white"] .nav-links .theme-toggle .check {
-  background: rgba(0, 0, 0, 0.95) !important;
+  background: rgba(255, 255, 255, 0.95) !important;
   border-color: rgba(255, 255, 255, 0.4) !important;
 }
 
@@ -178,7 +177,16 @@ body[data-theme="white"] section:not(.header):not(.footer) h1,
 body[data-theme="white"] section:not(.header):not(.footer) h2,
 body[data-theme="white"] section:not(.header):not(.footer) h3,
 body[data-theme="white"] section:not(.header):not(.footer) p:not(.pricing-card p):not(.pricing-card-popular p):not(.marquee p),
-body[data-theme="white"] section:not(.header):not(.footer) li:not(.pricing-card li):not(.pricing-card-popular li) {
+body[data-theme="white"] section:not(.header):not(.footer) li:not(.pricing-card li):not(.pricing-card-popular li),
+body[data-theme="white"] .realisations-title,
+body[data-theme="white"] .realisations-subtitle,
+body[data-theme="white"] .realisations-badge,
+body[data-theme="white"] .stat-mini-number,
+body[data-theme="white"] .stat-mini-label,
+body[data-theme="white"] .case-tag,
+body[data-theme="white"] .case-title,
+body[data-theme="white"] .case-subtitle,
+body[data-theme="white"] .case-description {
   color: #000000 !important;
 }
 

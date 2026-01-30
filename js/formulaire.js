@@ -949,12 +949,14 @@ window.openModal = function(plan) {
     document.body.style.pointerEvents = '';
     document.documentElement.style.transform = 'none';
     
-    // Forcer le body à rester en place
+    // LOCK SCROLL SANS DÉCALER LE CONTENU
+    // Ne PAS utiliser position:fixed + top négatif car ça décale TOUT (y compris la modal)
+    // Utiliser overflow:hidden pour bloquer le scroll sans décalage
     const scrollY = window.scrollY || window.pageYOffset;
-    document.body.style.position = 'fixed';
-    document.body.style.top = `-${scrollY}px`;
-    document.body.style.width = '100%';
     document.body.dataset.scrollPosition = scrollY;
+    document.body.style.overflow = 'hidden';
+    document.body.style.height = '100vh';
+    document.documentElement.style.overflow = 'hidden';
     document.body.classList.add('modal-open');
     
     // Stop GSAP animations
@@ -1001,13 +1003,13 @@ window.closeModal = function() {
     console.log('🔥 Modal hidden');
   }
   
-  // Restaurer la position du body
+  // RESTAURER SCROLL (overflow:hidden au lieu de position:fixed)
   const scrollY = document.body.dataset.scrollPosition || 0;
-  document.body.style.position = '';
-  document.body.style.top = '';
-  document.body.style.width = '';
+  document.body.style.overflow = '';
+  document.body.style.height = '';
+  document.documentElement.style.overflow = '';
   document.body.classList.remove('modal-open');
-  window.scrollTo(0, parseInt(scrollY, 10));
+  // Le scroll est déjà à la bonne position (pas besoin de scrollTo car on n'a pas décalé le body)
   
   unlockScroll();
   

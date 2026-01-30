@@ -5,14 +5,18 @@
 /* === MODAL CONTAINER === */
 .modal {
   position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  bottom: 0 !important;
   z-index: var(--z-modal);
   display: flex;
   align-items: center;
   justify-content: center;
+  transform: none !important;
+  /* S'assurer que la modal s'affiche TOUJOURS en haut de viewport */
+  margin: 0 !important;
+  padding: 0 !important;
 }
 
 .modal.hidden {
