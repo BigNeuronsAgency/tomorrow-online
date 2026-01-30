@@ -20,11 +20,7 @@
       radio.checked = radio.value === theme;
     });
     
-    // Petit effet de transition
-    document.body.style.transition = 'background 0.5s ease, color 0.5s ease';
-    setTimeout(() => {
-      document.body.style.transition = '';
-    }, 500);
+    // Pas d'effet de transition (respiration désactivée)
   };
   
   // Afficher les actions mobiles sur petit écran

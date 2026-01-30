@@ -62,10 +62,14 @@ body[data-theme="white"] {
   color: #000000 !important;
 }
 
-/* Backgrounds */
-body[data-theme="white"] section:not(#bookingModal *),
+/* Backgrounds TOUS les éléments en blanc */
+body[data-theme="white"] section:not(#bookingModal):not(#bookingModal *),
 body[data-theme="white"] .content-section,
-body[data-theme="white"] .hero {
+body[data-theme="white"] .hero,
+body[data-theme="white"] main,
+body[data-theme="white"] article,
+body[data-theme="white"] .page-wrapper,
+body[data-theme="white"] .container {
   background: #FFFFFF !important;
 }
 
@@ -118,41 +122,52 @@ body[data-theme="white"] .footer-link:hover {
 body[data-theme="white"] .footer p,
 body[data-theme="white"] .footer span,
 body[data-theme="white"] .footer div,
+body[data-theme="white"] .footer button,
+body[data-theme="white"] .video-link-btn,
 body[data-theme="white"] .text-gray-400,
 body[data-theme="white"] .text-gray-500,
 body[data-theme="white"] .text-gray-600 {
   color: #666666 !important;
 }
 
-/* Textes */
+/* Textes - SAUF dropdown */
 body[data-theme="white"] h1,
 body[data-theme="white"] h2,
 body[data-theme="white"] h3,
 body[data-theme="white"] h4,
 body[data-theme="white"] h5,
 body[data-theme="white"] h6,
-body[data-theme="white"] p:not(.footer *),
-body[data-theme="white"] span:not(.badge):not(.popular-badge):not(.pricing-badge):not(.footer *),
-body[data-theme="white"] li,
-body[data-theme="white"] a:not(.footer-link):not(.nav-link) {
+body[data-theme="white"] p:not(.footer *):not(.dropdown-content *),
+body[data-theme="white"] span:not(.badge):not(.popular-badge):not(.pricing-badge):not(.footer *):not(.dropdown-content *),
+body[data-theme="white"] li:not(.dropdown-content *),
+body[data-theme="white"] a:not(.footer-link):not(.nav-link):not(.dropdown-content a) {
   color: #000000 !important;
 }
 
-/* Pricing cards avec GRADIENT orange sur populaire */
+/* Pricing cards - MÊME STYLE QUE DARK MODE */
 body[data-theme="white"] .pricing-card {
-  background: #FFFFFF !important;
-  border: 2px solid #E5E5E5 !important;
+  background: rgba(0, 0, 0, 0.95) !important;
+  border: 2px solid rgba(255, 255, 255, 0.1) !important;
+}
+
+body[data-theme="white"] .pricing-card h3,
+body[data-theme="white"] .pricing-card .pricing-price,
+body[data-theme="white"] .pricing-card p,
+body[data-theme="white"] .pricing-card li {
+  color: #FFFFFF !important;
 }
 
 body[data-theme="white"] .pricing-card-popular {
-  background: #FFFFFF !important;
-  border: 2px solid transparent !important;
-  background-image: 
-    linear-gradient(#FFFFFF, #FFFFFF),
-    linear-gradient(135deg, #FF5500 0%, #FF0000 50%, #660000 100%) !important;
-  background-origin: border-box !important;
-  background-clip: padding-box, border-box !important;
-  box-shadow: 0 0 40px rgba(255, 85, 0, 0.15) !important;
+  background: linear-gradient(135deg, #FF5500 0%, #FF0000 50%, #660000 100%) !important;
+  border: none !important;
+  box-shadow: 0 0 40px rgba(255, 85, 0, 0.4) !important;
+}
+
+body[data-theme="white"] .pricing-card-popular h3,
+body[data-theme="white"] .pricing-card-popular .pricing-price,
+body[data-theme="white"] .pricing-card-popular p,
+body[data-theme="white"] .pricing-card-popular li {
+  color: #FFFFFF !important;
 }
 
 body[data-theme="white"] .popular-badge {
@@ -223,13 +238,18 @@ body[data-theme="white"] .venn-bad .venn-center {
 }
 
 /* IMPORTANT : Formulaire DOIT rester inchangé */
-body[data-theme="white"] #bookingModal,
-body[data-theme="white"] #bookingModal *,
+body[data-theme="white"] .modal,
+body[data-theme="white"] .modal *,
 body[data-theme="white"] .modal-overlay,
 body[data-theme="white"] .modal-container,
 body[data-theme="white"] .modal-content,
-body[data-theme="white"] .modal-content * {
-  all: revert !important;
+body[data-theme="white"] .modal-content *,
+body[data-theme="white"] #bookingModal,
+body[data-theme="white"] #bookingModal * {
+  background-color: revert !important;
+  color: revert !important;
+  border-color: revert !important;
+  filter: revert !important;
 }
 
 /* ========================================
@@ -431,11 +451,16 @@ body[data-theme="rainbow"] .theme-toggle {
 }
 
 /* IMPORTANT : Formulaire DOIT rester inchangé */
-body[data-theme="rainbow"] #bookingModal,
-body[data-theme="rainbow"] #bookingModal *,
+body[data-theme="rainbow"] .modal,
+body[data-theme="rainbow"] .modal *,
 body[data-theme="rainbow"] .modal-overlay,
 body[data-theme="rainbow"] .modal-container,
 body[data-theme="rainbow"] .modal-content,
-body[data-theme="rainbow"] .modal-content * {
-  all: revert !important;
+body[data-theme="rainbow"] .modal-content *,
+body[data-theme="rainbow"] #bookingModal,
+body[data-theme="rainbow"] #bookingModal * {
+  background-color: revert !important;
+  color: revert !important;
+  border-color: revert !important;
+  filter: revert !important;
 }
