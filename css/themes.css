@@ -40,8 +40,14 @@ body[data-theme="white"] > .theme-toggle {
 }
 
 body[data-theme="white"] > .theme-toggle .check {
-  background: rgba(0, 0, 0, 0.8) !important;
-  border-color: rgba(255, 255, 255, 0.3) !important;
+  background: rgba(0, 0, 0, 0.95) !important;
+  border-color: rgba(255, 255, 255, 0.4) !important;
+}
+
+/* Fix check background AUSSI pour le toggle dans nav-links */
+body[data-theme="white"] .nav-links .theme-toggle .check {
+  background: rgba(0, 0, 0, 0.95) !important;
+  border-color: rgba(255, 255, 255, 0.4) !important;
 }
 
 .theme-toggle .label {
@@ -187,12 +193,16 @@ body[data-theme="white"] .pricing-card h3,
 body[data-theme="white"] .pricing-card .pricing-price,
 body[data-theme="white"] .pricing-card .pricing-time,
 body[data-theme="white"] .pricing-card .pricing-badge,
+body[data-theme="white"] .pricing-card .pricing-label,
 body[data-theme="white"] .pricing-card p,
 body[data-theme="white"] .pricing-card li,
 body[data-theme="white"] .pricing-card span,
 body[data-theme="white"] .pricing-card .feature-text,
 body[data-theme="white"] .pricing-card .btn,
-body[data-theme="white"] .pricing-card .complex-subtitle {
+body[data-theme="white"] .pricing-card .complex-subtitle,
+body[data-theme="white"] .pricing-card .price-strike,
+body[data-theme="white"] .pricing-card .price-ht,
+body[data-theme="white"] .pricing-card .price-offer {
   color: #FFFFFF !important;
 }
 
@@ -200,6 +210,10 @@ body[data-theme="white"] .pricing-card .btn-outline,
 body[data-theme="white"] .pricing-card button {
   color: #FFFFFF !important;
   border-color: #FFFFFF !important;
+  pointer-events: auto !important;
+  cursor: pointer !important;
+  position: relative !important;
+  z-index: 10 !important;
 }
 
 body[data-theme="white"] .pricing-card .btn-outline {
@@ -222,16 +236,24 @@ body[data-theme="white"] .pricing-card-popular h3,
 body[data-theme="white"] .pricing-card-popular .pricing-price,
 body[data-theme="white"] .pricing-card-popular .pricing-time,
 body[data-theme="white"] .pricing-card-popular .pricing-badge,
+body[data-theme="white"] .pricing-card-popular .pricing-label,
 body[data-theme="white"] .pricing-card-popular p,
 body[data-theme="white"] .pricing-card-popular li,
 body[data-theme="white"] .pricing-card-popular span,
-body[data-theme="white"] .pricing-card-popular .feature-text {
+body[data-theme="white"] .pricing-card-popular .feature-text,
+body[data-theme="white"] .pricing-card-popular .price-strike,
+body[data-theme="white"] .pricing-card-popular .price-ht,
+body[data-theme="white"] .pricing-card-popular .price-offer {
   color: #FFFFFF !important;
 }
 
 body[data-theme="white"] .pricing-card-popular .btn-primary {
   background: #FF5500 !important;
   color: #FFFFFF !important;
+  pointer-events: auto !important;
+  cursor: pointer !important;
+  position: relative !important;
+  z-index: 10 !important;
 }
 
 body[data-theme="white"] .popular-badge {
@@ -279,6 +301,13 @@ body[data-theme="white"] .step-number {
   background: #000000 !important;
   border-color: #000000 !important;
   color: #FFFFFF !important;
+}
+
+/* IMPORTANT: Garder les animations gradient au hover */
+body[data-theme="white"] .process-step:hover .step-number {
+  background: var(--gradient-main) !important;
+  border-color: var(--gradient-violet) !important;
+  transform: scale(1.1) !important;
 }
 
 /* Timeline */
@@ -415,12 +444,20 @@ body[data-theme="rainbow"] .btn-primary {
   border: none !important;
   box-shadow: 0 0 20px rgba(255, 20, 147, 0.5) !important;
   font-weight: 700 !important;
+  pointer-events: auto !important;
+  cursor: pointer !important;
+  position: relative !important;
+  z-index: 10 !important;
 }
 
 body[data-theme="rainbow"] .btn-outline {
   border: 2px solid #00FFFF !important;
   color: #00FFFF !important;
   background: rgba(0, 0, 0, 0.5) !important;
+  pointer-events: auto !important;
+  cursor: pointer !important;
+  position: relative !important;
+  z-index: 10 !important;
 }
 
 body[data-theme="rainbow"] .btn-outline:hover {
