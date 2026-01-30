@@ -43,6 +43,12 @@ body[data-theme="rainbow"] .btn-outline {
   background-color: rgba(0, 0, 0, 0.5) !important;
 }
 
+/* ===== GLOW ROSE/ARC-EN-CIEL derrière tête enfant ===== */
+body[data-theme="rainbow"] .logo-glow {
+  background: #FF1493 !important;
+  opacity: 0.4 !important;
+}
+
 /* ===== Photos équipe ROSE GAY ===== */
 body[data-theme="rainbow"] .xray-img,
 body[data-theme="rainbow"] .team-card img,
