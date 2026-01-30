@@ -202,9 +202,6 @@
       <div class="pricing-grid">
         <!-- MAQUETTE -->
         <div class="pricing-card">
-          <button class="details-link" onclick="openDetails('MAQUETTE')">
-            Détails [ + ]
-          </button>
           <div class="pricing-badge">Maquette</div>
           <div class="pricing-time">12H</div>
           <div class="pricing-price">
@@ -225,9 +222,6 @@
         <!-- STARTER (POPULAIRE) -->
         <div class="pricing-card pricing-card-popular">
           <div class="popular-badge">Populaire</div>
-          <button class="details-link details-link-light" onclick="openDetails('STARTER')">
-            Détails [ + ]
-          </button>
           <div class="pricing-badge pricing-badge-light">Starter</div>
           <div class="pricing-time">24H</div>
           <div class="pricing-price">
@@ -248,9 +242,6 @@
         
         <!-- BUSINESS -->
         <div class="pricing-card">
-          <button class="details-link" onclick="openDetails('BUSINESS')">
-            Détails [ + ]
-          </button>
           <div class="pricing-badge">Business</div>
           <div class="pricing-time">48H</div>
           <div class="pricing-price">
@@ -1027,42 +1018,6 @@
       }
     }
     
-    // Details modal functions
-    function openDetails(pack) {
-      console.log('Opening details for:', pack);
-      const modalId = 'modal' + pack.charAt(0).toUpperCase() + pack.slice(1).toLowerCase();
-      openModalDetails(modalId);
-    }
-    
-    function openProcessDetails() {
-      console.log('Opening process details');
-      openModalDetails('modalProcess');
-    }
-    
-    function openModalDetails(modalId) {
-      const modal = document.getElementById(modalId);
-      if(modal) {
-        modal.classList.remove('hidden');
-        if(window.lenis) {
-          setTimeout(() => {
-            if(window.lenis && window.lenis.stop) window.lenis.stop();
-          }, 100);
-        }
-      }
-    }
-
-    function closeModalDetails(modalId) {
-      const modal = document.getElementById(modalId);
-      if(modal) {
-        modal.classList.add('hidden');
-        if(window.lenis) {
-          setTimeout(() => {
-            if(window.lenis && window.lenis.start) window.lenis.start();
-          }, 100);
-        }
-      }
-    }
-    
     // Video modal functions
     function openVideoModal() {
       const modal = document.getElementById('videoModal');
@@ -1083,10 +1038,6 @@
     
     // Export functions
     window.toggleFaq = toggleFaq;
-    window.openDetails = openDetails;
-    window.openProcessDetails = openProcessDetails;
-    window.openModalDetails = openModalDetails;
-    window.closeModalDetails = closeModalDetails;
     window.openVideoModal = openVideoModal;
     window.closeVideoModal = closeVideoModal;
   </script>
