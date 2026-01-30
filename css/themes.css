@@ -7,13 +7,27 @@
   display: flex !important;
   gap: 8px;
   align-items: center;
-  margin-left: 4rem;
-  margin-right: 4rem;
   border: none !important;
   background: transparent !important;
   box-shadow: none !important;
   visibility: visible !important;
   opacity: 1 !important;
+}
+
+/* Toggle dans header (index.html) */
+.nav-links .theme-toggle {
+  margin-left: 4rem;
+  margin-right: 4rem;
+  position: relative;
+}
+
+/* Toggle fixe sur pages secondaires (body direct child) */
+body > .theme-toggle {
+  position: fixed !important;
+  top: 1.5rem !important;
+  right: 15rem !important;
+  z-index: 1000 !important;
+  margin: 0 !important;
 }
 
 .theme-toggle .label {
@@ -74,12 +88,12 @@ body[data-theme="white"] body {
 }
 
 body[data-theme="white"] section:not(.header):not(.footer):not(#bookingModal):not(#bookingModal *),
-body[data-theme="white"] .content-section,
-body[data-theme="white"] .hero,
-body[data-theme="white"] main,
-body[data-theme="white"] article,
-body[data-theme="white"] .page-wrapper,
-body[data-theme="white"] .container,
+body[data-theme="white"] .content-section:not(.footer):not(.footer *),
+body[data-theme="white"] .hero:not(.footer):not(.footer *),
+body[data-theme="white"] main:not(.footer):not(.footer *),
+body[data-theme="white"] article:not(.footer):not(.footer *),
+body[data-theme="white"] .page-wrapper:not(.footer):not(.footer *),
+body[data-theme="white"] .container:not(.footer):not(.footer *),
 body[data-theme="white"] div:not(.pricing-card):not(.pricing-card-popular):not(.pricing-card *):not(.pricing-card-popular *):not(#bookingModal):not(#bookingModal *):not(.modal):not(.modal *):not(.header):not(.header *):not(.footer):not(.footer *):not(.dropdown-content):not(.dropdown-content *) {
   background: #FAF9F6 !important;
 }
@@ -466,6 +480,30 @@ body[data-theme="rainbow"] .xray-scanline {
     transparent 0%, 
     rgba(255, 20, 147, 0.8) 50%, 
     transparent 100%) !important;
+}
+
+/* Glow rainbow derrière le gamin de la home */
+body[data-theme="rainbow"] .logo-glow {
+  background: linear-gradient(135deg, 
+    #FF1493 0%, 
+    #FF69B4 20%, 
+    #FFD700 40%, 
+    #00FF00 60%, 
+    #00FFFF 80%, 
+    #9370DB 100%) !important;
+  opacity: 0.4 !important;
+  animation: rainbow-pulse 3s ease-in-out infinite !important;
+}
+
+@keyframes rainbow-pulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.3;
+  }
+  50% {
+    transform: scale(1.1);
+    opacity: 0.5;
+  }
 }
 
 /* Effet de lumière rainbow derrière images */
