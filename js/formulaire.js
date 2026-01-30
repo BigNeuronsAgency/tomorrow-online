@@ -940,14 +940,20 @@ window.openModal = function(plan) {
       if (window.lenis) {
         try {
           if (typeof window.lenis.stop === 'function') {
+            // Scroll to top AVANT de stopper
+            window.lenis.scrollTo(0, { immediate: true });
             window.lenis.stop();
-            console.log('🔥 Lenis stopped');
+            console.log('🔥 Lenis scrolled to top and stopped');
           }
         } catch (e) {
           console.warn('🔥 Lenis stop error:', e);
         }
       }
-    }, 100);
+      // Forcer le scroll à 0 aussi en natif
+      window.scrollTo(0, 0);
+      document.documentElement.scrollTop = 0;
+      document.body.scrollTop = 0;
+    }, 50);
     
     // Stop GSAP animations
     if (typeof gsap !== 'undefined') {
@@ -959,16 +965,6 @@ window.openModal = function(plan) {
     if (whatsappWidget) {
       whatsappWidget.style.display = 'none';
       whatsappWidget.dataset.hiddenByModal = 'true';
-    }
-    
-    // Empêcher l'overlay de fermer le formulaire
-    var overlay = m.querySelector('.modal-overlay');
-    if (overlay) {
-      // Retirer tout listener précédent et ne rien faire au clic
-      overlay.onclick = function(e) {
-        e.stopPropagation();
-        return false;
-      };
     }
     
     // Montrer le modal AVANT de dessiner
