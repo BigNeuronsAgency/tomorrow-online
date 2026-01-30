@@ -1,5 +1,5 @@
 /* ========================================
-   THEME TOGGLE BASE
+   THEME TOGGLE - Style de base
    ======================================== */
 
 body > .theme-toggle {
@@ -16,10 +16,19 @@ body > .theme-toggle {
 
 /* ========================================
    MODE WHITE
-   fond BLANC header/footer NOIR
+   Fond BLANC + Header/Footer NOIR
    ======================================== */
 
 body[data-theme="white"] {
+  background: #FAF9F6 !important;
+}
+
+body[data-theme="white"] body,
+body[data-theme="white"] main,
+body[data-theme="white"] .hero,
+body[data-theme="white"] section:not(.header):not(.footer),
+body[data-theme="white"] article,
+body[data-theme="white"] .page-wrapper {
   background: #FAF9F6 !important;
 }
 
@@ -27,7 +36,10 @@ body[data-theme="white"] {
 body[data-theme="white"] .header {
   background: #000000 !important;
 }
-body[data-theme="white"] .header * {
+
+body[data-theme="white"] .header *,
+body[data-theme="white"] .nav-link,
+body[data-theme="white"] .logo {
   color: #FFFFFF !important;
 }
 
@@ -35,20 +47,34 @@ body[data-theme="white"] .header * {
 body[data-theme="white"] .footer {
   background: #000000 !important;
 }
-body[data-theme="white"] .footer * {
-  color: rgba(255,255,255,0.8) !important;
+
+body[data-theme="white"] .footer *,
+body[data-theme="white"] .footer-link,
+body[data-theme="white"] .footer-title,
+body[data-theme="white"] .footer p,
+body[data-theme="white"] .footer span,
+body[data-theme="white"] .footer a,
+body[data-theme="white"] .footer li {
+  color: rgba(255, 255, 255, 0.8) !important;
 }
 
 /* Pricing cards NOIRES textes BLANCS */
 body[data-theme="white"] .pricing-card {
   background: #000000 !important;
 }
-body[data-theme="white"] .pricing-card * {
+
+body[data-theme="white"] .pricing-card *,
+body[data-theme="white"] .pricing-card h3,
+body[data-theme="white"] .pricing-card p,
+body[data-theme="white"] .pricing-card span,
+body[data-theme="white"] .pricing-card li {
   color: #FFFFFF !important;
 }
+
 body[data-theme="white"] .pricing-card-popular {
-  background: linear-gradient(135deg,#FF5500 0%,#FF0000 50%,#660000 100%) !important;
+  background: linear-gradient(135deg, #FF5500 0%, #FF0000 50%, #660000 100%) !important;
 }
+
 body[data-theme="white"] .pricing-card-popular * {
   color: #FFFFFF !important;
 }
@@ -57,24 +83,41 @@ body[data-theme="white"] .pricing-card-popular * {
 body[data-theme="white"] .marquee {
   background: var(--gradient-main) !important;
 }
+
 body[data-theme="white"] .marquee * {
   color: #FFFFFF !important;
 }
 
-/* Contenu BLANC/CRÈME textes NOIRS ou ORANGE */
-body[data-theme="white"] main,
-body[data-theme="white"] .hero,
-body[data-theme="white"] section:not(.header):not(.footer) {
-  background: #FAF9F6 !important;
-}
-
-body[data-theme="white"] main *:not(.pricing-card *):not(.pricing-card-popular *):not(.marquee *):not(.header *):not(.footer *):not(.text-gradient):not(.stat-value),
-body[data-theme="white"] .hero *:not(.text-gradient):not(.stat-value),
-body[data-theme="white"] section:not(.header):not(.footer) *:not(.pricing-card *):not(.pricing-card-popular *):not(.marquee *):not(.text-gradient):not(.stat-value) {
+/* Contenu sur fond BLANC = textes NOIRS ou ORANGE */
+body[data-theme="white"] main h1:not(.text-gradient):not(.text-gradient *),
+body[data-theme="white"] main h2:not(.text-gradient):not(.text-gradient *),
+body[data-theme="white"] main h3:not(.text-gradient):not(.text-gradient *),
+body[data-theme="white"] main h4:not(.text-gradient):not(.text-gradient *),
+body[data-theme="white"] main p:not(.text-gradient):not(.text-gradient *),
+body[data-theme="white"] main li:not(.text-gradient):not(.text-gradient *),
+body[data-theme="white"] main span:not(.text-gradient):not(.text-gradient *):not(.stat-value),
+body[data-theme="white"] main div:not(.text-gradient):not(.text-gradient *):not(.stat-value),
+body[data-theme="white"] .hero h1:not(.text-gradient):not(.text-gradient *),
+body[data-theme="white"] .hero h2:not(.text-gradient):not(.text-gradient *),
+body[data-theme="white"] .hero p:not(.text-gradient):not(.text-gradient *),
+body[data-theme="white"] .hero span:not(.text-gradient):not(.text-gradient *):not(.stat-value),
+body[data-theme="white"] section:not(.header):not(.footer) h1:not(.text-gradient):not(.text-gradient *),
+body[data-theme="white"] section:not(.header):not(.footer) h2:not(.text-gradient):not(.text-gradient *),
+body[data-theme="white"] section:not(.header):not(.footer) h3:not(.text-gradient):not(.text-gradient *),
+body[data-theme="white"] section:not(.header):not(.footer) p:not(.text-gradient):not(.text-gradient *),
+body[data-theme="white"] section:not(.header):not(.footer) li:not(.text-gradient):not(.text-gradient *),
+body[data-theme="white"] section:not(.header):not(.footer) span:not(.text-gradient):not(.text-gradient *):not(.stat-value),
+body[data-theme="white"] section:not(.header):not(.footer) div:not(.text-gradient):not(.text-gradient *):not(.stat-value),
+body[data-theme="white"] .realisations-badge,
+body[data-theme="white"] .realisations-title,
+body[data-theme="white"] .realisations-subtitle,
+body[data-theme="white"] .case-tag,
+body[data-theme="white"] .stat-mini-number,
+body[data-theme="white"] .stat-mini-label {
   color: #000000 !important;
 }
 
-/* Gradients ORANGE */
+/* Gradients ORANGE préservés */
 body[data-theme="white"] .text-gradient {
   background: var(--gradient-main) !important;
   -webkit-background-clip: text !important;
@@ -91,12 +134,14 @@ body[data-theme="white"] .work-stat {
   background: #FFFFFF !important;
   border: 2px solid #000000 !important;
 }
+
 body[data-theme="white"] .work-stat .stat-value {
-  background: linear-gradient(135deg,#000000 0%,#333333 100%) !important;
+  background: linear-gradient(135deg, #000000 0%, #333333 100%) !important;
   -webkit-background-clip: text !important;
   background-clip: text !important;
   -webkit-text-fill-color: transparent !important;
 }
+
 body[data-theme="white"] .work-stat .stat-label {
   color: #666666 !important;
 }
@@ -106,10 +151,13 @@ body[data-theme="white"] .btn-primary {
   background: #FF5500 !important;
   color: #FFFFFF !important;
 }
+
 body[data-theme="white"] .btn-outline {
   border: 2px solid #000000 !important;
   color: #000000 !important;
+  background: transparent !important;
 }
+
 body[data-theme="white"] .btn-outline:hover {
   background: #000000 !important;
   color: #FFFFFF !important;
@@ -121,6 +169,7 @@ body[data-theme="white"] .step-number {
   border-color: #000000 !important;
   color: #FFFFFF !important;
 }
+
 body[data-theme="white"] .process-step:hover .step-number {
   background: var(--gradient-main) !important;
 }
@@ -129,12 +178,14 @@ body[data-theme="white"] .process-step:hover .step-number {
 body[data-theme="white"] .cursor {
   border-color: #000000 !important;
 }
+
 body[data-theme="white"] .cursor-dot {
   background: #000000 !important;
 }
 
 /* ========================================
    MODE RAINBOW
+   Fond NOIR header/footer NOIR (ISO)
    ======================================== */
 
 body[data-theme="rainbow"] {
@@ -144,7 +195,7 @@ body[data-theme="rainbow"] {
 body[data-theme="rainbow"] h1:not(.header *):not(.footer *):not(.pricing-card *):not(.pricing-card-popular *),
 body[data-theme="rainbow"] h2:not(.header *):not(.footer *):not(.pricing-card *):not(.pricing-card-popular *),
 body[data-theme="rainbow"] h3:not(.header *):not(.footer *):not(.pricing-card *):not(.pricing-card-popular *) {
-  background: linear-gradient(90deg,#FF1493 0%,#00FFFF 25%,#FFD700 50%,#00FF00 75%,#FF1493 100%) !important;
+  background: linear-gradient(90deg, #FF1493 0%, #00FFFF 25%, #FFD700 50%, #00FF00 75%, #FF1493 100%) !important;
   -webkit-background-clip: text !important;
   background-clip: text !important;
   -webkit-text-fill-color: transparent !important;
@@ -158,7 +209,7 @@ body[data-theme="rainbow"] h3:not(.header *):not(.footer *):not(.pricing-card *)
 }
 
 body[data-theme="rainbow"] .btn-primary {
-  background: linear-gradient(135deg,#FF1493 0%,#FF69B4 50%,#FFD700 100%) !important;
+  background: linear-gradient(135deg, #FF1493 0%, #FF69B4 50%, #FFD700 100%) !important;
   color: #FFFFFF !important;
   pointer-events: auto !important;
   cursor: pointer !important;
@@ -168,6 +219,7 @@ body[data-theme="rainbow"] .btn-primary {
 body[data-theme="rainbow"] .btn-outline {
   border: 2px solid #00FFFF !important;
   color: #00FFFF !important;
+  background: rgba(0, 0, 0, 0.5) !important;
   pointer-events: auto !important;
   cursor: pointer !important;
   z-index: 10 !important;
