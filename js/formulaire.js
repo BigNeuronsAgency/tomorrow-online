@@ -10,9 +10,9 @@ var fileStore = [];
 var countdownTimer = null;
 var countdownStarted = false;
 
-// Form action URLs
-const FORM_ACTION_URL = 'https://formspree.io/f/YOUR_FORM_ID'; // À configurer
-const FORM_ACTION_URL_UPSELL = 'https://formspree.io/f/YOUR_FORM_ID'; // À configurer
+// Form action URLs - Web3Forms
+const FORM_ACTION_URL = 'https://api.web3forms.com/submit';
+const WEB3FORMS_ACCESS_KEY = '2aeb47c5-ac88-4de0-9d2e-4025e72d2c9e';
 const BRAND_RED = '#FF3333';
 
 // Data constants
@@ -1051,13 +1051,12 @@ window.submitForm = function() {
   };
   
   var formDataObj = new FormData();
-  formDataObj.append("_captcha", "false");
-  formDataObj.append("_template", "table");
-  formDataObj.append("_autoresponse", "Merci pour votre confiance. Votre brief a bien été reçu. Un membre de l'équipe vous appellera demain entre 09H00 et 10H00 pour validation.");
-  formDataObj.append("_subject", "🚀 NOUVEAU LEAD - " + (dataToSend.brandName || "Projet Inconnu"));
-  formDataObj.append("_cc", "mf.phan@bigneurons.com,t.martella@bigneurons.com,a.escare@bigneurons.com");
+  formDataObj.append("access_key", WEB3FORMS_ACCESS_KEY);
+  formDataObj.append("subject", "🚀 NOUVEAU LEAD - " + (dataToSend.brandName || "Projet Inconnu"));
+  formDataObj.append("from_name", dataToSend.brandName || "Projet Inconnu");
+  formDataObj.append("redirect", "https://tomorrow.online");
   
-  // Aplatir les données (PAS de JSON.stringify pour FormSubmit)
+  // Aplatir les données
   formDataObj.append("brandName", dataToSend.brandName || '');
   formDataObj.append("email", dataToSend.email || '');
   formDataObj.append("phone", dataToSend.phone || '');
@@ -1154,33 +1153,34 @@ window.submitForm = function() {
 };
 
 function sendFormData(formDataObj, btn) {
-  console.log('📧 Sending form data to FormSubmit.co...');
-  console.log('📧 Email destination:', FORM_ACTION_URL);
+  console.log('📧 Sending form data to Web3Forms...');
+  console.log('📧 API:', FORM_ACTION_URL);
   console.log('📧 FormData keys:', Array.from(formDataObj.keys()));
   
-  fetch(FORM_ACTION_URL, { method: 'POST', body: formDataObj })
-    .then(response => {
-      console.log('📧 Response status:', response.status);
-      console.log('📧 Response ok:', response.ok);
-      console.log('📧 Response headers:', response.headers);
+  fetch(FORM_ACTION_URL, { 
+    method: 'POST', 
+    body: formDataObj,
+    headers: {
+      'Accept': 'application/json'
+    }
+  })
+    .then(response => response.json())
+    .then(data => {
+      console.log('📧 Response:', data);
       
-      return response.text().then(text => {
-        console.log('📧 Response body:', text);
+      if (data.success) {
+        console.log('✅ Form submitted successfully to Web3Forms');
+        showSuccessScreen();
+      } else {
+        console.error('❌ Form submission failed:', data.message);
         
-        if (response.ok || response.status === 200) {
-          console.log('✅ Form submitted successfully to FormSubmit');
-          showSuccessScreen();
-        } else {
-          console.error('❌ Form submission failed:', response.status, response.statusText);
-          
-          // FALLBACK: Créer un mailto avec les données
-          const mailto = createMailtoFallback();
-          window.location.href = mailto;
-          
-          alert("Le formulaire n'a pas pu être envoyé automatiquement. Votre client mail va s'ouvrir.");
-          if (btn) btn.innerHTML = "Bloquer mon slot 🔒";
-        }
-      });
+        // FALLBACK: Créer un mailto avec les données
+        const mailto = createMailtoFallback();
+        window.location.href = mailto;
+        
+        alert("Le formulaire n'a pas pu être envoyé automatiquement. Votre client mail va s'ouvrir.");
+        if (btn) btn.innerHTML = "Bloquer mon slot 🔒";
+      }
     })
     .catch(error => {
       console.error('❌ Fetch error:', error);
