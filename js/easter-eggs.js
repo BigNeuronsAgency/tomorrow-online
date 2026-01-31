@@ -24,8 +24,6 @@ document.addEventListener('visibilitychange', function() {
 });
 
 // ===== 2. CURSEUR INTERACTIF SUR MOTS-CLÉS =====
-// Approche simple : détecter les mots dans les événements mouseover
-
 // Injecter les styles CSS pour les curseurs emoji
 const cursorStyle = document.createElement('style');
 cursorStyle.textContent = `
@@ -57,15 +55,23 @@ cursorStyle.textContent = `
 document.head.appendChild(cursorStyle);
 
 let currentCursor = null;
+let currentElement = null;
+
+// Fonction pour nettoyer le curseur
+function clearCursor() {
+  if (currentCursor) {
+    document.body.classList.remove(currentCursor);
+    currentCursor = null;
+  }
+}
 
 // Détecter survol des éléments contenant les mots-clés
 document.addEventListener('mouseover', function(e) {
-  // Ignorer le formulaire
-  if (e.target.closest('.formulaire-modal')) {
-    if (currentCursor) {
-      document.body.classList.remove(currentCursor);
-      currentCursor = null;
-    }
+  // Ignorer le formulaire et le bandeau défilant (marquee)
+  if (e.target.closest('.formulaire-modal') || 
+      e.target.closest('.marquee') || 
+      e.target.closest('.marquee-content')) {
+    clearCursor();
     return;
   }
   
@@ -77,24 +83,25 @@ document.addEventListener('mouseover', function(e) {
   // Détecter les mots-clés
   if (textLower.includes('24h')) {
     newCursor = 'cursor-chrono';
+    currentElement = e.target;
   } else if (textLower.includes('mercenaire')) {
     newCursor = 'cursor-soldier';
+    currentElement = e.target;
   } else if (textLower.includes('vitesse') || textLower.includes('brutal')) {
-    // Effet vibration
+    // Effet vibration (mais pas sur le bandeau défilant)
     if (!e.target.classList.contains('word-vibrate')) {
       e.target.classList.add('word-vibrate');
+      currentElement = e.target;
     }
   }
   
   // Changer le curseur si nécessaire
   if (newCursor !== currentCursor) {
-    if (currentCursor) {
-      document.body.classList.remove(currentCursor);
-    }
+    clearCursor();
     if (newCursor) {
       document.body.classList.add(newCursor);
+      currentCursor = newCursor;
     }
-    currentCursor = newCursor;
   }
 });
 
@@ -104,14 +111,15 @@ document.addEventListener('mouseout', function(e) {
     e.target.classList.remove('word-vibrate');
   }
   
-  // Retirer curseur si on quitte l'élément
-  const text = e.target.textContent || '';
-  const textLower = text.toLowerCase();
-  
-  if (textLower.includes('24h') || textLower.includes('mercenaire')) {
-    if (currentCursor) {
-      document.body.classList.remove(currentCursor);
-      currentCursor = null;
-    }
+  // Retirer curseur si on quitte l'élément qui l'a déclenché
+  if (e.target === currentElement) {
+    clearCursor();
+    currentElement = null;
   }
+});
+
+// Sécurité : nettoyer le curseur si la souris quitte la fenêtre
+document.addEventListener('mouseleave', function() {
+  clearCursor();
+  currentElement = null;
 });
