@@ -1,0 +1,10 @@
+# robots.txt for tomorrow.online
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://tomorrow.online/sitemap.xml
+
+# Disallow admin/dev stuff
+Disallow: /_archive-webflow/
+Disallow: /*.md$

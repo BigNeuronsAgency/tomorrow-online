@@ -375,28 +375,8 @@ if (document.readyState === 'loading') {
   initRageClick();
 }
 
-// ===== 5. MALÉDICTION JEAN-CHARLES (Curseur sablier simple) =====
-// DÉSACTIVÉ SUR MOBILE
-function initJCCurse() {
-  if (isMobile) return; // Pas sur mobile
-  
-  const jcSection = document.querySelector('.jean-charles');
-  if (!jcSection) return;
-  
-  jcSection.addEventListener('mouseenter', function() {
-    document.body.classList.add('cursor-laggy');
-  });
-  
-  jcSection.addEventListener('mouseleave', function() {
-    document.body.classList.remove('cursor-laggy');
-  });
-}
-
-if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', initJCCurse);
-} else {
-  initJCCurse();
-}
+// ===== 5. MALÉDICTION JEAN-CHARLES - DÉSACTIVÉ =====
+// L'effet sablier/lag crée un vrai sentiment de bug, supprimé pour meilleure UX
 
 // ===== 6. EXORCISME WIX/WORDPRESS =====
 let typedWord = '';
@@ -516,19 +496,19 @@ if (document.readyState === 'loading') {
   initThermalVision();
 }
 
-// ===== 9. SABRAGE SONORE - FEU D'ARTIFICE =====
+// ===== 9. SABRAGE SONORE - MEGA FEU D'ARTIFICE =====
 function createFirework(x, y) {
-  const symbols = ['<div>', '{', '}', '</>', '()', '[]', ';', '=', '<>', '//', '/*', '*/', '🔥', '🍾', '⚡', '✨', '💥'];
-  const colors = ['#FF5500', '#FF8844', '#FFAA00', '#FFFFFF', '#00FF00', '#FF0000', '#FFD700'];
+  const symbols = ['<div>', '{', '}', '</>', '()', '[]', ';', '=', '<>', '//', '/*', '*/', '🔥', '🍾', '⚡', '✨', '💥', '🎆', '🎇', '💫', '🌟', '⭐'];
+  const colors = ['#FF5500', '#FF8844', '#FFAA00', '#FFFFFF', '#00FF00', '#FF0000', '#FFD700', '#FF00FF', '#00FFFF', '#FF3366'];
   
-  // Explosion centrale
-  for (let i = 0; i < 50; i++) {
+  // EXPLOSION 1 - Cercle principal (100 particules)
+  for (let i = 0; i < 100; i++) {
     const confetti = document.createElement('div');
     confetti.className = 'firework-particle';
     confetti.textContent = symbols[Math.floor(Math.random() * symbols.length)];
     
-    const angle = (Math.PI * 2 * i) / 50;
-    const velocity = 100 + Math.random() * 200;
+    const angle = (Math.PI * 2 * i) / 100;
+    const velocity = 150 + Math.random() * 350;
     const endX = Math.cos(angle) * velocity;
     const endY = Math.sin(angle) * velocity;
     
@@ -537,47 +517,91 @@ function createFirework(x, y) {
       left: ${x}px;
       top: ${y}px;
       font-family: 'JetBrains Mono', monospace;
-      font-size: ${12 + Math.random() * 20}px;
+      font-size: ${14 + Math.random() * 28}px;
       color: ${colors[Math.floor(Math.random() * colors.length)]};
       pointer-events: none;
       z-index: 10002;
-      text-shadow: 0 0 10px currentColor;
+      text-shadow: 0 0 20px currentColor, 0 0 40px currentColor;
       --end-x: ${endX}px;
       --end-y: ${endY}px;
-      --rotation: ${Math.random() * 720 - 360}deg;
-      animation: firework-explode 1.5s ease-out forwards;
+      --rotation: ${Math.random() * 1080 - 540}deg;
+      animation: firework-explode 2s ease-out forwards;
     `;
     
     document.body.appendChild(confetti);
-    setTimeout(() => confetti.remove(), 1500);
+    setTimeout(() => confetti.remove(), 2000);
   }
   
-  // Deuxième vague avec délai
+  // EXPLOSION 2 - Sparks emoji (50 particules)
   setTimeout(() => {
-    for (let i = 0; i < 30; i++) {
+    for (let i = 0; i < 50; i++) {
       const spark = document.createElement('div');
-      spark.textContent = ['✨', '⚡', '💫', '🔥'][Math.floor(Math.random() * 4)];
+      spark.textContent = ['✨', '⚡', '💫', '🔥', '🎆', '🎇', '🌟', '💥'][Math.floor(Math.random() * 8)];
       
       const angle = Math.random() * Math.PI * 2;
-      const velocity = 50 + Math.random() * 150;
+      const velocity = 100 + Math.random() * 250;
       
       spark.style.cssText = `
         position: fixed;
-        left: ${x + (Math.random() - 0.5) * 100}px;
-        top: ${y + (Math.random() - 0.5) * 100}px;
-        font-size: ${20 + Math.random() * 30}px;
+        left: ${x + (Math.random() - 0.5) * 150}px;
+        top: ${y + (Math.random() - 0.5) * 150}px;
+        font-size: ${30 + Math.random() * 50}px;
         pointer-events: none;
         z-index: 10001;
         --end-x: ${Math.cos(angle) * velocity}px;
-        --end-y: ${Math.sin(angle) * velocity - 100}px;
-        --rotation: ${Math.random() * 360}deg;
-        animation: firework-explode 1s ease-out forwards;
+        --end-y: ${Math.sin(angle) * velocity - 150}px;
+        --rotation: ${Math.random() * 720}deg;
+        animation: firework-explode 1.5s ease-out forwards;
       `;
       
       document.body.appendChild(spark);
-      setTimeout(() => spark.remove(), 1000);
+      setTimeout(() => spark.remove(), 1500);
     }
-  }, 200);
+  }, 100);
+  
+  // EXPLOSION 3 - Pluie de code (70 particules tombantes)
+  setTimeout(() => {
+    for (let i = 0; i < 70; i++) {
+      const code = document.createElement('div');
+      code.textContent = ['{', '}', '<', '>', '/', ';', '()', '[]', '""', "''"][Math.floor(Math.random() * 10)];
+      
+      code.style.cssText = `
+        position: fixed;
+        left: ${x + (Math.random() - 0.5) * 400}px;
+        top: ${y - 100}px;
+        font-family: 'JetBrains Mono', monospace;
+        font-size: ${16 + Math.random() * 24}px;
+        color: ${colors[Math.floor(Math.random() * colors.length)]};
+        pointer-events: none;
+        z-index: 10000;
+        text-shadow: 0 0 10px currentColor;
+        --end-x: ${(Math.random() - 0.5) * 100}px;
+        --end-y: ${300 + Math.random() * 400}px;
+        --rotation: ${Math.random() * 360}deg;
+        animation: firework-explode 2.5s ease-in forwards;
+      `;
+      
+      document.body.appendChild(code);
+      setTimeout(() => code.remove(), 2500);
+    }
+  }, 300);
+  
+  // FLASH LUMINEUX
+  const flash = document.createElement('div');
+  flash.style.cssText = `
+    position: fixed;
+    left: ${x - 200}px;
+    top: ${y - 200}px;
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, rgba(255,85,0,0.8) 0%, rgba(255,200,0,0.4) 30%, transparent 70%);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9999;
+    animation: flash-boom 0.5s ease-out forwards;
+  `;
+  document.body.appendChild(flash);
+  setTimeout(() => flash.remove(), 500);
 }
 
 // Ajouter les styles d'animation
@@ -592,6 +616,10 @@ fireworkStyle.textContent = `
       transform: translate(var(--end-x), var(--end-y)) rotate(var(--rotation)) scale(0);
       opacity: 0;
     }
+  }
+  @keyframes flash-boom {
+    0% { transform: scale(0.5); opacity: 1; }
+    100% { transform: scale(2); opacity: 0; }
   }
 `;
 document.head.appendChild(fireworkStyle);
