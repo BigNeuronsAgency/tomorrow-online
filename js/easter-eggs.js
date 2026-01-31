@@ -367,47 +367,17 @@ if (document.readyState === 'loading') {
   initRageClick();
 }
 
-// ===== 5. MALÉDICTION JEAN-CHARLES (Curseur laggy) =====
-let jcCursorActive = false;
-let jcCursorPosition = { x: 0, y: 0 };
-let jcFakeCursor = null;
-
+// ===== 5. MALÉDICTION JEAN-CHARLES (Curseur sablier simple) =====
 function initJCCurse() {
   const jcSection = document.querySelector('.jean-charles');
   if (!jcSection) return;
   
   jcSection.addEventListener('mouseenter', function() {
-    jcCursorActive = true;
     document.body.classList.add('cursor-laggy');
-    document.body.style.cursor = 'none';
-    
-    if (!jcFakeCursor) {
-      jcFakeCursor = document.createElement('div');
-      jcFakeCursor.textContent = '⌛';
-      jcFakeCursor.style.cssText = 'position:fixed;font-size:24px;pointer-events:none;z-index:10001;display:none;';
-      document.body.appendChild(jcFakeCursor);
-    }
-    jcFakeCursor.style.display = 'block';
   });
   
   jcSection.addEventListener('mouseleave', function() {
-    jcCursorActive = false;
     document.body.classList.remove('cursor-laggy');
-    document.body.style.cursor = '';
-    if (jcFakeCursor) {
-      jcFakeCursor.style.display = 'none';
-    }
-  });
-  
-  document.addEventListener('mousemove', function(e) {
-    if (jcCursorActive && jcFakeCursor) {
-      setTimeout(() => {
-        if (jcCursorActive) { // Vérifier que c'est toujours actif
-          jcFakeCursor.style.left = e.clientX + 'px';
-          jcFakeCursor.style.top = e.clientY + 'px';
-        }
-      }, 500);
-    }
   });
 }
 
@@ -535,23 +505,87 @@ if (document.readyState === 'loading') {
   initThermalVision();
 }
 
-// ===== 9. SABRAGE SONORE =====
-function createCodeConfetti(x, y) {
-  const symbols = ['<div>', '{', '}', '</>','()','[]',';','='];
-  for (let i = 0; i < 20; i++) {
+// ===== 9. SABRAGE SONORE - FEU D'ARTIFICE =====
+function createFirework(x, y) {
+  const symbols = ['<div>', '{', '}', '</>', '()', '[]', ';', '=', '<>', '//', '/*', '*/', '🔥', '🍾', '⚡', '✨', '💥'];
+  const colors = ['#FF5500', '#FF8844', '#FFAA00', '#FFFFFF', '#00FF00', '#FF0000', '#FFD700'];
+  
+  // Explosion centrale
+  for (let i = 0; i < 50; i++) {
     const confetti = document.createElement('div');
-    confetti.className = 'code-confetti';
+    confetti.className = 'firework-particle';
     confetti.textContent = symbols[Math.floor(Math.random() * symbols.length)];
-    confetti.style.left = (x + (Math.random() - 0.5) * 100) + 'px';
-    confetti.style.top = y + 'px';
-    document.body.appendChild(confetti);
     
-    setTimeout(() => confetti.remove(), 2000);
+    const angle = (Math.PI * 2 * i) / 50;
+    const velocity = 100 + Math.random() * 200;
+    const endX = Math.cos(angle) * velocity;
+    const endY = Math.sin(angle) * velocity;
+    
+    confetti.style.cssText = `
+      position: fixed;
+      left: ${x}px;
+      top: ${y}px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: ${12 + Math.random() * 20}px;
+      color: ${colors[Math.floor(Math.random() * colors.length)]};
+      pointer-events: none;
+      z-index: 10002;
+      text-shadow: 0 0 10px currentColor;
+      --end-x: ${endX}px;
+      --end-y: ${endY}px;
+      --rotation: ${Math.random() * 720 - 360}deg;
+      animation: firework-explode 1.5s ease-out forwards;
+    `;
+    
+    document.body.appendChild(confetti);
+    setTimeout(() => confetti.remove(), 1500);
   }
+  
+  // Deuxième vague avec délai
+  setTimeout(() => {
+    for (let i = 0; i < 30; i++) {
+      const spark = document.createElement('div');
+      spark.textContent = ['✨', '⚡', '💫', '🔥'][Math.floor(Math.random() * 4)];
+      
+      const angle = Math.random() * Math.PI * 2;
+      const velocity = 50 + Math.random() * 150;
+      
+      spark.style.cssText = `
+        position: fixed;
+        left: ${x + (Math.random() - 0.5) * 100}px;
+        top: ${y + (Math.random() - 0.5) * 100}px;
+        font-size: ${20 + Math.random() * 30}px;
+        pointer-events: none;
+        z-index: 10001;
+        --end-x: ${Math.cos(angle) * velocity}px;
+        --end-y: ${Math.sin(angle) * velocity - 100}px;
+        --rotation: ${Math.random() * 360}deg;
+        animation: firework-explode 1s ease-out forwards;
+      `;
+      
+      document.body.appendChild(spark);
+      setTimeout(() => spark.remove(), 1000);
+    }
+  }, 200);
 }
 
+// Ajouter les styles d'animation
+const fireworkStyle = document.createElement('style');
+fireworkStyle.textContent = `
+  @keyframes firework-explode {
+    0% {
+      transform: translate(0, 0) rotate(0deg) scale(1);
+      opacity: 1;
+    }
+    100% {
+      transform: translate(var(--end-x), var(--end-y)) rotate(var(--rotation)) scale(0);
+      opacity: 0;
+    }
+  }
+`;
+document.head.appendChild(fireworkStyle);
+
 function initSabrage() {
-  // Trouver tous les boutons avec "champagne" ou "sabrer"
   const champagneButtons = document.querySelectorAll('button, .btn-outline, .cta-button, a');
   
   champagneButtons.forEach(btn => {
@@ -560,11 +594,16 @@ function initSabrage() {
       console.log('✅ Sabrage button found:', text.substring(0, 30));
       
       btn.addEventListener('click', function(e) {
-        // Juste les confettis et le toast, pas de son (le son fait un bip)
         const rect = btn.getBoundingClientRect();
-        createCodeConfetti(rect.left + rect.width / 2, rect.top);
+        const x = rect.left + rect.width / 2;
+        const y = rect.top + rect.height / 2;
         
-        showToast('🍾 POP ! Champagne sabrééé !');
+        // Triple explosion pour effet massif
+        createFirework(x, y);
+        setTimeout(() => createFirework(x - 50, y - 30), 100);
+        setTimeout(() => createFirework(x + 50, y - 30), 200);
+        
+        showToast('🍾 POP ! CHAMPAAAAGNE !!! 🎆');
         
         console.log('🍾 Sabrage triggered!');
       }, { capture: true });
