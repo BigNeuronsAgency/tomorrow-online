@@ -1,0 +1,941 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>404 - Page Perdue dans le Temps | Tomorrow.Online</title>
+  <link rel="icon" type="image/png" href="images/favicon-kid.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Syne:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    :root {
+      --void: #0A0A0A;
+      --orange: #FF5500;
+      --white: #FFFFFF;
+      --gray: #888888;
+    }
+    
+    html, body {
+      height: 100%;
+      overflow: hidden;
+      background: var(--void);
+      color: var(--white);
+      font-family: 'Space Grotesk', sans-serif;
+    }
+    
+    /* ===== CANVAS BACKGROUND ===== */
+    #matrix-canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+      opacity: 0.15;
+    }
+    
+    /* ===== GLITCH CONTAINER ===== */
+    .container {
+      position: relative;
+      z-index: 1;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+      text-align: center;
+    }
+    
+    /* ===== 404 GÉANT GLITCH ===== */
+    .error-code {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(150px, 30vw, 400px);
+      font-weight: 800;
+      line-height: 1;
+      position: relative;
+      color: var(--white);
+      text-shadow: 
+        0 0 20px rgba(255, 85, 0, 0.5),
+        0 0 40px rgba(255, 85, 0, 0.3),
+        0 0 60px rgba(255, 85, 0, 0.2);
+      animation: glitch-skew 4s infinite linear alternate-reverse;
+      cursor: default;
+      user-select: none;
+    }
+    
+    .error-code::before,
+    .error-code::after {
+      content: '404';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
+    
+    .error-code::before {
+      color: #FF0000;
+      animation: glitch-1 0.3s infinite linear alternate-reverse;
+      clip-path: polygon(0 0, 100% 0, 100% 35%, 0 35%);
+      transform: translate(-3px, -3px);
+    }
+    
+    .error-code::after {
+      color: #00FFFF;
+      animation: glitch-2 0.3s infinite linear alternate-reverse;
+      clip-path: polygon(0 65%, 100% 65%, 100% 100%, 0 100%);
+      transform: translate(3px, 3px);
+    }
+    
+    @keyframes glitch-1 {
+      0% { transform: translate(-3px, -3px); }
+      25% { transform: translate(3px, 0px); }
+      50% { transform: translate(-3px, 3px); }
+      75% { transform: translate(0px, -3px); }
+      100% { transform: translate(3px, 3px); }
+    }
+    
+    @keyframes glitch-2 {
+      0% { transform: translate(3px, 3px); }
+      25% { transform: translate(-3px, 0px); }
+      50% { transform: translate(3px, -3px); }
+      75% { transform: translate(0px, 3px); }
+      100% { transform: translate(-3px, -3px); }
+    }
+    
+    @keyframes glitch-skew {
+      0% { transform: skew(0deg); }
+      20% { transform: skew(0deg); }
+      21% { transform: skew(2deg); }
+      22% { transform: skew(0deg); }
+      50% { transform: skew(0deg); }
+      51% { transform: skew(-1deg); }
+      52% { transform: skew(0deg); }
+      80% { transform: skew(0deg); }
+      81% { transform: skew(3deg); }
+      82% { transform: skew(0deg); }
+      100% { transform: skew(0deg); }
+    }
+    
+    /* ===== KID EN COLÈRE ===== */
+    .angry-kid {
+      width: clamp(150px, 25vw, 250px);
+      margin: 2rem 0;
+      animation: kid-bounce 2s ease-in-out infinite, kid-shake 0.5s ease-in-out infinite;
+      filter: drop-shadow(0 0 30px rgba(255, 85, 0, 0.6));
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+    
+    .angry-kid:hover {
+      animation: kid-rage 0.1s ease-in-out infinite;
+      filter: drop-shadow(0 0 50px rgba(255, 0, 0, 0.8));
+    }
+    
+    @keyframes kid-bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-20px); }
+    }
+    
+    @keyframes kid-shake {
+      0%, 100% { transform: translateY(0) rotate(0deg); }
+      25% { transform: translateY(-10px) rotate(-2deg); }
+      75% { transform: translateY(-10px) rotate(2deg); }
+    }
+    
+    @keyframes kid-rage {
+      0%, 100% { transform: translate(0, 0) rotate(0deg) scale(1.1); }
+      25% { transform: translate(-5px, -5px) rotate(-5deg) scale(1.15); }
+      50% { transform: translate(5px, 5px) rotate(5deg) scale(1.1); }
+      75% { transform: translate(-5px, 5px) rotate(-5deg) scale(1.15); }
+    }
+    
+    /* ===== MESSAGES ===== */
+    .message-main {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(24px, 4vw, 48px);
+      font-weight: 700;
+      margin-bottom: 1rem;
+      background: linear-gradient(90deg, var(--orange) 0%, #FF8844 50%, var(--orange) 100%);
+      background-size: 200% auto;
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: gradient-shift 3s ease infinite;
+    }
+    
+    @keyframes gradient-shift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+    
+    .message-sub {
+      font-size: clamp(14px, 2vw, 18px);
+      color: var(--gray);
+      margin-bottom: 2rem;
+      max-width: 500px;
+      line-height: 1.6;
+    }
+    
+    .message-sub span {
+      color: var(--orange);
+      text-decoration: line-through;
+      text-decoration-color: #FF0000;
+      text-decoration-thickness: 2px;
+    }
+    
+    /* ===== BOUTONS ===== */
+    .buttons {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      align-items: center;
+    }
+    
+    .btn-home {
+      padding: 16px 40px;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--void);
+      background: var(--orange);
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+    }
+    
+    .btn-home:hover {
+      background: var(--white);
+      transform: scale(1.05);
+      box-shadow: 0 0 30px rgba(255, 85, 0, 0.5);
+    }
+    
+    /* ===== BOUTON INTERDIT ===== */
+    .btn-forbidden {
+      padding: 12px 24px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      font-weight: 500;
+      color: #666;
+      background: transparent;
+      border: 1px dashed #333;
+      border-radius: 8px;
+      cursor: not-allowed;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .btn-forbidden::before {
+      content: '⚠️';
+      margin-right: 8px;
+    }
+    
+    .btn-forbidden:hover {
+      color: #FF0000;
+      border-color: #FF0000;
+      cursor: pointer;
+      animation: forbidden-shake 0.3s ease-in-out infinite;
+    }
+    
+    @keyframes forbidden-shake {
+      0%, 100% { transform: translateX(0); }
+      25% { transform: translateX(-3px); }
+      75% { transform: translateX(3px); }
+    }
+    
+    /* ===== MODAL SECRET ===== */
+    .secret-modal {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.95);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+      animation: modal-in 0.5s ease-out;
+    }
+    
+    .secret-modal.active {
+      display: flex;
+    }
+    
+    @keyframes modal-in {
+      from {
+        opacity: 0;
+        transform: scale(0.8);
+      }
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+    
+    .secret-content {
+      background: linear-gradient(135deg, #1a1a1a 0%, #0a0a0a 100%);
+      border: 2px solid var(--orange);
+      border-radius: 20px;
+      padding: 3rem;
+      max-width: 500px;
+      text-align: center;
+      position: relative;
+      box-shadow: 
+        0 0 50px rgba(255, 85, 0, 0.3),
+        inset 0 0 50px rgba(255, 85, 0, 0.05);
+    }
+    
+    .secret-content::before {
+      content: '🔓';
+      position: absolute;
+      top: -30px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 50px;
+      animation: unlock-bounce 1s ease infinite;
+    }
+    
+    @keyframes unlock-bounce {
+      0%, 100% { transform: translateX(-50%) translateY(0); }
+      50% { transform: translateX(-50%) translateY(-10px); }
+    }
+    
+    .secret-title {
+      font-family: 'Syne', sans-serif;
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--orange);
+      margin-bottom: 1rem;
+    }
+    
+    .secret-text {
+      font-size: 16px;
+      color: var(--gray);
+      margin-bottom: 2rem;
+      line-height: 1.6;
+    }
+    
+    .secret-code {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 32px;
+      font-weight: 700;
+      color: var(--white);
+      background: linear-gradient(90deg, #FF0000, var(--orange), #FF0000);
+      background-size: 200% auto;
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: gradient-shift 2s ease infinite;
+      padding: 1rem;
+      border: 2px dashed var(--orange);
+      border-radius: 10px;
+      margin-bottom: 2rem;
+      letter-spacing: 2px;
+    }
+    
+    .secret-discount {
+      font-family: 'Syne', sans-serif;
+      font-size: 48px;
+      font-weight: 800;
+      color: #00FF00;
+      text-shadow: 0 0 20px rgba(0, 255, 0, 0.5);
+      margin-bottom: 1rem;
+    }
+    
+    .btn-close {
+      padding: 12px 30px;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--white);
+      background: transparent;
+      border: 1px solid var(--white);
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    
+    .btn-close:hover {
+      background: var(--white);
+      color: var(--void);
+    }
+    
+    /* ===== COMPTEUR DE TEMPS PERDU ===== */
+    .time-wasted {
+      position: fixed;
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      color: #444;
+      text-align: center;
+    }
+    
+    .time-wasted span {
+      color: var(--orange);
+      font-weight: 600;
+    }
+    
+    /* ===== PARTICULES ===== */
+    .particle {
+      position: fixed;
+      font-size: 20px;
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.3;
+      animation: particle-float 10s linear infinite;
+    }
+    
+    @keyframes particle-float {
+      0% {
+        transform: translateY(100vh) rotate(0deg);
+        opacity: 0;
+      }
+      10% {
+        opacity: 0.3;
+      }
+      90% {
+        opacity: 0.3;
+      }
+      100% {
+        transform: translateY(-100vh) rotate(720deg);
+        opacity: 0;
+      }
+    }
+    
+    /* ===== SCANLINES ===== */
+    .scanlines {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 2;
+      background: repeating-linear-gradient(
+        0deg,
+        rgba(0, 0, 0, 0.1) 0px,
+        rgba(0, 0, 0, 0.1) 1px,
+        transparent 1px,
+        transparent 2px
+      );
+      animation: scanline-move 10s linear infinite;
+    }
+    
+    @keyframes scanline-move {
+      0% { background-position: 0 0; }
+      100% { background-position: 0 100px; }
+    }
+    
+    /* ===== VHS EFFECT ===== */
+    .vhs-effect {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 3;
+      background: 
+        linear-gradient(
+          90deg,
+          rgba(255, 0, 0, 0.03) 0%,
+          transparent 15%,
+          transparent 85%,
+          rgba(0, 0, 255, 0.03) 100%
+        );
+      animation: vhs-shift 8s ease-in-out infinite;
+    }
+    
+    @keyframes vhs-shift {
+      0%, 100% { opacity: 0.5; }
+      50% { opacity: 1; }
+    }
+    
+    /* ===== STATIC NOISE ===== */
+    .static-noise {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 1;
+      opacity: 0.02;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+      animation: static-flicker 0.5s steps(10) infinite;
+    }
+    
+    @keyframes static-flicker {
+      0%, 100% { opacity: 0.02; }
+      50% { opacity: 0.04; }
+    }
+    
+    /* ===== TYPING EFFECT ===== */
+    .typing-container {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 14px;
+      color: #00FF00;
+      margin-top: 2rem;
+      padding: 1rem;
+      background: rgba(0, 255, 0, 0.05);
+      border: 1px solid rgba(0, 255, 0, 0.2);
+      border-radius: 8px;
+      min-height: 60px;
+      max-width: 600px;
+    }
+    
+    .typing-text {
+      display: inline;
+    }
+    
+    .typing-cursor {
+      display: inline-block;
+      width: 10px;
+      height: 20px;
+      background: #00FF00;
+      animation: cursor-blink 0.8s step-end infinite;
+      vertical-align: text-bottom;
+    }
+    
+    @keyframes cursor-blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0; }
+    }
+    
+    /* ===== KONAMI HINT ===== */
+    .konami-hint {
+      position: fixed;
+      bottom: 80px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      color: #333;
+      opacity: 0;
+      transition: opacity 0.5s ease;
+    }
+    
+    .konami-hint.visible {
+      opacity: 1;
+    }
+    
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 768px) {
+      .error-code {
+        font-size: 120px;
+      }
+      
+      .angry-kid {
+        width: 120px;
+      }
+      
+      .message-main {
+        font-size: 24px;
+      }
+      
+      .secret-content {
+        margin: 1rem;
+        padding: 2rem;
+      }
+      
+      .secret-code {
+        font-size: 20px;
+      }
+      
+      .typing-container {
+        font-size: 11px;
+        margin: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Matrix Rain Canvas -->
+  <canvas id="matrix-canvas"></canvas>
+  
+  <!-- Effects Overlays -->
+  <div class="scanlines"></div>
+  <div class="vhs-effect"></div>
+  <div class="static-noise"></div>
+  
+  <!-- Main Content -->
+  <div class="container">
+    <div class="error-code" id="error-code">404</div>
+    
+    <img src="images/tomorrowcolere.png" alt="Enfant en colère" class="angry-kid" id="angry-kid">
+    
+    <h1 class="message-main">Cette page n'existe pas. Encore.</h1>
+    <p class="message-sub">
+      Tu t'es perdu ? Même notre IA surpuissante n'a pas réussi à trouver cette page.<br>
+      Peut-être qu'elle a été créée avec <span>Wix</span> ou <span>Wordpress</span>...
+    </p>
+    
+    <div class="typing-container">
+      <span class="typing-text" id="typing-text"></span>
+      <span class="typing-cursor"></span>
+    </div>
+    
+    <div class="buttons">
+      <a href="/" class="btn-home">
+        <span>←</span> Retour à la civilisation
+      </a>
+      <button class="btn-forbidden" id="btn-forbidden">
+        Ne pas cliquer ici
+      </button>
+    </div>
+  </div>
+  
+  <!-- Secret Modal -->
+  <div class="secret-modal" id="secret-modal">
+    <div class="secret-content">
+      <h2 class="secret-title">On adore les rebelles 🤘</h2>
+      <p class="secret-text">
+        Tu as osé cliquer là où il ne fallait pas.<br>
+        Tu mérites une récompense.
+      </p>
+      <div class="secret-code">F*CK WIX</div>
+      <div class="secret-discount">-5%</div>
+      <p class="secret-text">
+        Donne ce mot de passe lors de ton appel<br>
+        pour débloquer ta remise secrète.
+      </p>
+      <button class="btn-close" id="btn-close">J'ai noté, merci 🔥</button>
+    </div>
+  </div>
+  
+  <!-- Time Wasted Counter -->
+  <div class="time-wasted">
+    Temps perdu sur cette page : <span id="time-counter">0</span>s<br>
+    <small>Ce temps aurait pu servir à commander ton site...</small>
+  </div>
+  
+  <!-- Konami Hint -->
+  <div class="konami-hint" id="konami-hint">
+    ↑ ↑ ↓ ↓ ← → ← → pour un secret...
+  </div>
+  
+  <script>
+    // ===== MATRIX RAIN =====
+    const canvas = document.getElementById('matrix-canvas');
+    const ctx = canvas.getContext('2d');
+    
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+    resizeCanvas();
+    window.addEventListener('resize', resizeCanvas);
+    
+    const chars = '01アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン</>{}[]();=+-*/%&|^~!@#$Tomorrow.Online404';
+    const charArray = chars.split('');
+    const fontSize = 14;
+    const columns = canvas.width / fontSize;
+    const drops = Array(Math.floor(columns)).fill(1);
+    
+    function drawMatrix() {
+      ctx.fillStyle = 'rgba(10, 10, 10, 0.05)';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      
+      ctx.fillStyle = '#FF5500';
+      ctx.font = fontSize + 'px JetBrains Mono';
+      
+      for (let i = 0; i < drops.length; i++) {
+        const text = charArray[Math.floor(Math.random() * charArray.length)];
+        const x = i * fontSize;
+        const y = drops[i] * fontSize;
+        
+        // Random orange intensity
+        const intensity = Math.random();
+        if (intensity > 0.95) {
+          ctx.fillStyle = '#FFFFFF';
+        } else if (intensity > 0.8) {
+          ctx.fillStyle = '#FF8844';
+        } else {
+          ctx.fillStyle = '#FF5500';
+        }
+        
+        ctx.fillText(text, x, y);
+        
+        if (y > canvas.height && Math.random() > 0.975) {
+          drops[i] = 0;
+        }
+        drops[i]++;
+      }
+    }
+    
+    setInterval(drawMatrix, 50);
+    
+    // ===== FLOATING PARTICLES =====
+    const particles = ['<div>', '</>', '{', '}', '404', '⚠️', '💀', '🔥', '<a>', '</a>'];
+    
+    function createParticle() {
+      const particle = document.createElement('div');
+      particle.className = 'particle';
+      particle.textContent = particles[Math.floor(Math.random() * particles.length)];
+      particle.style.left = Math.random() * 100 + 'vw';
+      particle.style.animationDuration = (Math.random() * 10 + 10) + 's';
+      particle.style.animationDelay = Math.random() * 5 + 's';
+      document.body.appendChild(particle);
+      
+      setTimeout(() => particle.remove(), 20000);
+    }
+    
+    setInterval(createParticle, 2000);
+    for (let i = 0; i < 10; i++) {
+      setTimeout(createParticle, i * 500);
+    }
+    
+    // ===== TYPING EFFECT =====
+    const messages = [
+      '> ERROR: Page not found in any known dimension...',
+      '> Scanning multiverse for missing page...',
+      '> Result: Page probably deleted by an angry intern.',
+      '> Suggestion: Return home before it gets worse.',
+      '> Fun fact: This 404 page was built in 24 hours.',
+      '> Unlike your current website probably.',
+      '> Just kidding. Or am I?',
+      '> Seriously though, go back home.',
+      '> Or keep staring at this. We get paid either way.',
+      '> ...',
+      '> Still here? Fine. Have you tried the Konami code?',
+    ];
+    
+    let messageIndex = 0;
+    let charIndex = 0;
+    const typingText = document.getElementById('typing-text');
+    
+    function typeMessage() {
+      if (charIndex < messages[messageIndex].length) {
+        typingText.textContent += messages[messageIndex].charAt(charIndex);
+        charIndex++;
+        setTimeout(typeMessage, 30 + Math.random() * 50);
+      } else {
+        setTimeout(() => {
+          messageIndex = (messageIndex + 1) % messages.length;
+          charIndex = 0;
+          typingText.textContent = '';
+          typeMessage();
+        }, 3000);
+      }
+    }
+    
+    typeMessage();
+    
+    // ===== SECRET MODAL =====
+    const btnForbidden = document.getElementById('btn-forbidden');
+    const secretModal = document.getElementById('secret-modal');
+    const btnClose = document.getElementById('btn-close');
+    
+    btnForbidden.addEventListener('click', function() {
+      secretModal.classList.add('active');
+      // Confetti explosion
+      for (let i = 0; i < 50; i++) {
+        setTimeout(() => createConfetti(), i * 30);
+      }
+    });
+    
+    btnClose.addEventListener('click', function() {
+      secretModal.classList.remove('active');
+    });
+    
+    secretModal.addEventListener('click', function(e) {
+      if (e.target === secretModal) {
+        secretModal.classList.remove('active');
+      }
+    });
+    
+    function createConfetti() {
+      const confetti = document.createElement('div');
+      confetti.style.cssText = `
+        position: fixed;
+        left: ${Math.random() * 100}vw;
+        top: ${Math.random() * 100}vh;
+        font-size: ${20 + Math.random() * 30}px;
+        pointer-events: none;
+        z-index: 1001;
+        animation: confetti-explode 1s ease-out forwards;
+      `;
+      confetti.textContent = ['🔥', '🎉', '💀', '⚡', '🤘', '❌'][Math.floor(Math.random() * 6)];
+      document.body.appendChild(confetti);
+      setTimeout(() => confetti.remove(), 1000);
+    }
+    
+    // Add confetti animation
+    const confettiStyle = document.createElement('style');
+    confettiStyle.textContent = `
+      @keyframes confetti-explode {
+        0% { transform: scale(0) rotate(0deg); opacity: 1; }
+        100% { transform: scale(1.5) rotate(360deg); opacity: 0; }
+      }
+    `;
+    document.head.appendChild(confettiStyle);
+    
+    // ===== TIME WASTED COUNTER =====
+    let seconds = 0;
+    const timeCounter = document.getElementById('time-counter');
+    
+    setInterval(() => {
+      seconds++;
+      timeCounter.textContent = seconds;
+    }, 1000);
+    
+    // ===== ANGRY KID INTERACTIONS =====
+    const angryKid = document.getElementById('angry-kid');
+    let kidClickCount = 0;
+    
+    angryKid.addEventListener('click', function() {
+      kidClickCount++;
+      
+      // Different reactions based on click count
+      if (kidClickCount === 1) {
+        showKidMessage("Quoi ?!");
+      } else if (kidClickCount === 3) {
+        showKidMessage("Tu veux quoi exactement ?!");
+      } else if (kidClickCount === 5) {
+        showKidMessage("OK J'AI COMPRIS !!!");
+        angryKid.style.transform = 'scale(1.5)';
+        document.body.style.animation = 'screen-shake 0.5s ease';
+        setTimeout(() => {
+          angryKid.style.transform = '';
+          document.body.style.animation = '';
+        }, 500);
+      } else if (kidClickCount >= 10) {
+        showKidMessage("🔥 BURNOUT MODE ACTIVÉ 🔥");
+        document.body.classList.add('matrix-mode');
+        setTimeout(() => {
+          document.body.classList.remove('matrix-mode');
+        }, 3000);
+        kidClickCount = 0;
+      }
+    });
+    
+    function showKidMessage(msg) {
+      const bubble = document.createElement('div');
+      bubble.style.cssText = `
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background: #FF5500;
+        color: white;
+        padding: 20px 40px;
+        border-radius: 10px;
+        font-family: 'Syne', sans-serif;
+        font-size: 24px;
+        font-weight: 700;
+        z-index: 1000;
+        animation: bubble-pop 0.3s ease-out;
+      `;
+      bubble.textContent = msg;
+      document.body.appendChild(bubble);
+      setTimeout(() => bubble.remove(), 1500);
+    }
+    
+    // Add bubble animation
+    const bubbleStyle = document.createElement('style');
+    bubbleStyle.textContent = `
+      @keyframes bubble-pop {
+        0% { transform: translate(-50%, -50%) scale(0); }
+        50% { transform: translate(-50%, -50%) scale(1.2); }
+        100% { transform: translate(-50%, -50%) scale(1); }
+      }
+      @keyframes screen-shake {
+        0%, 100% { transform: translate(0, 0); }
+        10%, 30%, 50%, 70%, 90% { transform: translate(-10px, 5px); }
+        20%, 40%, 60%, 80% { transform: translate(10px, -5px); }
+      }
+      body.matrix-mode {
+        filter: hue-rotate(120deg) contrast(1.2) !important;
+      }
+      body.matrix-mode * {
+        color: #00FF00 !important;
+      }
+    `;
+    document.head.appendChild(bubbleStyle);
+    
+    // ===== KONAMI CODE =====
+    let konamiSequence = [];
+    const konamiCode = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight'];
+    const konamiHint = document.getElementById('konami-hint');
+    
+    // Show hint after 30 seconds
+    setTimeout(() => {
+      konamiHint.classList.add('visible');
+    }, 30000);
+    
+    document.addEventListener('keydown', function(e) {
+      konamiSequence.push(e.key);
+      konamiSequence = konamiSequence.slice(-8);
+      
+      if (JSON.stringify(konamiSequence) === JSON.stringify(konamiCode)) {
+        // ULTIMATE EASTER EGG
+        document.body.innerHTML = `
+          <div style="
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: #000;
+            color: #00FF00;
+            font-family: 'JetBrains Mono', monospace;
+            text-align: center;
+            padding: 2rem;
+          ">
+            <pre style="font-size: 10px; line-height: 1.2; margin-bottom: 2rem;">
+ _______  _______  _______  _______  _______ 
+|       ||       ||       ||       ||       |
+|_     _||   _   ||  _____||_     _||  _____|
+  |   |  |  | |  || |_____   |   |  | |_____ 
+  |   |  |  |_|  ||_____  |  |   |  |_____  |
+  |   |  |       | _____| |  |   |   _____| |
+  |___|  |_______||_______|  |___|  |_______|
+            </pre>
+            <h1 style="font-size: 48px; color: #FF5500; margin-bottom: 1rem;">
+              🎮 KONAMI MASTER 🎮
+            </h1>
+            <p style="font-size: 18px; margin-bottom: 2rem;">
+              Tu as débloqué le mode ULTRA SECRET.<br>
+              Tu es officiellement un(e) légende.
+            </p>
+            <p style="font-size: 14px; color: #666;">
+              Maintenant retourne bosser et commande ton site.<br>
+              <a href="/" style="color: #FF5500;">→ Retour à l'accueil</a>
+            </p>
+          </div>
+        `;
+      }
+    });
+    
+    // ===== 404 HOVER EFFECTS =====
+    const errorCode = document.getElementById('error-code');
+    
+    errorCode.addEventListener('mouseenter', function() {
+      this.textContent = '666';
+      setTimeout(() => {
+        this.textContent = '404';
+      }, 200);
+    });
+    
+    // ===== CONSOLE EASTER EGG =====
+    console.log(
+      "%c 🔥 404 PAGE - TOMORROW.ONLINE 🔥 ",
+      "background: #FF5500; color: #000; font-size: 20px; padding: 10px; font-weight: bold;"
+    );
+    console.log(
+      "%cTu inspectes même les pages d'erreur ? Tu mérites vraiment un site badass.\nContacte-nous : hello@tomorrow.online",
+      "color: #888; font-size: 12px;"
+    );
+    console.log(
+      "%cPS: Essaie le Konami Code ↑↑↓↓←→←→",
+      "color: #00FF00; font-size: 10px;"
+    );
+  </script>
+</body>
+</html>
