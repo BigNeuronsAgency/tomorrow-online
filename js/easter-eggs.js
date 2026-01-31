@@ -290,19 +290,29 @@ let clickTimer = null;
 let kidRaging = false;
 
 function initRageClick() {
-  const kidImg = document.querySelector('.hero-image img[src*="beimpatient"]');
-  if (!kidImg) return;
+  // Sélecteur plus large pour trouver l'image
+  const kidImg = document.querySelector('img[src*="beimpatient"]') || document.querySelector('#kid-logo');
+  if (!kidImg) {
+    console.log('Kid image not found for rage click');
+    return;
+  }
   
+  console.log('✅ Rage click initialized on kid image');
   kidImg.style.cursor = 'pointer';
   
-  kidImg.addEventListener('click', function() {
+  kidImg.addEventListener('click', function(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    
     if (kidRaging) return;
     
     clickCount++;
+    console.log('Click count:', clickCount);
     
     if (clickTimer) clearTimeout(clickTimer);
     
     if (clickCount >= 5) {
+      console.log('🔥 RAGE MODE ACTIVATED!');
       kidRaging = true;
       const originalSrc = kidImg.src;
       kidImg.src = 'images/tomorrowcolere.png';
@@ -310,18 +320,29 @@ function initRageClick() {
       const bubble = document.createElement('div');
       bubble.className = 'kid-bubble';
       bubble.textContent = "C'est bon, on a compris, t'es pressé !";
-      kidImg.parentElement.style.position = 'relative';
-      kidImg.parentElement.appendChild(bubble);
+      
+      const container = kidImg.parentElement;
+      const originalPosition = container.style.position;
+      container.style.position = 'relative';
+      container.appendChild(bubble);
       
       const resetRage = () => {
+        if (!kidRaging) return;
+        console.log('Resetting rage mode');
         kidImg.src = originalSrc;
-        bubble.remove();
+        if (bubble.parentElement) bubble.remove();
+        container.style.position = originalPosition;
         kidRaging = false;
         clickCount = 0;
       };
       
       setTimeout(resetRage, 3000);
-      window.addEventListener('scroll', resetRage, { once: true });
+      
+      const scrollHandler = () => {
+        resetRage();
+        window.removeEventListener('scroll', scrollHandler);
+      };
+      window.addEventListener('scroll', scrollHandler);
     } else {
       clickTimer = setTimeout(() => {
         clickCount = 0;
@@ -412,17 +433,41 @@ document.addEventListener('keydown', function(e) {
 });
 
 // ===== 7. COPYRIGHT FUTURISTE =====
+let copyrightInterval = null;
+let copyrightActive = false;
+
 function initFuturisticCopyright() {
   const copyright = document.querySelector('.footer-copyright');
-  if (!copyright) return;
+  const footer = document.querySelector('footer');
+  if (!copyright || !footer) return;
   
   let year = 2026;
   const yearPattern = /© \d{4}/;
+  const originalText = copyright.textContent;
   
-  setInterval(() => {
-    year++;
-    copyright.textContent = copyright.textContent.replace(yearPattern, `© ${year}`);
-  }, 100);
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting && !copyrightActive) {
+        console.log('🚀 Copyright futuriste activé!');
+        copyrightActive = true;
+        year = 2026;
+        
+        copyrightInterval = setInterval(() => {
+          year++;
+          copyright.textContent = originalText.replace(yearPattern, `© ${year}`);
+        }, 100);
+      } else if (!entry.isIntersecting && copyrightActive) {
+        copyrightActive = false;
+        if (copyrightInterval) {
+          clearInterval(copyrightInterval);
+          copyrightInterval = null;
+        }
+        copyright.textContent = originalText;
+      }
+    });
+  }, { threshold: 0.5 });
+  
+  observer.observe(footer);
 }
 
 if (document.readyState === 'loading') {
@@ -435,13 +480,30 @@ if (document.readyState === 'loading') {
 let thermalVision = false;
 
 function initThermalVision() {
-  const statusBadge = document.querySelector('.status-operational, .footer-status');
-  if (!statusBadge) return;
+  const statusBadge = document.querySelector('.status-operational');
+  if (!statusBadge) {
+    console.log('Status badge not found for thermal vision');
+    return;
+  }
   
+  console.log('✅ Thermal vision initialized on:', statusBadge);
   statusBadge.style.cursor = 'pointer';
+  statusBadge.style.transition = 'transform 0.2s';
   
-  statusBadge.addEventListener('click', function() {
+  statusBadge.addEventListener('mouseenter', function() {
+    statusBadge.style.transform = 'scale(1.1)';
+  });
+  
+  statusBadge.addEventListener('mouseleave', function() {
+    statusBadge.style.transform = 'scale(1)';
+  });
+  
+  statusBadge.addEventListener('click', function(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    
     thermalVision = !thermalVision;
+    console.log('🔥 Thermal vision toggled:', thermalVision);
     
     if (thermalVision) {
       document.body.classList.add('thermal-vision');
@@ -476,20 +538,22 @@ function createCodeConfetti(x, y) {
 
 function initSabrage() {
   // Trouver tous les boutons avec "champagne" ou "sabrer"
-  const champagneButtons = document.querySelectorAll('button, .btn-outline, .cta-button');
+  const champagneButtons = document.querySelectorAll('button, .btn-outline, .cta-button, a');
   
   champagneButtons.forEach(btn => {
     const text = btn.textContent.toLowerCase();
     if (text.includes('champagne') || text.includes('sabrer')) {
+      console.log('✅ Sabrage button found:', text.substring(0, 30));
+      
       btn.addEventListener('click', function(e) {
-        const audio = new Audio('data:audio/wav;base64,UklGRnoGAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQoGAACBhYqFbF1fdJivrJBhNjVgodDbq2EcBj+a2/LDciUFLIHO8tiJNwgZaLvt559NEAxQp+PwtmMcBjiR1/LMeSwFJHfH8N2QQAoUXrTp66hVFApGn+DyvmwhBi2Azv PaiTcIGWi77eefTRAMUKfj8LZjHAY4kdfyy3ksBSR3x/DdkEAKFF606+uoVRQKRp/g8r5sIQYtgM7z2ok3CBlou+3nn00QDFCn4/C2YxwGOJHX8st5LAUkd8fw3ZBgChRevOvrrFUUCkaf4PK+bCEGLYDO89qJNwgZaLvt559NEAxQp+PwtmMcBjiR1/LLeSwFJHfH8N2QQAoUXrTr66hVFApGn+DyvmwhBi2Azv PaiTcIGWi77eefTRAMUKfj8LZjHAY4kdfyy3ksBSR3x/DdkEAKFF606+uoVRQKRp/g8r5sIQYtgM7z2ok3CBlou+3nn00QDFCn4/C2YxwGOJHX8st5LAUkd8fw3ZBACQ==');
-        audio.play().catch(() => {});
-        
+        // Juste les confettis et le toast, pas de son (le son fait un bip)
         const rect = btn.getBoundingClientRect();
         createCodeConfetti(rect.left + rect.width / 2, rect.top);
         
         showToast('🍾 POP ! Champagne sabrééé !');
-      });
+        
+        console.log('🍾 Sabrage triggered!');
+      }, { capture: true });
     }
   });
 }
