@@ -211,6 +211,11 @@ document.addEventListener('visibilitychange', function() {
 });
 
 // ===== 2. CURSEURS INTERACTIFS (24H, mercenaires, vitesse, brutal) =====
+// DÉSACTIVÉ SUR MOBILE - Les curseurs custom ne fonctionnent pas sur tactile
+const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || 
+                 ('ontouchstart' in window) || 
+                 (navigator.maxTouchPoints > 0);
+
 let currentCursor = null;
 let currentElement = null;
 
@@ -221,56 +226,59 @@ function clearCursor() {
   }
 }
 
-document.addEventListener('mouseover', function(e) {
-  // Ignorer formulaire, marquee, JC section
-  if (e.target.closest('.formulaire-modal') || 
-      e.target.closest('.marquee') || 
-      e.target.closest('.marquee-content') ||
-      e.target.closest('.jean-charles')) {
-    clearCursor();
-    return;
-  }
-  
-  // Chercher seulement dans les éléments de type texte (h1, h2, h3, p, span, etc.)
-  if (!e.target.matches('h1, h2, h3, h4, h5, h6, p, span, a, li, div.squad-desc, div.value-item')) {
-    return;
-  }
-  
-  const text = e.target.textContent || '';
-  const textLower = text.toLowerCase();
-  
-  let newCursor = null;
-  
-  // Détecter mots-clés EXACTS
-  if (/\b24h\b/i.test(text)) {
-    newCursor = 'cursor-chrono';
-    currentElement = e.target;
-  } else if (/\bmercenaires?\b/i.test(text)) {
-    newCursor = 'cursor-soldier';
-    currentElement = e.target;
-  }
-  
-  // Changer curseur
-  if (newCursor !== currentCursor) {
-    clearCursor();
-    if (newCursor) {
-      document.body.classList.add(newCursor);
-      currentCursor = newCursor;
+// Seulement activer sur desktop
+if (!isMobile) {
+  document.addEventListener('mouseover', function(e) {
+    // Ignorer formulaire, marquee, JC section
+    if (e.target.closest('.formulaire-modal') || 
+        e.target.closest('.marquee') || 
+        e.target.closest('.marquee-content') ||
+        e.target.closest('.jean-charles')) {
+      clearCursor();
+      return;
     }
-  }
-});
+    
+    // Chercher seulement dans les éléments de type texte (h1, h2, h3, p, span, etc.)
+    if (!e.target.matches('h1, h2, h3, h4, h5, h6, p, span, a, li, div.squad-desc, div.value-item')) {
+      return;
+    }
+    
+    const text = e.target.textContent || '';
+    const textLower = text.toLowerCase();
+    
+    let newCursor = null;
+    
+    // Détecter mots-clés EXACTS
+    if (/\b24h\b/i.test(text)) {
+      newCursor = 'cursor-chrono';
+      currentElement = e.target;
+    } else if (/\bmercenaires?\b/i.test(text)) {
+      newCursor = 'cursor-soldier';
+      currentElement = e.target;
+    }
+    
+    // Changer curseur
+    if (newCursor !== currentCursor) {
+      clearCursor();
+      if (newCursor) {
+        document.body.classList.add(newCursor);
+        currentCursor = newCursor;
+      }
+    }
+  });
 
-document.addEventListener('mouseout', function(e) {
-  if (e.target === currentElement) {
+  document.addEventListener('mouseout', function(e) {
+    if (e.target === currentElement) {
+      clearCursor();
+      currentElement = null;
+    }
+  });
+
+  document.addEventListener('mouseleave', function() {
     clearCursor();
     currentElement = null;
-  }
-});
-
-document.addEventListener('mouseleave', function() {
-  clearCursor();
-  currentElement = null;
-});
+  });
+}
 
 // ===== 3. KONAMI CODE → MODE TERMINAL MATRIX =====
 let konamiSequence = [];
@@ -368,7 +376,10 @@ if (document.readyState === 'loading') {
 }
 
 // ===== 5. MALÉDICTION JEAN-CHARLES (Curseur sablier simple) =====
+// DÉSACTIVÉ SUR MOBILE
 function initJCCurse() {
+  if (isMobile) return; // Pas sur mobile
+  
   const jcSection = document.querySelector('.jean-charles');
   if (!jcSection) return;
   
