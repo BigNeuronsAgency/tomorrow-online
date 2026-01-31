@@ -63,7 +63,17 @@ easterEggStyles.textContent = `
   
   /* Mode Vision Thermique */
   body.thermal-vision {
-    filter: invert(1) hue-rotate(180deg) contrast(1.5);
+    filter: invert(1) hue-rotate(180deg) contrast(1.5) !important;
+    background: #000 !important;
+  }
+  
+  body.thermal-vision::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background: radial-gradient(circle, rgba(255,0,0,0.3) 0%, rgba(0,0,255,0.3) 100%);
+    pointer-events: none;
+    z-index: 9998;
   }
   
   /* Toast notification */
@@ -374,24 +384,28 @@ function initJCCurse() {
     if (!jcFakeCursor) {
       jcFakeCursor = document.createElement('div');
       jcFakeCursor.textContent = '⌛';
-      jcFakeCursor.style.cssText = 'position:fixed;font-size:24px;pointer-events:none;z-index:10001;';
+      jcFakeCursor.style.cssText = 'position:fixed;font-size:24px;pointer-events:none;z-index:10001;display:none;';
       document.body.appendChild(jcFakeCursor);
     }
+    jcFakeCursor.style.display = 'block';
   });
   
   jcSection.addEventListener('mouseleave', function() {
     jcCursorActive = false;
     document.body.classList.remove('cursor-laggy');
     document.body.style.cursor = '';
-    if (jcFakeCursor) jcFakeCursor.style.display = 'none';
+    if (jcFakeCursor) {
+      jcFakeCursor.style.display = 'none';
+    }
   });
   
   document.addEventListener('mousemove', function(e) {
     if (jcCursorActive && jcFakeCursor) {
       setTimeout(() => {
-        jcFakeCursor.style.left = e.clientX + 'px';
-        jcFakeCursor.style.top = e.clientY + 'px';
-        jcFakeCursor.style.display = 'block';
+        if (jcCursorActive) { // Vérifier que c'est toujours actif
+          jcFakeCursor.style.left = e.clientX + 'px';
+          jcFakeCursor.style.top = e.clientY + 'px';
+        }
       }, 500);
     }
   });
