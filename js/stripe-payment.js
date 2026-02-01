@@ -133,15 +133,8 @@ async function createPaymentIntentForElements(total) {
       locale: 'fr'
     });
     
-    // Créer le Payment Element avec restrictions pays + adresse facturation
+    // Créer le Payment Element (France par défaut)
     const paymentElement = elements.create('payment', {
-      fields: {
-        billingDetails: {
-          address: {
-            country: 'never' // Forcer FR via allowedCountries ci-dessous
-          }
-        }
-      },
       wallets: {
         applePay: 'auto',
         googlePay: 'auto'
@@ -149,7 +142,6 @@ async function createPaymentIntentForElements(total) {
       business: {
         name: 'Tomorrow.Online'
       },
-      // Restreindre aux paiements France uniquement
       terms: {
         card: 'never'
       }
@@ -182,12 +174,29 @@ async function submitPayment() {
 
   try {
     const careEnabled = document.getElementById('care-checkbox')?.checked || false;
+    
+    // Récupérer les champs de facturation
+    const billingName = document.getElementById('billing-name')?.value || formData.brandName || '';
+    const billingCompany = document.getElementById('billing-company')?.value || '';
 
     // 1. Confirmer le paiement avec Stripe Elements
     const { error, paymentIntent } = await stripe.confirmPayment({
       elements,
       confirmParams: {
-        receipt_email: formData.email
+        receipt_email: formData.email,
+        payment_method_data: {
+          billing_details: {
+            name: billingName,
+            email: formData.email,
+            phone: formData.phone || '',
+            address: {
+              country: 'FR'
+            }
+          },
+          metadata: {
+            company: billingCompany || ''
+          }
+        }
       },
       redirect: 'if_required'
     });
@@ -201,6 +210,15 @@ async function submitPayment() {
     }
 
     console.log('✅ Paiement pré-autorisé !', paymentIntent);
+    
+    // Vérifier que le paiement est bien autorisé avant de continuer
+    if (!paymentIntent || paymentIntent.status !== 'requires_capture') {
+      console.error('❌ Paiement non autorisé:', paymentIntent?.status);
+      showError('Le paiement n\'a pas pu être autorisé. Veuillez réessayer.');
+      submitButton.disabled = false;
+      loader.classList.add('hidden');
+      return false;
+    }
 
     // 2. Si Care activé, créer la subscription avec le même PaymentMethod
     if (careEnabled && paymentIntent && paymentIntent.payment_method) {

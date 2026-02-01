@@ -706,6 +706,20 @@ function getStepContent() {
           <div class="payment-form">
             <h3 class="payment-form-title">Informations de paiement</h3>
             
+            <!-- Informations de facturation -->
+            <div class="billing-info">
+              <div class="form-group">
+                <label class="form-label-small">Nom complet <span class="required">*</span></label>
+                <input type="text" id="billing-name" value="${formData.brandName || ''}" 
+                  class="form-input" placeholder="Jean Dupont" required>
+              </div>
+              <div class="form-group">
+                <label class="form-label-small">Société</label>
+                <input type="text" id="billing-company" value="${formData.company || ''}" 
+                  class="form-input" placeholder="Ma Société SARL">
+              </div>
+            </div>
+            
             <!-- Care optionnel -->
             <div class="care-checkbox-wrapper">
               <label class="care-checkbox-label">
