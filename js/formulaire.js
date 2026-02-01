@@ -1122,7 +1122,7 @@ window.openModal = function(plan) {
     }
     
     // Cacher WhatsApp widget si présent
-    var whatsappWidget = document.querySelector('.whatsapp-widget, #whatsapp-widget, [class*="whatsapp"], [id*="whatsapp"]');
+    var whatsappWidget = document.querySelector('.whatsapp-float, .whatsapp-widget, #whatsapp-widget, [class*="whatsapp"], [id*="whatsapp"]');
     if (whatsappWidget) {
       whatsappWidget.style.display = 'none';
       whatsappWidget.dataset.hiddenByModal = 'true';

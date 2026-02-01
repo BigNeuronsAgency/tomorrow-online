@@ -19,6 +19,11 @@
   padding: 0 !important;
 }
 
+/* Cacher WhatsApp quand le modal est ouvert */
+body:has(.modal:not(.hidden)) .whatsapp-float {
+  display: none !important;
+}
+
 .modal.hidden {
   display: none;
 }
