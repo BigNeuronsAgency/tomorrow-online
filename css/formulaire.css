@@ -134,6 +134,11 @@
   overflow-x: hidden;
 }
 
+/* Step 7 : pas de scroll */
+.step-7 {
+  overflow-y: hidden;
+}
+
 .step-header {
   margin-bottom: 2rem;
   border-left: 4px solid;

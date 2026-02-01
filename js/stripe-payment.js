@@ -238,6 +238,7 @@ async function createCareSubscription(paymentMethodId) {
 
 // Envoyer le brief par email
 async function sendBriefEmail() {
+  // 1. Email à l'équipe Tomorrow (brief détaillé)
   const briefData = {
     access_key: WEB3FORMS_ACCESS_KEY,
     subject: `[Tomorrow.Online] Brief - ${formData.brandName}`,
@@ -253,7 +254,34 @@ async function sendBriefEmail() {
     body: JSON.stringify(briefData)
   });
 
-  console.log('✅ Brief envoyé par email');
+  console.log('✅ Brief envoyé à l\'équipe');
+
+  // 2. Email de confirmation au client
+  const clientEmailData = {
+    access_key: WEB3FORMS_ACCESS_KEY,
+    subject: 'Votre site en 24H - Slot bloqué',
+    from_name: 'Tomorrow.Online',
+    email: formData.email,
+    message: `
+Bonjour et merci de votre brief sur www.tomorrow.online.
+
+Nous l'avons bien reçu et votre slot est bloqué.
+
+Restez près de votre téléphone, nous vous appellerons demain matin pour valider le brief avec vous : ensuite le chrono démarre.
+
+A très bientôt,
+
+L'équipe de Tomorrow.online
+    `
+  };
+
+  await fetch(FORM_ACTION_URL, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(clientEmailData)
+  });
+
+  console.log('✅ Email de confirmation envoyé au client');
 }
 
 // Formater le brief pour l'email
