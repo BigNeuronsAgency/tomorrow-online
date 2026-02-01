@@ -899,10 +899,8 @@ function draw(preserveScroll) {
     }, 100);
   }
   
-  if (currentStep === 7 && !countdownStarted) {
-    startCountdown();
-    countdownStarted = true;
-  }
+  // Le countdown step 7 est désactivé pour éviter la redirection automatique vers succès
+  // Il sera géré après validation du paiement Stripe
 }
 
 // ========================================
