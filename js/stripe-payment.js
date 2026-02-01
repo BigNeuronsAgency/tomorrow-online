@@ -13,17 +13,36 @@ let elements = null;
 let cardElement = null;
 let paymentIntentId = null;
 
-// Initialiser Stripe au chargement
-if (typeof Stripe !== 'undefined') {
-  // ATTENTION : Remplace cette clé par ta vraie clé pk_test_...
-  stripe = Stripe(STRIPE_PUBLISHABLE_KEY);
-  console.log('✅ Stripe initialisé');
+// Initialiser Stripe quand le SDK est prêt
+function initStripe() {
+  if (typeof Stripe !== 'undefined' && !stripe) {
+    stripe = Stripe(STRIPE_PUBLISHABLE_KEY);
+    console.log('✅ Stripe initialisé');
+    return true;
+  }
+  return false;
 }
+
+// Essayer d'initialiser au chargement
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initStripe);
+} else {
+  initStripe();
+}
+
+// Réessayer après un délai si Stripe n'est pas encore chargé
+setTimeout(initStripe, 1000);
 
 // Fonction pour créer l'étape de paiement
 function createPaymentStep() {
+  // Tenter d'initialiser Stripe si pas encore fait
   if (!stripe) {
-    console.error('❌ Stripe non initialisé');
+    initStripe();
+  }
+  
+  if (!stripe) {
+    console.error('❌ Stripe non initialisé - SDK non chargé');
+    showError('Erreur: Stripe non disponible. Rafraîchissez la page.');
     return;
   }
 
