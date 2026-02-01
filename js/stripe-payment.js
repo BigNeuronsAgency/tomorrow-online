@@ -127,10 +127,34 @@ async function createPaymentIntentForElements(total) {
       }
     };
 
-    elements = stripe.elements({ clientSecret, appearance });
+    elements = stripe.elements({ 
+      clientSecret, 
+      appearance,
+      locale: 'fr'
+    });
     
-    // Créer le Payment Element
-    const paymentElement = elements.create('payment');
+    // Créer le Payment Element avec restrictions pays + adresse facturation
+    const paymentElement = elements.create('payment', {
+      fields: {
+        billingDetails: {
+          address: {
+            country: 'never' // Forcer FR via allowedCountries ci-dessous
+          }
+        }
+      },
+      wallets: {
+        applePay: 'auto',
+        googlePay: 'auto'
+      },
+      business: {
+        name: 'Tomorrow.Online'
+      },
+      // Restreindre aux paiements France uniquement
+      terms: {
+        card: 'never'
+      }
+    });
+    
     paymentElement.mount('#payment-element');
     
     console.log('✅ Payment Element monté');
@@ -286,35 +310,88 @@ L'équipe de Tomorrow.online
 
 // Formater le brief pour l'email
 function formatBriefForEmail() {
-  const total = calculateTotal();
+  const totals = calculateTotals();
   const pack = PACKS.find(p => p.id === formData.selectedPack);
+  
+  // Récupérer les upsells sélectionnés
+  const selectedUpsells = [];
+  const packUpsells = UPSELLS[formData.selectedPack] || [];
+  packUpsells.forEach(u => {
+    if (formData.upsells[u.id]) {
+      selectedUpsells.push(`${u.name} (+${u.price}€)`);
+    }
+  });
   
   let message = `
 🎯 NOUVEAU BRIEF REÇU
 ━━━━━━━━━━━━━━━━━━━━━━
 
 📦 PACK SÉLECTIONNÉ
-${pack.name} - ${pack.price}€ HT
+${pack ? pack.name : 'Non défini'} - ${pack ? pack.price : 0}€ HT
+
+${selectedUpsells.length > 0 ? `
+📋 OPTIONS SÉLECTIONNÉES
+${selectedUpsells.join('\n')}
+` : ''}
+
+${formData.care ? '✅ Tomorrow Care (39€/mois) - Abonnement souscrit\n' : ''}
 
 💳 PAIEMENT
-Montant total: ${total}€ HT
+Montant total: ${totals.price}€ HT
+Délai: ${totals.delay}
 Statut: PRÉ-AUTORISÉ (à capturer manuellement)
 ID Stripe: ${paymentIntentId}
 
 👤 CLIENT
-Nom: ${formData.brandName}
-Email: ${formData.email}
+Nom de marque: ${formData.brandName || 'Non renseigné'}
+Email: ${formData.email || 'Non renseigné'}
+Téléphone: ${formData.phone || 'Non renseigné'}
 
-📝 BRIEF
-Pitch: ${formData.pitch || 'Non renseigné'}
+🎯 CIBLE & POSITIONNEMENT
+Pitch (1 ligne): ${formData.pitch || 'Non renseigné'}
+Target: ${formData.target || 'Non renseigné'}
 Archétype: ${formData.archetype || 'Non renseigné'}
-Copywriting: ${formData.copywriting === 'me' ? 'Client fourni' : 'Tomorrow rédige'}
+
+✍️ COPYWRITING
+${formData.copywriting === 'me' ? '📝 Client fourni le contenu' : '✨ Tomorrow rédige le contenu'}
+
+🎨 VIBE
+${formData.vibeSeriousness ? `Sérieux/Drôle: ${formatVibeData(formData.vibeSeriousness, 'seriousness')}` : ''}
+${formData.vibeStyle ? `Style: ${formatVibeData(formData.vibeStyle, 'style')}` : ''}
+
+${formData.hasDomain !== undefined ? `
+🌐 DOMAINE
+${formData.hasDomain ? `✅ Possède un domaine: ${formData.domainName || 'À préciser'}` : '❌ Pas de domaine (à acquérir)'}
+` : ''}
+
+${formData.multiLangues && formData.multiLangues.length > 0 ? `
+🌍 LANGUES
+${formData.multiLangues.join(', ')}
+` : ''}
+
+${formData.pagesSupQty > 0 ? `
+📄 PAGES SUPPLÉMENTAIRES (${formData.pagesSupQty})
+${formData.pagesSupNames.filter(Boolean).join(', ')}
+` : ''}
 
 ━━━━━━━━━━━━━━━━━━━━━━
 ⚡ Chrono démarre demain matin au call de validation
   `;
 
   return message;
+}
+
+// Helper function pour formater les vibes
+function formatVibeData(value, type) {
+  if (value === 0) return 'Neutre';
+  const absValue = Math.abs(value);
+  if (type === 'seriousness') {
+    return value < 0 ? `+${absValue}% drôle` : `+${absValue}% sérieux`;
+  }
+  if (type === 'style') {
+    return value < 0 ? `+${absValue}% minimaliste` : `+${absValue}% complexe`;
+  }
+  return value + '%';
 }
 
 // Afficher une erreur
