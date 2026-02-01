@@ -7,7 +7,7 @@
   <meta name="description" content="On construit votre site en 24H. Sinon on vous rembourse. Équipe senior + IA. Webflow. 0 bug. Tomorrow.">
   
   <!-- Favicon -->
-  <link rel="icon" type="image/png" href="images/favicon.png">
+  <link rel="icon" type="image/png" href="images/favicon-kid.png">
   <link rel="apple-touch-icon" href="images/webclip.png">
   
   <!-- Fonts -->
@@ -19,6 +19,8 @@
   <link rel="stylesheet" href="css/design-system.css">
   <link rel="stylesheet" href="css/home.css">
   <link rel="stylesheet" href="css/formulaire.css">
+  <link rel="stylesheet" href="css/stripe-payment.css">
+  <link rel="stylesheet" href="css/themes.css?v=1769805033">
   
   <!-- GSAP -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
@@ -58,6 +60,17 @@
             <a href="migrations.html">🔄 Migrations CMS</a>
           </div>
         </div>
+        
+        <!-- Theme Toggle -->
+        <div class="theme-toggle radio-input">
+          <label class="label">
+            <input type="radio" name="theme" value="dark" checked>
+            <span class="check" title="Mode Sombre">🌙</span>
+          </label><label class="label">
+            <input type="radio" name="theme" value="rainbow">
+            <span class="check" title="Mode Arc-en-ciel">🌈</span>
+          </label>
+        </div>
       </div>
       
       <div class="nav-cta">
@@ -85,7 +98,6 @@
           <a href="migrations.html">🔄 Migrations CMS</a>
         </div>
       </div>
-      <button class="btn btn-primary" onclick="openModal()">Réserver</button>
     </div>
   </header>
   
@@ -202,13 +214,10 @@
       <div class="pricing-grid">
         <!-- MAQUETTE -->
         <div class="pricing-card">
-          <button class="details-link" onclick="openDetails('MAQUETTE')">
-            Détails [ + ]
-          </button>
           <div class="pricing-badge">Maquette</div>
           <div class="pricing-time">12H</div>
           <div class="pricing-price">
-            900€ <span class="price-ht">HT</span>
+            750€ <span class="price-ht">HT</span>
           </div>
           <div class="pricing-label">Design Only</div>
           <ul class="pricing-features">
@@ -225,13 +234,10 @@
         <!-- STARTER (POPULAIRE) -->
         <div class="pricing-card pricing-card-popular">
           <div class="popular-badge">Populaire</div>
-          <button class="details-link details-link-light" onclick="openDetails('STARTER')">
-            Détails [ + ]
-          </button>
           <div class="pricing-badge pricing-badge-light">Starter</div>
           <div class="pricing-time">24H</div>
           <div class="pricing-price">
-            <span class="price-strike">1500€</span> 980€ <span class="price-ht">HT</span>
+            <span class="price-strike">1500€</span> 950€ <span class="price-ht">HT</span>
             <span class="price-offer">Offre du mois</span>
           </div>
           <div class="pricing-label">Conversions instantanées</div>
@@ -248,9 +254,6 @@
         
         <!-- BUSINESS -->
         <div class="pricing-card">
-          <button class="details-link" onclick="openDetails('BUSINESS')">
-            Détails [ + ]
-          </button>
           <div class="pricing-badge">Business</div>
           <div class="pricing-time">48H</div>
           <div class="pricing-price">
@@ -312,7 +315,7 @@
           <div class="squad-card xray-container">
             <div class="squad-role font-mono">COPYWRITING</div>
             <div class="squad-image">
-              <img src="images/PPARTHURTOMORROW.jpeg" alt="Le Publicitaire" class="xray-img">
+              <img src="images/arthur-new.png" alt="Le Publicitaire" class="xray-img">
               <div class="xray-scanline"></div>
             </div>
             <h3 class="squad-name">Le Publicitaire</h3>
@@ -378,17 +381,13 @@
         <h2 class="section-title">
           Comment on fait ?<br>
           On triche ?<br>
-          <span class="text-gradient">Oui.</span><br>
-          <button class="details-link details-link-under-oui" onclick="openProcessDetails()">
-            Détails [ + ]
-          </button>
+          <span class="text-gradient">Oui.</span>
         </h2>
+        <p class="process-intro">
+          Pendant que certains refusent l'IA ou produisent de la soupe déshumanisée, 
+          nous avons créé un process où humain et machine ne font qu'un.
+        </p>
       </div>
-      
-      <p class="process-intro">
-        Pendant que certains refusent l'IA ou produisent de la soupe déshumanisée, 
-        nous avons créé un process où humain et machine ne font qu'un.
-      </p>
       
       <div class="process-grid">
         <div class="process-step">
@@ -422,7 +421,7 @@
         </div>
         
         <div class="process-step process-step-final">
-          <div class="step-number step-number-gradient">4</div>
+          <div class="step-number">4</div>
           <div class="step-badge font-mono">Étape 4</div>
           <h3 class="step-title">Champagne</h3>
           <p class="step-desc">
@@ -443,7 +442,12 @@
 
   <!-- Jean-Charles BSOD Section -->
   <section id="jean-charles" class="section jean-charles">
-    <div class="container">
+    <div class="container jc-container">
+      <!-- Sticky Kid Image -->
+      <div class="jc-sticky-kid">
+        <img src="images/tomorrowcolere.png" alt="Tomorrow colère" class="jc-kid-img">
+      </div>
+      
       <div class="bsod">
         <div class="bsod-header">
           <div class="bsod-title font-mono">FATAL_ERROR_JC_DIY_ATTEMPT</div>
@@ -572,7 +576,9 @@
           <div class="venn-circle venn-template">
             <div class="circle-label">TEMPLATE<br>FIABLE</div>
           </div>
-          <div class="venn-center-gradient"></div>
+          <div class="venn-center-image">
+            <img src="images/tomorrowfarce.png" alt="Tomorrow" class="venn-kid pulse-animation">
+          </div>
         </div>
         
         <div class="mondes-content">
@@ -704,8 +710,7 @@
           <img src="images/TO-logo.webp" alt="Tomorrow.Online" class="footer-logo">
           <p class="footer-tagline font-mono">
             La première agence web "NO-WAIT" en France.<br>
-            Designed for speed. Powered by intelligence.<br>
-            <span style="font-size: 11px; opacity: 0.6; cursor: pointer; user-select: none;" onclick="if(prompt('Code secret ?','')?.toUpperCase().includes('F*CK WIX')||prompt('Code secret ?','')?.toUpperCase().includes('FUCKWIX')){alert('🎉 Code valide ! Utilise le code promo dans le formulaire pour 5% de réduction.');}else if(event.target.dataset.clicked){return;}else{event.target.dataset.clicked='1';}">.</span>
+            Designed for speed. Powered by intelligence.
           </p>
         </div>
         
@@ -748,6 +753,16 @@
         <button class="video-link-btn" onclick="openVideoModal()">
           Comment on voit les acheteurs de templates
         </button>
+      </div>
+      
+      <!-- Site Build Info -->
+      <div class="footer-build-info">
+        <div class="build-badge">
+          ⚡ CE SITE A ÉTÉ RÉALISÉ EN 42H23 GRÂCE À LA STACK BIG NEURONS.
+        </div>
+        <p class="stack-tech font-mono">
+          STACK TECHNIQUE: WEBFLOW • FIGMA • GEMINI-3 • CLAUDE OPUS 4.5 • BANANA • VERDENT • SEVALLA
+        </p>
       </div>
       
       <div class="footer-bottom">
@@ -927,7 +942,7 @@
 
   <!-- Modal Formulaire 7 Étapes -->
   <div id="bookingModal" class="modal hidden">
-    <div class="modal-overlay" onclick="window.closeModal()"></div>
+    <div class="modal-overlay"></div>
     <div class="modal-container">
       <div id="modalContent" class="modal-content">
         <!-- Dynamic content generated by formulaire.js -->
@@ -952,14 +967,19 @@
   </div>
 
   <!-- Scripts -->
+  <script src="js/themes.js"></script>
   <script src="js/cursor.js"></script>
   <script src="js/animations.js"></script>
   <script src="js/navigation.js"></script>
+  <script src="js/easter-eggs.js"></script>
   <script src="js/marquee.js"></script>
   <script src="js/main.js"></script>
   <script src="js/formulaire.js"></script>
-  <script src="js/submit-netlify.js"></script>
   <script src="js/impatient-kid.js"></script>
+  
+  <!-- Stripe.js SDK -->
+  <script src="https://js.stripe.com/v3/"></script>
+  <script src="js/stripe-payment.js?v=20260201"></script>
   
   <!-- Initialize IMMEDIATELY after scripts load -->
   <script>
@@ -1028,42 +1048,6 @@
       }
     }
     
-    // Details modal functions
-    function openDetails(pack) {
-      console.log('Opening details for:', pack);
-      const modalId = 'modal' + pack.charAt(0).toUpperCase() + pack.slice(1).toLowerCase();
-      openModalDetails(modalId);
-    }
-    
-    function openProcessDetails() {
-      console.log('Opening process details');
-      openModalDetails('modalProcess');
-    }
-    
-    function openModalDetails(modalId) {
-      const modal = document.getElementById(modalId);
-      if(modal) {
-        modal.classList.remove('hidden');
-        if(window.lenis) {
-          setTimeout(() => {
-            if(window.lenis && window.lenis.stop) window.lenis.stop();
-          }, 100);
-        }
-      }
-    }
-
-    function closeModalDetails(modalId) {
-      const modal = document.getElementById(modalId);
-      if(modal) {
-        modal.classList.add('hidden');
-        if(window.lenis) {
-          setTimeout(() => {
-            if(window.lenis && window.lenis.start) window.lenis.start();
-          }, 100);
-        }
-      }
-    }
-    
     // Video modal functions
     function openVideoModal() {
       const modal = document.getElementById('videoModal');
@@ -1084,10 +1068,6 @@
     
     // Export functions
     window.toggleFaq = toggleFaq;
-    window.openDetails = openDetails;
-    window.openProcessDetails = openProcessDetails;
-    window.openModalDetails = openModalDetails;
-    window.closeModalDetails = closeModalDetails;
     window.openVideoModal = openVideoModal;
     window.closeVideoModal = closeVideoModal;
   </script>
