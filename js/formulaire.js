@@ -4,21 +4,21 @@
 
 // Global state
 var currentStep = 1;
-var totalSteps = 7; // Ajout de l'étape paiement
+var totalSteps = 6;
 var currentConsoleMessage = 'SYSTEM READY';
 var fileStore = [];
 var countdownTimer = null;
 var countdownStarted = false;
 
-// Form action URLs - Web3Forms
-const FORM_ACTION_URL = 'https://api.web3forms.com/submit';
-const WEB3FORMS_ACCESS_KEY = '2aeb47c5-ac88-4de0-9d2e-4025e72d2c9e';
+// Form action URLs
+const FORM_ACTION_URL = '/.netlify/functions/submit-brief';
+const FORM_ACTION_URL_UPSELL = '/.netlify/functions/submit-brief';
 const BRAND_RED = '#FF3333';
 
 // Data constants
 var PACKS = [
-  { id: 'MAQUETTE', name: 'PACK MAQUETTE', price: 750, delay: 12, desc: 'Design Only // Pas de code' },
-  { id: 'STARTER', name: 'PACK STARTER', price: 950, delay: 24, desc: 'Landing Page // Vitrine' },
+  { id: 'MAQUETTE', name: 'PACK MAQUETTE', price: 900, delay: 12, desc: 'Design Only // Pas de code' },
+  { id: 'STARTER', name: 'PACK STARTER', price: 980, delay: 24, desc: 'Landing Page // Vitrine' },
   { id: 'BUSINESS', name: 'PACK BUSINESS', price: 2200, delay: 48, desc: 'Site Complet // Blog & SEO' }
 ];
 
@@ -140,9 +140,6 @@ function calculateTotals() {
   });
   return { price: price, delay: delay };
 }
-
-// Export globalement pour stripe-payment.js
-window.calculateTotals = calculateTotals;
 
 function validateEmail(email) {
   return String(email).toLowerCase().match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/);
@@ -606,6 +603,15 @@ function getStepContent() {
                   ` : ''}
                 </div>
               </div>
+              
+              <div class="care-box">
+                <h3 class="care-title">Offre Care</h3>
+                <p class="care-desc">Hébergement, mises à jour de sécurité et modifications mineures (1h/mois).</p>
+                <label class="care-toggle" onclick="window.toggleCare()">
+                  <span class="care-price font-mono">+90€/mois</span>
+                  <span class="care-switch ${formData.care ? 'active' : ''}"></span>
+                </label>
+              </div>
             </div>
           ` : '<div></div>'}
           
@@ -625,14 +631,14 @@ function getStepContent() {
                   class="form-input" placeholder="06 00 00 00 00">
               </div>
               
-              <button onclick="window.goToPaymentStep()" id="submitBtn" class="btn btn-submit">
-                Continuer vers le paiement →
+              <button onclick="window.submitForm()" id="submitBtn" class="btn btn-submit">
+                Bloquer mon slot 🔒
               </button>
               
               <div class="submit-note">
-                <p class="submit-note-small font-mono">Étape suivante : Sécurisation du slot</p>
+                <p class="submit-note-small font-mono">Aucun paiement requis maintenant.</p>
                 <p class="submit-note-highlight font-mono">
-                  Empreinte bancaire uniquement. Aucun débit avant livraison.
+                  Nous analysons d'abord votre brief et vous paierez uniquement après validation, demain matin.
                 </p>
               </div>
             </div>
@@ -642,131 +648,7 @@ function getStepContent() {
     `;
   }
   
-  // Step 7: Paiement (Confirmation)
-  if (currentStep === 7) {
-    const totals = calculateTotals();
-    const pack = PACKS.find(p => p.id === formData.selectedPack);
-    
-    // Récupérer les upsells sélectionnés avec leurs détails
-    const selectedUpsells = [];
-    const packUpsells = UPSELLS[formData.selectedPack] || [];
-    
-    packUpsells.forEach(upsell => {
-      if (formData.upsells[upsell.id]) {
-        selectedUpsells.push(upsell);
-      }
-    });
-    
-    const hasUpsells = selectedUpsells.length > 0;
-    
-    return `
-      <div class="form-step step-7">
-        <div class="step-header">
-          <h2 class="step-title">CONFIRMATION</h2>
-          <p class="step-subtitle font-mono">Sécurisation de votre slot</p>
-        </div>
-        
-        <div class="payment-container">
-          <!-- Récapitulatif -->
-          <div class="payment-summary">
-            <h3 class="payment-summary-title">Récapitulatif</h3>
-            
-            <div class="summary-line">
-              <span>${pack.name}</span>
-              <span class="font-mono">${pack.price}€ HT</span>
-            </div>
-            
-            ${hasUpsells ? `
-              <div class="summary-divider"></div>
-              <p class="summary-section-title">Options</p>
-              ${selectedUpsells.map(upsell => `
-                <div class="summary-line summary-line-small">
-                  <span>${upsell.name}</span>
-                  <span class="font-mono">${upsell.price}€</span>
-                </div>
-              `).join('')}
-            ` : ''}
-            
-            <div class="summary-divider"></div>
-            
-            <div class="summary-line summary-line-total">
-              <span>TOTAL HT</span>
-              <span class="font-mono">${totals.price}€</span>
-            </div>
-            
-            <div class="payment-reassurance">
-              <p class="reassurance-text">
-                <span class="reassurance-icon">🔒</span>
-                Aucun débit avant livraison du site. Empreinte bancaire uniquement.
-              </p>
-            </div>
-          </div>
-          
-          <!-- Formulaire de paiement Stripe -->
-          <div class="payment-form">
-            <h3 class="payment-form-title">Informations de facturation</h3>
-            
-            <!-- Informations de facturation -->
-            <div class="billing-info">
-              <div class="form-group">
-                <label class="form-label-small">Nom complet *</label>
-                <input type="text" id="billing-name" value="" 
-                  class="form-input" placeholder="Jean Dupont" required>
-              </div>
-              <div class="form-group">
-                <label class="form-label-small">Société (optionnel)</label>
-                <input type="text" id="billing-company" value="${formData.brandName || ''}" 
-                  class="form-input" placeholder="Nom de votre entreprise">
-              </div>
-            </div>
-            
-            <!-- Code promo -->
-            <div class="promo-wrapper">
-              <label class="form-label-small">Code promo</label>
-              <div class="promo-input-wrapper">
-                <input type="text" id="promo-code" class="form-input promo-input" 
-                  placeholder="Entrez votre code" maxlength="20">
-                <button type="button" onclick="window.applyPromoCode()" class="btn-apply-promo">Appliquer</button>
-              </div>
-              <div id="promo-message" class="promo-message"></div>
-            </div>
-            
-            <!-- Care optionnel -->
-            <div class="care-checkbox-wrapper">
-              <label class="care-checkbox-label">
-                <input type="checkbox" id="care-checkbox" class="care-checkbox-input" ${formData.care ? 'checked' : ''}>
-                <span class="care-checkbox-text">
-                  <strong>Tomorrow Care</strong> - 39€/mois
-                  <br>
-                  <small>Hébergement, maintenance technique et 0.5j de dev/mois</small>
-                </span>
-              </label>
-            </div>
-            
-            <!-- Stripe Payment Element -->
-            <div id="payment-element" class="stripe-element">
-              <!-- Stripe Elements will be inserted here -->
-            </div>
-            
-            <!-- Message d'erreur -->
-            <div id="payment-error" class="payment-error hidden"></div>
-            
-            <!-- Bouton de soumission -->
-            <button onclick="window.submitPayment()" id="submit-payment-btn" class="btn btn-primary btn-submit-payment">
-              <span id="payment-button-text">Sécuriser mon slot</span>
-              <span id="payment-loader" class="payment-loader hidden"></span>
-            </button>
-            
-            <p class="payment-note font-mono">
-              Paiement sécurisé par Stripe.
-            </p>
-          </div>
-        </div>
-      </div>
-    `;
-  }
-  
-  // Step 8 (ancien step 7) - Success screen
+  // Step 7 SUPPRIMÉ - On passe direct au success screen après submit
 }
 
 function renderSuccessCard(u) {
@@ -879,14 +761,9 @@ function draw(preserveScroll) {
     </div>
   `;
   
-  // Restaurer le scroll après le rendu
   if (preserveScroll && scrollPos > 0) {
-    requestAnimationFrame(() => {
-      var scrollContainer = container.querySelector('.modal-body');
-      if (scrollContainer) {
-        scrollContainer.scrollTop = scrollPos;
-      }
-    });
+    var scrollContainer = container.querySelector('.modal-body');
+    if (scrollContainer) scrollContainer.scrollTop = scrollPos;
   }
   
   var slotEl = document.getElementById('consoleSlotId');
@@ -899,10 +776,8 @@ function draw(preserveScroll) {
     }, 100);
   }
   
-  if (currentStep === 7 && !countdownStarted) {
-    startCountdown();
-    countdownStarted = true;
-  }
+  // Le countdown ne se déclenche plus automatiquement sur step 7
+  // Il sera géré après validation du paiement
 }
 
 // ========================================
@@ -933,34 +808,8 @@ window.selectCopy = function(val) {
 window.toggleUpsell = function(key) {
   formData.upsells[key] = !formData.upsells[key];
   typeConsole('OPTION UPDATED');
-  
-  // Mise à jour visuelle directe sans re-render complet
-  var card = document.getElementById('ups-' + key);
-  if (card) {
-    var isSelected = formData.upsells[key];
-    card.classList.toggle('selected', isSelected);
-    var checkEl = card.querySelector('.upsell-check');
-    if (checkEl) checkEl.textContent = isSelected ? '✓' : '';
-  }
-  
-  // Mettre à jour le total affiché
-  updateTotalDisplay();
-  
-  // Re-render seulement si l'upsell a des options additionnelles (hasQty, hasLangs)
-  var upsell = (UPSELLS[formData.selectedPack] || []).find(u => u.id === key);
-  if (upsell && (upsell.hasQty || upsell.hasLangs)) {
-    draw(true);
-  }
+  draw(true);
 };
-
-// Fonction pour mettre à jour l'affichage du total sans re-render
-function updateTotalDisplay() {
-  var totals = calculateTotals();
-  var totalEl = document.querySelector('.total-price');
-  if (totalEl) totalEl.textContent = totals.price + '€ HT';
-  var delayEl = document.querySelector('.total-delay');
-  if (delayEl) delayEl.textContent = totals.delay;
-}
 
 window.toggleSuccessUpsell = function(key) {
   formData.upsellsSuccess[key] = !formData.upsellsSuccess[key];
@@ -979,15 +828,7 @@ window.toggleLang = function(lang) {
   var idx = formData.multiLangues.indexOf(lang);
   if (idx > -1) formData.multiLangues.splice(idx, 1);
   else formData.multiLangues.push(lang);
-  
-  // Mise à jour visuelle directe sans re-render complet
-  var btn = document.querySelector('[onclick*="toggleLang(\'' + lang + '\')"]');
-  if (btn) {
-    btn.classList.toggle('selected', formData.multiLangues.includes(lang));
-  }
-  
-  // Mettre à jour le total
-  updateTotalDisplay();
+  draw(true);
 };
 
 window.toggleCare = function() {
@@ -1041,7 +882,7 @@ window.nextStep = function() {
 };
 
 window.prevStep = function() {
-  if (currentStep > 1 && currentStep <= 7) {
+  if (currentStep > 1 && currentStep < 7) {
     currentStep--;
     typeConsole('ROLLBACK TO STEP ' + currentStep);
     draw();
@@ -1087,34 +928,16 @@ window.openModal = function(plan) {
     formData.selectedPack = plan || '';
     
     // Force clear any stale styles/transforms
-    // Stopper Lenis IMMÉDIATEMENT pour éviter le décalage
-    if (window.lenis) {
-      try {
-        if (typeof window.lenis.stop === 'function') {
-          window.lenis.stop();
-          console.log('🔥 Lenis stopped IMMEDIATELY');
-        }
-      } catch (e) {
-        console.warn('🔥 Lenis stop error:', e);
-      }
-    }
-    
-    // Retirer TOUS les transforms qui peuvent décaler la modal
-    document.body.style.transform = 'none';
-    document.body.style.filter = 'none';
-    document.body.style.skewY = 'none';
+    document.body.style.transform = '';
+    document.body.style.filter = '';
+    document.body.style.skewY = '';
     document.body.style.pointerEvents = '';
-    document.documentElement.style.transform = 'none';
     
-    // LOCK SCROLL SANS DÉCALER LE CONTENU
-    // Ne PAS utiliser position:fixed + top négatif car ça décale TOUT (y compris la modal)
-    // Utiliser overflow:hidden pour bloquer le scroll sans décalage
-    const scrollY = window.scrollY || window.pageYOffset;
-    document.body.dataset.scrollPosition = scrollY;
-    document.body.style.overflow = 'hidden';
-    document.body.style.height = '100vh';
-    document.documentElement.style.overflow = 'hidden';
-    document.body.classList.add('modal-open');
+    // Stop Lenis smooth scroll
+    if (window.lenis) {
+      window.lenis.stop();
+      console.log('🔥 Lenis stopped');
+    }
     
     // Stop GSAP animations
     if (typeof gsap !== 'undefined') {
@@ -1122,7 +945,7 @@ window.openModal = function(plan) {
     }
     
     // Cacher WhatsApp widget si présent
-    var whatsappWidget = document.querySelector('.whatsapp-float, .whatsapp-widget, #whatsapp-widget, [class*="whatsapp"], [id*="whatsapp"]');
+    var whatsappWidget = document.querySelector('.whatsapp-widget, #whatsapp-widget, [class*="whatsapp"], [id*="whatsapp"]');
     if (whatsappWidget) {
       whatsappWidget.style.display = 'none';
       whatsappWidget.dataset.hiddenByModal = 'true';
@@ -1159,30 +982,13 @@ window.closeModal = function() {
     m.classList.add('hidden');
     console.log('🔥 Modal hidden');
   }
-  
-  // RESTAURER SCROLL (overflow:hidden au lieu de position:fixed)
-  const scrollY = document.body.dataset.scrollPosition || 0;
-  document.body.style.overflow = '';
-  document.body.style.height = '';
-  document.documentElement.style.overflow = '';
-  document.body.classList.remove('modal-open');
-  // Le scroll est déjà à la bonne position (pas besoin de scrollTo car on n'a pas décalé le body)
-  
   unlockScroll();
   
-  // Restart Lenis smooth scroll with timeout to avoid race
-  setTimeout(() => {
-    if (window.lenis) {
-      try {
-        if (typeof window.lenis.start === 'function') {
-          window.lenis.start();
-          console.log('🔥 Lenis restarted');
-        }
-      } catch (e) {
-        console.warn('🔥 Lenis start error:', e);
-      }
-    }
-  }, 200);
+  // Restart Lenis smooth scroll
+  if (window.lenis) {
+    window.lenis.start();
+    console.log('🔥 Lenis restarted');
+  }
   
   // Ré-afficher WhatsApp widget si présent
   var whatsappWidget = document.querySelector('[data-hidden-by-modal="true"]');
@@ -1208,12 +1014,13 @@ window.submitForm = function() {
   };
   
   var formDataObj = new FormData();
-  formDataObj.append("access_key", WEB3FORMS_ACCESS_KEY);
-  formDataObj.append("subject", "🚀 NOUVEAU LEAD - " + (dataToSend.brandName || "Projet Inconnu"));
-  formDataObj.append("from_name", dataToSend.brandName || "Projet Inconnu");
-  formDataObj.append("redirect", "https://tomorrow.online");
+  formDataObj.append("_captcha", "false");
+  formDataObj.append("_template", "table");
+  formDataObj.append("_autoresponse", "Merci pour votre confiance. Votre brief a bien été reçu. Un membre de l'équipe vous appellera demain entre 09H00 et 10H00 pour validation.");
+  formDataObj.append("_subject", "🚀 NOUVEAU LEAD - " + (dataToSend.brandName || "Projet Inconnu"));
+  formDataObj.append("_cc", "mf.phan@bigneurons.com,t.martella@bigneurons.com,a.escare@bigneurons.com");
   
-  // Aplatir les données
+  // Aplatir les données (PAS de JSON.stringify pour FormSubmit)
   formDataObj.append("brandName", dataToSend.brandName || '');
   formDataObj.append("email", dataToSend.email || '');
   formDataObj.append("phone", dataToSend.phone || '');
@@ -1310,34 +1117,33 @@ window.submitForm = function() {
 };
 
 function sendFormData(formDataObj, btn) {
-  console.log('📧 Sending form data to Web3Forms...');
-  console.log('📧 API:', FORM_ACTION_URL);
+  console.log('📧 Sending form data to FormSubmit.co...');
+  console.log('📧 Email destination:', FORM_ACTION_URL);
   console.log('📧 FormData keys:', Array.from(formDataObj.keys()));
   
-  fetch(FORM_ACTION_URL, { 
-    method: 'POST', 
-    body: formDataObj,
-    headers: {
-      'Accept': 'application/json'
-    }
-  })
-    .then(response => response.json())
-    .then(data => {
-      console.log('📧 Response:', data);
+  fetch(FORM_ACTION_URL, { method: 'POST', body: formDataObj })
+    .then(response => {
+      console.log('📧 Response status:', response.status);
+      console.log('📧 Response ok:', response.ok);
+      console.log('📧 Response headers:', response.headers);
       
-      if (data.success) {
-        console.log('✅ Form submitted successfully to Web3Forms');
-        showSuccessScreen();
-      } else {
-        console.error('❌ Form submission failed:', data.message);
+      return response.text().then(text => {
+        console.log('📧 Response body:', text);
         
-        // FALLBACK: Créer un mailto avec les données
-        const mailto = createMailtoFallback();
-        window.location.href = mailto;
-        
-        alert("Le formulaire n'a pas pu être envoyé automatiquement. Votre client mail va s'ouvrir.");
-        if (btn) btn.innerHTML = "Bloquer mon slot 🔒";
-      }
+        if (response.ok || response.status === 200) {
+          console.log('✅ Form submitted successfully to FormSubmit');
+          showSuccessScreen();
+        } else {
+          console.error('❌ Form submission failed:', response.status, response.statusText);
+          
+          // FALLBACK: Créer un mailto avec les données
+          const mailto = createMailtoFallback();
+          window.location.href = mailto;
+          
+          alert("Le formulaire n'a pas pu être envoyé automatiquement. Votre client mail va s'ouvrir.");
+          if (btn) btn.innerHTML = "Bloquer mon slot 🔒";
+        }
+      });
     })
     .catch(error => {
       console.error('❌ Fetch error:', error);
@@ -1518,37 +1324,6 @@ function startCountdown() {
     }
   }, 1000);
 }
-
-// ========================================
-// PAYMENT FUNCTIONS
-// ========================================
-
-window.goToPaymentStep = function() {
-  // Validation de l'étape 6
-  if (!formData.email || !formData.phone) {
-    alert('Veuillez remplir votre email et téléphone.');
-    return;
-  }
-  
-  // Passer à l'étape 7 (paiement)
-  currentStep = 7;
-  typeConsole('PAYMENT STEP INITIALIZED');
-  draw();
-  
-  // Initialiser Stripe Elements après le rendu
-  setTimeout(() => {
-    console.log('🔍 Checking for createPaymentStep...');
-    console.log('typeof window.createPaymentStep:', typeof window.createPaymentStep);
-    console.log('typeof window.applyPromoCode:', typeof window.applyPromoCode);
-    
-    if (typeof window.createPaymentStep === 'function') {
-      console.log('✅ createPaymentStep found, calling it...');
-      window.createPaymentStep();
-    } else {
-      console.error('❌ createPaymentStep NOT FOUND - stripe-payment.js not loaded?');
-    }
-  }, 500);
-};
 
 // ========================================
 // INIT
