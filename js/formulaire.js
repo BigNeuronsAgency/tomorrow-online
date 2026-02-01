@@ -710,12 +710,12 @@ function getStepContent() {
             <div class="billing-info">
               <div class="form-group">
                 <label class="form-label-small">Nom complet *</label>
-                <input type="text" id="billing-name" value="${formData.brandName || ''}" 
+                <input type="text" id="billing-name" value="" 
                   class="form-input" placeholder="Jean Dupont" required>
               </div>
               <div class="form-group">
                 <label class="form-label-small">Société (optionnel)</label>
-                <input type="text" id="billing-company" value="${formData.company || ''}" 
+                <input type="text" id="billing-company" value="${formData.brandName || ''}" 
                   class="form-input" placeholder="Nom de votre entreprise">
               </div>
             </div>
@@ -1537,8 +1537,15 @@ window.goToPaymentStep = function() {
   
   // Initialiser Stripe Elements après le rendu
   setTimeout(() => {
+    console.log('🔍 Checking for createPaymentStep...');
+    console.log('typeof window.createPaymentStep:', typeof window.createPaymentStep);
+    console.log('typeof window.applyPromoCode:', typeof window.applyPromoCode);
+    
     if (typeof window.createPaymentStep === 'function') {
+      console.log('✅ createPaymentStep found, calling it...');
       window.createPaymentStep();
+    } else {
+      console.error('❌ createPaymentStep NOT FOUND - stripe-payment.js not loaded?');
     }
   }, 500);
 };
