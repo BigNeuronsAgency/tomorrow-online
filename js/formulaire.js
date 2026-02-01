@@ -854,9 +854,14 @@ function draw(preserveScroll) {
     </div>
   `;
   
+  // Restaurer le scroll après le rendu
   if (preserveScroll && scrollPos > 0) {
-    var scrollContainer = container.querySelector('.modal-body');
-    if (scrollContainer) scrollContainer.scrollTop = scrollPos;
+    requestAnimationFrame(() => {
+      var scrollContainer = container.querySelector('.modal-body');
+      if (scrollContainer) {
+        scrollContainer.scrollTop = scrollPos;
+      }
+    });
   }
   
   var slotEl = document.getElementById('consoleSlotId');
