@@ -60,10 +60,29 @@ async function createPaymentIntentForElements(total) {
   try {
     const careEnabled = document.getElementById('care-checkbox')?.checked || false;
     
+    // Récupérer les noms des upsells sélectionnés
+    const upsellsDetails = [];
+    const packUpsells = UPSELLS[formData.selectedPack] || [];
+    packUpsells.forEach(u => {
+      if (formData.upsells[u.id]) {
+        upsellsDetails.push(u.name);
+      }
+    });
+    
+    // Calculer le total correct avec calculateTotals()
+    const totals = calculateTotals();
+    let totalAmount = totals.price;
+    
+    // Ajouter Care si coché (premier mois)
+    if (careEnabled) {
+      totalAmount += 39;
+    }
+    
     console.log('📤 Envoi requête PaymentIntent:', {
       pack: formData.selectedPack,
-      total: total,
-      care: careEnabled
+      totalAmount: totalAmount,
+      upsellsDetails: upsellsDetails,
+      careEnabled: careEnabled
     });
     
     const response = await fetch(`${STRIPE_WORKER_URL}/create-payment-intent`, {
@@ -71,7 +90,9 @@ async function createPaymentIntentForElements(total) {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         pack: formData.selectedPack || 'STARTER',
-        upsells: formData.upsells || {},
+        totalAmount: totalAmount,
+        upsellsDetails: upsellsDetails,
+        careEnabled: careEnabled,
         email: formData.email || '',
         name: formData.brandName || '',
         briefData: {
