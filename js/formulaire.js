@@ -908,8 +908,34 @@ window.selectCopy = function(val) {
 window.toggleUpsell = function(key) {
   formData.upsells[key] = !formData.upsells[key];
   typeConsole('OPTION UPDATED');
-  draw(true);
+  
+  // Mise à jour visuelle directe sans re-render complet
+  var card = document.getElementById('ups-' + key);
+  if (card) {
+    var isSelected = formData.upsells[key];
+    card.classList.toggle('selected', isSelected);
+    var checkEl = card.querySelector('.upsell-check');
+    if (checkEl) checkEl.textContent = isSelected ? '✓' : '';
+  }
+  
+  // Mettre à jour le total affiché
+  updateTotalDisplay();
+  
+  // Re-render seulement si l'upsell a des options additionnelles (hasQty, hasLangs)
+  var upsell = (UPSELLS[formData.selectedPack] || []).find(u => u.id === key);
+  if (upsell && (upsell.hasQty || upsell.hasLangs)) {
+    draw(true);
+  }
 };
+
+// Fonction pour mettre à jour l'affichage du total sans re-render
+function updateTotalDisplay() {
+  var totals = calculateTotals();
+  var totalEl = document.querySelector('.total-price');
+  if (totalEl) totalEl.textContent = totals.price + '€ HT';
+  var delayEl = document.querySelector('.total-delay');
+  if (delayEl) delayEl.textContent = totals.delay;
+}
 
 window.toggleSuccessUpsell = function(key) {
   formData.upsellsSuccess[key] = !formData.upsellsSuccess[key];
@@ -928,7 +954,15 @@ window.toggleLang = function(lang) {
   var idx = formData.multiLangues.indexOf(lang);
   if (idx > -1) formData.multiLangues.splice(idx, 1);
   else formData.multiLangues.push(lang);
-  draw(true);
+  
+  // Mise à jour visuelle directe sans re-render complet
+  var btn = document.querySelector('[onclick*="toggleLang(\'' + lang + '\')"]');
+  if (btn) {
+    btn.classList.toggle('selected', formData.multiLangues.includes(lang));
+  }
+  
+  // Mettre à jour le total
+  updateTotalDisplay();
 };
 
 window.toggleCare = function() {

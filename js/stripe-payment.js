@@ -157,47 +157,18 @@ async function submitPayment() {
   loader.classList.remove('hidden');
 
   try {
-    // 1. Créer le PaymentIntent via le Worker
-    const total = calculateTotal();
     const careEnabled = document.getElementById('care-checkbox')?.checked || false;
-    
-    const response = await fetch(`${STRIPE_WORKER_URL}/create-payment-intent`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        pack: formData.selectedPack,
-        upsells: formData.upsells,
-        email: formData.email,
-        name: formData.brandName,
-        briefData: {
-          brandName: formData.brandName,
-          pitch: formData.pitch,
-          archetype: formData.archetype
-        }
-      })
-    });
 
-    if (!response.ok) {
-      throw new Error('Erreur lors de la création du paiement');
-    }
-
-    const { clientSecret, paymentIntentId: piId } = await response.json();
-    paymentIntentId = piId;
-
-    console.log('✅ PaymentIntent créé:', paymentIntentId);
-
-    // 2. Confirmer le paiement avec Stripe Elements
-    const { error } = await stripe.confirmPayment({
+    // 1. Confirmer le paiement avec Stripe Elements
+    const { error, paymentIntent } = await stripe.confirmPayment({
       elements,
       confirmParams: {
-        return_url: window.location.href, // Pas de redirect, on gère tout côté client
         receipt_email: formData.email
       },
       redirect: 'if_required'
     });
 
     if (error) {
-      // Erreur de paiement
       console.error('❌ Erreur paiement:', error);
       showError(error.message);
       submitButton.disabled = false;
@@ -205,18 +176,27 @@ async function submitPayment() {
       return false;
     }
 
-    // 3. Paiement autorisé (pre-auth) !
-    console.log('✅ Paiement pré-autorisé !');
-    
-    // 4. Si Care activé, créer la subscription
-    if (careEnabled) {
-      await createCareSubscription();
+    console.log('✅ Paiement pré-autorisé !', paymentIntent);
+
+    // 2. Si Care activé, créer la subscription avec le même PaymentMethod
+    if (careEnabled && paymentIntent && paymentIntent.payment_method) {
+      console.log('🔄 Création abonnement Care...');
+      try {
+        const subscriptionResult = await createCareSubscription(paymentIntent.payment_method);
+        if (subscriptionResult.success) {
+          console.log('✅ Abonnement Care créé:', subscriptionResult.subscriptionId);
+        } else {
+          console.warn('⚠️ Abonnement Care non créé:', subscriptionResult.error);
+        }
+      } catch (subError) {
+        console.warn('⚠️ Erreur création Care (non bloquant):', subError);
+      }
     }
 
-    // 5. Envoyer le brief par email (Web3Forms)
+    // 3. Envoyer le brief par email (Web3Forms)
     await sendBriefEmail();
 
-    // 6. Afficher l'écran de succès
+    // 4. Afficher l'écran de succès
     showSuccessScreen();
 
     return true;
@@ -231,9 +211,29 @@ async function submitPayment() {
 }
 
 // Créer la subscription Care si activée
-async function createCareSubscription() {
-  // TODO: Implémenter si besoin
-  console.log('🔄 Care subscription à implémenter');
+async function createCareSubscription(paymentMethodId) {
+  try {
+    const response = await fetch(`${STRIPE_WORKER_URL}/create-subscription`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        email: formData.email || '',
+        name: formData.brandName || '',
+        paymentMethodId: paymentMethodId
+      })
+    });
+
+    const result = await response.json();
+    
+    if (!response.ok) {
+      throw new Error(result.error || 'Erreur création abonnement');
+    }
+    
+    return result;
+  } catch (error) {
+    console.error('Erreur Care subscription:', error);
+    return { success: false, error: error.message };
+  }
 }
 
 // Envoyer le brief par email
