@@ -20,6 +20,7 @@
   grid-template-columns: 1fr 1.5fr;
   gap: 40px;
   margin-top: 40px;
+  padding: 0 20px;
 }
 
 /* Récapitulatif */
@@ -119,6 +120,100 @@
   margin-bottom: 24px;
   text-transform: uppercase;
   letter-spacing: 0.05em;
+}
+
+/* Billing info */
+.billing-info {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.billing-info .form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.billing-info .form-label-small,
+.promo-wrapper .form-label-small {
+  font-size: 12px;
+  font-weight: 600;
+  color: #000000;
+  margin-bottom: 8px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.billing-info .form-input,
+.promo-input {
+  background: #FFFFFF;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  color: #000000;
+  padding: 12px 16px;
+  border-radius: 8px;
+  font-size: 15px;
+  width: 100%;
+  transition: all 0.2s ease;
+}
+
+.billing-info .form-input::placeholder,
+.promo-input::placeholder {
+  color: rgba(0, 0, 0, 0.4);
+}
+
+.billing-info .form-input:focus,
+.promo-input:focus {
+  outline: none;
+  border-color: #FF5500;
+  box-shadow: 0 0 0 3px rgba(255, 85, 0, 0.1);
+}
+
+/* Code promo */
+.promo-wrapper {
+  margin-bottom: 24px;
+}
+
+.promo-input-wrapper {
+  display: flex;
+  gap: 12px;
+}
+
+.promo-input {
+  flex: 1;
+  text-transform: uppercase;
+}
+
+.btn-apply-promo {
+  background: #000000;
+  border: none;
+  color: #FFFFFF;
+  padding: 12px 20px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.btn-apply-promo:hover {
+  background: #FF5500;
+}
+
+.promo-message {
+  font-size: 13px;
+  margin-top: 8px;
+  min-height: 1.2em;
+}
+
+.promo-success {
+  color: #22C55E;
+}
+
+.promo-error {
+  color: #EF4444;
 }
 
 /* Care checkbox */

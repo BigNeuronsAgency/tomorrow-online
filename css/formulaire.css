@@ -134,8 +134,10 @@
   overflow-x: hidden;
 }
 
-/* Step 7 : pas de scroll */
+/* Step 7 : fond noir obligatoire */
 .step-7 {
+  background: var(--void) !important;
+  color: var(--white) !important;
   overflow-y: hidden;
 }
 
