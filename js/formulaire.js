@@ -707,7 +707,7 @@ function getStepContent() {
             <!-- Care optionnel -->
             <div class="care-checkbox-wrapper">
               <label class="care-checkbox-label">
-                <input type="checkbox" id="care-checkbox" class="care-checkbox-input">
+                <input type="checkbox" id="care-checkbox" class="care-checkbox-input" ${formData.care ? 'checked' : ''}>
                 <span class="care-checkbox-text">
                   <strong>Tomorrow Care</strong> - 39€/mois
                   <br>

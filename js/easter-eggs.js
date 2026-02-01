@@ -667,6 +667,13 @@ function resetIdleTimer() {
     idleOverlay = null;
   }
   
+  // NE PAS activer le timer idle sur l'étape de paiement (step 7)
+  const isPaymentStep = document.querySelector('.step-7');
+  if (isPaymentStep) {
+    console.log('⏸️ Idle timer désactivé sur l\'étape de paiement');
+    return;
+  }
+  
   idleTimer = setTimeout(() => {
     idleOverlay = document.createElement('div');
     idleOverlay.className = 'idle-overlay';

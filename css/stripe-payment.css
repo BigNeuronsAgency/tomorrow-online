@@ -2,11 +2,16 @@
    STRIPE PAYMENT STEP
    ======================================== */
 
+.step-7 {
+  background: #000000 !important;
+}
+
 .payment-container {
   display: grid;
   grid-template-columns: 1fr 1.5fr;
   gap: 40px;
   margin-top: 40px;
+  background: #000000;
 }
 
 /* Récapitulatif */
@@ -185,11 +190,21 @@
   align-items: center;
   justify-content: center;
   gap: 8px;
+  background: #FF5500 !important;
+  color: #FFFFFF !important;
+  border: none;
+}
+
+.btn-submit-payment:hover {
+  background: #FF6622 !important;
+  color: #FFFFFF !important;
+  transform: translateY(-2px);
 }
 
 .btn-submit-payment:disabled {
   opacity: 0.5;
   cursor: not-allowed;
+  background: #FF5500 !important;
 }
 
 .payment-loader {

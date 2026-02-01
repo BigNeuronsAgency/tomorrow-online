@@ -27,29 +27,78 @@ function createPaymentStep() {
     return;
   }
 
+  console.log('🔄 Création du Payment Element...');
+
   // Calculer le total
   const total = calculateTotal();
   
-  // Créer les Stripe Elements
-  const appearance = {
-    theme: 'night',
-    variables: {
-      colorPrimary: '#FF5500',
-      colorBackground: '#000000',
-      colorText: '#FFFFFF',
-      colorDanger: '#FF3333',
-      fontFamily: 'Space Grotesk, sans-serif',
-      borderRadius: '8px'
-    }
-  };
+  // Créer le PaymentIntent d'abord
+  createPaymentIntentForElements(total);
+}
 
-  elements = stripe.elements({ appearance });
-  
-  // Créer le Payment Element (inclut Apple Pay / Google Pay)
-  const paymentElement = elements.create('payment');
-  paymentElement.mount('#payment-element');
-  
-  console.log('✅ Stripe Elements créé');
+// Créer le PaymentIntent et initialiser Elements
+async function createPaymentIntentForElements(total) {
+  try {
+    const careEnabled = document.getElementById('care-checkbox')?.checked || false;
+    
+    console.log('📤 Envoi requête PaymentIntent:', {
+      pack: formData.selectedPack,
+      total: total,
+      care: careEnabled
+    });
+    
+    const response = await fetch(`${STRIPE_WORKER_URL}/create-payment-intent`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        pack: formData.selectedPack || 'STARTER',
+        upsells: formData.upsells || {},
+        email: formData.email || '',
+        name: formData.brandName || '',
+        briefData: {
+          brandName: formData.brandName || '',
+          pitch: formData.pitch || '',
+          archetype: formData.archetype || ''
+        }
+      })
+    });
+
+    if (!response.ok) {
+      const errorText = await response.text();
+      console.error('❌ Erreur Worker:', errorText);
+      throw new Error(`Worker error: ${response.status}`);
+    }
+
+    const { clientSecret, paymentIntentId: piId } = await response.json();
+    paymentIntentId = piId;
+
+    console.log('✅ PaymentIntent créé:', paymentIntentId);
+
+    // Créer les Stripe Elements avec le clientSecret
+    const appearance = {
+      theme: 'night',
+      variables: {
+        colorPrimary: '#FF5500',
+        colorBackground: '#000000',
+        colorText: '#FFFFFF',
+        colorDanger: '#FF3333',
+        fontFamily: 'Space Grotesk, sans-serif',
+        borderRadius: '8px'
+      }
+    };
+
+    elements = stripe.elements({ clientSecret, appearance });
+    
+    // Créer le Payment Element
+    const paymentElement = elements.create('payment');
+    paymentElement.mount('#payment-element');
+    
+    console.log('✅ Payment Element monté');
+    
+  } catch (error) {
+    console.error('❌ Erreur création PaymentIntent:', error);
+    showError('Erreur lors de l\'initialisation du paiement. Vérifiez la console.');
+  }
 }
 
 // Fonction pour soumettre le paiement
