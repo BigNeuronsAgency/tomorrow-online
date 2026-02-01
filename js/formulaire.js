@@ -652,6 +652,7 @@ function getStepContent() {
   if (currentStep === 7) {
     const total = calculateTotal();
     const pack = PACKS.find(p => p.id === formData.selectedPack);
+    const hasUpsells = formData.upsells && Object.keys(formData.upsells).length > 0;
     
     return `
       <div class="form-step step-7">
@@ -670,15 +671,18 @@ function getStepContent() {
               <span class="font-mono">${pack.price}€ HT</span>
             </div>
             
-            ${Object.keys(formData.upsells).length > 0 ? `
+            ${hasUpsells ? `
               <div class="summary-divider"></div>
               <p class="summary-section-title">Options</p>
-              ${Object.entries(formData.upsells).map(([key, upsell]) => `
-                <div class="summary-line summary-line-small">
-                  <span>${upsell.name}</span>
-                  <span class="font-mono">${upsell.price}€</span>
-                </div>
-              `).join('')}
+              ${Object.entries(formData.upsells).map(([key, upsell]) => {
+                if (!upsell || !upsell.name) return '';
+                return `
+                  <div class="summary-line summary-line-small">
+                    <span>${upsell.name}</span>
+                    <span class="font-mono">${upsell.price}€</span>
+                  </div>
+                `;
+              }).join('')}
             ` : ''}
             
             <div class="summary-divider"></div>
