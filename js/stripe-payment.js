@@ -95,12 +95,12 @@ async function createPaymentIntentForElements(total) {
 
     // Créer les Stripe Elements avec le clientSecret
     const appearance = {
-      theme: 'night',
+      theme: 'stripe',
       variables: {
         colorPrimary: '#FF5500',
-        colorBackground: '#000000',
-        colorText: '#FFFFFF',
-        colorDanger: '#FF3333',
+        colorBackground: '#FFFFFF',
+        colorText: '#000000',
+        colorDanger: '#CC0000',
         fontFamily: 'Space Grotesk, sans-serif',
         borderRadius: '8px'
       }
