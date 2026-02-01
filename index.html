@@ -711,7 +711,7 @@
           <p class="footer-tagline font-mono">
             La première agence web "NO-WAIT" en France.<br>
             Designed for speed. Powered by intelligence.<br>
-            <span style="font-size: 11px; opacity: 0.6; cursor: pointer; user-select: none;" onclick="if(prompt('Code secret ?','')?.toUpperCase().includes('F*CK WIX')||prompt('Code secret ?','')?.toUpperCase().includes('FUCKWIX')){alert('🎉 Code valide ! Utilise le code promo dans le formulaire pour 5% de réduction.');}else if(event.target.dataset.clicked){return;}else{event.target.dataset.clicked='1';}">.</span>
+            <span id="footer-secret-trigger" style="font-size: 11px; opacity: 0.6; cursor: pointer; user-select: none;">.</span>
           </p>
         </div>
         
@@ -980,7 +980,7 @@
   
   <!-- Stripe.js SDK -->
   <script src="https://js.stripe.com/v3/"></script>
-  <script src="js/stripe-payment.js?v=20260201"></script>
+  <script src="js/stripe-payment.js?v=20260202c"></script>
   
   <!-- Initialize IMMEDIATELY after scripts load -->
   <script>
@@ -1071,7 +1071,80 @@
     window.toggleFaq = toggleFaq;
     window.openVideoModal = openVideoModal;
     window.closeVideoModal = closeVideoModal;
+    
+    // Footer secret easter egg
+    document.getElementById('footer-secret-trigger')?.addEventListener('click', function() {
+      const modal = document.getElementById('footer-secret-modal');
+      if (modal) {
+        modal.classList.add('active');
+        // Confetti explosion
+        for (let i = 0; i < 50; i++) {
+          setTimeout(() => {
+            const confetti = document.createElement('div');
+            confetti.style.cssText = `
+              position: fixed;
+              left: ${Math.random() * 100}vw;
+              top: ${Math.random() * 100}vh;
+              font-size: ${20 + Math.random() * 30}px;
+              pointer-events: none;
+              z-index: 10001;
+              animation: confetti-explode 1s ease-out forwards;
+            `;
+            confetti.textContent = ['🔥', '🎉', '💀', '⚡', '🤘', '❌'][Math.floor(Math.random() * 6)];
+            document.body.appendChild(confetti);
+            setTimeout(() => confetti.remove(), 1000);
+          }, i * 30);
+        }
+      }
+    });
+    
+    document.getElementById('footer-secret-close')?.addEventListener('click', function() {
+      document.getElementById('footer-secret-modal')?.classList.remove('active');
+    });
+    
+    document.getElementById('footer-secret-modal')?.addEventListener('click', function(e) {
+      if (e.target === this) {
+        this.classList.remove('active');
+      }
+    });
   </script>
+  
+  <!-- Footer Secret Modal -->
+  <div id="footer-secret-modal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); z-index: 10000; justify-content: center; align-items: center; backdrop-filter: blur(10px);">
+    <div style="background: linear-gradient(135deg, #0A0A0A 0%, #1A1A1A 100%); padding: 60px 40px; border-radius: 20px; border: 3px solid #FF5500; max-width: 500px; width: 90%; text-align: center; box-shadow: 0 0 100px rgba(255, 85, 0, 0.5), inset 0 0 50px rgba(255, 85, 0, 0.1); position: relative;">
+      <h2 style="color: #FFFFFF; font-family: 'Syne', sans-serif; font-size: 32px; font-weight: 800; margin-bottom: 20px; text-transform: uppercase; letter-spacing: 2px;">On adore les rebelles 🤘</h2>
+      <p style="color: #CCCCCC; font-size: 16px; margin-bottom: 30px; line-height: 1.6;">
+        Tu as osé cliquer là où il ne fallait pas.<br>
+        Tu mérites une récompense.
+      </p>
+      <div style="background: linear-gradient(135deg, #FF5500, #FF8844); padding: 20px 40px; border-radius: 15px; font-family: 'JetBrains Mono', monospace; font-size: 32px; font-weight: 700; color: #0A0A0A; margin: 30px 0; letter-spacing: 3px; box-shadow: 0 10px 40px rgba(255, 85, 0, 0.6); animation: pulse-glow 2s infinite;">F*CK WIX</div>
+      <div style="background: #FF5500; color: #0A0A0A; display: inline-block; padding: 10px 25px; border-radius: 50px; font-size: 24px; font-weight: 800; margin-bottom: 20px; box-shadow: 0 5px 20px rgba(255, 85, 0, 0.8);">-5%</div>
+      <p style="color: #CCCCCC; font-size: 16px; margin-bottom: 30px; line-height: 1.6;">
+        Entre ce code promo dans le formulaire de commande<br>
+        pour débloquer ta remise secrète.
+      </p>
+      <button id="footer-secret-close" style="background: #FF5500; color: #FFFFFF; border: none; padding: 15px 40px; border-radius: 50px; font-family: 'Syne', sans-serif; font-size: 16px; font-weight: 700; cursor: pointer; transition: all 0.3s; box-shadow: 0 5px 20px rgba(255, 85, 0, 0.5);">J'ai noté, merci 🔥</button>
+    </div>
+  </div>
+  
+  <style>
+    @keyframes confetti-explode {
+      0% { transform: scale(0) rotate(0deg); opacity: 1; }
+      100% { transform: scale(1.5) rotate(360deg); opacity: 0; }
+    }
+    @keyframes pulse-glow {
+      0%, 100% { box-shadow: 0 10px 40px rgba(255, 85, 0, 0.6); }
+      50% { box-shadow: 0 10px 60px rgba(255, 85, 0, 1); }
+    }
+    #footer-secret-modal.active {
+      display: flex !important;
+    }
+    #footer-secret-close:hover {
+      background: #FF8844;
+      transform: scale(1.05);
+      box-shadow: 0 8px 30px rgba(255, 85, 0, 0.8);
+    }
+  </style>
   
 </body>
 </html>
