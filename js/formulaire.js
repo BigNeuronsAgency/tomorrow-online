@@ -603,15 +603,6 @@ function getStepContent() {
                   ` : ''}
                 </div>
               </div>
-              
-              <div class="care-box">
-                <h3 class="care-title">Offre Care</h3>
-                <p class="care-desc">Hébergement, maintenance technique et 0.5j de dev/mois.</p>
-                <label class="care-toggle" onclick="window.toggleCare()">
-                  <span class="care-price font-mono">+39€/mois</span>
-                  <span class="care-switch ${formData.care ? 'active' : ''}"></span>
-                </label>
-              </div>
             </div>
           ` : '<div></div>'}
           
@@ -652,7 +643,18 @@ function getStepContent() {
   if (currentStep === 7) {
     const total = calculateTotal();
     const pack = PACKS.find(p => p.id === formData.selectedPack);
-    const hasUpsells = formData.upsells && Object.keys(formData.upsells).length > 0;
+    
+    // Récupérer les upsells sélectionnés avec leurs détails
+    const selectedUpsells = [];
+    const packUpsells = UPSELLS[formData.selectedPack] || [];
+    
+    packUpsells.forEach(upsell => {
+      if (formData.upsells[upsell.id]) {
+        selectedUpsells.push(upsell);
+      }
+    });
+    
+    const hasUpsells = selectedUpsells.length > 0;
     
     return `
       <div class="form-step step-7">
@@ -674,15 +676,12 @@ function getStepContent() {
             ${hasUpsells ? `
               <div class="summary-divider"></div>
               <p class="summary-section-title">Options</p>
-              ${Object.entries(formData.upsells).map(([key, upsell]) => {
-                if (!upsell || !upsell.name) return '';
-                return `
-                  <div class="summary-line summary-line-small">
-                    <span>${upsell.name}</span>
-                    <span class="font-mono">${upsell.price}€</span>
-                  </div>
-                `;
-              }).join('')}
+              ${selectedUpsells.map(upsell => `
+                <div class="summary-line summary-line-small">
+                  <span>${upsell.name}</span>
+                  <span class="font-mono">${upsell.price}€</span>
+                </div>
+              `).join('')}
             ` : ''}
             
             <div class="summary-divider"></div>

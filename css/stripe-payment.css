@@ -2,6 +2,15 @@
    STRIPE PAYMENT STEP
    ======================================== */
 
+/* Force fond noir pour tout le modal */
+.formulaire-modal {
+  background: #000000 !important;
+}
+
+.modal-content {
+  background: #000000 !important;
+}
+
 .step-7 {
   background: #000000 !important;
 }
