@@ -261,17 +261,33 @@ function showError(message) {
 
 // Calculer le total (fonction à adapter selon ton formulaire)
 function calculateTotal() {
+  // Utiliser la fonction calculateTotals() du formulaire si disponible
+  if (typeof window.calculateTotals === 'function') {
+    const totals = window.calculateTotals();
+    return totals.price;
+  }
+  
+  // Sinon calculer manuellement
   const pack = PACKS.find(p => p.id === formData.selectedPack);
   let total = pack ? pack.price : 0;
 
   // Ajouter les upsells
-  if (formData.upsells) {
-    Object.values(formData.upsells).forEach(upsell => {
-      if (upsell && upsell.price) {
-        total += upsell.price;
+  const upsellList = UPSELLS[formData.selectedPack] || [];
+  upsellList.forEach(u => {
+    if (formData.upsells[u.id]) {
+      if (u.hasQty) {
+        total += u.price * (formData.pagesSupQty || 1);
+      } else if (u.hasLangs) {
+        const langCount = formData.multiLangues ? formData.multiLangues.length : 0;
+        if (langCount > 0) {
+          total += u.price;
+          if (langCount > 1) total += (langCount - 1) * 20;
+        }
+      } else {
+        total += u.price;
       }
-    });
-  }
+    }
+  });
 
   // Ajouter Care si coché
   const careCheckbox = document.getElementById('care-checkbox');

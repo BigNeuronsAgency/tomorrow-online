@@ -2,13 +2,26 @@
    STRIPE PAYMENT STEP
    ======================================== */
 
-/* Force fond noir pour tout le modal */
-.formulaire-modal {
+/* Force fond noir pour TOUT le modal */
+#bookingModal {
   background: #000000 !important;
 }
 
-.modal-content {
+#bookingModal .modal-overlay {
   background: #000000 !important;
+}
+
+#bookingModal .modal-container {
+  background: #000000 !important;
+  max-width: 100% !important;
+  padding: 0 !important;
+}
+
+#bookingModal .modal-content {
+  background: #000000 !important;
+  max-width: 1400px !important;
+  margin: 0 auto !important;
+  padding: 40px !important;
 }
 
 .step-7 {

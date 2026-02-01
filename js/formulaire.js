@@ -141,6 +141,9 @@ function calculateTotals() {
   return { price: price, delay: delay };
 }
 
+// Export globalement pour stripe-payment.js
+window.calculateTotals = calculateTotals;
+
 function validateEmail(email) {
   return String(email).toLowerCase().match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/);
 }
@@ -641,7 +644,7 @@ function getStepContent() {
   
   // Step 7: Paiement (Confirmation)
   if (currentStep === 7) {
-    const total = calculateTotal();
+    const totals = calculateTotals();
     const pack = PACKS.find(p => p.id === formData.selectedPack);
     
     // Récupérer les upsells sélectionnés avec leurs détails
@@ -688,7 +691,7 @@ function getStepContent() {
             
             <div class="summary-line summary-line-total">
               <span>TOTAL HT</span>
-              <span class="font-mono">${total}€</span>
+              <span class="font-mono">${totals.price}€</span>
             </div>
             
             <div class="payment-reassurance">
