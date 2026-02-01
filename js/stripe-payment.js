@@ -7,6 +7,22 @@
 const STRIPE_PUBLISHABLE_KEY = 'pk_test_51Sw2QQHhyPxNNlpw0twD0qfP74lx2DfSoyY3Zw9Unkqx1zcTW8EaoSdpbWbMS8tSwICgJiZfDaMHlpgtYXv2HZWx00GtHoIERg';
 const STRIPE_WORKER_URL = 'https://tomorrow-stripe.t-martella.workers.dev';
 
+// Configuration Web3Forms
+const WEB3FORMS_ACCESS_KEY = 'f396e653-5562-4056-80e0-58e835d7e498';
+const FORM_ACTION_URL = 'https://api.web3forms.com/submit';
+const TEAM_EMAIL = 't.martella@bigneurons.com';
+
+// Codes promo valides (5% de réduction)
+const PROMO_CODES = {
+  'F*CK WIX': { discount: 5, type: 'percent' },
+  'FUCKWIX': { discount: 5, type: 'percent' },
+  'FUCK WIX': { discount: 5, type: 'percent' }
+};
+
+// État du code promo
+let appliedPromoCode = null;
+let promoDiscount = 0;
+
 // Initialiser Stripe
 let stripe = null;
 let elements = null;
@@ -33,6 +49,71 @@ if (document.readyState === 'loading') {
 // Réessayer après un délai si Stripe n'est pas encore chargé
 setTimeout(initStripe, 1000);
 
+// Fonction pour appliquer un code promo
+window.applyPromoCode = function() {
+  const codeInput = document.getElementById('promo-code');
+  const messageEl = document.getElementById('promo-message');
+  const code = codeInput.value.trim().toUpperCase();
+  
+  if (!code) {
+    messageEl.textContent = '';
+    messageEl.className = 'promo-message';
+    return;
+  }
+  
+  const promo = PROMO_CODES[code];
+  
+  if (promo) {
+    appliedPromoCode = code;
+    promoDiscount = promo.discount;
+    messageEl.textContent = `✓ Code appliqué : -${promo.discount}% sur le site`;
+    messageEl.className = 'promo-message promo-success';
+    codeInput.disabled = true;
+    
+    // Mettre à jour l'affichage du total
+    updatePaymentSummary();
+  } else {
+    appliedPromoCode = null;
+    promoDiscount = 0;
+    messageEl.textContent = '✗ Code invalide';
+    messageEl.className = 'promo-message promo-error';
+  }
+};
+
+// Mettre à jour le résumé du paiement avec la réduction
+function updatePaymentSummary() {
+  const totals = calculateTotals();
+  let finalPrice = totals.price;
+  
+  if (promoDiscount > 0) {
+    const discount = Math.round(finalPrice * promoDiscount / 100);
+    finalPrice = finalPrice - discount;
+  }
+  
+  // Mettre à jour les affichages
+  const totalEl = document.querySelector('.summary-line-total span:last-child');
+  if (totalEl) {
+    if (promoDiscount > 0) {
+      totalEl.innerHTML = `<span style="text-decoration: line-through; opacity: 0.5;">${totals.price}€</span> ${finalPrice}€ HT`;
+    } else {
+      totalEl.textContent = finalPrice + '€ HT';
+    }
+  }
+}
+
+// Calculer le montant final avec réduction
+function getFinalAmount() {
+  const totals = calculateTotals();
+  let finalPrice = totals.price;
+  
+  if (promoDiscount > 0) {
+    const discount = Math.round(finalPrice * promoDiscount / 100);
+    finalPrice = finalPrice - discount;
+  }
+  
+  return finalPrice;
+}
+
 // Fonction pour créer l'étape de paiement
 function createPaymentStep() {
   // Tenter d'initialiser Stripe si pas encore fait
@@ -48,11 +129,11 @@ function createPaymentStep() {
 
   console.log('🔄 Création du Payment Element...');
 
-  // Calculer le total
-  const total = calculateTotal();
+  // Calculer le total avec réduction promo si applicable
+  const finalAmount = getFinalAmount();
   
   // Créer le PaymentIntent d'abord
-  createPaymentIntentForElements(total);
+  createPaymentIntentForElements(finalAmount);
 }
 
 // Créer le PaymentIntent et initialiser Elements
@@ -69,9 +150,8 @@ async function createPaymentIntentForElements(total) {
       }
     });
     
-    // Calculer le total correct avec calculateTotals()
-    const totals = calculateTotals();
-    let totalAmount = totals.price;
+    // Utiliser le montant passé (déjà avec réduction promo)
+    let totalAmount = total;
     
     // Ajouter Care si coché (premier mois)
     if (careEnabled) {
@@ -82,7 +162,8 @@ async function createPaymentIntentForElements(total) {
       pack: formData.selectedPack,
       totalAmount: totalAmount,
       upsellsDetails: upsellsDetails,
-      careEnabled: careEnabled
+      careEnabled: careEnabled,
+      promoCode: appliedPromoCode
     });
     
     const response = await fetch(`${STRIPE_WORKER_URL}/create-payment-intent`, {
@@ -93,6 +174,7 @@ async function createPaymentIntentForElements(total) {
         totalAmount: totalAmount,
         upsellsDetails: upsellsDetails,
         careEnabled: careEnabled,
+        promoCode: appliedPromoCode,
         email: formData.email || '',
         name: formData.brandName || '',
         briefData: {
@@ -281,30 +363,47 @@ async function createCareSubscription(paymentMethodId) {
 // Envoyer le brief par email
 async function sendBriefEmail() {
   // 1. Email à l'équipe Tomorrow (brief détaillé)
+  // Web3Forms envoie toujours à l'email configuré dans le dashboard (t.martella@bigneurons.com)
+  // Le champ "email" ci-dessous est l'email de reply-to (le client)
   const briefData = {
     access_key: WEB3FORMS_ACCESS_KEY,
-    subject: `[Tomorrow.Online] Brief - ${formData.brandName}`,
-    from_name: formData.brandName,
-    email: formData.email,
-    message: formatBriefForEmail(),
-    payment_intent_id: paymentIntentId
+    subject: `[Tomorrow.Online] Nouveau Brief - ${formData.brandName || 'Client'}`,
+    from_name: formData.brandName || 'Tomorrow.Online',
+    replyto: formData.email || '',
+    message: formatBriefForEmail()
   };
 
-  await fetch(FORM_ACTION_URL, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(briefData)
-  });
-
-  console.log('✅ Brief envoyé à l\'équipe');
+  try {
+    const response = await fetch(FORM_ACTION_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(briefData)
+    });
+    
+    if (response.ok) {
+      console.log('✅ Brief envoyé à l\'équipe');
+    } else {
+      console.error('❌ Erreur envoi brief:', await response.text());
+    }
+  } catch (e) {
+    console.error('❌ Erreur envoi brief:', e);
+  }
 
   // 2. Email de confirmation au client
+  // Pour envoyer AU CLIENT, on utilise un autre access_key configuré pour ça
+  // Ou on utilise le même mais avec le bon format
   const clientEmailData = {
     access_key: WEB3FORMS_ACCESS_KEY,
     subject: 'Votre site en 24H - Slot bloqué',
     from_name: 'Tomorrow.Online',
-    email: formData.email,
+    email: TEAM_EMAIL,
+    replyto: TEAM_EMAIL,
+    // Envoyer au client via le champ "to" (nécessite Pro plan) ou via "cc"
     message: `
+EMAIL DE CONFIRMATION POUR: ${formData.email}
+
+---
+
 Bonjour et merci de votre brief sur www.tomorrow.online.
 
 Nous l'avons bien reçu et votre slot est bloqué.
@@ -317,13 +416,16 @@ L'équipe de Tomorrow.online
     `
   };
 
-  await fetch(FORM_ACTION_URL, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(clientEmailData)
-  });
-
-  console.log('✅ Email de confirmation envoyé au client');
+  try {
+    await fetch(FORM_ACTION_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(clientEmailData)
+    });
+    console.log('✅ Email de confirmation envoyé');
+  } catch (e) {
+    console.error('❌ Erreur envoi confirmation:', e);
+  }
 }
 
 // Formater le brief pour l'email

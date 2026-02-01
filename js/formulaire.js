@@ -704,20 +704,31 @@ function getStepContent() {
           
           <!-- Formulaire de paiement Stripe -->
           <div class="payment-form">
-            <h3 class="payment-form-title">Informations de paiement</h3>
+            <h3 class="payment-form-title">Informations de facturation</h3>
             
             <!-- Informations de facturation -->
             <div class="billing-info">
               <div class="form-group">
-                <label class="form-label-small">Nom complet <span class="required">*</span></label>
+                <label class="form-label-small">Nom complet *</label>
                 <input type="text" id="billing-name" value="${formData.brandName || ''}" 
                   class="form-input" placeholder="Jean Dupont" required>
               </div>
               <div class="form-group">
-                <label class="form-label-small">Société</label>
+                <label class="form-label-small">Société (optionnel)</label>
                 <input type="text" id="billing-company" value="${formData.company || ''}" 
-                  class="form-input" placeholder="Ma Société SARL">
+                  class="form-input" placeholder="Nom de votre entreprise">
               </div>
+            </div>
+            
+            <!-- Code promo -->
+            <div class="promo-wrapper">
+              <label class="form-label-small">Code promo</label>
+              <div class="promo-input-wrapper">
+                <input type="text" id="promo-code" class="form-input promo-input" 
+                  placeholder="Entrez votre code" maxlength="20">
+                <button type="button" onclick="window.applyPromoCode()" class="btn-apply-promo">Appliquer</button>
+              </div>
+              <div id="promo-message" class="promo-message"></div>
             </div>
             
             <!-- Care optionnel -->
@@ -743,11 +754,11 @@ function getStepContent() {
             <!-- Bouton de soumission -->
             <button onclick="window.submitPayment()" id="submit-payment-btn" class="btn btn-primary btn-submit-payment">
               <span id="payment-button-text">Sécuriser mon slot</span>
-              <span id="payment-loader" class="payment-loader hidden">⏳</span>
+              <span id="payment-loader" class="payment-loader hidden"></span>
             </button>
             
             <p class="payment-note font-mono">
-              Paiement sécurisé par Stripe. Vos données sont cryptées.
+              Paiement sécurisé par Stripe.
             </p>
           </div>
         </div>
