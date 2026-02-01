@@ -4,7 +4,7 @@
 
 // Global state
 var currentStep = 1;
-var totalSteps = 6;
+var totalSteps = 7; // Ajout de l'étape paiement
 var currentConsoleMessage = 'SYSTEM READY';
 var fileStore = [];
 var countdownTimer = null;
@@ -17,8 +17,8 @@ const BRAND_RED = '#FF3333';
 
 // Data constants
 var PACKS = [
-  { id: 'MAQUETTE', name: 'PACK MAQUETTE', price: 900, delay: 12, desc: 'Design Only // Pas de code' },
-  { id: 'STARTER', name: 'PACK STARTER', price: 980, delay: 24, desc: 'Landing Page // Vitrine' },
+  { id: 'MAQUETTE', name: 'PACK MAQUETTE', price: 750, delay: 12, desc: 'Design Only // Pas de code' },
+  { id: 'STARTER', name: 'PACK STARTER', price: 950, delay: 24, desc: 'Landing Page // Vitrine' },
   { id: 'BUSINESS', name: 'PACK BUSINESS', price: 2200, delay: 48, desc: 'Site Complet // Blog & SEO' }
 ];
 
@@ -606,9 +606,9 @@ function getStepContent() {
               
               <div class="care-box">
                 <h3 class="care-title">Offre Care</h3>
-                <p class="care-desc">Hébergement, mises à jour de sécurité et modifications mineures (1h/mois).</p>
+                <p class="care-desc">Hébergement, maintenance technique et 0.5j de dev/mois.</p>
                 <label class="care-toggle" onclick="window.toggleCare()">
-                  <span class="care-price font-mono">+90€/mois</span>
+                  <span class="care-price font-mono">+39€/mois</span>
                   <span class="care-switch ${formData.care ? 'active' : ''}"></span>
                 </label>
               </div>
@@ -631,14 +631,14 @@ function getStepContent() {
                   class="form-input" placeholder="06 00 00 00 00">
               </div>
               
-              <button onclick="window.submitForm()" id="submitBtn" class="btn btn-submit">
-                Bloquer mon slot 🔒
+              <button onclick="window.goToPaymentStep()" id="submitBtn" class="btn btn-submit">
+                Continuer vers le paiement →
               </button>
               
               <div class="submit-note">
-                <p class="submit-note-small font-mono">Aucun paiement requis maintenant.</p>
+                <p class="submit-note-small font-mono">Étape suivante : Sécurisation du slot</p>
                 <p class="submit-note-highlight font-mono">
-                  Nous analysons d'abord votre brief et vous paierez uniquement après validation, demain matin.
+                  Empreinte bancaire uniquement. Aucun débit avant livraison.
                 </p>
               </div>
             </div>
@@ -648,7 +648,94 @@ function getStepContent() {
     `;
   }
   
-  // Step 7 SUPPRIMÉ - On passe direct au success screen après submit
+  // Step 7: Paiement (Confirmation)
+  if (currentStep === 7) {
+    const total = calculateTotal();
+    const pack = PACKS.find(p => p.id === formData.selectedPack);
+    
+    return `
+      <div class="form-step step-7">
+        <div class="step-header">
+          <h2 class="step-title">CONFIRMATION</h2>
+          <p class="step-subtitle font-mono">Sécurisation de votre slot</p>
+        </div>
+        
+        <div class="payment-container">
+          <!-- Récapitulatif -->
+          <div class="payment-summary">
+            <h3 class="payment-summary-title">Récapitulatif</h3>
+            
+            <div class="summary-line">
+              <span>${pack.name}</span>
+              <span class="font-mono">${pack.price}€ HT</span>
+            </div>
+            
+            ${Object.keys(formData.upsells).length > 0 ? `
+              <div class="summary-divider"></div>
+              <p class="summary-section-title">Options</p>
+              ${Object.entries(formData.upsells).map(([key, upsell]) => `
+                <div class="summary-line summary-line-small">
+                  <span>${upsell.name}</span>
+                  <span class="font-mono">${upsell.price}€</span>
+                </div>
+              `).join('')}
+            ` : ''}
+            
+            <div class="summary-divider"></div>
+            
+            <div class="summary-line summary-line-total">
+              <span>TOTAL HT</span>
+              <span class="font-mono">${total}€</span>
+            </div>
+            
+            <div class="payment-reassurance">
+              <p class="reassurance-text">
+                <span class="reassurance-icon">🔒</span>
+                Aucun débit avant livraison du site. Empreinte bancaire uniquement.
+              </p>
+            </div>
+          </div>
+          
+          <!-- Formulaire de paiement Stripe -->
+          <div class="payment-form">
+            <h3 class="payment-form-title">Informations de paiement</h3>
+            
+            <!-- Care optionnel -->
+            <div class="care-checkbox-wrapper">
+              <label class="care-checkbox-label">
+                <input type="checkbox" id="care-checkbox" class="care-checkbox-input">
+                <span class="care-checkbox-text">
+                  <strong>Tomorrow Care</strong> - 39€/mois
+                  <br>
+                  <small>Hébergement, maintenance technique et 0.5j de dev/mois</small>
+                </span>
+              </label>
+            </div>
+            
+            <!-- Stripe Payment Element -->
+            <div id="payment-element" class="stripe-element">
+              <!-- Stripe Elements will be inserted here -->
+            </div>
+            
+            <!-- Message d'erreur -->
+            <div id="payment-error" class="payment-error hidden"></div>
+            
+            <!-- Bouton de soumission -->
+            <button onclick="window.submitPayment()" id="submit-payment-btn" class="btn btn-primary btn-submit-payment">
+              <span id="payment-button-text">Sécuriser mon slot</span>
+              <span id="payment-loader" class="payment-loader hidden">⏳</span>
+            </button>
+            
+            <p class="payment-note font-mono">
+              Paiement sécurisé par Stripe. Vos données sont cryptées.
+            </p>
+          </div>
+        </div>
+      </div>
+    `;
+  }
+  
+  // Step 8 (ancien step 7) - Success screen
 }
 
 function renderSuccessCard(u) {
@@ -884,7 +971,7 @@ window.nextStep = function() {
 };
 
 window.prevStep = function() {
-  if (currentStep > 1 && currentStep < 7) {
+  if (currentStep > 1 && currentStep <= 7) {
     currentStep--;
     typeConsole('ROLLBACK TO STEP ' + currentStep);
     draw();
@@ -1361,6 +1448,30 @@ function startCountdown() {
     }
   }, 1000);
 }
+
+// ========================================
+// PAYMENT FUNCTIONS
+// ========================================
+
+window.goToPaymentStep = function() {
+  // Validation de l'étape 6
+  if (!formData.email || !formData.phone) {
+    alert('Veuillez remplir votre email et téléphone.');
+    return;
+  }
+  
+  // Passer à l'étape 7 (paiement)
+  currentStep = 7;
+  typeConsole('PAYMENT STEP INITIALIZED');
+  draw();
+  
+  // Initialiser Stripe Elements après le rendu
+  setTimeout(() => {
+    if (typeof window.createPaymentStep === 'function') {
+      window.createPaymentStep();
+    }
+  }, 500);
+};
 
 // ========================================
 // INIT

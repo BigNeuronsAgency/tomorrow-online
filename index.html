@@ -19,6 +19,7 @@
   <link rel="stylesheet" href="css/design-system.css">
   <link rel="stylesheet" href="css/home.css">
   <link rel="stylesheet" href="css/formulaire.css">
+  <link rel="stylesheet" href="css/stripe-payment.css">
   <link rel="stylesheet" href="css/themes.css?v=1769805033">
   
   <!-- GSAP -->
@@ -216,7 +217,7 @@
           <div class="pricing-badge">Maquette</div>
           <div class="pricing-time">12H</div>
           <div class="pricing-price">
-            900€ <span class="price-ht">HT</span>
+            750€ <span class="price-ht">HT</span>
           </div>
           <div class="pricing-label">Design Only</div>
           <ul class="pricing-features">
@@ -236,7 +237,7 @@
           <div class="pricing-badge pricing-badge-light">Starter</div>
           <div class="pricing-time">24H</div>
           <div class="pricing-price">
-            <span class="price-strike">1500€</span> 980€ <span class="price-ht">HT</span>
+            <span class="price-strike">1500€</span> 950€ <span class="price-ht">HT</span>
             <span class="price-offer">Offre du mois</span>
           </div>
           <div class="pricing-label">Conversions instantanées</div>
@@ -975,6 +976,10 @@
   <script src="js/main.js"></script>
   <script src="js/formulaire.js"></script>
   <script src="js/impatient-kid.js"></script>
+  
+  <!-- Stripe.js SDK -->
+  <script src="https://js.stripe.com/v3/"></script>
+  <script src="js/stripe-payment.js"></script>
   
   <!-- Initialize IMMEDIATELY after scripts load -->
   <script>
