@@ -1,45 +1,47 @@
 /* ========================================
-   STRIPE PAYMENT STEP - FOND BLANC
+   STRIPE PAYMENT STEP - FOND NOIR
    ======================================== */
 
 .step-7 {
-  background: #FFFFFF !important;
-  color: #000000 !important;
+  background: #0A0A0A !important;
+  color: #FFFFFF !important;
+  padding: 40px !important;
+  overflow: hidden !important;
 }
 
 .step-7 .step-title {
-  color: #000000 !important;
+  color: #FFFFFF !important;
 }
 
 .step-7 .step-subtitle {
-  color: #666666 !important;
+  color: rgba(255, 255, 255, 0.7) !important;
 }
 
 .payment-container {
   display: grid;
-  grid-template-columns: 1fr 1.5fr;
+  grid-template-columns: 340px 1fr;
   gap: 40px;
-  margin-top: 40px;
-  padding: 0 20px;
+  max-height: calc(100vh - 250px);
+  overflow: hidden;
 }
 
 /* Récapitulatif */
 .payment-summary {
-  background: #F5F5F5;
-  border: 1px solid rgba(0, 0, 0, 0.1);
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 12px;
-  padding: 32px;
+  padding: 24px;
   height: fit-content;
-  position: sticky;
-  top: 20px;
+  max-height: calc(100vh - 300px);
+  overflow-y: auto;
 }
 
 .payment-summary-title {
   font-family: 'Syne', sans-serif;
-  font-size: 20px;
+  font-size: 16px;
   font-weight: 700;
-  color: #000000;
-  margin-bottom: 24px;
+  color: #FFFFFF;
+  margin-bottom: 20px;
   text-transform: uppercase;
   letter-spacing: 0.05em;
 }
@@ -48,51 +50,51 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 12px 0;
-  color: #000000;
-  font-size: 15px;
+  padding: 10px 0;
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 14px;
 }
 
 .summary-line-small {
-  font-size: 14px;
+  font-size: 13px;
   opacity: 0.7;
-  padding: 8px 0;
+  padding: 6px 0;
 }
 
 .summary-line-total {
   font-weight: 700;
-  font-size: 20px;
+  font-size: 18px;
   color: #FF5500;
-  padding-top: 16px;
+  padding-top: 12px;
 }
 
 .summary-divider {
   height: 1px;
-  background: rgba(0, 0, 0, 0.1);
-  margin: 16px 0;
+  background: rgba(255, 255, 255, 0.1);
+  margin: 12px 0;
 }
 
 .summary-section-title {
-  font-size: 13px;
+  font-size: 12px;
   text-transform: uppercase;
   letter-spacing: 0.1em;
-  color: rgba(0, 0, 0, 0.5);
-  margin-bottom: 8px;
-  margin-top: 16px;
+  color: rgba(255, 255, 255, 0.5);
+  margin-bottom: 6px;
+  margin-top: 12px;
 }
 
 .payment-reassurance {
-  margin-top: 24px;
-  padding: 16px;
-  background: rgba(255, 85, 0, 0.1);
+  margin-top: 16px;
+  padding: 12px;
+  background: rgba(255, 85, 0, 0.15);
   border: 1px solid rgba(255, 85, 0, 0.3);
   border-radius: 8px;
 }
 
 .reassurance-text {
-  font-size: 13px;
+  font-size: 12px;
   line-height: 1.5;
-  color: #000000;
+  color: rgba(255, 255, 255, 0.9);
   margin: 0;
   display: flex;
   align-items: flex-start;
@@ -106,18 +108,20 @@
 
 /* Formulaire de paiement */
 .payment-form {
-  background: #F5F5F5;
-  border: 1px solid rgba(0, 0, 0, 0.1);
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 12px;
-  padding: 32px;
+  padding: 28px;
+  max-height: calc(100vh - 300px);
+  overflow-y: auto;
 }
 
 .payment-form-title {
   font-family: 'Syne', sans-serif;
-  font-size: 20px;
+  font-size: 16px;
   font-weight: 700;
-  color: #000000;
-  margin-bottom: 24px;
+  color: #FFFFFF;
+  margin-bottom: 20px;
   text-transform: uppercase;
   letter-spacing: 0.05em;
 }
@@ -127,7 +131,7 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 16px;
-  margin-bottom: 24px;
+  margin-bottom: 20px;
 }
 
 .billing-info .form-group {
@@ -137,46 +141,46 @@
 
 .billing-info .form-label-small,
 .promo-wrapper .form-label-small {
-  font-size: 12px;
+  font-size: 11px;
   font-weight: 600;
-  color: #000000;
-  margin-bottom: 8px;
+  color: rgba(255, 255, 255, 0.8);
+  margin-bottom: 6px;
   text-transform: uppercase;
   letter-spacing: 0.05em;
 }
 
 .billing-info .form-input,
 .promo-input {
-  background: #FFFFFF;
-  border: 1px solid rgba(0, 0, 0, 0.2);
-  color: #000000;
-  padding: 12px 16px;
-  border-radius: 8px;
-  font-size: 15px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #FFFFFF;
+  padding: 12px 14px;
+  border-radius: 6px;
+  font-size: 14px;
   width: 100%;
   transition: all 0.2s ease;
 }
 
 .billing-info .form-input::placeholder,
 .promo-input::placeholder {
-  color: rgba(0, 0, 0, 0.4);
+  color: rgba(255, 255, 255, 0.4);
 }
 
 .billing-info .form-input:focus,
 .promo-input:focus {
   outline: none;
   border-color: #FF5500;
-  box-shadow: 0 0 0 3px rgba(255, 85, 0, 0.1);
+  background: rgba(255, 255, 255, 0.12);
 }
 
 /* Code promo */
 .promo-wrapper {
-  margin-bottom: 24px;
+  margin-bottom: 20px;
 }
 
 .promo-input-wrapper {
   display: flex;
-  gap: 12px;
+  gap: 10px;
 }
 
 .promo-input {
@@ -185,12 +189,12 @@
 }
 
 .btn-apply-promo {
-  background: #000000;
-  border: none;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
   color: #FFFFFF;
-  padding: 12px 20px;
-  border-radius: 8px;
-  font-size: 13px;
+  padding: 12px 16px;
+  border-radius: 6px;
+  font-size: 12px;
   font-weight: 600;
   text-transform: uppercase;
   cursor: pointer;
@@ -199,35 +203,36 @@
 }
 
 .btn-apply-promo:hover {
-  background: #FF5500;
+  background: rgba(255, 85, 0, 0.3);
+  border-color: #FF5500;
 }
 
 .promo-message {
-  font-size: 13px;
-  margin-top: 8px;
+  font-size: 12px;
+  margin-top: 6px;
   min-height: 1.2em;
 }
 
 .promo-success {
-  color: #22C55E;
+  color: #4ADE80;
 }
 
 .promo-error {
-  color: #EF4444;
+  color: #F87171;
 }
 
 /* Care checkbox */
 .care-checkbox-wrapper {
-  margin-bottom: 24px;
-  padding: 16px;
-  background: #FFFFFF;
-  border: 1px solid rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+  padding: 14px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.15);
   border-radius: 8px;
   transition: all 0.3s ease;
 }
 
 .care-checkbox-wrapper:has(.care-checkbox-input:checked) {
-  background: rgba(255, 85, 0, 0.1);
+  background: rgba(255, 85, 0, 0.15);
   border-color: rgba(255, 85, 0, 0.5);
 }
 
@@ -239,8 +244,8 @@
 }
 
 .care-checkbox-input {
-  width: 20px;
-  height: 20px;
+  width: 18px;
+  height: 18px;
   margin-top: 2px;
   flex-shrink: 0;
   cursor: pointer;
@@ -248,34 +253,40 @@
 }
 
 .care-checkbox-text {
-  color: #000000;
-  font-size: 15px;
+  color: #FFFFFF;
+  font-size: 14px;
   line-height: 1.5;
 }
 
-.care-checkbox-text small {
-  font-size: 13px;
-  opacity: 0.7;
+.care-checkbox-text strong {
+  color: #FF5500;
 }
 
-/* Stripe Element */
+.care-checkbox-text small {
+  font-size: 12px;
+  opacity: 0.7;
+  display: block;
+  margin-top: 4px;
+}
+
+/* Stripe Element - FOND BLANC pour que les textes Stripe soient visibles */
 .stripe-element {
-  margin-bottom: 24px;
-  padding: 16px;
+  margin-bottom: 20px;
+  padding: 14px;
   background: #FFFFFF;
-  border: 1px solid rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: 8px;
-  min-height: 120px;
+  min-height: 100px;
 }
 
 /* Message d'erreur */
 .payment-error {
-  background: rgba(255, 51, 51, 0.1);
-  border: 1px solid rgba(255, 51, 51, 0.5);
-  border-radius: 8px;
-  padding: 12px 16px;
-  color: #CC0000;
-  font-size: 14px;
+  background: rgba(248, 113, 113, 0.15);
+  border: 1px solid rgba(248, 113, 113, 0.5);
+  border-radius: 6px;
+  padding: 12px 14px;
+  color: #F87171;
+  font-size: 13px;
   margin-bottom: 16px;
 }
 
@@ -286,14 +297,16 @@
 /* Bouton de soumission */
 .btn-submit-payment {
   width: 100%;
-  padding: 18px 32px;
-  font-size: 16px;
+  padding: 16px 28px;
+  font-size: 14px;
   font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 8px;
-  background: #FF5500 !important;
+  background: linear-gradient(135deg, #FF5500, #FF7722) !important;
   color: #FFFFFF !important;
   border: none;
   border-radius: 8px;
@@ -302,15 +315,16 @@
 }
 
 .btn-submit-payment:hover {
-  background: #FF6622 !important;
-  color: #FFFFFF !important;
+  background: linear-gradient(135deg, #FF6622, #FF8833) !important;
   transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(255, 85, 0, 0.4);
 }
 
 .btn-submit-payment:disabled {
-  opacity: 0.5;
+  opacity: 0.6;
   cursor: not-allowed;
-  background: #FF5500 !important;
+  transform: none;
+  box-shadow: none;
 }
 
 .payment-loader {

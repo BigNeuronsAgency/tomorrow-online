@@ -116,8 +116,11 @@ function getFinalAmount() {
 
 // Fonction pour créer l'étape de paiement
 function createPaymentStep() {
+  console.log('🔄 createPaymentStep() appelé');
+  
   // Tenter d'initialiser Stripe si pas encore fait
   if (!stripe) {
+    console.log('⚠️ Stripe pas encore init, tentative...');
     initStripe();
   }
   
@@ -126,6 +129,8 @@ function createPaymentStep() {
     showError('Erreur: Stripe non disponible. Rafraîchissez la page.');
     return;
   }
+  
+  console.log('✅ Stripe disponible');
 
   console.log('🔄 Création du Payment Element...');
 
@@ -577,3 +582,4 @@ function showSuccessScreen() {
 // Export des fonctions
 window.createPaymentStep = createPaymentStep;
 window.submitPayment = submitPayment;
+window.applyPromoCode = applyPromoCode;
