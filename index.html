@@ -1043,29 +1043,30 @@
       
       try {
         var pack = (window.PACKS && window.formData) ? window.PACKS.find(function(p) { return p.id === window.formData.selectedPack; }) : null;
-        var total = pack ? pack.price : 950;
+        var totalHT = pack ? pack.price : 950;
         
         if (window.formData && window.formData.upsells && window.UPSELLS) {
           var packUpsells = window.UPSELLS[window.formData.selectedPack] || [];
           packUpsells.forEach(function(upsell) {
             if (window.formData.upsells[upsell.id]) {
-              total += upsell.price;
+              totalHT += upsell.price;
             }
           });
         }
         
         var discount = window.promoDiscount || 0;
-        var finalAmount = total * (1 - discount);
+        var totalHTApresRemise = totalHT * (1 - discount);
+        var totalTTC = Math.round(totalHTApresRemise * 1.2);
         
         var payload = {
           pack: (window.formData && window.formData.selectedPack ? window.formData.selectedPack : 'STARTER').toUpperCase(),
-          totalAmount: finalAmount,
+          totalAmount: totalTTC,
           email: (window.formData && window.formData.email) ? window.formData.email : 'client@example.com',
           name: document.getElementById('billing-name')?.value || 'Client',
           careEnabled: document.getElementById('care-checkbox')?.checked || false
         };
         
-        console.log('📦 Payload:', payload);
+        console.log('Payload:', payload);
         
         var response = await fetch('https://tomorrow-stripe.t-martella.workers.dev/create-payment-intent', {
           method: 'POST',
@@ -1076,7 +1077,7 @@
         if (!response.ok) throw new Error('Worker returned ' + response.status);
         
         var data = await response.json();
-        console.log('✅ PaymentIntent created');
+        console.log('PaymentIntent created');
         
         var stripe = Stripe('pk_test_51Sw2QQHhyPxNNlpw0twD0qfP74lx2DfSoyY3Zw9Unkqx1zcTW8EaoSdpbWbMS8tSwICgJiZfDaMHlpgtYXv2HZWx00GtHoIERg');
         var elements = stripe.elements({ 
@@ -1094,10 +1095,10 @@
         window.stripeInstance = stripe;
         window.stripeElements = elements;
         window.paymentIntentId = data.paymentIntentId;
-        console.log('✅ Payment Element mounted');
+        console.log('Payment Element mounted');
         
       } catch (error) {
-        console.error('❌ Payment error:', error);
+        console.error('Payment error:', error);
         var el = document.getElementById('payment-element');
         if (el) el.innerHTML = '<p style="color: #FF5500; padding: 20px;">Erreur de chargement. <a href="javascript:location.reload()" style="color: #FF5500;">Rechargez la page</a></p>';
       }
@@ -1133,8 +1134,10 @@
         }
         
         console.log('Paiement reussi:', result.paymentIntent);
-        if (typeof window.goToStep === 'function') {
-          window.goToStep(8);
+        if (typeof window.nextStep === 'function') {
+          window.nextStep();
+        } else {
+          console.error('nextStep not found');
         }
         
       } catch (error) {

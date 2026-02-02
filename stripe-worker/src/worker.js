@@ -64,10 +64,8 @@ export default {
 
         let subscriptionId = null;
 
-        // Si Care activé, créer un Customer + Subscription
         if (careEnabled && email) {
           try {
-            // Créer Customer
             const customerResponse = await fetch('https://api.stripe.com/v1/customers', {
               method: 'POST',
               headers: {
@@ -78,15 +76,14 @@ export default {
                 'email': email,
                 'name': name || '',
                 'metadata[source]': 'Tomorrow.Online',
-                'metadata[pack]': pack || 'STARTER'
+                'metadata[pack]': pack || 'STARTER',
+                'metadata[care_pending]': 'true'
               }).toString()
             });
 
             const customer = await customerResponse.json();
 
             if (customer.id) {
-              // Créer Subscription avec le produit "Tomorrow Care"
-              // ID du prix : price_XXXXXX (à configurer dans Stripe Dashboard)
               const subscriptionResponse = await fetch('https://api.stripe.com/v1/subscriptions', {
                 method: 'POST',
                 headers: {
@@ -96,17 +93,20 @@ export default {
                 body: new URLSearchParams({
                   'customer': customer.id,
                   'items[0][price]': 'price_1Sw4eZHhyPxNNlpwkdXD1AFF',
-                  'payment_behavior': 'default_incomplete',
-                  'payment_settings[save_default_payment_method]': 'on_subscription',
-                  'expand[]': 'latest_invoice.payment_intent',
+                  'payment_behavior': 'allow_incomplete',
                   'metadata[pack]': pack || 'STARTER',
-                  'metadata[payment_intent_id]': paymentIntent.id
+                  'metadata[payment_intent_id]': paymentIntent.id,
+                  'metadata[status]': 'pending_payment_method'
                 }).toString()
               });
 
               const subscription = await subscriptionResponse.json();
-              subscriptionId = subscription.id;
-              console.log('Subscription created:', subscriptionId);
+              if (subscription.id) {
+                subscriptionId = subscription.id;
+                console.log('Subscription created:', subscriptionId);
+              } else {
+                console.error('Subscription error:', subscription);
+              }
             }
           } catch (subError) {
             console.error('Subscription error:', subError);
