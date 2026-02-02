@@ -27,9 +27,9 @@ var TECH_OPTIONS = [
     id: 'tomorrow', 
     name: 'STACK TOMORROW', 
     price: 0, 
-    tag: 'RECOMMANDÉ',
+    tag: 'CHOIX RECOMMANDÉ',
     desc: 'Performance maximale. Hébergement offert à vie. Éditeur visuel inclus.',
-    features: ['Hébergement : 0€/mois', 'Sécurité : Maximale', 'Autonomie : Textes/Images']
+    features: ['Hébergement : 0€/mois', 'Autonomie : Textes/Images/SocialMedia/Statistiques', 'Sécurité & Performance : Maximale']
   },
   { 
     id: 'webflow', 
@@ -44,8 +44,8 @@ var TECH_OPTIONS = [
     name: 'CODE BRUT (.ZIP)', 
     price: -190, 
     tag: 'EXPERT IT',
-    desc: 'Nous livrons le code source (HTML/CSS/JS). Vos développeurs gèrent l\'intégration.',
-    features: ['Hébergement : À votre charge', 'Support : Aucun', 'Format : Archive ZIP']
+    desc: 'Nous livrons le code source. Vos développeurs gèrent l\'intégration.',
+    features: ['Autonomie totale : Code source complet', 'Fait pour les grandes équipes : Tech interne', 'Adaptation : Intégrable dans tout CMS']
   }
 ];
 
@@ -619,36 +619,41 @@ function getStepContent() {
       <div class="form-step step-6">
         <div class="step-header">
           <h2 class="step-title">INFRASTRUCTURE</h2>
-          <p class="step-subtitle font-mono">Choisissez votre moteur.</p>
+          <p class="step-subtitle font-mono">Vous choisissez ce que vous mettez sous le capot</p>
         </div>
         
-        <div class="tech-selection-grid" style="display: grid; gap: 15px;">
+        <div class="tech-selection-grid" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-bottom: 30px;">
           ${TECH_OPTIONS.map(t => `
             <div onclick="window.selectTech('${t.id}')" 
                  class="tech-option-card ${formData.selectedTech === t.id ? 'selected' : ''}"
-                 style="border: 1px solid #333; padding: 20px; cursor: pointer; transition: all 0.2s; background: ${formData.selectedTech === t.id ? 'rgba(0,255,0,0.05)' : 'transparent'}; position: relative; border-color: ${formData.selectedTech === t.id ? '#00FF00' : '#333'}; border-radius: 4px;">
+                 style="border: 1px solid ${formData.selectedTech === t.id ? (t.id === 'tomorrow' ? '#FF5500' : t.id === 'raw' ? '#00FF00' : '#4353FF') : '#333'}; padding: 25px; cursor: pointer; transition: all 0.2s; background: ${formData.selectedTech === t.id ? (t.id === 'tomorrow' ? 'rgba(255,85,0,0.05)' : t.id === 'raw' ? 'rgba(0,255,0,0.05)' : 'rgba(67,83,255,0.05)') : 'transparent'}; position: relative; border-radius: 4px;">
               
-              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
-                <div style="display: flex; align-items: center; gap: 10px;">
-                  <div class="tech-radio" style="width: 20px; height: 20px; border-radius: 50%; border: 1px solid #555; display: flex; align-items: center; justify-content: center;">
-                    ${formData.selectedTech === t.id ? '<div style="width: 10px; height: 10px; background: #00FF00; border-radius: 50%;"></div>' : ''}
-                  </div>
-                  <span class="font-syne text-lg uppercase text-white">${t.name}</span>
+              ${t.tag ? `<div style="position: absolute; top: 0; right: 0; background: ${t.id === 'tomorrow' ? '#FF5500' : t.id === 'raw' ? '#00FF00' : '#333'}; color: ${t.id === 'raw' ? '#000' : '#FFF'}; font-size: 9px; padding: 4px 8px; font-weight:bold; font-family: monospace;">${t.tag}</div>` : ''}
+              
+              <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 15px; margin-top: ${t.tag ? '20px' : '0'};">
+                <div class="tech-radio" style="width: 20px; height: 20px; border-radius: 50%; border: 2px solid ${formData.selectedTech === t.id ? (t.id === 'tomorrow' ? '#FF5500' : t.id === 'raw' ? '#00FF00' : '#4353FF') : '#555'}; display: flex; align-items: center; justify-content: center;">
+                  ${formData.selectedTech === t.id ? `<div style="width: 10px; height: 10px; background: ${t.id === 'tomorrow' ? '#FF5500' : t.id === 'raw' ? '#00FF00' : '#4353FF'}; border-radius: 50%;"></div>` : ''}
                 </div>
-                <div class="font-mono" style="color: ${t.price > 0 ? '#FF5500' : (t.price < 0 ? '#00FF00' : '#FFF')}; font-weight: bold;">
-                  ${t.price > 0 ? '+' + t.price : (t.price < 0 ? t.price : 'INCLUS')}€
-                </div>
+                <span class="font-syne" style="font-size: 18px; font-weight: bold; text-transform: uppercase; color: white;">${t.name}</span>
+              </div>
+              
+              <div style="text-align: right; margin-bottom: 15px;">
+                <span class="font-mono" style="font-size: 20px; font-weight: bold; color: ${t.price > 0 ? '#FF5500' : (t.price < 0 ? '#00FF00' : '#FFF')}">${t.price > 0 ? '+' + t.price : (t.price < 0 ? t.price : 'INCLUS')}€</span>
               </div>
 
-              <p class="text-sm text-gray-400 mb-3" style="padding-left: 30px; font-size: 13px; line-height: 1.4;">${t.desc}</p>
+              <p style="color: #999; font-size: 13px; margin-bottom: 15px; line-height: 1.5;">${t.desc}</p>
 
-              <div class="tech-features" style="padding-left: 30px; font-size: 10px; color: #666; font-family: monospace;">
-                ${t.features.map(f => `<div>• ${f}</div>`).join('')}
+              <div class="tech-features" style="font-size: 11px; color: #666; font-family: monospace; display: flex; flex-direction: column; gap: 8px;">
+                ${t.features.map(f => `<div style="display: flex; gap: 8px;"><span style="color: ${t.id === 'tomorrow' ? '#FF5500' : t.id === 'raw' ? '#00FF00' : '#4353FF'};">•</span><span>${f}</span></div>`).join('')}
               </div>
-
-              ${t.tag ? `<div style="position: absolute; top: 0; right: 0; background: ${t.id === 'tomorrow' ? '#00FF00' : '#333'}; color: ${t.id === 'tomorrow' ? '#000' : '#fff'}; font-size: 9px; padding: 4px 8px; font-weight:bold; font-family: monospace;">${t.tag}</div>` : ''}
             </div>
           `).join('')}
+        </div>
+        
+        <div style="text-align: center;">
+          <button onclick="window.nextStep()" class="btn btn-primary" style="padding: 15px 40px;">
+            Continuer →
+          </button>
         </div>
       </div>
     `;

@@ -205,23 +205,23 @@
     <div class="container">
       <div class="section-header" style="text-align: center; margin-bottom: 60px;">
         <h2 class="section-title">Le Moteur<span class="text-gradient">.</span></h2>
-        <p class="section-subtitle font-mono">Qu'est-ce qu'il y a sous le capot ?</p>
+        <p class="section-subtitle font-mono">Vous choisissez ce que vous mettez sous le capot</p>
       </div>
 
-      <div class="tech-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px;">
+      <div class="tech-grid" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px;">
         
         <!-- Tomorrow Stack (Featured) -->
-        <div class="tech-card featured" style="background: linear-gradient(145deg, #111 0%, #0a0a0a 100%); border: 1px solid #333; padding: 40px; position: relative; overflow: hidden; border-radius: 4px; transition: transform 0.3s ease, border-color 0.3s ease;">
-          <div style="position: absolute; top: 0; right: 0; background: #00FF00; color: #000; font-family: 'JetBrains Mono'; font-size: 10px; font-weight: bold; padding: 5px 10px; text-transform: uppercase;">Recommandé</div>
+        <div class="tech-card featured" style="background: linear-gradient(145deg, #111 0%, #0a0a0a 100%); border: 1px solid #FF5500; padding: 40px; position: relative; overflow: hidden; border-radius: 4px; transition: transform 0.3s ease, border-color 0.3s ease;">
+          <div style="position: absolute; top: 0; right: 0; background: #FF5500; color: #000; font-family: 'JetBrains Mono'; font-size: 10px; font-weight: bold; padding: 5px 10px; text-transform: uppercase;">Choix recommandé</div>
           <h3 style="font-family: 'Syne', sans-serif; font-size: 24px; color: white; margin-bottom: 10px; text-transform: uppercase;">Tomorrow Stack</h3>
-          <p class="font-mono" style="font-size: 10px; color: #00FF00; margin-bottom: 20px;">/// HYBRID STATIC ARCHITECTURE</p>
+          <p class="font-mono" style="font-size: 10px; color: #FF5500; margin-bottom: 20px;">/// HYBRID STATIC ARCHITECTURE</p>
           <p style="color: #999; font-size: 14px; margin-bottom: 25px; line-height: 1.6;">
             La puissance du code brut (Next.js) combinée à un éditeur visuel simple pour vous. La performance des géants de la Tech, rendue accessible.
           </p>
           <ul style="list-style: none; padding: 0; font-family: 'JetBrains Mono'; font-size: 12px; color: #ccc; display: flex; flex-direction: column; gap: 10px;">
-            <li style="display: flex; gap: 10px;"><span style="color: #00FF00;">✓</span> <strong>0€ / mois</strong> (Hébergement offert à vie)</li>
-            <li style="display: flex; gap: 10px;"><span style="color: #00FF00;">✓</span> <strong>Indestructible</strong> (Sécurité maximale)</li>
-            <li style="display: flex; gap: 10px;"><span style="color: #00FF00;">✓</span> <strong>Éditeur Visuel</strong> (Changez textes & images)</li>
+            <li style="display: flex; gap: 10px;"><span style="color: #FF5500;">✓</span> <strong>0€ / mois</strong> (Hébergement offert à vie)</li>
+            <li style="display: flex; gap: 10px;"><span style="color: #FF5500;">✓</span> <strong>Autonomie</strong> (Textes/Images/SocialMedia/Statistiques)</li>
+            <li style="display: flex; gap: 10px;"><span style="color: #FF5500;">✓</span> <strong>Sécurité & Performance</strong> (Maximale)</li>
           </ul>
         </div>
 
@@ -239,9 +239,21 @@
           </ul>
         </div>
 
-      </div>
-      <div style="text-align: center; margin-top: 30px;">
-        <p class="font-mono" style="font-size: 10px; color: #444;">* Option "Code Brut" également disponible pour les équipes IT (-190€).</p>
+        <!-- Code Brut -->
+        <div class="tech-card" style="background: #050505; border: 1px solid #00FF00; padding: 40px; border-radius: 4px; transition: transform 0.3s ease, border-color 0.3s ease;">
+          <div style="position: absolute; top: 0; right: 0; background: #00FF00; color: #000; font-family: 'JetBrains Mono'; font-size: 10px; font-weight: bold; padding: 5px 10px; text-transform: uppercase;">Expert IT</div>
+          <h3 style="font-family: 'Syne', sans-serif; font-size: 24px; color: white; margin-bottom: 10px; text-transform: uppercase;">Code Brut</h3>
+          <p class="font-mono" style="font-size: 10px; color: #00FF00; margin-bottom: 20px;">/// RAW HTML/CSS/JS</p>
+          <p style="color: #999; font-size: 14px; margin-bottom: 25px; line-height: 1.6;">
+            Nous livrons le code source propre (HTML/CSS/JS). Vos développeurs gèrent l'intégration et l'hébergement. Autonomie maximale.
+          </p>
+          <ul style="list-style: none; padding: 0; font-family: 'JetBrains Mono'; font-size: 12px; color: #ccc; display: flex; flex-direction: column; gap: 10px;">
+            <li style="display: flex; gap: 10px;"><span style="color: #00FF00;">✓</span> <strong>Autonomie totale</strong> (Code source complet)</li>
+            <li style="display: flex; gap: 10px;"><span style="color: #00FF00;">✓</span> <strong>Fait pour les grandes équipes</strong> (Tech interne)</li>
+            <li style="display: flex; gap: 10px;"><span style="color: #00FF00;">✓</span> <strong>Adaptation</strong> (Intégrable dans tout CMS)</li>
+          </ul>
+        </div>
+
       </div>
     </div>
   </section>
@@ -311,7 +323,7 @@
             <li><span class="feature-dot"></span> Max 5 pages</li>
             <li><span class="feature-dot"></span> <strong>Tech Hybride (Code + CMS)</strong></li>
             <li><span class="feature-dot"></span> <strong>Hébergement Offert à vie</strong></li>
-            <li><span class="feature-dot"></span> CMS (Blog/Réalisations)</li>
+            <li><span class="feature-dot"></span> UX/UI CRO</li>
           </ul>
           <button class="btn btn-outline w-full" onclick="openModal()">
             >Bloquer mon slot
@@ -752,7 +764,7 @@
             <span class="faq-icon font-mono">+</span>
           </div>
           <div class="faq-answer">
-            <p>Vous êtes 100% autonome. Mais si vous voulez déléguer les MAJ/évolutions, notre offre Care démarre à 190€/mois (détails dans le formulaire).</p>
+            <p>Vous êtes 100% autonome. Mais si vous voulez déléguer les MAJ/évolutions, notre offre Care démarre à 39€/mois (détails dans le formulaire).</p>
           </div>
         </div>
       </div>
