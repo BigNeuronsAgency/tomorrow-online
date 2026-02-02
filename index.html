@@ -1180,17 +1180,24 @@
         'Marque: ' + (fd.brandName || 'Non renseigne') + '\n' +
         'Email: ' + (fd.email || 'Non renseigne') + '\n' +
         'Telephone: ' + (fd.phone || 'Non renseigne') + '\n\n' +
-        'CIBLE & POSITIONNEMENT\n' +
-        'Pitch (1 ligne): ' + (fd.pitch || 'Non renseigne') + '\n' +
-        'Target: ' + (fd.target || 'Non renseigne') + '\n' +
-        'Archetype: ' + (fd.archetype || 'Non renseigne') + '\n\n' +
-        'VIBES\n' +
+        'PITCH & CONCURRENTS (Step 2)\n' +
+        'Pitch: ' + (fd.pitch || 'Non renseigne') + '\n' +
+        'Concurrents: ' + (fd.competitors || 'Non renseigne') + '\n\n' +
+        'CIBLE (Step 2)\n' +
+        'Client ideal: ' + (fd.target || 'Non renseigne') + '\n' +
+        'Probleme: ' + (fd.problem || 'Non renseigne') + '\n' +
+        'Solution: ' + (fd.solution || 'Non renseigne') + '\n' +
+        'Pourquoi nous: ' + (fd.whyUs || 'Non renseigne') + '\n\n' +
+        'IDENTITE (Step 2)\n' +
+        'Archetype: ' + (fd.archetype || 'Non renseigne') + '\n' +
+        'VIBES:\n' +
         (vibeTexte || 'Neutres\n') + '\n' +
         'COPYWRITING: ' + (fd.copywriting === 'me' ? 'Le client fournit le contenu' : 'Tomorrow redige le contenu') + '\n\n' +
         'DOMAINE\n' +
         (fd.hasDomain ? 'Possede un domaine: ' + (fd.domainName || 'A preciser lors du call') : 'Pas de domaine (a acquerir)') + '\n\n' +
         (fd.multiLangues && fd.multiLangues.length > 0 ? 'LANGUES: ' + fd.multiLangues.join(', ') + '\n\n' : '') +
         (fd.pagesSupQty > 0 ? 'PAGES SUPPLEMENTAIRES (' + fd.pagesSupQty + '):\n' + (fd.pagesSupNames || []).filter(Boolean).join(', ') + '\n\n' : '') +
+        'FICHIERS JOINTS:\n' +
         (fd.logoUrl ? 'LOGO: ' + fd.logoUrl + '\n' : '') +
         (fd.inspirationUrl ? 'INSPIRATION: ' + fd.inspirationUrl + '\n' : '') +
         (fd.brandingUrl ? 'BRANDING: ' + fd.brandingUrl + '\n' : '') +
