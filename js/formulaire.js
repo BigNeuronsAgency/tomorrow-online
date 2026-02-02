@@ -791,7 +791,65 @@ function getStepContent() {
     `;
   }
   
-  // Step 8 (ancien step 7) - Success screen
+  // Step 8 - Success screen
+  if (step === 8) {
+    return `
+      <div class="step step-8">
+        <div class="success-header">
+          <div class="success-icon">🎉</div>
+          <h2 class="step-title">Slot sécurisé !</h2>
+          <p class="step-subtitle">Votre brief a été reçu. Voici ce qui va se passer :</p>
+        </div>
+        
+        <div class="timeline">
+          <div class="timeline-item completed">
+            <div class="timeline-marker">✓</div>
+            <div class="timeline-content">
+              <h3>Brief reçu</h3>
+              <p>Votre demande est enregistrée</p>
+            </div>
+          </div>
+          
+          <div class="timeline-item active">
+            <div class="timeline-marker">⏳</div>
+            <div class="timeline-content">
+              <h3>Analyse humaine en cours</h3>
+              <p>Notre équipe étudie votre projet</p>
+            </div>
+          </div>
+          
+          <div class="timeline-item">
+            <div class="timeline-marker">📞</div>
+            <div class="timeline-content">
+              <h3>Appel de validation</h3>
+              <p><strong>Demain entre 09h et 10h</strong></p>
+              <p class="timeline-note">Restez près de votre téléphone</p>
+            </div>
+          </div>
+          
+          <div class="timeline-item">
+            <div class="timeline-marker">🚀</div>
+            <div class="timeline-content">
+              <h3>Livraison du site</h3>
+              <p><strong>En 24h après validation</strong></p>
+            </div>
+          </div>
+        </div>
+        
+        <div class="success-footer">
+          <div class="success-note">
+            <p><strong>💳 Aucun débit avant livraison</strong></p>
+            <p>Votre carte ne sera prélevée qu'à la livraison du site.</p>
+          </div>
+          
+          <p class="success-message">
+            Merci de votre confiance. Vous pouvez désormais fermer cette fenêtre.<br>
+            <a href="/" class="btn-link">← Retour à l'accueil</a>
+          </p>
+        </div>
+      </div>
+    `;
+  }
 }
 
 function renderSuccessCard(u) {
