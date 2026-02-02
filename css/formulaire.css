@@ -139,10 +139,10 @@ body:has(.modal:not(.hidden)) .whatsapp-float {
   overflow-x: hidden;
 }
 
-/* Step 7 : fond noir obligatoire */
+/* Step 7 : fond BLANC pour lisibilité formulaire CB */
 .step-7 {
-  background: var(--void) !important;
-  color: var(--white) !important;
+  background: var(--white) !important;
+  color: var(--void) !important;
   overflow-y: hidden;
 }
 
@@ -1197,10 +1197,10 @@ body:has(.modal:not(.hidden)) .whatsapp-float {
 
 .payment-summary {
   flex: 0 0 280px;
-  background: rgba(255, 255, 255, 0.05);
+  background: rgba(0, 0, 0, 0.05);
   padding: 1.25rem;
   border-radius: 8px;
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(0, 0, 0, 0.1);
   height: fit-content;
   max-height: calc(100vh - 220px);
   overflow-y: auto;
@@ -1210,7 +1210,7 @@ body:has(.modal:not(.hidden)) .whatsapp-float {
   font-size: 0.875rem;
   font-weight: 700;
   text-transform: uppercase;
-  color: var(--white);
+  color: var(--void);
   margin-bottom: 1rem;
   letter-spacing: 0.05em;
 }
@@ -1219,27 +1219,27 @@ body:has(.modal:not(.hidden)) .whatsapp-float {
   display: flex;
   justify-content: space-between;
   padding: 0.75rem 0;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-  color: rgba(255, 255, 255, 0.8);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  color: rgba(0, 0, 0, 0.8);
   font-size: 0.875rem;
 }
 
 .summary-line-small {
   font-size: 0.75rem;
-  color: rgba(255, 255, 255, 0.6);
+  color: rgba(0, 0, 0, 0.6);
 }
 
 .summary-line-total {
   font-weight: 700;
   font-size: 1.125rem;
-  color: var(--white);
+  color: var(--void);
   border-bottom: none;
   margin-top: 0.5rem;
 }
 
 .summary-divider {
   height: 1px;
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(0, 0, 0, 0.1);
   margin: 0.5rem 0;
 }
 
@@ -1247,7 +1247,7 @@ body:has(.modal:not(.hidden)) .whatsapp-float {
   font-size: 0.75rem;
   font-weight: 600;
   text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.5);
+  color: rgba(0, 0, 0, 0.5);
   margin: 0.75rem 0 0.5rem 0;
   letter-spacing: 0.05em;
 }
@@ -1262,7 +1262,7 @@ body:has(.modal:not(.hidden)) .whatsapp-float {
 
 .reassurance-text {
   font-size: 0.75rem;
-  color: rgba(255, 255, 255, 0.9);
+  color: rgba(0, 0, 0, 0.8);
   line-height: 1.5;
   margin: 0;
   display: flex;
@@ -1283,7 +1283,7 @@ body:has(.modal:not(.hidden)) .whatsapp-float {
 .payment-form-title {
   font-size: 1rem;
   font-weight: 700;
-  color: var(--white);
+  color: var(--void);
   margin-bottom: 1.5rem;
 }
 
@@ -1301,7 +1301,7 @@ body:has(.modal:not(.hidden)) .whatsapp-float {
 .billing-info .form-label-small {
   font-size: 0.75rem;
   font-weight: 600;
-  color: var(--white);
+  color: var(--void);
   margin-bottom: 0.5rem;
   display: block;
   text-transform: uppercase;
@@ -1309,9 +1309,9 @@ body:has(.modal:not(.hidden)) .whatsapp-float {
 }
 
 .billing-info .form-input {
-  background: rgba(255, 255, 255, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  color: var(--white);
+  background: rgba(0, 0, 0, 0.05);
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  color: var(--void);
   padding: 0.75rem;
   border-radius: 4px;
   font-size: 0.875rem;
@@ -1320,11 +1320,11 @@ body:has(.modal:not(.hidden)) .whatsapp-float {
 }
 
 .billing-info .form-input::placeholder {
-  color: rgba(255, 255, 255, 0.4);
+  color: rgba(0, 0, 0, 0.4);
 }
 
 .billing-info .form-input:focus {
-  background: rgba(255, 255, 255, 0.15);
+  background: rgba(0, 0, 0, 0.08);
   border-color: #FF5500;
   outline: none;
 }
@@ -1337,7 +1337,7 @@ body:has(.modal:not(.hidden)) .whatsapp-float {
 .promo-wrapper .form-label-small {
   font-size: 0.75rem;
   font-weight: 600;
-  color: var(--white);
+  color: var(--void);
   margin-bottom: 0.5rem;
   display: block;
   text-transform: uppercase;
@@ -1351,9 +1351,9 @@ body:has(.modal:not(.hidden)) .whatsapp-float {
 
 .promo-input {
   flex: 1;
-  background: rgba(255, 255, 255, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  color: var(--white);
+  background: rgba(0, 0, 0, 0.05);
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  color: var(--void);
   padding: 0.75rem;
   border-radius: 4px;
   font-size: 0.875rem;
@@ -1361,7 +1361,7 @@ body:has(.modal:not(.hidden)) .whatsapp-float {
 }
 
 .promo-input::placeholder {
-  color: rgba(255, 255, 255, 0.4);
+  color: rgba(0, 0, 0, 0.4);
   text-transform: none;
 }
 
@@ -1371,9 +1371,9 @@ body:has(.modal:not(.hidden)) .whatsapp-float {
 }
 
 .btn-apply-promo {
-  background: rgba(255, 255, 255, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  color: var(--white);
+  background: rgba(0, 0, 0, 0.05);
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  color: var(--void);
   padding: 0.75rem 1rem;
   border-radius: 4px;
   font-size: 0.75rem;
@@ -1385,8 +1385,9 @@ body:has(.modal:not(.hidden)) .whatsapp-float {
 }
 
 .btn-apply-promo:hover {
-  background: rgba(255, 85, 0, 0.3);
+  background: rgba(255, 85, 0, 0.2);
   border-color: #FF5500;
+  color: #FF5500;
 }
 
 .promo-message {
@@ -1396,25 +1397,25 @@ body:has(.modal:not(.hidden)) .whatsapp-float {
 }
 
 .promo-success {
-  color: #4ade80;
+  color: #22c55e;
 }
 
 .promo-error {
-  color: #ff6b6b;
+  color: #ef4444;
 }
 
 .care-checkbox-wrapper {
   margin-bottom: 1.5rem;
   padding: 1rem;
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(0, 0, 0, 0.03);
+  border: 1px solid rgba(0, 0, 0, 0.1);
   border-radius: 6px;
   cursor: pointer;
   transition: all 0.2s ease;
 }
 
 .care-checkbox-wrapper:hover {
-  background: rgba(255, 255, 255, 0.08);
+  background: rgba(0, 0, 0, 0.05);
   border-color: rgba(255, 85, 0, 0.5);
 }
 
@@ -1436,7 +1437,7 @@ body:has(.modal:not(.hidden)) .whatsapp-float {
 .care-checkbox-text {
   flex: 1;
   font-size: 0.875rem;
-  color: var(--white);
+  color: var(--void);
 }
 
 .care-checkbox-text strong {
@@ -1447,7 +1448,7 @@ body:has(.modal:not(.hidden)) .whatsapp-float {
 .care-checkbox-text small {
   display: block;
   margin-top: 0.25rem;
-  color: rgba(255, 255, 255, 0.6);
+  color: rgba(0, 0, 0, 0.6);
   font-size: 0.75rem;
   line-height: 1.4;
 }
@@ -1460,7 +1461,7 @@ body:has(.modal:not(.hidden)) .whatsapp-float {
 .payment-error {
   background: rgba(255, 0, 0, 0.1);
   border: 1px solid rgba(255, 0, 0, 0.3);
-  color: #ff6b6b;
+  color: #dc2626;
   padding: 0.75rem 1rem;
   border-radius: 4px;
   font-size: 0.875rem;
@@ -1512,14 +1513,14 @@ body:has(.modal:not(.hidden)) .whatsapp-float {
 .payment-note {
   text-align: center;
   font-size: 0.75rem;
-  color: rgba(255, 255, 255, 0.5);
+  color: rgba(0, 0, 0, 0.5);
   margin-top: 1rem;
 }
 
 /* === SUCCESS UPSELLS (Step 7) === */
 .step-7 {
-  background: var(--void);
-  color: var(--white);
+  background: var(--white);
+  color: var(--void);
   margin: 0;
   padding: 2rem;
   width: 100%;
@@ -1531,7 +1532,7 @@ body:has(.modal:not(.hidden)) .whatsapp-float {
 }
 
 .step-7 .step-title {
-  color: var(--white);
+  color: var(--void);
 }
 
 .step-7 .step-header {
