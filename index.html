@@ -992,31 +992,42 @@
       var code = input.value.trim().toUpperCase().replace(/\*/g, '*');
       if (code === 'F*CK WIX' || code === 'FUCKWIX' || code === 'FUCK WIX') {
         message.innerHTML = '✅ Code valide ! -5% appliqué';
-        message.style.color = '#00FF00';
+        message.style.color = '#22c55e';
         window.promoDiscount = 0.05;
         
         if (typeof window.formData !== 'undefined' && typeof window.PACKS !== 'undefined') {
           var pack = window.PACKS.find(function(p) { return p.id === window.formData.selectedPack; });
-          var total = pack ? pack.price : 0;
+          var subtotal = pack ? pack.price : 0;
           
           if (window.formData.upsells && typeof window.UPSELLS !== 'undefined') {
             var packUpsells = window.UPSELLS[window.formData.selectedPack] || [];
             packUpsells.forEach(function(upsell) {
               if (window.formData.upsells[upsell.id]) {
-                total += upsell.price;
+                subtotal += upsell.price;
               }
             });
           }
           
-          var discountedPrice = Math.round(total * 0.95);
-          var totalEl = document.querySelector('.summary-line-total span.font-mono');
-          if (totalEl) {
-            totalEl.textContent = discountedPrice + '€';
-          }
+          var remise = Math.round(subtotal * 0.05);
+          var totalHT = subtotal - remise;
+          var tva = Math.round(totalHT * 0.2);
+          var totalTTC = totalHT + tva;
+          
+          var promoLine = document.getElementById('promo-line');
+          var promoAmount = document.getElementById('promo-amount');
+          var totalHTEl = document.getElementById('total-ht');
+          var tvaEl = document.getElementById('tva-amount');
+          var totalTTCEl = document.getElementById('total-ttc');
+          
+          if (promoLine) promoLine.style.display = 'flex';
+          if (promoAmount) promoAmount.textContent = '-' + remise + '€';
+          if (totalHTEl) totalHTEl.textContent = totalHT + '€';
+          if (tvaEl) tvaEl.textContent = tva + '€';
+          if (totalTTCEl) totalTTCEl.textContent = totalTTC + '€';
         }
       } else {
         message.innerHTML = '❌ Code invalide';
-        message.style.color = '#FF5500';
+        message.style.color = '#ef4444';
         window.promoDiscount = 0;
       }
     };

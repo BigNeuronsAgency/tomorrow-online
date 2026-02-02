@@ -754,9 +754,29 @@ function getStepContent() {
             
             <div class="summary-divider"></div>
             
+            <div class="summary-line">
+              <span>Sous-total HT</span>
+              <span class="font-mono">${totals.price}€</span>
+            </div>
+            
+            <div class="summary-line summary-line-small" id="promo-line" style="display: none;">
+              <span>Remise promo (-5%)</span>
+              <span class="font-mono" id="promo-amount">-0€</span>
+            </div>
+            
             <div class="summary-line summary-line-total">
               <span>TOTAL HT</span>
-              <span class="font-mono">${totals.price}€</span>
+              <span class="font-mono" id="total-ht">${totals.price}€</span>
+            </div>
+            
+            <div class="summary-line summary-line-small">
+              <span>TVA (20%)</span>
+              <span class="font-mono" id="tva-amount">${Math.round(totals.price * 0.2)}€</span>
+            </div>
+            
+            <div class="summary-line summary-line-total summary-ttc">
+              <span>TOTAL TTC</span>
+              <span class="font-mono" id="total-ttc">${Math.round(totals.price * 1.2)}€</span>
             </div>
             
             <div class="payment-reassurance">

@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Paiement confirmé - Tomorrow.Online</title>
+  <link rel="icon" type="image/png" href="images/favicon-kid.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Space Grotesk', sans-serif;
+      background: #0A0A0A;
+      color: #FFFFFF;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+    }
+    .container {
+      max-width: 600px;
+      text-align: center;
+    }
+    .icon {
+      font-size: 5rem;
+      margin-bottom: 2rem;
+      animation: bounce 1s ease infinite;
+    }
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+    h1 {
+      font-size: clamp(2rem, 5vw, 3rem);
+      font-weight: 800;
+      margin-bottom: 1rem;
+      background: linear-gradient(135deg, #FF5500, #FF0000);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .subtitle {
+      font-size: 1.25rem;
+      color: rgba(255, 255, 255, 0.8);
+      margin-bottom: 2rem;
+      line-height: 1.6;
+    }
+    .message-box {
+      background: rgba(255, 85, 0, 0.1);
+      border: 1px solid rgba(255, 85, 0, 0.3);
+      border-radius: 12px;
+      padding: 2rem;
+      margin-bottom: 2rem;
+      text-align: left;
+    }
+    .message-box h2 {
+      font-size: 1rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: #FF5500;
+      margin-bottom: 1rem;
+    }
+    .message-box p {
+      color: rgba(255, 255, 255, 0.9);
+      line-height: 1.8;
+      font-size: 0.95rem;
+    }
+    .btn {
+      display: inline-block;
+      background: linear-gradient(135deg, #FF5500, #FF0000);
+      color: white;
+      padding: 1rem 2rem;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 30px rgba(255, 85, 0, 0.4);
+    }
+    .footer-note {
+      margin-top: 2rem;
+      font-size: 0.875rem;
+      color: rgba(255, 255, 255, 0.5);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="icon">🎉</div>
+    <h1>Slot bloqué !</h1>
+    <p class="subtitle">Votre empreinte bancaire a été enregistrée.<br>Aucun débit avant livraison du site.</p>
+    
+    <div class="message-box">
+      <h2>Prochaine étape</h2>
+      <p>
+        Nous avons bien reçu votre brief.<br><br>
+        <strong>Restez près de votre téléphone</strong> : nous vous appellerons demain matin pour valider le brief avec vous.<br><br>
+        Ensuite, le chrono démarre. ⏱️
+      </p>
+    </div>
+    
+    <a href="/" class="btn">Retour à l'accueil</a>
+    
+    <p class="footer-note">
+      Un email de confirmation vous a été envoyé.<br>
+      L'équipe Tomorrow.Online
+    </p>
+  </div>
+</body>
+</html>
