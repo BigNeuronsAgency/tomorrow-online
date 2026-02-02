@@ -1967,6 +1967,19 @@ body:has(.modal:not(.hidden)) .whatsapp-float {
   display: none !important;
 }
 
+/* Step 8 - Force modal-content to be fullscreen black centered */
+.modal-content:has(.step-8) {
+  width: 100vw !important;
+  height: 100vh !important;
+  max-width: 100vw !important;
+  background: #0A0A0A !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  animation: none !important;
+  transform: none !important;
+}
+
 .modal-console {
   background: var(--void);
   color: var(--white);
