@@ -126,6 +126,13 @@ body:has(.modal:not(.hidden)) .whatsapp-float {
   overflow: hidden;
 }
 
+/* Step 8 - Force BLACK background on modal-body */
+.modal-body:has(.step-8) {
+  padding: 0 !important;
+  overflow: hidden !important;
+  background: #0A0A0A !important;
+}
+
 /* === FORM STEP === */
 .form-step {
   width: 100%;
