@@ -1,10 +1,10 @@
 // ========================================
-// FORMULAIRE 7 ÉTAPES - TOMORROW.ONLINE
+// FORMULAIRE 8 ÉTAPES - TOMORROW.ONLINE
 // ========================================
 
 // Global state
 var currentStep = 1;
-var totalSteps = 7; // Ajout de l'étape paiement
+var totalSteps = 8;
 var currentConsoleMessage = 'SYSTEM READY';
 var fileStore = [];
 var countdownTimer = null;
