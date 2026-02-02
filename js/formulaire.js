@@ -22,6 +22,33 @@ var PACKS = [
   { id: 'BUSINESS', name: 'PACK BUSINESS', price: 2200, delay: 48, desc: 'Site Complet // Blog & SEO' }
 ];
 
+var TECH_OPTIONS = [
+  { 
+    id: 'tomorrow', 
+    name: 'STACK TOMORROW', 
+    price: 0, 
+    tag: 'RECOMMANDÉ',
+    desc: 'Performance maximale. Hébergement offert à vie. Éditeur visuel inclus.',
+    features: ['Hébergement : 0€/mois', 'Sécurité : Maximale', 'Autonomie : Textes/Images']
+  },
+  { 
+    id: 'webflow', 
+    name: 'WEBFLOW NATIVE', 
+    price: 290, 
+    tag: 'STANDARD',
+    desc: 'Site livré sur votre compte Webflow. Idéal pour les équipes marketing habituées.',
+    features: ['Abonnement : ~30€/mois (à votre charge)', 'Interface : Webflow Editor', 'Transfert : Propriété complète']
+  },
+  { 
+    id: 'raw', 
+    name: 'CODE BRUT (.ZIP)', 
+    price: -190, 
+    tag: 'EXPERT IT',
+    desc: 'Nous livrons le code source (HTML/CSS/JS). Vos développeurs gèrent l\'intégration.',
+    features: ['Hébergement : À votre charge', 'Support : Aucun', 'Format : Archive ZIP']
+  }
+];
+
 var UPSELLS = {
   'MAQUETTE': [
     { id: 'packGraphique', name: 'Pack Graphique', price: 160, delay: 4, tooltip: 'Un Directeur Artistique senior boosté à l\'IA, s\'occupe de votre charte graphique et nous vous fournissons votre logo, votre typo et vos couleurs', desc: 'DA senior boosté IA pour votre charte complète.' },
@@ -93,6 +120,7 @@ var formData = {
   vibeStyle: 0,
   copywriting: 'me',
   selectedPack: '',
+  selectedTech: 'tomorrow',
   upsells: {},
   pagesSupQty: 1,
   pagesSupNames: [],
@@ -119,6 +147,15 @@ function calculateTotals() {
     price += pack.price;
     delay += pack.delay;
   }
+  
+  // Tech price (skip if MAQUETTE)
+  if (formData.selectedPack !== 'MAQUETTE') {
+    var tech = TECH_OPTIONS.find(t => t.id === formData.selectedTech);
+    if (tech) {
+      price += tech.price;
+    }
+  }
+  
   var upsellList = UPSELLS[formData.selectedPack] || [];
   upsellList.forEach(u => {
     if (formData.upsells[u.id]) {
@@ -570,8 +607,55 @@ function getStepContent() {
     }
   }
   
-  // Step 6: Validation
+  // Step 6: Technology Choice (Skip if MAQUETTE)
   if (currentStep === 6) {
+    // Skip auto si MAQUETTE
+    if (formData.selectedPack === 'MAQUETTE') {
+      currentStep = 7;
+      return getStepContent();
+    }
+    
+    return `
+      <div class="form-step step-6">
+        <div class="step-header">
+          <h2 class="step-title">INFRASTRUCTURE</h2>
+          <p class="step-subtitle font-mono">Choisissez votre moteur.</p>
+        </div>
+        
+        <div class="tech-selection-grid" style="display: grid; gap: 15px;">
+          ${TECH_OPTIONS.map(t => `
+            <div onclick="window.selectTech('${t.id}')" 
+                 class="tech-option-card ${formData.selectedTech === t.id ? 'selected' : ''}"
+                 style="border: 1px solid #333; padding: 20px; cursor: pointer; transition: all 0.2s; background: ${formData.selectedTech === t.id ? 'rgba(0,255,0,0.05)' : 'transparent'}; position: relative; border-color: ${formData.selectedTech === t.id ? '#00FF00' : '#333'}; border-radius: 4px;">
+              
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                <div style="display: flex; align-items: center; gap: 10px;">
+                  <div class="tech-radio" style="width: 20px; height: 20px; border-radius: 50%; border: 1px solid #555; display: flex; align-items: center; justify-content: center;">
+                    ${formData.selectedTech === t.id ? '<div style="width: 10px; height: 10px; background: #00FF00; border-radius: 50%;"></div>' : ''}
+                  </div>
+                  <span class="font-syne text-lg uppercase text-white">${t.name}</span>
+                </div>
+                <div class="font-mono" style="color: ${t.price > 0 ? '#FF5500' : (t.price < 0 ? '#00FF00' : '#FFF')}; font-weight: bold;">
+                  ${t.price > 0 ? '+' + t.price : (t.price < 0 ? t.price : 'INCLUS')}€
+                </div>
+              </div>
+
+              <p class="text-sm text-gray-400 mb-3" style="padding-left: 30px; font-size: 13px; line-height: 1.4;">${t.desc}</p>
+
+              <div class="tech-features" style="padding-left: 30px; font-size: 10px; color: #666; font-family: monospace;">
+                ${t.features.map(f => `<div>• ${f}</div>`).join('')}
+              </div>
+
+              ${t.tag ? `<div style="position: absolute; top: 0; right: 0; background: ${t.id === 'tomorrow' ? '#00FF00' : '#333'}; color: ${t.id === 'tomorrow' ? '#000' : '#fff'}; font-size: 9px; padding: 4px 8px; font-weight:bold; font-family: monospace;">${t.tag}</div>` : ''}
+            </div>
+          `).join('')}
+        </div>
+      </div>
+    `;
+  }
+  
+  // Step 7: Validation (Anciennement Step 6)
+  if (currentStep === 7) {
     return `
       <div class="form-step step-6">
         <div class="step-header">
@@ -642,10 +726,11 @@ function getStepContent() {
     `;
   }
   
-  // Step 7: Paiement (Confirmation)
-  if (currentStep === 7) {
+  // Step 8: Paiement (Confirmation)
+  if (currentStep === 8) {
     const totals = calculateTotals();
     const pack = PACKS.find(p => p.id === formData.selectedPack);
+    const tech = TECH_OPTIONS.find(t => t.id === formData.selectedTech);
     
     // Récupérer les upsells sélectionnés avec leurs détails
     const selectedUpsells = [];
@@ -663,7 +748,7 @@ function getStepContent() {
     const showCare = formData.selectedPack !== 'maquette';
     
     return `
-      <div class="form-step step-7">
+      <div class="form-step step-8">
         <div class="step-header">
           <h2 class="step-title">CONFIRMATION</h2>
           <p class="step-subtitle font-mono">Sécurisation de votre slot</p>
@@ -741,6 +826,13 @@ function getStepContent() {
               <span class="font-mono">${pack.price}€ HT</span>
             </div>
             
+            ${formData.selectedPack !== 'MAQUETTE' ? `
+            <div class="summary-line summary-line-small" style="color: #ccc;">
+              <span>INFRA: ${tech.name}</span>
+              <span class="font-mono" style="color: ${tech.price > 0 ? '#FF5500' : (tech.price < 0 ? '#00FF00' : '#FFF')}">${tech.price > 0 ? '+' : ''}${tech.price}€</span>
+            </div>
+            ` : ''}
+            
             ${hasUpsells ? `
               <div class="summary-divider"></div>
               <p class="summary-section-title">Options</p>
@@ -784,78 +876,6 @@ function getStepContent() {
                 <span class="reassurance-icon">🔒</span>
                 Aucun débit avant livraison du site. Empreinte bancaire uniquement.
               </p>
-            </div>
-          </div>
-        </div>
-      </div>
-    `;
-  }
-  
-  // Step 8 - Success screen
-  if (currentStep === 8) {
-    return `
-      <div class="step step-8 success-fullscreen">
-        <div class="success-container">
-          <button onclick="window.closeModal()" style="position: absolute; top: 1rem; right: 1rem; background: rgba(255,255,255,0.15); border: 2px solid rgba(255,255,255,0.4); color: #FFFFFF; width: 48px; height: 48px; border-radius: 50%; font-size: 2rem; line-height: 1; cursor: pointer; z-index: 99999; transition: all 0.2s; display: flex; align-items: center; justify-content: center;" onmouseover="this.style.background='rgba(255,255,255,0.3)'" onmouseout="this.style.background='rgba(255,255,255,0.15)'">×</button>
-          
-          <div class="success-icon-large">🎉</div>
-          <h1 class="success-title">Slot sécurisé !</h1>
-          <p class="success-intro">Votre brief a été reçu. Voici ce qui va se passer :</p>
-          
-          <div class="success-grid-desktop">
-            <div class="success-timeline">
-              <div class="timeline-step completed">
-                <div class="timeline-icon">✓</div>
-                <div class="timeline-text">
-                  <h3>Brief reçu</h3>
-                  <p>Votre demande est enregistrée</p>
-                </div>
-              </div>
-              
-              <div class="timeline-connector active"></div>
-              
-              <div class="timeline-step active">
-                <div class="timeline-icon">⏳</div>
-                <div class="timeline-text">
-                  <h3>Analyse humaine</h3>
-                  <p>Notre équipe étudie votre projet</p>
-                </div>
-              </div>
-              
-              <div class="timeline-connector"></div>
-              
-              <div class="timeline-step">
-                <div class="timeline-icon">📞</div>
-                <div class="timeline-text">
-                  <h3>Appel de validation</h3>
-                  <p><strong>Demain entre 09h et 10h</strong></p>
-                  <small>Restez près de votre téléphone</small>
-                </div>
-              </div>
-              
-              <div class="timeline-connector"></div>
-              
-              <div class="timeline-step">
-                <div class="timeline-icon">🚀</div>
-                <div class="timeline-text">
-                  <h3>Livraison</h3>
-                  <p><strong>24h après validation</strong></p>
-                </div>
-              </div>
-            </div>
-            
-            <div class="success-right">
-              <div class="success-note-box">
-                <p class="success-note-title">💳 Aucun débit avant livraison</p>
-                <p class="success-note-text">Votre carte ne sera prélevée qu'à la livraison du site.</p>
-              </div>
-              
-              <div class="success-actions">
-                <button onclick="window.location.href='/'" class="btn-success-home">Retour à l'accueil</button>
-                <button onclick="window.closeModal()" class="btn-success-close">Fermer cette fenêtre</button>
-              </div>
-              
-              <p class="success-footer-text">Merci de votre confiance — L'équipe Tomorrow.Online</p>
             </div>
           </div>
         </div>
@@ -1021,6 +1041,12 @@ window.updateInput = function(key, value, consoleMsg) {
     var el = document.getElementById('consoleBrandName');
     if (el) el.innerText = value || 'NOUVELLE MARQUE';
   }
+};
+
+window.selectTech = function(id) {
+  formData.selectedTech = id;
+  typeConsole('TECH SELECTED: ' + id.toUpperCase());
+  draw();
 };
 
 window.selectArchetype = function(id) {
