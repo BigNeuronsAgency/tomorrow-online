@@ -2647,7 +2647,7 @@ body:has(.modal:not(.hidden)) .whatsapp-float {
 }
 
 /* Desktop 2-column layout for step 8 */
-@media (min-width: 1024px) {
+@media (min-width: 768px) {
   .success-grid-desktop {
     display: grid !important;
     grid-template-columns: 1fr 1fr !important;
@@ -2665,7 +2665,7 @@ body:has(.modal:not(.hidden)) .whatsapp-float {
 }
 
 /* Mobile keep vertical */
-@media (max-width: 1023px) {
+@media (max-width: 767px) {
   .success-grid-desktop {
     display: flex !important;
     flex-direction: column !important;
