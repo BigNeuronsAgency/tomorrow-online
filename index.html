@@ -1054,18 +1054,22 @@
             var discount = window.promoDiscount || 0;
             var finalAmount = total * (1 - discount); // en euros
             
+            var payload = {
+              pack: (window.formData.selectedPack || 'STARTER').toUpperCase(),
+              totalAmount: finalAmount,
+              email: window.formData.email || 'unknown@example.com',
+              name: document.getElementById('billing-name')?.value || 'Client',
+              careEnabled: document.getElementById('care-checkbox')?.checked || false,
+              promoCode: window.promoDiscount > 0 ? 'F*CK WIX' : null
+            };
+            
+            console.log('📦 Payload envoyé au Worker:', payload);
+            
             // Créer PaymentIntent via Worker
             var response = await fetch('https://tomorrow-stripe.t-martella.workers.dev/create-payment-intent', {
               method: 'POST',
               headers: { 'Content-Type': 'application/json' },
-              body: JSON.stringify({
-                pack: window.formData.selectedPack.toUpperCase(),
-                totalAmount: finalAmount,
-                email: window.formData.email || 'unknown@example.com',
-                name: document.getElementById('billing-name')?.value || 'Client',
-                careEnabled: document.getElementById('care-checkbox')?.checked || false,
-                promoCode: window.promoDiscount > 0 ? 'F*CK WIX' : null
-              })
+              body: JSON.stringify(payload)
             });
             
             var data = await response.json();
