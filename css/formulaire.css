@@ -2642,6 +2642,8 @@ body:has(.modal:not(.hidden)) .whatsapp-float {
 .success-fullscreen .success-container {
   position: relative !important;
   padding-top: 3rem !important;
+  max-width: 1200px !important;
+  width: 100% !important;
 }
 
 /* Desktop 2-column layout for step 8 */
@@ -2655,6 +2657,10 @@ body:has(.modal:not(.hidden)) .whatsapp-float {
   
   .step-8 .success-timeline {
     margin-bottom: 0 !important;
+  }
+  
+  .step-8 .success-intro {
+    margin-bottom: 2rem !important;
   }
 }
 
