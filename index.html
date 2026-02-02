@@ -1144,7 +1144,6 @@
       var fd = window.formData || {};
       var pack = (window.PACKS || []).find(function(p) { return p.id === fd.selectedPack; });
       
-      // Construire la liste des upsells
       var upsellsList = [];
       var packUpsells = (window.UPSELLS || {})[fd.selectedPack] || [];
       packUpsells.forEach(function(u) {
@@ -1153,25 +1152,22 @@
         }
       });
       
-      var briefMessage = '🎯 NOUVEAU BRIEF REÇU\\n' +
-        '━━━━━━━━━━━━━━━━━━━━━━\\n\\n' +
-        '📦 PACK: ' + (pack ? pack.name + ' - ' + pack.price + '€ HT' : 'Non défini') + '\\n\\n' +
-        (upsellsList.length > 0 ? '📋 OPTIONS:\\n' + upsellsList.join('\\n') + '\\n\\n' : '') +
-        (fd.care ? '✅ Tomorrow Care (39€/mois) souscrit\\n\\n' : '') +
-        '👤 CLIENT\\n' +
-        'Marque: ' + (fd.brandName || 'Non renseigné') + '\\n' +
-        'Email: ' + (fd.email || 'Non renseigné') + '\\n' +
-        'Téléphone: ' + (fd.phone || 'Non renseigné') + '\\n\\n' +
-        '🎯 CIBLE & POSITIONNEMENT\\n' +
-        'Pitch: ' + (fd.pitch || 'Non renseigné') + '\\n' +
-        'Target: ' + (fd.target || 'Non renseigné') + '\\n' +
-        'Archétype: ' + (fd.archetype || 'Non renseigné') + '\\n\\n' +
-        '✍️ COPYWRITING: ' + (fd.copywriting === 'me' ? 'Client fournit' : 'Tomorrow rédige') + '\\n\\n' +
-        (fd.hasDomain ? '🌐 Domaine: ' + (fd.domainName || 'À préciser') : '🌐 Pas de domaine') + '\\n\\n' +
-        '💳 Payment Intent ID: ' + (window.paymentIntentId || 'N/A') + '\\n' +
-        '━━━━━━━━━━━━━━━━━━━━━━';
+      var briefMessage = 'NOUVEAU BRIEF RECU\n\n' +
+        'PACK: ' + (pack ? pack.name + ' - ' + pack.price + ' EUR HT' : 'Non defini') + '\n\n' +
+        (upsellsList.length > 0 ? 'OPTIONS:\n' + upsellsList.join('\n') + '\n\n' : '') +
+        (fd.care ? 'Tomorrow Care (39 EUR/mois) souscrit\n\n' : '') +
+        'CLIENT\n' +
+        'Marque: ' + (fd.brandName || 'Non renseigne') + '\n' +
+        'Email: ' + (fd.email || 'Non renseigne') + '\n' +
+        'Telephone: ' + (fd.phone || 'Non renseigne') + '\n\n' +
+        'CIBLE & POSITIONNEMENT\n' +
+        'Pitch: ' + (fd.pitch || 'Non renseigne') + '\n' +
+        'Target: ' + (fd.target || 'Non renseigne') + '\n' +
+        'Archetype: ' + (fd.archetype || 'Non renseigne') + '\n\n' +
+        'COPYWRITING: ' + (fd.copywriting === 'me' ? 'Client fournit' : 'Tomorrow redige') + '\n\n' +
+        (fd.hasDomain ? 'Domaine: ' + (fd.domainName || 'A preciser') : 'Pas de domaine') + '\n\n' +
+        'Payment Intent ID: ' + (window.paymentIntentId || 'N/A');
       
-      // 1. Brief à l'équipe
       try {
         await fetch('https://api.web3forms.com/submit', {
           method: 'POST',
@@ -1184,31 +1180,26 @@
             message: briefMessage
           })
         });
-        console.log('✅ Brief envoyé');
+        console.log('Brief envoye');
       } catch (e) {
-        console.error('❌ Erreur brief:', e);
+        console.error('Erreur brief:', e);
       }
       
-      // 2. Confirmation client
       try {
         await fetch('https://api.web3forms.com/submit', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
             access_key: WEB3FORMS_KEY,
-            subject: 'Votre site en 24H - Slot bloqué',
+            subject: 'Votre site en 24H - Slot bloque',
             from_name: 'Tomorrow.Online',
             replyto: 't.martella@bigneurons.com',
-            message: 'EMAIL POUR: ' + (fd.email || '') + '\\n\\n' +
-              'Bonjour et merci de votre brief sur www.tomorrow.online.\\n\\n' +
-              'Nous l\\'avons bien reçu et votre slot est bloqué.\\n\\n' +
-              'Restez près de votre téléphone, nous vous appellerons demain matin pour valider le brief avec vous : ensuite le chrono démarre.\\n\\n' +
-              'A très bientôt,\\n\\nL\\'équipe de Tomorrow.online'
+            message: 'EMAIL POUR: ' + (fd.email || '') + '\n\nBonjour et merci de votre brief sur www.tomorrow.online.\n\nNous avons bien recu et votre slot est bloque.\n\nRestez pres de votre telephone, nous vous appellerons demain matin pour valider le brief avec vous.\n\nA tres bientot,\n\nEquipe Tomorrow.online'
           })
         });
-        console.log('✅ Email confirmation envoyé');
+        console.log('Email confirmation envoye');
       } catch (e) {
-        console.error('❌ Erreur confirmation:', e);
+        console.error('Erreur confirmation:', e);
       }
     };
     
