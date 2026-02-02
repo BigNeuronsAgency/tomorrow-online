@@ -982,6 +982,73 @@
   <script src="https://js.stripe.com/v3/"></script>
   <script src="js/stripe-v3.js"></script>
   
+  <!-- FALLBACK: Define functions inline if stripe-v3.js fails -->
+  <script>
+    // Wait for stripe-v3.js to load, then check
+    setTimeout(function() {
+      if (typeof window.applyPromoCode !== 'function') {
+        console.log('⚠️ FALLBACK: Defining applyPromoCode inline');
+        window.applyPromoCode = function() {
+          var input = document.getElementById('promo-code');
+          var message = document.getElementById('promo-message');
+          if (!input || !message) return;
+          
+          var code = input.value.trim().toUpperCase().replace(/\*/g, '*');
+          if (code === 'F*CK WIX' || code === 'FUCKWIX' || code === 'FUCK WIX') {
+            message.innerHTML = '✅ Code valide ! -5% appliqué';
+            message.style.color = '#00FF00';
+            window.promoDiscount = 0.05;
+          } else {
+            message.innerHTML = '❌ Code invalide';
+            message.style.color = '#FF5500';
+            window.promoDiscount = 0;
+          }
+        };
+      }
+      
+      if (typeof window.createPaymentStep !== 'function') {
+        console.log('⚠️ FALLBACK: Defining createPaymentStep inline');
+        window.createPaymentStep = function() {
+          console.log('Creating Stripe Elements...');
+          if (typeof Stripe === 'undefined') {
+            console.error('Stripe SDK not loaded');
+            return;
+          }
+          
+          var stripe = Stripe('pk_test_51Sw2QQHhyPxNNlpw0twD0qfP74lx2DfSoyY3Zw9Unkqx1zcTW8EaoSdpbWbMS8tSwICgJiZfDaMHlpgtYXv2HZWx00GtHoIERg');
+          var elements = stripe.elements();
+          var paymentElement = document.getElementById('payment-element');
+          
+          if (!paymentElement) {
+            console.error('payment-element not found');
+            return;
+          }
+          
+          var card = elements.create('card', {
+            style: {
+              base: {
+                fontSize: '16px',
+                color: '#000000',
+                '::placeholder': { color: '#666666' }
+              }
+            }
+          });
+          card.mount('#payment-element');
+          window.stripeCard = card;
+          window.stripeInstance = stripe;
+          console.log('✅ Stripe Card Element mounted');
+        };
+      }
+      
+      if (typeof window.submitPayment !== 'function') {
+        console.log('⚠️ FALLBACK: Defining submitPayment inline');
+        window.submitPayment = function() {
+          alert('Paiement en cours de configuration. Veuillez réessayer.');
+        };
+      }
+    }, 1000);
+  </script>
+  
   <!-- Initialize IMMEDIATELY after scripts load -->
   <script>
     console.log('=== INIT START ===');
@@ -1072,39 +1139,40 @@
     window.openVideoModal = openVideoModal;
     window.closeVideoModal = closeVideoModal;
     
-    // Footer secret easter egg
-    document.getElementById('footer-secret-trigger')?.addEventListener('click', function() {
-      const modal = document.getElementById('footer-secret-modal');
-      if (modal) {
-        modal.classList.add('active');
-        // Confetti explosion
-        for (let i = 0; i < 50; i++) {
-          setTimeout(() => {
-            const confetti = document.createElement('div');
-            confetti.style.cssText = `
-              position: fixed;
-              left: ${Math.random() * 100}vw;
-              top: ${Math.random() * 100}vh;
-              font-size: ${20 + Math.random() * 30}px;
-              pointer-events: none;
-              z-index: 10001;
-              animation: confetti-explode 1s ease-out forwards;
-            `;
-            confetti.textContent = ['🔥', '🎉', '💀', '⚡', '🤘', '❌'][Math.floor(Math.random() * 6)];
-            document.body.appendChild(confetti);
-            setTimeout(() => confetti.remove(), 1000);
-          }, i * 30);
-        }
+    // Footer secret easter egg - attendre que le DOM soit prêt
+    document.addEventListener('DOMContentLoaded', function() {
+      var trigger = document.getElementById('footer-secret-trigger');
+      var modal = document.getElementById('footer-secret-modal');
+      var closeBtn = document.getElementById('footer-secret-close');
+      
+      if (trigger && modal) {
+        trigger.addEventListener('click', function() {
+          modal.style.display = 'flex';
+          // Confetti explosion
+          for (var i = 0; i < 50; i++) {
+            setTimeout(function() {
+              var confetti = document.createElement('div');
+              confetti.style.cssText = 'position: fixed; left: ' + (Math.random() * 100) + 'vw; top: ' + (Math.random() * 100) + 'vh; font-size: ' + (20 + Math.random() * 30) + 'px; pointer-events: none; z-index: 10001; animation: confetti-explode 1s ease-out forwards;';
+              confetti.textContent = ['🔥', '🎉', '💀', '⚡', '🤘', '❌'][Math.floor(Math.random() * 6)];
+              document.body.appendChild(confetti);
+              setTimeout(function() { confetti.remove(); }, 1000);
+            }, i * 30);
+          }
+        });
       }
-    });
-    
-    document.getElementById('footer-secret-close')?.addEventListener('click', function() {
-      document.getElementById('footer-secret-modal')?.classList.remove('active');
-    });
-    
-    document.getElementById('footer-secret-modal')?.addEventListener('click', function(e) {
-      if (e.target === this) {
-        this.classList.remove('active');
+      
+      if (closeBtn && modal) {
+        closeBtn.addEventListener('click', function() {
+          modal.style.display = 'none';
+        });
+      }
+      
+      if (modal) {
+        modal.addEventListener('click', function(e) {
+          if (e.target === modal) {
+            modal.style.display = 'none';
+          }
+        });
       }
     });
   </script>
