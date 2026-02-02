@@ -1108,10 +1108,47 @@
       var btn = document.getElementById('submit-payment-btn');
       var errorEl = document.getElementById('payment-error');
       
-      if (btn) { btn.disabled = true; btn.textContent = 'Envoi du brief...'; }
+      if (btn) { btn.disabled = true; btn.textContent = 'Upload fichiers...'; }
       
       try {
         if (!window.stripeInstance || !window.stripeElements) throw new Error('Stripe non initialise');
+        
+        var uploadedFileUrls = { logo: '', inspiration: '', branding: '', content: '' };
+        
+        if (window.fileStore && window.fileStore.length > 0) {
+          console.log('Uploading files...');
+          var uploads = await Promise.all(window.fileStore.map(function(file) {
+            var uploadData = new FormData();
+            uploadData.append('file', file);
+            return fetch('https://tmpfiles.org/api/v1/upload', {
+              method: 'POST',
+              body: uploadData
+            })
+            .then(function(res) { return res.json(); })
+            .then(function(data) {
+              if (data.status === 'success') {
+                var downloadUrl = data.data.url.replace('tmpfiles.org/', 'tmpfiles.org/dl/');
+                return { name: file.name, url: downloadUrl };
+              }
+              return { name: file.name, url: 'FAILED' };
+            })
+            .catch(function() { return { name: file.name, url: 'ERROR' }; });
+          }));
+          
+          uploads.forEach(function(f) {
+            if (f.name.toLowerCase().includes('logo')) uploadedFileUrls.logo = f.url;
+            else if (f.name.toLowerCase().includes('inspir')) uploadedFileUrls.inspiration = f.url;
+            else if (f.name.toLowerCase().includes('brand')) uploadedFileUrls.branding = f.url;
+            else uploadedFileUrls.content = f.url;
+          });
+          
+          window.formData.logoUrl = uploadedFileUrls.logo;
+          window.formData.inspirationUrl = uploadedFileUrls.inspiration;
+          window.formData.brandingUrl = uploadedFileUrls.branding;
+          window.formData.contentUrl = uploadedFileUrls.content;
+        }
+        
+        if (btn) { btn.textContent = 'Envoi du brief...'; }
         
         await window.sendBriefEmail();
         

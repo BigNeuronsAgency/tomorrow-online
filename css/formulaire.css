@@ -2196,3 +2196,219 @@ body:has(.modal:not(.hidden)) .whatsapp-float {
     flex-direction: column;
   }
 }
+}
+
+/* === STEP 8 SUCCESS FULLSCREEN === */
+.success-fullscreen {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #0A0A0A 0%, #1A1A1A 100%);
+  padding: 2rem;
+}
+
+.success-container {
+  max-width: 700px;
+  text-align: center;
+}
+
+.success-icon-large {
+  font-size: 5rem;
+  margin-bottom: 1.5rem;
+  animation: bounce 2s ease-in-out infinite;
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-15px); }
+}
+
+.success-title {
+  font-size: clamp(2.5rem, 6vw, 4rem);
+  font-weight: 800;
+  background: linear-gradient(135deg, #FF5500, #FF0000);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 1rem;
+}
+
+.success-intro {
+  font-size: 1.125rem;
+  color: rgba(255, 255, 255, 0.8);
+  margin-bottom: 3rem;
+}
+
+.success-timeline {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  margin-bottom: 3rem;
+  text-align: left;
+}
+
+.timeline-step {
+  display: flex;
+  align-items: flex-start;
+  gap: 1.5rem;
+  padding: 1.5rem;
+  opacity: 0.5;
+  transition: opacity 0.3s;
+}
+
+.timeline-step.completed,
+.timeline-step.active {
+  opacity: 1;
+}
+
+.timeline-icon {
+  flex-shrink: 0;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.1);
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.75rem;
+  transition: all 0.3s;
+}
+
+.timeline-step.completed .timeline-icon {
+  background: rgba(0, 255, 0, 0.2);
+  border-color: #00FF00;
+}
+
+.timeline-step.active .timeline-icon {
+  background: rgba(255, 85, 0, 0.2);
+  border-color: #FF5500;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(255, 85, 0, 0.7); }
+  50% { box-shadow: 0 0 0 20px rgba(255, 85, 0, 0); }
+}
+
+.timeline-text h3 {
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: var(--white);
+  margin-bottom: 0.25rem;
+}
+
+.timeline-text p {
+  font-size: 0.95rem;
+  color: rgba(255, 255, 255, 0.7);
+  margin: 0.25rem 0;
+}
+
+.timeline-text small {
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.5);
+  display: block;
+  margin-top: 0.5rem;
+}
+
+.timeline-connector {
+  width: 2px;
+  height: 40px;
+  background: rgba(255, 255, 255, 0.1);
+  margin-left: calc(1.5rem + 29px);
+}
+
+.timeline-connector.active {
+  background: linear-gradient(to bottom, #FF5500, rgba(255, 85, 0, 0.2));
+}
+
+.success-note-box {
+  background: rgba(255, 85, 0, 0.1);
+  border: 1px solid rgba(255, 85, 0, 0.3);
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.success-note-title {
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: #FF5500;
+  margin-bottom: 0.5rem;
+}
+
+.success-note-text {
+  font-size: 0.95rem;
+  color: rgba(255, 255, 255, 0.8);
+  margin: 0;
+}
+
+.success-actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  margin-bottom: 2rem;
+}
+
+.btn-success-home,
+.btn-success-close {
+  padding: 1rem 2rem;
+  border: none;
+  border-radius: 8px;
+  font-weight: 700;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.btn-success-home {
+  background: linear-gradient(135deg, #FF5500, #FF0000);
+  color: var(--white);
+}
+
+.btn-success-home:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 30px rgba(255, 85, 0, 0.4);
+}
+
+.btn-success-close {
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--white);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.btn-success-close:hover {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.success-footer-text {
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+@media (max-width: 768px) {
+  .success-timeline {
+    gap: 0;
+  }
+  
+  .timeline-step {
+    padding: 1rem;
+  }
+  
+  .timeline-icon {
+    width: 50px;
+    height: 50px;
+    font-size: 1.5rem;
+  }
+  
+  .timeline-connector {
+    margin-left: calc(1rem + 24px);
+    height: 30px;
+  }
+  
+  .success-actions {
+    flex-direction: column;
+  }
