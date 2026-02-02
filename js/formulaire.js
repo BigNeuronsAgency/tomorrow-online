@@ -795,6 +795,8 @@ function getStepContent() {
   if (currentStep === 8) {
     return `
       <div class="step step-8 success-fullscreen">
+        <button onclick="window.closeModal()" style="position: fixed; top: 2rem; right: 2rem; background: rgba(255,255,255,0.1); border: 2px solid rgba(255,255,255,0.3); color: #FFFFFF; width: 50px; height: 50px; border-radius: 50%; font-size: 1.5rem; cursor: pointer; z-index: 99999; transition: all 0.2s;" onmouseover="this.style.background='rgba(255,255,255,0.2)'" onmouseout="this.style.background='rgba(255,255,255,0.1)'">×</button>
+        
         <div class="success-container">
           <div class="success-icon-large">🎉</div>
           <h1 class="success-title">Slot sécurisé !</h1>
