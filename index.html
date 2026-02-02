@@ -975,16 +975,13 @@
   <script src="js/easter-eggs.js"></script>
   <script src="js/marquee.js"></script>
   <script src="js/main.js"></script>
-  <script src="js/formulaire.js"></script>
-  <script src="js/impatient-kid.js"></script>
   
-  <!-- Stripe.js SDK -->
+  <!-- Stripe.js SDK - MUST load before formulaire.js -->
   <script src="https://js.stripe.com/v3/"></script>
-  <script src="js/stripe-v3.js?v=20260202-1143"></script>
   
-  <!-- FALLBACK: Define functions IMMEDIATELY -->
+  <!-- Payment functions - MUST be defined before formulaire.js -->
   <script>
-    console.log('🔧 Defining payment functions inline...');
+    console.log('🔧 Defining payment functions...');
     
     window.applyPromoCode = function() {
       var input = document.getElementById('promo-code');
@@ -997,7 +994,6 @@
         message.style.color = '#00FF00';
         window.promoDiscount = 0.05;
         
-        // Mettre à jour le total affiché
         if (typeof window.formData !== 'undefined' && typeof window.PACKS !== 'undefined') {
           var pack = window.PACKS.find(function(p) { return p.id === window.formData.selectedPack; });
           var total = pack ? pack.price : 0;
@@ -1028,12 +1024,13 @@
       console.log('🔄 createPaymentStep called');
       if (typeof Stripe === 'undefined') {
         console.error('Stripe SDK not loaded');
-        document.getElementById('payment-element').innerHTML = '<p style="color: red;">Erreur: Stripe non chargé. Rechargez la page.</p>';
+        var el = document.getElementById('payment-element');
+        if (el) el.innerHTML = '<p style="color: red;">Erreur: Stripe non chargé.</p>';
         return;
       }
       
       try {
-        var pack = window.PACKS ? window.PACKS.find(function(p) { return p.id === window.formData.selectedPack; }) : null;
+        var pack = (window.PACKS && window.formData) ? window.PACKS.find(function(p) { return p.id === window.formData.selectedPack; }) : null;
         var total = pack ? pack.price : 950;
         
         if (window.formData && window.formData.upsells && window.UPSELLS) {
@@ -1064,12 +1061,10 @@
           body: JSON.stringify(payload)
         });
         
-        if (!response.ok) {
-          throw new Error('Worker returned ' + response.status);
-        }
+        if (!response.ok) throw new Error('Worker returned ' + response.status);
         
         var data = await response.json();
-        console.log('✅ PaymentIntent created:', data.clientSecret ? 'OK' : 'NO SECRET');
+        console.log('✅ PaymentIntent created');
         
         var stripe = Stripe('pk_test_51Sw2QQHhyPxNNlpw0twD0qfP74lx2DfSoyY3Zw9Unkqx1zcTW8EaoSdpbWbMS8tSwICgJiZfDaMHlpgtYXv2HZWx00GtHoIERg');
         var elements = stripe.elements({ 
@@ -1077,11 +1072,7 @@
           locale: 'fr',
           appearance: {
             theme: 'stripe',
-            variables: {
-              colorPrimary: '#FF5500',
-              colorBackground: '#FFFFFF',
-              colorText: '#000000'
-            }
+            variables: { colorPrimary: '#FF5500', colorBackground: '#FFFFFF', colorText: '#000000' }
           }
         });
         
@@ -1095,7 +1086,8 @@
         
       } catch (error) {
         console.error('❌ Payment error:', error);
-        document.getElementById('payment-element').innerHTML = '<p style="color: #FF5500; padding: 20px; background: #1A1A1A; border-radius: 10px;">Erreur de chargement. <a href="javascript:location.reload()" style="color: #FF5500; text-decoration: underline;">Rechargez la page</a></p>';
+        var el = document.getElementById('payment-element');
+        if (el) el.innerHTML = '<p style="color: #FF5500; padding: 20px;">Erreur de chargement. <a href="javascript:location.reload()" style="color: #FF5500;">Rechargez la page</a></p>';
       }
     };
     
@@ -1103,15 +1095,10 @@
       var btn = document.getElementById('submit-payment-btn');
       var errorEl = document.getElementById('payment-error');
       
-      if (btn) {
-        btn.disabled = true;
-        btn.textContent = 'Traitement...';
-      }
+      if (btn) { btn.disabled = true; btn.textContent = 'Traitement...'; }
       
       try {
-        if (!window.stripeInstance || !window.stripeElements) {
-          throw new Error('Stripe non initialisé');
-        }
+        if (!window.stripeInstance || !window.stripeElements) throw new Error('Stripe non initialisé');
         
         var billingName = document.getElementById('billing-name')?.value || 'Client';
         
@@ -1120,33 +1107,26 @@
           confirmParams: {
             return_url: window.location.origin + '/success.html',
             payment_method_data: {
-              billing_details: {
-                name: billingName,
-                address: { country: 'FR' }
-              }
+              billing_details: { name: billingName, address: { country: 'FR' } }
             }
           }
         });
         
-        if (result.error) {
-          throw new Error(result.error.message);
-        }
+        if (result.error) throw new Error(result.error.message);
         
       } catch (error) {
         console.error('❌ Submit error:', error);
-        if (errorEl) {
-          errorEl.textContent = error.message;
-          errorEl.classList.remove('hidden');
-        }
-        if (btn) {
-          btn.disabled = false;
-          btn.textContent = 'Sécuriser mon slot';
-        }
+        if (errorEl) { errorEl.textContent = error.message; errorEl.classList.remove('hidden'); }
+        if (btn) { btn.disabled = false; btn.textContent = 'Sécuriser mon slot'; }
       }
     };
     
     console.log('✅ Payment functions defined');
   </script>
+  
+  <!-- Formulaire AFTER payment functions -->
+  <script src="js/formulaire.js"></script>
+  <script src="js/impatient-kid.js"></script>
   
   <!-- Initialize IMMEDIATELY after scripts load -->
   <script>
