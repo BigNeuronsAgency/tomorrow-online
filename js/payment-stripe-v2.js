@@ -3,6 +3,8 @@
 // Pre-authorization (capture_method: manual)
 // ========================================
 
+console.log('🚀 payment-stripe-v2.js START LOADING');
+
 // Configuration Stripe (MODE TEST)
 const STRIPE_PUBLISHABLE_KEY = 'pk_test_51Sw2QQHhyPxNNlpw0twD0qfP74lx2DfSoyY3Zw9Unkqx1zcTW8EaoSdpbWbMS8tSwICgJiZfDaMHlpgtYXv2HZWx00GtHoIERg';
 const STRIPE_WORKER_URL = 'https://tomorrow-stripe.t-martella.workers.dev';
@@ -580,6 +582,8 @@ function showSuccessScreen() {
 }
 
 // Export des fonctions
+console.log('🚀 payment-stripe-v2.js EXPORTING FUNCTIONS');
 window.createPaymentStep = createPaymentStep;
 window.submitPayment = submitPayment;
 window.applyPromoCode = applyPromoCode;
+console.log('✅ payment-stripe-v2.js FULLY LOADED');
