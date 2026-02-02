@@ -802,58 +802,62 @@ function getStepContent() {
           <h1 class="success-title">Slot sécurisé !</h1>
           <p class="success-intro">Votre brief a été reçu. Voici ce qui va se passer :</p>
           
-          <div class="success-timeline">
-            <div class="timeline-step completed">
-              <div class="timeline-icon">✓</div>
-              <div class="timeline-text">
-                <h3>Brief reçu</h3>
-                <p>Votre demande est enregistrée</p>
+          <div class="success-grid-desktop">
+            <div class="success-timeline">
+              <div class="timeline-step completed">
+                <div class="timeline-icon">✓</div>
+                <div class="timeline-text">
+                  <h3>Brief reçu</h3>
+                  <p>Votre demande est enregistrée</p>
+                </div>
+              </div>
+              
+              <div class="timeline-connector active"></div>
+              
+              <div class="timeline-step active">
+                <div class="timeline-icon">⏳</div>
+                <div class="timeline-text">
+                  <h3>Analyse humaine</h3>
+                  <p>Notre équipe étudie votre projet</p>
+                </div>
+              </div>
+              
+              <div class="timeline-connector"></div>
+              
+              <div class="timeline-step">
+                <div class="timeline-icon">📞</div>
+                <div class="timeline-text">
+                  <h3>Appel de validation</h3>
+                  <p><strong>Demain entre 09h et 10h</strong></p>
+                  <small>Restez près de votre téléphone</small>
+                </div>
+              </div>
+              
+              <div class="timeline-connector"></div>
+              
+              <div class="timeline-step">
+                <div class="timeline-icon">🚀</div>
+                <div class="timeline-text">
+                  <h3>Livraison</h3>
+                  <p><strong>24h après validation</strong></p>
+                </div>
               </div>
             </div>
             
-            <div class="timeline-connector active"></div>
-            
-            <div class="timeline-step active">
-              <div class="timeline-icon">⏳</div>
-              <div class="timeline-text">
-                <h3>Analyse humaine</h3>
-                <p>Notre équipe étudie votre projet</p>
+            <div class="success-right">
+              <div class="success-note-box">
+                <p class="success-note-title">💳 Aucun débit avant livraison</p>
+                <p class="success-note-text">Votre carte ne sera prélevée qu'à la livraison du site.</p>
               </div>
-            </div>
-            
-            <div class="timeline-connector"></div>
-            
-            <div class="timeline-step">
-              <div class="timeline-icon">📞</div>
-              <div class="timeline-text">
-                <h3>Appel de validation</h3>
-                <p><strong>Demain entre 09h et 10h</strong></p>
-                <small>Restez près de votre téléphone</small>
+              
+              <div class="success-actions">
+                <button onclick="window.location.href='/'" class="btn-success-home">Retour à l'accueil</button>
+                <button onclick="window.closeModal()" class="btn-success-close">Fermer cette fenêtre</button>
               </div>
-            </div>
-            
-            <div class="timeline-connector"></div>
-            
-            <div class="timeline-step">
-              <div class="timeline-icon">🚀</div>
-              <div class="timeline-text">
-                <h3>Livraison</h3>
-                <p><strong>24h après validation</strong></p>
-              </div>
+              
+              <p class="success-footer-text">Merci de votre confiance — L'équipe Tomorrow.Online</p>
             </div>
           </div>
-          
-          <div class="success-note-box">
-            <p class="success-note-title">💳 Aucun débit avant livraison</p>
-            <p class="success-note-text">Votre carte ne sera prélevée qu'à la livraison du site.</p>
-          </div>
-          
-          <div class="success-actions">
-            <button onclick="window.location.href='/'" class="btn-success-home">Retour à l'accueil</button>
-            <button onclick="window.closeModal()" class="btn-success-close">Fermer cette fenêtre</button>
-          </div>
-          
-          <p class="success-footer-text">Merci de votre confiance — L'équipe Tomorrow.Online</p>
         </div>
       </div>
     `;

@@ -2643,3 +2643,26 @@ body:has(.modal:not(.hidden)) .whatsapp-float {
   position: relative !important;
   padding-top: 3rem !important;
 }
+
+/* Desktop 2-column layout for step 8 */
+@media (min-width: 1024px) {
+  .success-grid-desktop {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 3rem !important;
+    align-items: start !important;
+  }
+  
+  .step-8 .success-timeline {
+    margin-bottom: 0 !important;
+  }
+}
+
+/* Mobile keep vertical */
+@media (max-width: 1023px) {
+  .success-grid-desktop {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 2rem !important;
+  }
+}
