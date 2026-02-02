@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Migration Shopify vers Webflow | Tomorrow.Online</title>
+  <meta name="description" content="Migrez votre boutique Shopify vers Webflow en 24H. Design sur-mesure, vitrine haut de gamme. Tomorrow.Online.">
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="../images/favicon.png">
+  <link rel="apple-touch-icon" href="../images/webclip.png">
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700;800;900&family=Syne:wght@700;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+  
+  <!-- CSS -->
+  <link rel="stylesheet" href="../css/design-system.css">
+  <link rel="stylesheet" href="../css/home.css">
+  
+  <!-- GSAP -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+  
+  <!-- Lenis Smooth Scroll -->
+  <script src="https://unpkg.com/lenis@1.0.19/dist/lenis.min.js"></script>
+  
+  <style>
+    /* Migration page specific styles */
+    body {
+      background: #000;
+      color: #fff;
+    }
+    
+    .migration-hero {
+      padding: 180px 24px 100px;
+      text-align: center;
+      border-bottom: 1px solid #222;
+    }
+    
+    .migration-hero h1 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 900;
+      font-size: clamp(48px, 10vw, 120px);
+      line-height: 0.9;
+      text-transform: uppercase;
+      margin-bottom: 40px;
+    }
+    
+    .migration-hero .cms-name {
+      background: linear-gradient(90deg, rgba(180,7,254,1) 0%, rgba(255,10,55,1) 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    
+    .migration-intro {
+      max-width: 900px;
+      margin: 0 auto 60px;
+      font-size: 24px;
+      line-height: 1.5;
+      color: #999;
+      border-left: 4px solid;
+      border-image: linear-gradient(90deg, rgba(180,7,254,1) 0%, rgba(255,10,55,1) 100%) 1;
+      padding-left: 32px;
+    }
+    
+    .migration-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 80px 24px;
+    }
+    
+    .migration-section {
+      margin-bottom: 80px;
+    }
+    
+    .migration-section h2 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 900;
+      font-size: 36px;
+      text-transform: uppercase;
+      margin-bottom: 32px;
+      border-left: 4px solid #fff;
+      padding-left: 24px;
+    }
+    
+    .migration-section h3 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 700;
+      font-size: 24px;
+      margin: 32px 0 16px;
+      color: #fff;
+    }
+    
+    .migration-section p {
+      font-size: 18px;
+      line-height: 1.7;
+      color: #999;
+      margin-bottom: 24px;
+    }
+    
+    .migration-section strong {
+      color: #fff;
+    }
+    
+    .comparison-table {
+      width: 100%;
+      margin: 40px 0;
+      border: 2px solid #222;
+      border-collapse: collapse;
+    }
+    
+    .comparison-table thead {
+      background: #111;
+    }
+    
+    .comparison-table th,
+    .comparison-table td {
+      padding: 16px 24px;
+      text-align: left;
+      border: 1px solid #222;
+    }
+    
+    .comparison-table th {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      font-weight: 700;
+    }
+    
+    .comparison-table td {
+      font-size: 16px;
+    }
+    
+    .comparison-table .highlight {
+      color: #fff;
+      font-weight: 700;
+    }
+    
+    .protocol-section {
+      background: #111;
+      padding: 80px 24px;
+      border-top: 1px solid #222;
+      border-bottom: 1px solid #222;
+    }
+    
+    .protocol-step {
+      margin-bottom: 40px;
+    }
+    
+    .protocol-step-number {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      background: linear-gradient(90deg, rgba(180,7,254,1) 0%, rgba(255,10,55,1) 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 8px;
+    }
+    
+    .protocol-step h3 {
+      font-size: 24px;
+      margin-bottom: 12px;
+    }
+    
+    .cms-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      justify-content: center;
+      padding: 40px 0;
+    }
+    
+    .cms-pill {
+      display: inline-block;
+      padding: 8px 20px;
+      border: 1px solid #333;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: #666;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+    
+    .cms-pill:hover {
+      border-color: #fff;
+      color: #fff;
+      background: rgba(255,255,255,0.05);
+    }
+    
+    .migration-cta {
+      text-align: center;
+      padding: 120px 24px;
+      background: linear-gradient(90deg, rgba(180,7,254,1) 0%, rgba(255,10,55,1) 100%);
+    }
+    
+    .migration-cta h2 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 900;
+      font-size: clamp(36px, 6vw, 72px);
+      text-transform: uppercase;
+      margin-bottom: 32px;
+      color: #fff;
+    }
+    
+    .migration-cta button {
+      background: #fff;
+      color: #000;
+      border: none;
+      padding: 20px 48px;
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 700;
+      font-size: 16px;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: all 0.2s;
+      box-shadow: 4px 4px 0px 0px #000;
+    }
+    
+    .migration-cta button:hover {
+      transform: translateY(-2px);
+      box-shadow: 6px 6px 0px 0px #000;
+    }
+    
+    .migration-cta p {
+      margin-top: 16px;
+      font-size: 14px;
+      opacity: 0.9;
+    }
+  </style>
+</head>
+<body>
+  
+  <!-- Custom Cursor -->
+  <div class="custom-cursor" id="cursor"></div>
+  
+  <!-- Grid Background -->
+  <div class="bg-grid-fixed"></div>
+  
+  <!-- Header -->
+  <header class="header">
+    <nav class="nav">
+      <div class="nav-logo" onclick="window.location.href='../index.html'">
+        <img src="../images/TO-logo.webp" alt="Tomorrow.Online" class="logo">
+      </div>
+      
+      <div class="nav-links">
+        <a href="../process-24h.html" class="nav-link">Process</a>
+        <a href="../realisations.html" class="nav-link">Réalisations</a>
+        <div class="nav-dropdown">
+          <span class="nav-link nav-link-dropdown">
+            Ressources
+            <span class="dropdown-arrow">▼</span>
+          </span>
+          <div class="dropdown-content">
+            <a href="../la-vision-tomorrow.html">🔮 Notre Vision</a>
+            <a href="../notre-histoire.html">🏢 Qui sommes-nous</a>
+            <a href="../comparatif-solutions-web.html">⚡ Comparatif Solutions</a>
+            <a href="../migrations.html">🔄 Migrations CMS</a>
+          </div>
+        </div>
+      </div>
+      
+      <div class="nav-cta">
+        <button class="btn btn-primary" onclick="window.location.href='../index.html#pricing'">
+          Réserver mon créneau
+        </button>
+      </div>
+      
+      <!-- Mobile Menu Button -->
+      <button class="mobile-menu-btn" onclick="toggleMobileMenu()">
+        <span class="hamburger"></span>
+      </button>
+    </nav>
+    
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobileMenu">
+      <a href="../process-24h.html">Process</a>
+      <a href="../realisations.html">Réalisations</a>
+      <div class="mobile-dropdown" onclick="toggleMobileDropdown(this)">
+        <span>Ressources ▼</span>
+        <div class="mobile-dropdown-content">
+          <a href="../la-vision-tomorrow.html">🔮 Notre Vision</a>
+          <a href="../notre-histoire.html">🏢 Qui sommes-nous</a>
+          <a href="../comparatif-solutions-web.html">⚡ Comparatif Solutions</a>
+          <a href="../migrations.html">🔄 Migrations CMS</a>
+        </div>
+      </div>
+      <button class="btn btn-primary" onclick="window.location.href='../index.html#pricing'">Réserver</button>
+    </div>
+  </header>
+  
+  <!-- Hero Section -->
+  <section class="migration-hero">
+    <h1>
+      MIGRER DE<br>
+      <span class="cms-name">SHOPIFY</span><br>
+      VERS WEBFLOW.
+    </h1>
+    <p class="migration-intro">
+      Le roi du E-commerce pour encaisser, mais un cauchemar pour les designers. Votre marque mérite mieux qu'un template à 150$ que tout le monde utilise.
+    </p>
+  </section>
+  
+  <!-- Content Section -->
+  <div class="migration-content">
+    
+    <!-- Pourquoi quitter Section -->
+    <div class="migration-section">
+      <h2>Pourquoi quitter Shopify ?</h2>
+      
+      <h3>1. Le piège du "Liquid"</h3>
+      <p>Modifier le code de Shopify demande un développeur spécialisé coûteux. <strong>Vous êtes prisonnier de votre thème.</strong></p>
+      
+      <h3>2. Apps = Lenteur</h3>
+      <p>Comme WP, chaque fonctionnalité (Avis, Upsell) demande une App qui ajoute du Javascript lourd. <strong>Chaque App ralentit votre site.</strong></p>
+      
+      <h3>3. L'approche Hybride</h3>
+      <p>Ne quittez pas Shopify pour les paiements ! Nous utilisons Webflow pour créer une vitrine incroyable (Marketing), et nous connectons des boutons "Buy Button" Shopify. <strong>Le meilleur des deux mondes.</strong></p>
+    </div>
+    
+    <!-- Comparatif Section -->
+    <div class="migration-section">
+      <h2>Le Comparatif</h2>
+      
+      <table class="comparison-table">
+        <thead>
+          <tr>
+            <th>Critère</th>
+            <th>Shopify</th>
+            <th>Tomorrow</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="highlight">Design</td>
+            <td>Limité par le thème</td>
+            <td class="highlight">🎨 100% Sur-mesure</td>
+          </tr>
+          <tr>
+            <td class="highlight">CMS (Blog)</td>
+            <td>Basique / Rigide</td>
+            <td class="highlight">Flexible & Visuel</td>
+          </tr>
+          <tr>
+            <td class="highlight">Frais</td>
+            <td>Abonnement Apps</td>
+            <td class="highlight">Inclus (Natif)</td>
+          </tr>
+          <tr>
+            <td class="highlight">Code</td>
+            <td>Liquid (Propriétaire)</td>
+            <td class="highlight">Standard Web</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    
+  </div>
+  
+  <!-- Protocol Section -->
+  <section class="protocol-section">
+    <div class="migration-content">
+      <h2 style="border: none; padding: 0; margin-bottom: 60px;">PROTOCOLE DE MIGRATION</h2>
+      <p style="margin-bottom: 60px; font-size: 24px;">Comment on vous sort de là.</p>
+      
+      <div class="protocol-step">
+        <div class="protocol-step-number">01. Headless Setup</div>
+        <h3>Configuration Headless</h3>
+        <p>On garde votre catalogue produits sur Shopify.</p>
+      </div>
+      
+      <div class="protocol-step">
+        <div class="protocol-step-number">02. Synchro</div>
+        <h3>Connexion API</h3>
+        <p>On connecte Webflow à Shopify via API pour que les produits s'affichent sur le site design.</p>
+      </div>
+      
+      <div class="protocol-step">
+        <div class="protocol-step-number">03. Checkout</div>
+        <h3>Paiement sécurisé</h3>
+        <p>Le client navigue sur Webflow, mais paie sur le checkout sécurisé Shopify.</p>
+      </div>
+      
+      <div class="protocol-step">
+        <div class="protocol-step-number">04. Livraison</div>
+        <h3>Site en ligne en 24H</h3>
+        <p>Votre nouvelle vitrine Shopify est live. Design unique, conversion maximale.</p>
+      </div>
+    </div>
+  </section>
+  
+  <!-- CMS Pills -->
+  <div style="padding: 60px 24px; border-bottom: 1px solid #222;">
+    <p style="text-align: center; font-family: 'JetBrains Mono', monospace; font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; color: #666; margin-bottom: 24px;">Comparer avec d'autres solutions</p>
+    <div class="cms-pills">
+      <a href="wordpress.html" class="cms-pill">WordPress</a>
+      <a href="wix.html" class="cms-pill">Wix</a>
+      <a href="squarespace.html" class="cms-pill">Squarespace</a>
+      <a href="joomla.html" class="cms-pill">Joomla</a>
+    </div>
+  </div>
+  
+  <!-- CTA Section -->
+  <section class="migration-cta">
+    <h2>Prêt à quitter Shopify ?</h2>
+    <button onclick="window.location.href='../index.html#pricing'">
+      Lancer la migration (24H) →
+    </button>
+    <p>Pas de perte de données. Pas de downtime.</p>
+  </section>
+  
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <img src="../images/TO-logo.webp" alt="Tomorrow.Online" class="footer-logo">
+          <p class="footer-tagline font-mono">
+            La première agence web "NO-WAIT" en France.<br>
+            Designed for speed. Powered by intelligence.
+          </p>
+        </div>
+        
+                <div class="footer-links">
+          <h4 class="footer-title font-mono">Services</h4>
+          <ul class="footer-list">
+            <li><a href="../process-24h.html">Process 24H</a></li>
+            <li><a href="../realisations.html">Réalisations</a></li>
+            <li><a href="../site-vitrine-pme.html">Sites Vitrines PME</a></li>
+            <li><a href="../creation-sites-internet-24h.html">Sites 24H Chrono</a></li>
+            <li><a href="../landing-page-haute-conversion.html">Landing Pages CRO</a></li>
+            <li><a href="../agence-webflow-paris.html">Agence Paris</a></li>
+            <li><a href="../agence-webflow-rapide.html">Agence Rapide</a></li>
+            <li><a href="../comparatif-solutions-web.html">Comparatif</a></li>
+            <li><a href="../migrations.html">Migrations</a></li>
+          </ul>
+        </div>
+        
+        <div class="footer-links">
+          <h4 class="footer-title font-mono">À Propos</h4>
+          <ul class="footer-list">
+            <li><a href="../la-vision-tomorrow.html">La Vision</a></li>
+            <li><a href="../notre-histoire.html">Notre Histoire</a></li>
+          </ul>
+        </div>
+        
+        <div class="footer-links">
+          <h4 class="footer-title font-mono">Réseau & Contact</h4>
+          <ul class="footer-list">
+            <li><a href="https://www.bigneurons.com" target="_blank">Groupe Big Neurons <span class="external-icon">↗</span></a></li>
+            <li><a href="../mentions-legales.html">Mentions Légales</a></li>
+            <li><a href="mailto:hello@tomorrow.online">Contact Ops</a></li>
+          </ul>
+        </div>
+      </div>
+      
+      <div class="footer-bottom">
+        <p class="footer-copyright font-mono">
+          © 2026 TOMORROW AGENCY. UNE MARQUE DE SAS BIG NEURONS. TOMORROW.ONLINE EST LA PREMIÈRE AGENCE WEB "NO-WAIT" EN FRANCE. DESIGNED FOR SPEED. POWERED BY INTELLIGENCE.
+        </p>
+        <div class="footer-status font-mono">
+          SYSTEM STATUS: OPERATIONAL
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="../js/cursor.js"></script>
+  <script src="../js/navigation.js"></script>
+  
+  <script>
+    // Mobile menu toggle
+    function toggleMobileMenu() {
+      const menu = document.getElementById('mobileMenu');
+      if(menu) menu.classList.toggle('active');
+    }
+    
+    function toggleMobileDropdown(el) {
+      el.classList.toggle('active');
+    }
+  </script>
+  
+</body>
+</html>

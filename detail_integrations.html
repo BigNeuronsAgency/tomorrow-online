@@ -1,0 +1,193 @@
+<!DOCTYPE html><!--  Last Published: Mon Dec 29 2025 20:04:39 GMT+0000 (Coordinated Universal Time)  -->
+<html data-wf-page="692ec4a557410e8427499d60" data-wf-site="69296dff64369c09698b8e09" lang="fr">
+<head>
+  <meta charset="utf-8">
+  <title>tomorrow.online</title>
+  <meta content="width=device-width, initial-scale=1" name="viewport">
+  <link href="css/normalize.css" rel="stylesheet" type="text/css">
+  <link href="css/webflow.css" rel="stylesheet" type="text/css">
+  <link href="css/tomorrow-online-test.webflow.css" rel="stylesheet" type="text/css">
+  <script type="text/javascript">!function(o,c){var n=c.documentElement,t=" w-mod-";n.className+=t+"js",("ontouchstart"in o||o.DocumentTouch&&c instanceof DocumentTouch)&&(n.className+=t+"touch")}(window,document);</script>
+  <link href="images/favicon.png" rel="shortcut icon" type="image/x-icon">
+  <link href="images/webclip.png" rel="apple-touch-icon">
+</head>
+<body>
+  <div class="w-embed w-script">
+    <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600;800;900&family=Inter:wght@400;500&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+    body { background: #ffffff; color: #000; font-family: 'Inter', sans-serif; }
+    .font-heading { font-family: 'Archivo', sans-serif; }
+    .font-mono { font-family: 'JetBrains Mono', monospace; }
+    .tech-bg { background-image: radial-gradient(#E5E5E5 1px, transparent 1px); background-size: 24px 24px; }
+    /* --- STYLE STANDARD (FOND BLANC) --- */
+    .w-richtext h1, .w-richtext h2, .w-richtext h3, .w-richtext h4 { 
+        font-family: 'Archivo'; 
+        margin-top: 2.5rem; 
+        margin-bottom: 1rem; 
+        text-transform: uppercase; 
+        font-weight: 900; 
+        line-height: 1.1;
+        color: #000000; /* Noir par défaut */
+    }
+    .w-richtext h3 { 
+        font-size: 1.5rem; 
+        border-left: 4px solid #FF3333; 
+        padding-left: 1rem; 
+    }
+    .w-richtext p, .w-richtext li { 
+        margin-bottom: 1rem; 
+        line-height: 1.7; 
+        color: #444444; 
+        font-size: 1.1rem; 
+    }
+    .w-richtext ul { list-style: none; padding-left: 0; margin-bottom: 2rem; }
+    .w-richtext li { margin-bottom: 0.5rem; padding-left: 1.5rem; position: relative; }
+    .w-richtext li::before { content: "→"; color: #FF3333; position: absolute; left: 0; font-weight: bold; }
+    /* --- EXCEPTION DARK MODE (POUR LE PROTOCOLE) --- */
+    /* Tout texte riche qui se trouve dans une section noire devient blanc */
+    .bg-black .w-richtext h1, 
+    .bg-black .w-richtext h2, 
+    .bg-black .w-richtext h3,
+    .bg-black .w-richtext h4 { 
+        color: #FFFFFF !important; 
+    }
+    .bg-black .w-richtext p, 
+    .bg-black .w-richtext li { 
+        color: #CCCCCC !important; 
+    }
+</style>
+    <nav class="fixed top-0 w-full z-50 bg-white/90 backdrop-blur border-b border-gray-200 h-20 flex items-center justify-between px-6 md:px-10">
+      <a href="index.html" class="font-heading font-black text-xl tracking-tighter">TOMORROW<span class="text-[#FF3333]">.</span></a>
+      <a href="index.html" class="hidden md:block font-mono text-xs font-bold uppercase hover:text-[#FF3333]">← Retour QG</a>
+      <div onclick="window.openModal('STARTER')" class="bg-black text-white px-6 py-3 font-heading font-bold text-xs uppercase cursor-pointer hover:bg-[#FF3333] transition">Lancer la migration</div>
+    </nav>
+    <header class="pt-32 pb-12 px-6 md:px-10 tech-bg border-b border-gray-200">
+      <div class="max-w-5xl mx-auto">
+        <div class="font-mono text-xs text-gray-400 mb-8 uppercase tracking-widest">INTEGRATIONS /// </div>
+        <div class="grid md:grid-cols-12 gap-12 items-start">
+          <div class="md:col-span-8">
+            <div class="flex items-center gap-6 mb-8">
+              <div class="w-20 h-20 flex items-center justify-center border-2 border-black bg-black shadow-[4px_4px_0px_0px_#000]" style="background-color: ">
+                <img src="" class="w-10 h-10 object-contain invert filter brightness-0 invert">
+              </div>
+              <h1 class="font-heading font-black text-5xl md:text-7xl uppercase leading-[0.9]">
+                <br><span class="text-gray-300">VS WEBFLOW</span>
+              </h1>
+            </div>
+            <p class="text-xl md:text-2xl font-medium leading-relaxed border-l-4 border-[#FF3333] pl-6">
+              ""
+            </p>
+          </div>
+          <div class="md:col-span-4 bg-white border-2 border-black p-6 shadow-[8px_8px_0px_0px_#000]">
+            <div class="flex justify-between items-center mb-6 border-b border-gray-100 pb-4">
+              <div class="font-mono text-xs text-gray-400">TECH SCORE</div>
+              <div class="font-heading font-black text-4xl" style="color: ">/10</div>
+            </div>
+            <div class="space-y-3 font-mono text-xs">
+              <div class="flex justify-between"><span>Performance</span><span class="text-red-500">Lente</span></div>
+              <div class="flex justify-between"><span>Sécurité</span><span class="text-red-500">Risque</span></div>
+              <div class="flex justify-between"><span>Maintenance</span><span class="text-red-500">Lourde</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+    <div class="max-w-4xl mx-auto px-6 pt-12 pb-16"></div>
+    <div class="w-dyn-bind-empty w-richtext"></div>
+    <div class="w-embed"></div>
+    <section class="py-16 bg-gray-50 border-y border-gray-200">
+      <div class="max-w-5xl mx-auto px-6">
+        <h2 class="font-heading font-black text-3xl uppercase mb-8">Comparatif Brutal</h2>
+        <div class="overflow-x-auto bg-white border border-black shadow-[4px_4px_0px_0px_#000]">
+          <table class="w-full text-left border-collapse">
+            <thead>
+              <tr class="bg-black text-white font-mono text-xs uppercase">
+                <th class="p-4 border-r border-gray-800">Critère</th>
+                <th class="p-4 border-r border-gray-800"></th>
+                <th class="p-4 text-[#FF3333]">Tomorrow.online</th>
+              </tr>
+            </thead>
+            <tbody class="font-mono text-xs">
+              <tr class="border-b border-gray-100">
+                <td class="p-4 font-bold">Vitesse (Core Web Vitals)</td>
+                <td class="p-4 text-gray-500">Lente (PHP/Serveur)</td>
+                <td class="p-4 font-bold">🚀 Instantanée (Static)</td>
+              </tr>
+              <tr class="border-b border-gray-100">
+                <td class="p-4 font-bold">Sécurité</td>
+                <td class="p-4 text-gray-500">Mises à jour requises</td>
+                <td class="p-4 font-bold">🛡️ Blindé (SOC-2)</td>
+              </tr>
+              <tr class="border-b border-gray-100">
+                <td class="p-4 font-bold">Maintenance</td>
+                <td class="p-4 text-gray-500">Mensuelle & Coûteuse</td>
+                <td class="p-4 font-bold">❌ Zéro maintenance</td>
+              </tr>
+              <tr>
+                <td class="p-4 font-bold">Design</td>
+                <td class="p-4 text-gray-500">Thèmes rigides</td>
+                <td class="p-4 font-bold">🎨 100% Sur-mesure</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+    <section class="bg-black text-white py-20 px-6">
+      <div class="max-w-4xl mx-auto">
+        <div class="font-mono text-xs text-[#FF3333] mb-4">/// PROTOCOLE DE MIGRATION</div>
+        <h2 class="font-heading font-black text-4xl uppercase mb-10">Comment on vous sort de là.</h2>
+        <div class="prose-invert"></div>
+        <div class="w-dyn-bind-empty w-richtext"></div>
+        <div class="w-embed w-script"></div>
+      </div>
+    </section>
+    <div class="py-24 text-center bg-[#FF3333] border-t-4 border-black">
+      <h2 class="font-heading font-black text-4xl md:text-6xl uppercase text-white mb-8">Prêt à quitter ?</h2>
+      <div onclick="window.openModal('STARTER')" class="bg-white text-black px-10 py-5 font-heading font-bold uppercase text-sm inline-block cursor-pointer border-2 border-black shadow-[8px_8px_0px_0px_#000] hover:translate-y-1 hover:shadow-none transition-all">
+        Lancer la migration (24H) ->
+      </div>
+    </div>
+    <footer class="py-12 bg-white text-center font-mono text-xs text-gray-400 border-t border-black">
+      © 2026 Tomorrow.online • Expert Migration to Webflow.
+    </footer>
+    <div id="detailsModal" class="fixed inset-0 z-[150] hidden">
+      <div class="absolute inset-0 bg-black/80 modal-overlay" onclick="window.closeDetails()"></div>
+      <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[90%] md:w-[800px] bg-white p-8">
+        <h2 class="font-heading font-black text-2xl">DÉTAILS OFFRE</h2>
+        <p class="font-mono text-xs mt-4">Voir page d'accueil pour le détail complet.</p><button onclick="window.closeDetails()" class="mt-6 btn-outline px-6 py-2 font-bold uppercase text-xs">Fermer</button>
+      </div>
+    </div>
+    <div id="bookingModal" class="fixed inset-0 z-[100] hidden">
+      <div class="absolute inset-0 bg-black/80 modal-overlay" onclick="window.closeModal()"></div>
+      <div class="absolute right-0 top-0 h-full w-full md:w-[700px] bg-white flex flex-col transform transition-transform duration-300 translate-x-full" id="modalContent">
+        <div class="bg-white border-b border-gray-100 p-8 flex justify-between items-center">
+          <div class="font-heading font-black text-2xl uppercase">SMART BRIEF<span class="text-[#FF3333]">.</span></div>
+          <button onclick="window.closeModal()" class="font-mono text-xs uppercase border px-3 py-2">Fermer [X]</button>
+        </div>
+        <div class="flex-grow p-8 bg-gray-50 flex items-center justify-center text-center">
+          <div>
+            <p class="font-heading font-bold text-xl mb-4">Pour migrer depuis ,<br>passez par le formulaire principal.</p>
+            <a href="/#pricing" class="btn-primary px-8 py-4 font-heading font-bold uppercase inline-block">Aller au formulaire</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script>
+    // MINI SCRIPT POUR QUE LES BOUTONS MARCHENT SUR CETTE PAGE
+    function openModal(plan) {
+        // Redirection vers la home avec ancre pour simplifier (la modale complète est trop lourde à dupliquer ici)
+        window.location.href = '/?plan=' + plan + '#pricing';
+    }
+    window.openModal = openModal;
+    // Animation simple
+    if (typeof gsap !== 'undefined') {
+        gsap.from("header h1", { y: 50, opacity: 0, duration: 1, delay: 0.2 });
+    }
+</script>
+  </div>
+  <script src="https://d3e54v103j8qbb.cloudfront.net/js/jquery-3.5.1.min.dc5e7f18c8.js?site=69296dff64369c09698b8e09" type="text/javascript" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+  <script src="js/webflow.js" type="text/javascript"></script>
+</body>
+</html>

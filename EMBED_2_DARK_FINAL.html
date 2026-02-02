@@ -1,0 +1,153 @@
+<style>
+.faq-content{max-height:0;overflow:hidden;transition:max-height 0.4s ease}
+.faq-content.open{max-height:500px}
+.icon-plus{transition:transform 0.3s ease}
+.icon-plus.rotated{transform:rotate(45deg)}
+</style>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+
+<script type="text/javascript" src="https://cdn.weglot.com/weglot.min.js"></script>
+<script>Weglot.initialize({api_key:'wg_3b8be3f3773886e6a9139b91c364f46f1',hide_switcher:true});</script>
+
+<!-- FAQ Section -->
+<section id="faq" class="py-16 md:py-24 px-4 md:px-10 bg-[#030303] relative z-10 border-t border-[rgba(0,240,255,0.2)]">
+  <div class="grid md:grid-cols-12 gap-10 items-start max-w-7xl mx-auto">
+    <div class="md:col-span-4 md:sticky md:top-40 self-start">
+      <h2 class="font-heading font-black text-5xl md:text-6xl uppercase mb-6 text-[#EAEAEA]">FAQ<span style="color: #00F0FF;">.</span></h2>
+      <p class="font-mono text-xs text-[#EAEAEA]/60 uppercase">Pas de zone d'ombre.<br>Tout est clair avant le départ.</p>
+    </div>
+    <div class="md:col-span-8 border-t border-[rgba(0,240,255,0.2)]">
+      <div class="border-b border-[rgba(0,240,255,0.2)] group cursor-pointer" onclick="window.toggleFaq(this)">
+        <div class="py-8 flex justify-between items-center">
+          <h3 class="font-heading font-bold text-xl uppercase text-[#EAEAEA] group-hover:text-[#00F0FF] transition-colors">Vraiment livré en 24h ?</h3><span class="font-mono text-xl text-[#EAEAEA] icon-plus">+</span>
+        </div>
+        <div class="faq-content">
+          <p class="pb-8 text-sm text-[#EAEAEA]/80 leading-relaxed">Oui. Le chronomètre démarre à la validation du brief ("Sprint Go"). Nous mobilisons une équipe senior complète sur votre projet pendant une journée non-stop.</p>
+        </div>
+      </div>
+      <div class="border-b border-[rgba(0,240,255,0.2)] group cursor-pointer" onclick="window.toggleFaq(this)">
+        <div class="py-8 flex justify-between items-center">
+          <h3 class="font-heading font-bold text-xl uppercase text-[#EAEAEA] group-hover:text-[#00F0FF] transition-colors">Est-ce que le site m'appartient ?</h3><span class="font-mono text-xl text-[#EAEAEA] icon-plus">+</span>
+        </div>
+        <div class="faq-content">
+          <p class="pb-8 text-sm text-[#EAEAEA]/80 leading-relaxed">À 100%. Contrairement à beaucoup d'agences, nous ne vous louons pas votre site. Une fois livré et payé, nous vous transférons la propriété complète du projet Webflow. Vous êtes libre.</p>
+        </div>
+      </div>
+      <div class="border-b border-[rgba(0,240,255,0.2)] group cursor-pointer" onclick="window.toggleFaq(this)">
+        <div class="py-8 flex justify-between items-center">
+          <h3 class="font-heading font-bold text-xl uppercase text-[#EAEAEA] group-hover:text-[#00F0FF] transition-colors">Je suis sur WordPress / Shopify / Autre ?</h3><span class="font-mono text-xl text-[#EAEAEA] icon-plus">+</span>
+        </div>
+        <div class="faq-content">
+          <p class="pb-8 text-sm text-[#EAEAEA]/80 leading-relaxed">Aucun problème. Nous recommandons Webflow pour la performance. Si votre infra est ailleurs, <strong>nous vous livrons le code source exporté (HTML/CSS/JS)</strong> propre et documenté, prêt à être intégré par vos équipes sur n'importe quel CMS.</p>
+        </div>
+      </div>
+      <div class="border-b border-[rgba(0,240,255,0.2)] group cursor-pointer" onclick="window.toggleFaq(this)">
+        <div class="py-8 flex justify-between items-center">
+          <h3 class="font-heading font-bold text-xl uppercase text-[#EAEAEA] group-hover:text-[#00F0FF] transition-colors">C'est optimisé pour Google (SEO) ?</h3><span class="font-mono text-xl text-[#EAEAEA] icon-plus">+</span>
+        </div>
+        <div class="faq-content">
+          <p class="pb-8 text-sm text-[#EAEAEA]/80 leading-relaxed">Absolument. Nous livrons une structure technique irréprochable : Balisage Hn sémantique, attributs Alt sur les images, optimisation du poids des assets, et structure responsive.</p>
+        </div>
+      </div>
+      <div class="border-b border-[rgba(0,240,255,0.2)] group cursor-pointer" onclick="window.toggleFaq(this)">
+        <div class="py-8 flex justify-between items-center">
+          <h3 class="font-heading font-bold text-xl uppercase text-[#EAEAEA] group-hover:text-[#00F0FF] transition-colors">J'ai déjà un nom de domaine (OVH...) ?</h3><span class="font-mono text-xl text-[#EAEAEA] icon-plus">+</span>
+        </div>
+        <div class="faq-content">
+          <p class="pb-8 text-sm text-[#EAEAEA]/80 leading-relaxed">On ne touche pas à vos emails ni à votre hébergeur actuel. On pointe simplement les enregistrements DNS (A & CNAME) de votre domaine vers les serveurs CDN ultra-rapides. C'est une opération de 5 minutes, sans coupure de service.</p>
+        </div>
+      </div>
+      <div class="border-b border-[rgba(0,240,255,0.2)] group cursor-pointer" onclick="window.toggleFaq(this)">
+        <div class="py-8 flex justify-between items-center">
+          <h3 class="font-heading font-bold text-xl uppercase text-[#EAEAEA] group-hover:text-[#00F0FF] transition-colors">Que se passe-t-il si je n'aime pas le design ?</h3><span class="font-mono text-xl text-[#EAEAEA] icon-plus">+</span>
+        </div>
+        <div class="faq-content">
+          <p class="pb-8 text-sm text-[#EAEAEA]/80 leading-relaxed">Impossible. Nous validons la direction artistique AVANT de coder une seule ligne (Phase "Maquette"). Vous validez le style, les couleurs et l'ambiance. Pas de mauvaise surprise à la livraison.</p>
+        </div>
+      </div>
+      <div class="border-b border-[rgba(0,240,255,0.2)] group cursor-pointer" onclick="window.toggleFaq(this)">
+        <div class="py-8 flex justify-between items-center">
+          <h3 class="font-heading font-bold text-xl uppercase text-[#EAEAEA] group-hover:text-[#00F0FF] transition-colors">Je n'ai pas encore mon contenu (textes/images) ?</h3><span class="font-mono text-xl text-[#EAEAEA] icon-plus">+</span>
+        </div>
+        <div class="faq-content">
+          <p class="pb-8 text-sm text-[#EAEAEA]/80 leading-relaxed">Pas de problème. Nous allons rédiger vos textes et utiliser des placeholders premium pour la structure. Vous n'aurez qu'à les valider pour lancer le code final.</p>
+        </div>
+      </div>
+      <div class="border-b border-[rgba(0,240,255,0.2)] group cursor-pointer" onclick="window.toggleFaq(this)">
+        <div class="py-8 flex justify-between items-center">
+          <h3 class="font-heading font-bold text-xl uppercase text-[#EAEAEA] group-hover:text-[#00F0FF] transition-colors">Puis-je modifier les textes moi-même ?</h3><span class="font-mono text-xl text-[#EAEAEA] icon-plus">+</span>
+        </div>
+        <div class="faq-content">
+          <p class="pb-8 text-sm text-[#EAEAEA]/80 leading-relaxed">Oui. Nous configurons un code simplifié pour vous. Vous pouvez changer les textes et les images très facilement, sans risque de casser le design.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="bg-[#000000] text-white pt-20 pb-10 px-4 md:px-10 border-t border-[rgba(0,240,255,0.2)] relative z-10">
+  <div class="grid grid-cols-1 md:grid-cols-12 gap-12 mb-16 max-w-7xl mx-auto">
+    <div class="md:col-span-5">
+      <img src="https://cdn.prod.website-files.com/69296dff64369c09698b8e09/694ea265af90959fd406a4bf_TO-logo.svg" alt="Tomorrow.online" class="h-12 w-auto mb-6" onerror="this.src='images/TO-logo_1.svg'">
+      <p class="font-medium text-lg leading-relaxed text-[#EAEAEA]/80 mb-6">
+        L'agence web commando du réseau <strong style="color: #00F0FF;">Big Neurons</strong>. Nous livrons des sites Webflow premium sans bullshit, sans réunionite et sans 2027.
+      </p>
+      <div class="inline-block px-4 py-2 bg-[rgba(0,240,255,0.1)] border border-[rgba(0,240,255,0.3)] text-[#00F0FF] font-mono text-xs mb-6" style="box-shadow: 0 0 15px rgba(0,240,255,0.2);">
+        ⚡ Ce site réalisé en 22H23
+      </div>
+      <p class="font-mono text-xs text-[#EAEAEA]/60 uppercase mb-2">Stack Technique</p>
+      <p class="text-sm text-[#EAEAEA]/60">Webflow • GSAP • Tailwind CSS • Weglot • Cloudflare CDN</p>
+    </div>
+    <div class="md:col-span-3">
+      <h3 class="font-heading font-bold text-sm uppercase mb-4 text-[#00F0FF]">Services</h3>
+      <ul class="space-y-3 text-sm text-[#EAEAEA]/80">
+        <li><a href="process-24h.html" class="hover:text-[#00F0FF] transition">Process 24H</a></li>
+        <li><a href="realisations.html" class="hover:text-[#00F0FF] transition">Réalisations</a></li>
+        <li><a href="la-vision-tomorrow.html" class="hover:text-[#00F0FF] transition">Notre Vision</a></li>
+        <li><a href="migrations.html" class="hover:text-[#00F0FF] transition">Migrations CMS</a></li>
+      </ul>
+    </div>
+    <div class="md:col-span-4">
+      <h3 class="font-heading font-bold text-sm uppercase mb-4 text-[#00F0FF]">Réseau & Contact</h3>
+      <ul class="space-y-3 text-sm text-[#EAEAEA]/80">
+        <li><a href="https://www.bigneurons.com" target="_blank" class="hover:text-[#00F0FF] transition">Big Neurons (Projets complexes)</a></li>
+        <li><a href="mailto:hello@tomorrow.online" class="hover:text-[#00F0FF] transition">hello@tomorrow.online</a></li>
+        <li><a href="https://www.linkedin.com/company/tomorrow-online" target="_blank" class="hover:text-[#00F0FF] transition">LinkedIn</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="max-w-7xl mx-auto pt-10 border-t border-[rgba(0,240,255,0.1)] flex flex-col md:flex-row justify-between items-center gap-4">
+    <p class="text-xs text-[#EAEAEA]/60">© 2026 Tomorrow.Online • Big Neurons Network • Tous droits réservés</p>
+    <div class="flex items-center gap-2">
+      <span class="w-2 h-2 bg-[#00F0FF] rounded-full animate-pulse" style="box-shadow: 0 0 10px #00F0FF;"></span>
+      <span class="font-mono text-xs text-[#00F0FF]">2 slots disponibles demain</span>
+    </div>
+  </div>
+</footer>
+
+<!-- Language Switcher -->
+<div class="weglot-container fixed bottom-4 right-4 z-50"></div>
+
+<script>
+// FAQ Toggle
+window.toggleFaq = function(element) {
+  const content = element.querySelector('.faq-content');
+  const icon = element.querySelector('.icon-plus');
+  const isOpen = content.classList.contains('open');
+  
+  // Close all FAQs
+  document.querySelectorAll('.faq-content').forEach(el => el.classList.remove('open'));
+  document.querySelectorAll('.icon-plus').forEach(el => el.classList.remove('rotated'));
+  
+  // Open clicked FAQ if it was closed
+  if (!isOpen) {
+    content.classList.add('open');
+    icon.classList.add('rotated');
+  }
+};
+</script>

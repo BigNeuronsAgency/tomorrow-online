@@ -1,0 +1,233 @@
+<!-- ⚡ VARIABLES CSS PROTOCOLE 24 - VOID & ACID -->
+<style>
+:root {
+  /* Palette Void & Acid */
+  --void: #050505;
+  --carbon: #0F0F0F;
+  --acid: #CCFF00;
+  --alert: #FF3300;
+  --platinum: #EAEAEA;
+  --dim: rgba(255, 255, 255, 0.03);
+  --gold: #D4AF37;
+  
+  /* Spacing & Grid */
+  --grid-size: 60px;
+  --spacing-xs: 0.5rem;
+  --spacing-sm: 1rem;
+  --spacing-md: 2rem;
+  --spacing-lg: 4rem;
+  
+  /* Typography */
+  --font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-heading: 'Space Grotesk', sans-serif;
+  --font-mono: 'JetBrains Mono', 'Courier New', monospace;
+}
+
+/* 2. FORCE font-display swap (Fix CLS fonts) */
+@font-face {
+  font-family: 'Spacegrotesk';
+  font-display: swap !important;
+}
+@font-face {
+  font-family: 'Space Grotesk';
+  font-display: swap !important;
+}
+@font-face {
+  font-family: 'Inter';
+  font-display: swap !important;
+}
+
+/* 3. CSS CRITIQUE INLINE pour éviter FOUC */
+body { 
+  margin: 0; 
+  padding: 0; 
+  font-family: 'Space Grotesk', -apple-system, BlinkMacSystemFont, sans-serif;
+  background: #050505;
+  color: #EAEAEA;
+  overflow-x: hidden;
+}
+
+/* 4. PRÉ-DIMENSIONNER header pour éviter CLS */
+header { min-height: 100vh; }
+
+/* 5. DÉSACTIVER animations qui causent CLS */
+.hero-load,
+.reveal-text,
+.animate-fadeIn {
+  opacity: 1 !important;
+  transform: none !important;
+}
+
+/* ⭐ LOADER CSS PUR - Fond noir fixe */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw; height: 100vh;
+  background: linear-gradient(135deg, #050505 0%, #0F0F0F 100%);
+  z-index: 99999;
+  transition: opacity 0.6s ease, visibility 0.6s ease;
+}
+
+body.loaded::before {
+  opacity: 0;
+  visibility: hidden;
+}
+
+/* Logo animé du loader (pulse) */
+body::after {
+  content: '';
+  position: fixed;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 120px; height: 120px;
+  background-image: url('https://cdn.prod.website-files.com/69296dff64369c09698b8e09/695809f6ebea6a58ef3b1c7c_Capture%20d%E2%80%99e%CC%81cran%202026-01-02%20a%CC%80%2016.11.53.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  z-index: 100000;
+  animation: pulse 1.5s ease-in-out infinite;
+  transition: opacity 0.6s ease, visibility 0.6s ease;
+}
+
+body.loaded::after {
+  opacity: 0;
+  visibility: hidden;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 0.4; transform: translate(-50%, -50%) scale(0.95); }
+  50% { opacity: 1; transform: translate(-50%, -50%) scale(1.05); }
+}
+
+/* 6. PRELOAD CSS WEBFLOW (critique) */
+</style>
+
+<!-- Preload CSS Webflow pour réduire le blocage -->
+<link rel="preload" href="https://cdn.prod.website-files.com/69296dff64369c09698b8e09/css/tomorrow-online-test.webflow.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://cdn.prod.website-files.com/69296dff64369c09698b8e09/css/tomorrow-online-test.webflow.css"></noscript>
+
+<!-- 7. GTM DIFFÉRÉ (3 secondes après load pour ne pas bloquer le rendu) -->
+<script>
+  window.addEventListener('load', function() {
+    setTimeout(function() {
+      (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+      new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+      j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+      'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+      })(window,document,'script','dataLayer','GTM-XXXXXXX');
+    }, 3000);
+  });
+</script>
+
+<!-- 8. SCHEMA.ORG JSON-LD (SEO structuré) -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://tomorrow.online/#organization",
+      "name": "Tomorrow.Online",
+      "url": "https://tomorrow.online",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://tomorrow.online/images/TO-logo-baseline.svg",
+        "width": 250,
+        "height": 60
+      },
+      "description": "Sites web professionnels livrés en 24-48H. Qualité chirurgicale, vitesse brutale, expertise humaine.",
+      "foundingDate": "2024",
+      "slogan": "Tomorrow en ligne.",
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "contactType": "Sales",
+        "availableLanguage": ["French", "English"]
+      }
+    },
+    {
+      "@type": "LocalBusiness",
+      "@id": "https://tomorrow.online/#business",
+      "name": "Tomorrow.Online",
+      "image": "https://tomorrow.online/images/TO-logo-baseline.svg",
+      "priceRange": "€€",
+      "telephone": "+33-X-XX-XX-XX-XX",
+      "address": {
+        "@type": "PostalAddress",
+        "addressCountry": "FR"
+      }
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://tomorrow.online/#website",
+      "url": "https://tomorrow.online",
+      "name": "Tomorrow.Online",
+      "publisher": {
+        "@id": "https://tomorrow.online/#organization"
+      },
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": "https://tomorrow.online/?s={search_term_string}",
+        "query-input": "required name=search_term_string"
+      }
+    },
+    {
+      "@type": "Service",
+      "@id": "https://tomorrow.online/#service",
+      "serviceType": "Web Development",
+      "provider": {
+        "@id": "https://tomorrow.online/#organization"
+      },
+      "areaServed": {
+        "@type": "Country",
+        "name": "France"
+      },
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Services de développement web",
+        "itemListElement": [
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Maquette - 12H",
+              "description": "Design Only - Maquette intégrable, UX/UI CRO, Copy + visuels"
+            },
+            "price": "900",
+            "priceCurrency": "EUR"
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Starter - 24H",
+              "description": "One page / Landing - UX/UI CRO, Copy + visuels, Dev Webflow"
+            },
+            "price": "980",
+            "priceCurrency": "EUR"
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Business - 48H",
+              "description": "Max 5 pages - UX/CRO, Copy + visuels, Dev Webflow"
+            },
+            "price": "2200",
+            "priceCurrency": "EUR"
+          }
+        ]
+      }
+    }
+  ]
+}
+</script>
+
+<!-- 9. SCRIPT LOADER : Retirer le loader après chargement complet -->
+<script>
+  window.addEventListener('load', function() {
+    setTimeout(function() {
+      document.body.classList.add('loaded');
+    }, 500);
+  });
+</script>

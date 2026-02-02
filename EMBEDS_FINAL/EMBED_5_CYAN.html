@@ -1,0 +1,221 @@
+    var PACKS = [
+        { id: 'MAQUETTE', name: 'PACK MAQUETTE', price: 900, delay: 12, desc: 'Design Only // Pas de code' },
+        { id: 'STARTER', name: 'PACK STARTER', price: 980, delay: 24, desc: 'Landing Page // Vitrine' },
+        { id: 'BUSINESS', name: 'PACK BUSINESS', price: 2200, delay: 48, desc: 'Site Complet // Blog & SEO' }
+    ];
+    var UPSELLS = {
+        'MAQUETTE': [
+            { id: 'packGraphique', name: 'Pack Graphique', price: 160, delay: 4, tooltip: 'Un Directeur Artistique senior boosté à l\'IA, s\'occupe de votre charte graphique et nous vous fournissons votre logo, votre typo et vos couleurs', desc: 'DA senior boosté IA pour votre charte complète.' },
+            { id: 'pagesSup', name: 'Pages supplémentaires', price: 100, delay: 2, hasQty: true, hasNames: true, tooltip: 'On peut tout dire en une page, mais parfois on peut avoir besoin/envie de plus d\'espace', desc: 'Plus d\'espace pour développer votre contenu.' },
+            { id: 'slogan', name: 'Slogan', price: 80, delay: 1, tooltip: 'On vous trouve votre "Just Do It" : Un concepteur-rédacteur senior vous propose 3 slogans mémorables', desc: '3 slogans mémorables par un CR senior.' }
+        ],
+        'STARTER': [
+            { id: 'packGraphique', name: 'Pack Graphique', price: 160, delay: 4, tooltip: 'Un Directeur Artistique senior boosté à l\'IA, s\'occupe de votre charte graphique et nous vous fournissons votre logo, votre typo et vos couleurs', desc: 'DA senior boosté IA pour votre charte complète.' },
+            { id: 'slogan', name: 'Slogan', price: 80, delay: 1, tooltip: 'On vous trouve votre "Just Do It" : Un concepteur-rédacteur senior vous propose 3 slogans mémorables', desc: '3 slogans mémorables par un CR senior.' },
+            { id: 'pagesSup', name: 'Pages supplémentaires', price: 190, delay: 3, hasQty: true, hasNames: true, tooltip: 'On peut tout dire en une page, mais parfois on peut avoir besoin/envie de plus d\'espace', desc: 'Plus d\'espace pour développer votre contenu.' },
+            { id: 'formulaire', name: 'Formulaire', price: 90, delay: 1, tooltip: 'On sait que vous avez aimé le notre, on vous en fait un ?', desc: 'Un formulaire comme celui-ci pour votre site.' },
+            { id: 'multilingue', name: 'Multilingue', price: 130, delay: 2, hasLangs: true, tooltip: 'Donnez une dimension internationale à votre marque', desc: 'Dimension internationale. 1ère langue offerte.' },
+            { id: 'setupGoogle', name: 'Setup Google', price: 90, delay: 1, tooltip: 'On vous connecte aux outils d\'analyses et de publicité google', desc: 'Analytics + Ads configurés et prêts.' },
+            { id: 'darkMode', name: 'Version Dark/White', price: 35, delay: 1, tooltip: 'Modernité ou élégance, plus besoin de choisir', desc: 'Laissez vos visiteurs choisir leur ambiance.' },
+            { id: 'paiement', name: 'Module de paiement (Stripe)', price: 120, delay: 2, tooltip: 'Vous comptez encaisser comment ?', desc: 'Encaissement Stripe intégré et sécurisé.' }
+        ],
+        'BUSINESS': [
+            { id: 'packGraphique', name: 'Pack Graphique', price: 160, delay: 4, tooltip: 'Un Directeur Artistique senior boosté à l\'IA, s\'occupe de votre charte graphique et nous vous fournissons votre logo, votre typo et vos couleurs', desc: 'DA senior boosté IA pour votre charte complète.' },
+            { id: 'slogan', name: 'Slogan', price: 80, delay: 1, tooltip: 'On vous trouve votre "Just Do It" : Un concepteur-rédacteur senior vous propose 3 slogans mémorables', desc: '3 slogans mémorables par un CR senior.' },
+            { id: 'pagesSup', name: 'Pages supplémentaires', price: 190, delay: 3, hasQty: true, hasNames: true, tooltip: 'On peut tout dire en une page, mais parfois on peut avoir besoin/envie de plus d\'espace', desc: 'Plus d\'espace pour développer votre contenu.' },
+            { id: 'formulaire', name: 'Formulaire', price: 90, delay: 1, tooltip: 'On sait que vous avez aimé le notre, on vous en fait un ?', desc: 'Un formulaire comme celui-ci pour votre site.' },
+            { id: 'multilingue', name: 'Multilingue', price: 130, delay: 2, hasLangs: true, tooltip: 'Donnez une dimension internationale à votre marque', desc: 'Dimension internationale. 1ère langue offerte.' },
+            { id: 'setupGoogle', name: 'Setup Google', price: 90, delay: 1, tooltip: 'On vous connecte aux outils d\'analyses et de publicité google', desc: 'Analytics + Ads configurés et prêts.' },
+            { id: 'darkMode', name: 'Version Dark/White', price: 35, delay: 1, tooltip: 'Modernité ou élégance, plus besoin de choisir', desc: 'Laissez vos visiteurs choisir leur ambiance.' },
+            { id: 'paiement', name: 'Module de paiement (Stripe)', price: 120, delay: 2, tooltip: 'Vous comptez encaisser comment ?', desc: 'Encaissement Stripe intégré et sécurisé.' }
+        ]
+    };
+    var UPSELLS_SUCCESS = [
+        { id: 'socialMedia', name: 'Pack Social Media Lancement', price: 140, hasNetwork: true, tooltip: 'Maintenant que vous avez un beau site, il faut l\'annoncer, profitez de 8 publications sur Instagram ou 6 sur LinkedIn', desc: '8 posts Instagram ou 6 posts LinkedIn pour annoncer votre lancement.' },
+        { id: 'pubMeta', name: 'Pack Publicités Meta', price: 160, tooltip: 'Faites vos premières ventes avec un jeu de 6 créa performantes, adaptées à l\'algorithme Meta et surtout à votre cible', desc: '6 créas Meta performantes adaptées à votre cible.' },
+        { id: 'analysePersona', name: 'Analyse Cible et Persona', price: 30, tooltip: 'Apprenez à connaître votre cible par coeur, pour leur parler en toute autonomie', desc: 'Connaissez votre cible par cœur.' },
+        { id: 'packPrint', name: 'Pack Graphique Print', price: 140, tooltip: 'Votre univers digital dans la vraie vie avec 3 gabarits (carte de visite, flyer recto-verso et roll up)', desc: 'Carte de visite, flyer et roll-up pour exister IRL.' },
+        { id: 'tomorrowSucces', name: 'Pack Tomorrow Succès', price: 290, originalPrice: 470, isBundle: true, tooltip: 'Tous les services précédents', desc: 'Tous les services ci-dessus réunis. Économisez 180€.' }
+    ];
+    var DETAILS_DATA = {
+        'MAQUETTE': { title: 'PACK MAQUETTE (12H)', included: ['Design Figma Complet', 'Direction Artistique Senior', 'Maquettes Desktop & Mobile', 'Fichiers Sources', 'Cession des droits'], excluded: ['Intégration Webflow', 'Animations', 'SEO Technique', 'Mise en ligne'] },
+        'STARTER': { title: 'PACK STARTER (24H)', included: ['Design Premium', 'Développement Webflow', 'Responsive Perfect', 'Optimisation SEO de base', 'Copywriting (Textes)'], excluded: ['Système de Blog/CMS', 'Filtres avancés', 'E-commerce'] },
+        'BUSINESS': { title: 'PACK BUSINESS (48H)', included: ['Site Multi-pages (max 5)', 'CMS (Blog/Réalisations)', 'Animations Avancées (GSAP)', 'SEO Technique Avancé', 'Formation Admin'], excluded: ['E-commerce complexe', 'Espace Membre'] }
+    };
+    var ARCHETYPES = [
+        { id: 'innocent', icon: '☁️', name: "L'Innocent", desc: "Optimisme & Sécurité" }, 
+        { id: 'explorer', icon: '🧭', name: "L'Explorateur", desc: "Liberté & Découverte" },
+        { id: 'sage', icon: '🦉', name: "Le Sage", desc: "Vérité & Expertise" }, 
+        { id: 'hero', icon: '🏆', name: "Le Héros", desc: "Courage & Maîtrise" },
+        { id: 'outlaw', icon: '💀', name: "Le Hors-la-loi", desc: "Révolution & Disruption" }, 
+        { id: 'magician', icon: '✨', name: "Le Magicien", desc: "Vision & Transformation" },
+        { id: 'everyman', icon: '🤝', name: "Mr T-L-M", desc: "Réalisme & Connexion" }, 
+        { id: 'lover', icon: '🌹', name: "L'Amoureux", desc: "Passion & Intimité" },
+        { id: 'jester', icon: '🎭', name: "Le Bouffon", desc: "Humour & Plaisir" }, 
+        { id: 'caregiver', icon: '🛡️', name: "Le Soignant", desc: "Service & Protection" },
+        { id: 'creator', icon: '🎨', name: "Le Créateur", desc: "Innovation & Création" }, 
+        { id: 'ruler', icon: '👑', name: "Le Dirigeant", desc: "Contrôle & Succès" }
+    ];
+    var formData = {
+        brandName: '', pitch: '', competitors: '', target: '', problem: '', solution: '', whyUs: '', archetype: '', vibeSeriousness: 0, vibeStyle: 0, copywriting: 'me', selectedPack: '', 
+        upsells: {},
+        pagesSupQty: 1,
+        pagesSupNames: [],
+        multiLangues: [],
+        socialNetwork: '',
+        socialNetworkExtra: false,
+        upsellsSuccess: {},
+        hasDomain: null, domainName: '', care: false, email: '', phone: ''
+    };
+    window.openDetails = function(planKey) {
+        var data = DETAILS_DATA[planKey];
+        if(!data) return;
+        var titleEl = document.getElementById('detailTitle');
+        var incEl = document.getElementById('detailIncluded');
+        var excEl = document.getElementById('detailExcluded');
+        var modal = document.getElementById('detailsModal');
+        if(titleEl) titleEl.innerText = data.title;
+        if(incEl) incEl.innerHTML = data.included.map(i => `<li class="flex items-center gap-3"><span class="w-1.5 h-1.5 bg-black"></span>${i}</li>`).join('');
+        if(excEl) excEl.innerHTML = data.excluded.map(i => `<li class="flex items-center gap-3 opacity-50"><span class="w-1.5 h-1.5 bg-gray-300"></span>${i}</li>`).join('');
+        if(modal) { modal.classList.remove('hidden'); lockScroll(); }
+    };
+    window.closeDetails = function() { var m = document.getElementById('detailsModal'); if(m) m.classList.add('hidden'); unlockScroll(); };
+    window.openProcessDetails = function() { var m = document.getElementById('processDetailsModal'); if(m) { m.classList.remove('hidden'); lockScroll(); } };
+    window.closeProcessDetails = function() { var m = document.getElementById('processDetailsModal'); if(m) m.classList.add('hidden'); unlockScroll(); };
+    window.openTemplateVideo = function() { var m = document.getElementById('videoEggModal'); if(m) m.classList.remove('hidden'); };
+    window.closeTemplateVideo = function() { var m = document.getElementById('videoEggModal'); if(m) { m.classList.add('hidden'); var iframe = m.querySelector('iframe'); if(iframe) { var src = iframe.src; iframe.src = src; } } };
+    window.openLightbox = function(src, title) { var m = document.getElementById('lightboxModal'); var img = document.getElementById('lightboxImage'); if(m && img) { img.src = src; m.classList.remove('hidden'); } };
+    window.closeLightbox = function() { var m = document.getElementById('lightboxModal'); if(m) m.classList.add('hidden'); };
+    function calculateTotals() {
+        var price = 0; var delay = 0;
+        var pack = PACKS.find(p => p.id === formData.selectedPack);
+        if (pack) { price += pack.price; delay += pack.delay; }
+        var upsellList = UPSELLS[formData.selectedPack] || [];
+        upsellList.forEach(u => {
+            if (formData.upsells[u.id]) {
+                if(u.hasQty) {
+                    price += u.price * formData.pagesSupQty;
+                    delay += u.delay * formData.pagesSupQty;
+                } else if(u.hasLangs) {
+                    var langCount = formData.multiLangues.length;
+                    if(langCount > 0) {
+                        price += u.price;
+                        if(langCount > 1) price += (langCount - 1) * 20;
+                        delay += u.delay;
+                    }
+                } else {
+                    price += u.price;
+                    delay += u.delay;
+                }
+            }
+        });
+        return { price: price, delay: delay };
+    }
+    function validateEmail(email) { return String(email).toLowerCase().match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/); }
+    function validatePhone(phone) { return String(phone).match(/^(?:(?:\+|00)33|0)\s*[1-9](?:[\s.-]*\d{2}){4}$/); }
+    function checkValidation() {
+        let valid = true;
+        let emailInput = document.getElementById('input-email');
+        let phoneInput = document.getElementById('input-phone');
+        if(emailInput) emailInput.style.borderColor = "#e2e8f0";
+        if(phoneInput) phoneInput.style.borderColor = "#e2e8f0";
+        if (!validateEmail(formData.email)) { typeConsole('ERROR: INVALID EMAIL'); if(emailInput) { emailInput.style.borderColor = BRAND_RED; gsap.fromTo(emailInput, {x:-5}, {x:5, duration:0.1, yoyo:true, repeat:3}); } valid = false; }
+        if (!validatePhone(formData.phone)) { typeConsole('ERROR: INVALID PHONE'); if(phoneInput) { phoneInput.style.borderColor = BRAND_RED; gsap.fromTo(phoneInput, {x:-5}, {x:5, duration:0.1, yoyo:true, repeat:3}); } valid = false; }
+        return valid;
+    }
+    function updateRangeLabel(input, labelId) {
+        const val = parseInt(input.value);
+        const label = document.getElementById(labelId);
+        if(label) { let sign = val > 0 ? "+" : ""; if(val === 0) sign = ""; label.innerHTML = sign + val + '%'; const percent = ((val + 100) * 100) / 200; label.style.left = `calc(${percent}% + (${8 - percent * 0.15}px))`; }
+    }
+    function typeConsole(text) { currentConsoleMessage = text; var el = document.getElementById('consoleOutput'); if(el) { el.innerHTML = `<span class="text-[#00F0FF] font-bold">> SYSTEM:</span> ${text}`; el.classList.remove('animate-pulse'); void el.offsetWidth; el.classList.add('animate-pulse'); } }
+    function lockScroll() { document.body.style.overflow = 'hidden'; }
+    function unlockScroll() { document.body.style.overflow = ''; }
+    window.updateInput = function(key, value, consoleMsg) { formData[key] = value; if(consoleMsg) { typeConsole(consoleMsg); } if(key === 'brandName') { var el = document.getElementById('consoleBrandName'); if(el) el.innerText = value || 'N/A'; } };
+    function renderHeader(progress) { return `<div class="flex-none bg-white z-50 pt-6 px-6 pb-2 w-full"><div class="max-w-7xl mx-auto w-full"><div class="flex justify-between items-end mb-2"><div class="text-[10px] font-bold text-black bg-gray-100 px-3 py-1 rounded-full">STEP ${currentStep}/7</div></div><div class="h-1 w-full bg-gray-100 relative rounded-full overflow-hidden"><div class="h-full bg-[#00F0FF] transition-all duration-500 ease-out" style="width: ${progress}%"></div></div></div></div>`; }
+</script>
+  </div>
+  <div class="w-embed w-script">
+    <style>
+/* FIX RESPONSIVE FORMULAIRE MOBILE - OPTIMISATION RADICALE */
+.h-screen-adaptive {
+  min-height: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+/* Réduction espaces mobile uniquement */
+@media (max-width: 767px) {
+  .step-grid {
+    gap: 0.75rem !important;
+  }
+  .step-grid.grid-cols-1.md\:grid-cols-12 .space-y-6 {
+    gap: 0.75rem !important;
+  }
+  .step-grid.grid-cols-1.md\:grid-cols-12 .space-y-4 {
+    gap: 0.75rem !important;
+  }
+  .grid-archetypes {
+    gap: 0.4rem !important;
+  }
+  .grid-archetypes > div {
+    padding: 0.4rem !important;
+  }
+}
+</style>
+    <script>
+function renderUpsellCard(u) {
+var selected = formData.upsells[u.id] || false;
+var html = `<div onclick="window.toggleUpsell('${u.id}')" id="ups-${u.id}" class="upsell-card ${selected ? 'selected' : ''}">
+<div class="flex items-center gap-3 flex-1">
+<div class="upsell-check">${selected ? '✓' : ''}</div>
+<div class="flex-1">
+<div class="flex items-center gap-2 mb-1">
+<span class="font-bold text-sm text-black uppercase tracking-wide">${u.name}</span>
+<div class="tooltip">
+<span class="text-xs text-gray-400 cursor-help">ⓘ</span>
+<span class="tooltiptext">${u.tooltip}</span>
+</div>
+</div>
+${u.desc ? `<p class="text-xs text-gray-500 font-normal leading-snug">${u.desc}</p>` : ''}
+</div>
+</div>
+<span class="text-xs font-black text-black bg-gray-200 px-2 py-1 ml-2">+${u.price}€</span>
+</div>`;
+if(selected && u.hasQty) {
+html += `<div class="ml-8 mt-3 p-4 bg-white border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,0.1)]">
+<div class="flex items-center gap-2 mb-4">
+<span class="text-2xl">📄</span>
+<label class="text-xs font-black uppercase tracking-wide">Quantité de pages :</label>
+</div>
+<input type="number" min="1" max="10" value="${formData.pagesSupQty}" onchange="formData.pagesSupQty = parseInt(this.value); draw(true);" class="w-20 p-3 border-2 border-gray-300 focus:border-[#00F0FF] outline-none font-bold text-center mb-4">
+<div class="border-t-2 border-gray-100 pt-4 mt-2">
+<label class="text-xs font-black uppercase tracking-wide mb-3 block">Noms des pages :</label>
+<div class="space-y-2">
+${Array.from({length: formData.pagesSupQty}, (_, i) => `<input type="text" placeholder="Page ${i+1}" value="${formData.pagesSupNames[i] || ''}" onchange="formData.pagesSupNames[${i}] = this.value;" class="w-full p-3 border-2 border-gray-300 focus:border-[#00F0FF] outline-none text-sm font-medium transition-all">`).join('')}
+</div>
+</div>
+</div>`;
+}
+if(selected && u.hasLangs) {
+var langIcons = {'Anglais': '🇬🇧', 'Italien': '🇮🇹', 'Espagnol': '🇪🇸', 'Arabe': '🇸🇦', 'Russe': '🇷🇺', 'Allemand': '🇩🇪', 'Mandarin': '🇨🇳'};
+var langs = ['Anglais', 'Italien', 'Espagnol', 'Arabe', 'Russe', 'Allemand', 'Mandarin'];
+html += `<div class="ml-8 mt-3 p-4 bg-white border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,0.1)]">
+<div class="flex items-center gap-2 mb-4">
+<span class="text-2xl">🌍</span>
+<label class="text-xs font-black uppercase tracking-wide">Langues (1ère offerte, +20€/langue sup)</label>
+</div>
+<div class="grid grid-cols-2 gap-2">
+${langs.map(l => {
+var checked = formData.multiLangues.includes(l);
+return `<label class="flex items-center gap-2 p-2 border-2 rounded cursor-pointer transition-all ${checked ? 'border-black bg-gray-50' : 'border-gray-200 hover:border-gray-400'}">
+<input type="checkbox" class="w-4 h-4 accent-black" ${checked ? 'checked' : ''} onchange="window.toggleLang('${l}')">
+<span class="text-lg">${langIcons[l]}</span>
+<span class="text-xs font-bold">${l}</span>
+</label>`;
+}).join('')}
+</div>
+</div>`;
+}
+return html;
+}

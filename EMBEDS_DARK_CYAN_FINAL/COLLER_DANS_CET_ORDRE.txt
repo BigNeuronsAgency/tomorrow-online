@@ -1,0 +1,48 @@
+╔═══════════════════════════════════════════════════════════════════════════╗
+║                                                                           ║
+║            📋 ORDRE D'INJECTION WEBFLOW - FICHIERS CLEAN                 ║
+║                                                                           ║
+╚═══════════════════════════════════════════════════════════════════════════╝
+
+⚠️  COLLER CES FICHIERS DANS CET ORDRE EXACT :
+
+1️⃣  EMBED_1_DARK_CLEAN.html    (40K)
+    → Head + styles + Hero → Work
+
+2️⃣  EMBED_2_DARK_CLEAN.html    (29K)
+    → Pricing + Jean-Charles + 3 Mondes
+
+3️⃣  EMBED_3_DARK_CLEAN.html    (9.7K)
+    → FAQ + toggle
+
+4️⃣  EMBED_4_DARK_CLEAN.html    (3.5K)
+    → Modales
+
+5️⃣  EMBED_5_DARK_CLEAN.html    (18K)
+    → Config formulaire
+
+6️⃣  EMBED_6_DARK_CLEAN.html    (38K)
+    → FORMULAIRE COMPLET ⭐
+
+7️⃣  EMBED_7_DARK_CLEAN.html    (317B)
+    → Footer + scripts
+
+═══════════════════════════════════════════════════════════════════════════
+
+✅ GARANTIES :
+
+  • 0 trace de magenta/rose dans tous les fichiers
+  • 0 trace de #FF3333
+  • Cyan #00F0FF appliqué partout
+  • "Offre du mois" (pas "FIN D'ANNÉE")
+  • Formulaire complet avec 7 étapes
+
+═══════════════════════════════════════════════════════════════════════════
+
+🚀 PROCÉDURE :
+
+1. Dans Webflow, supprime TOUS les embeds actuels
+2. Colle les fichiers _DARK_CLEAN.html dans l'ordre ci-dessus
+3. Sauvegarde après chaque embed
+4. Vérifie visuellement
+

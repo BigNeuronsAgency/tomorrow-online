@@ -1,0 +1,40 @@
+<style>
+.detail-link{font-family:'Spacegrotesk',sans-serif;font-size:10px;color:#999;text-transform:uppercase;cursor:pointer}
+.detail-link:hover{background:linear-gradient(90deg,rgba(180,7,254,1) 0%,rgba(255,10,55,1) 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;text-decoration:underline}
+.price-badge{font-size:9px;padding:2px 6px}
+.feature-card{display:flex;justify-content:space-between;items-center;background:white}
+.dropdown-content a{font-size:13px}
+.dropdown-arrow{font-size:10px}
+.mobile-menu .dropdown-content a{padding-left:2rem;font-size:13px}
+</style>
+<div class="grid grid-cols-2 w-full font-mono text-[10px] uppercase">Slots</div>
+<div class="cursor-pointer">> Briefez-nous</div>
+<div class="flex flex-col md:flex-row gap-4">
+<div onclick="window.openModal()" class="btn-primary px-8 py-4 font-heading font-bold uppercase tracking-wide text-center">> Briefez-nous</div>
+</div>
+<span class="text-gray-400">01 / SQUAD</span>
+<span class="text-gray-400">02 / STACK</span>
+<span class="text-gray-400">03 / PROMISE</span>
+<p class="text-gray-400 italic">Mais les avancées tech' et les exigences</p>
+<p class="text-gray-500 mb-16 uppercase">2 créneaux</p>
+<div onclick="window.openDetails('MAQUETTE')" class="absolute top-4 right-4 text-[10px] font-mono uppercase text-gray-400 hover:text-black cursor-pointer border-b border-transparent hover:border-black transition-all">Détails [ + ]</div>
+<div onclick="window.openDetails('STARTER')" class="absolute top-6 right-28 text-[10px] font-mono uppercase text-white/80 hover:text-white cursor-pointer border-b border-transparent hover:border-white transition-all">Détails [ + ]</div>
+<div onclick="window.openDetails('BUSINESS')" class="absolute top-4 right-4 text-[10px] font-mono uppercase text-gray-400 hover:text-black cursor-pointer border-b border-transparent hover:border-black transition-all">Détails [ + ]</div>
+<div class="font-mono text-[10px] border text-gray-500">Maquette</div>
+<div class="font-mono text-[10px] border text-gray-500">Business</div>
+<span class="text-sm text-gray-400">HT</span>
+<span class="text-sm text-white/60">HT</span>
+<div class="text-[10px]">Populaire</div>
+<p class="text-xs text-gray-500">Scale, SaaS</p>
+<div class="hidden md:block text-[10px] font-mono uppercase text-gray-400">Détails [ + ]</div>
+<div class="md:hidden mt-6 text-[10px] font-mono uppercase text-gray-400">Détails [ + ]</div>
+<div class="font-mono text-xs font-bold text-gray-400 mb-2 uppercase">Étape 1</div>
+<p class="mt-6 font-mono text-xs text-gray-400 uppercase">24H chrono</p>
+<div class="font-mono text-xs text-gray-400 mb-6">STRATÉGIE</div>
+<div class="font-mono text-xs uppercase text-gray-500">Sites livrés</div>
+<div class="font-mono text-xs text-gray-400 uppercase">Leader</div>
+<div class="bg-black text-white text-[10px]">43H 12MIN</div>
+<div class="text-xs text-gray-500">CMO, PPF</div>
+<div class="font-mono text-xs text-gray-400 uppercase">Ils nous font confiance</div>
+<p class="mt-6 font-mono text-xs text-gray-500 uppercase">3 slots disponibles</p>
+<span class="font-bold text-gray-400">14:00</span>
