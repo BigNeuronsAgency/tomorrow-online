@@ -1000,11 +1000,23 @@
             window.promoDiscount = 0.05;
             
             // Mettre à jour le total affiché
-            if (typeof window.calculateTotals === 'function') {
-              var totals = window.calculateTotals();
+            if (typeof window.formData !== 'undefined') {
+              var pack = window.PACKS.find(function(p) { return p.id === window.formData.selectedPack; });
+              var total = pack ? pack.price : 0;
+              
+              // Ajouter les upsells
+              if (window.formData.upsells) {
+                var packUpsells = window.UPSELLS[window.formData.selectedPack] || [];
+                packUpsells.forEach(function(upsell) {
+                  if (window.formData.upsells[upsell.id]) {
+                    total += upsell.price;
+                  }
+                });
+              }
+              
+              var discountedPrice = Math.round(total * (1 - 0.05));
               var totalEl = document.querySelector('.summary-line-total span.font-mono');
               if (totalEl) {
-                var discountedPrice = Math.round(totals.price * (1 - window.promoDiscount));
                 totalEl.textContent = discountedPrice + '€';
               }
             }
@@ -1018,50 +1030,74 @@
       
       if (typeof window.createPaymentStep !== 'function') {
         console.log('⚠️ FALLBACK: Defining createPaymentStep inline');
-        window.createPaymentStep = function() {
-          console.log('Creating Stripe Payment Element...');
+        window.createPaymentStep = async function() {
+          console.log('Creating Stripe Payment Element via Worker...');
           if (typeof Stripe === 'undefined') {
             console.error('Stripe SDK not loaded');
             return;
           }
           
-          var stripe = Stripe('pk_test_51Sw2QQHhyPxNNlpw0twD0qfP74lx2DfSoyY3Zw9Unkqx1zcTW8EaoSdpbWbMS8tSwICgJiZfDaMHlpgtYXv2HZWx00GtHoIERg');
-          var elements = stripe.elements();
-          var paymentElement = document.getElementById('payment-element');
-          
-          if (!paymentElement) {
-            console.error('payment-element not found');
-            return;
-          }
-          
-          // Utiliser Payment Element (complet avec adresse, code postal, etc.)
-          var payment = elements.create('payment', {
-            layout: 'tabs',
-            fields: {
-              billingDetails: {
-                address: {
-                  country: 'never'
+          try {
+            // Calculer le total
+            var pack = window.PACKS.find(function(p) { return p.id === window.formData.selectedPack; });
+            var total = pack ? pack.price : 0;
+            
+            if (window.formData.upsells) {
+              var packUpsells = window.UPSELLS[window.formData.selectedPack] || [];
+              packUpsells.forEach(function(upsell) {
+                if (window.formData.upsells[upsell.id]) {
+                  total += upsell.price;
                 }
-              }
+              });
             }
-          });
-          payment.mount('#payment-element');
-          window.stripePayment = payment;
-          window.stripeInstance = stripe;
-          window.stripeElements = elements;
-          console.log('✅ Stripe Payment Element mounted');
+            
+            var discount = window.promoDiscount || 0;
+            var finalAmount = Math.round(total * (1 - discount) * 100); // en centimes
+            
+            // Créer PaymentIntent via Worker
+            var response = await fetch('https://tomorrow-stripe.t-martella.workers.dev/create-payment-intent', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({
+                amount: finalAmount,
+                currency: 'eur',
+                metadata: {
+                  pack: window.formData.selectedPack,
+                  email: window.formData.email
+                }
+              })
+            });
+            
+            var data = await response.json();
+            
+            // Initialiser Stripe avec le clientSecret
+            var stripe = Stripe('pk_test_51Sw2QQHhyPxNNlpw0twD0qfP74lx2DfSoyY3Zw9Unkqx1zcTW8EaoSdpbWbMS8tSwICgJiZfDaMHlpgtYXv2HZWx00GtHoIERg');
+            var elements = stripe.elements({ 
+              clientSecret: data.clientSecret,
+              locale: 'fr'
+            });
+            
+            var payment = elements.create('payment', {
+              wallets: { applePay: 'auto', googlePay: 'auto' }
+            });
+            
+            payment.mount('#payment-element');
+            window.stripePayment = payment;
+            window.stripeInstance = stripe;
+            window.stripeElements = elements;
+            console.log('✅ Stripe Payment Element mounted');
+            
+          } catch (error) {
+            console.error('Erreur création payment:', error);
+            document.getElementById('payment-element').innerHTML = '<p style="color: red; padding: 20px;">Erreur de chargement du paiement. Veuillez recharger la page.</p>';
+          }
         };
       }
       
       if (typeof window.submitPayment !== 'function') {
         console.log('⚠️ FALLBACK: Defining submitPayment inline');
-        window.submitPayment = function() {
-          console.log('Submit payment called');
-          var btn = document.getElementById('submit-payment-btn');
-          if (btn) btn.disabled = true;
-          
-          alert('Le fichier stripe-v3.js n\'a pas pu se charger. Veuillez recharger la page et réessayer.');
-          if (btn) btn.disabled = false;
+        window.submitPayment = async function() {
+          alert('Le paiement n\'est pas encore configuré. Veuillez contacter le support.');
         };
       }
     }, 1000);
