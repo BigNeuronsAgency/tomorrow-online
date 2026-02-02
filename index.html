@@ -1148,25 +1148,46 @@
       var packUpsells = (window.UPSELLS || {})[fd.selectedPack] || [];
       packUpsells.forEach(function(u) {
         if (fd.upsells && fd.upsells[u.id]) {
-          upsellsList.push(u.name + ' (+' + u.price + '€)');
+          upsellsList.push(u.name + ' (+' + u.price + ' EUR)');
         }
       });
       
-      var briefMessage = 'NOUVEAU BRIEF RECU\n\n' +
-        'PACK: ' + (pack ? pack.name + ' - ' + pack.price + ' EUR HT' : 'Non defini') + '\n\n' +
+      var vibeSerieux = fd.vibeSeriousness || 0;
+      var vibeStyle = fd.vibeStyle || 0;
+      var vibeTexte = '';
+      if (vibeSerieux !== 0) {
+        vibeTexte += 'Serieux/Drole: ' + (vibeSerieux < 0 ? Math.abs(vibeSerieux) + '% drole' : vibeSerieux + '% serieux') + '\n';
+      }
+      if (vibeStyle !== 0) {
+        vibeTexte += 'Style: ' + (vibeStyle < 0 ? Math.abs(vibeStyle) + '% minimaliste' : vibeStyle + '% complexe') + '\n';
+      }
+      
+      var briefMessage = 'NOUVEAU BRIEF RECU\n' +
+        '==========================================\n\n' +
+        'PACK: ' + (pack ? pack.name + ' (' + pack.price + ' EUR HT)' : 'Non defini') + '\n\n' +
         (upsellsList.length > 0 ? 'OPTIONS:\n' + upsellsList.join('\n') + '\n\n' : '') +
-        (fd.care ? 'Tomorrow Care (39 EUR/mois) souscrit\n\n' : '') +
-        'CLIENT\n' +
+        (fd.care ? 'Tomorrow Care: 39 EUR/mois - ABONNEMENT SOUSCRIT\n\n' : '') +
+        'CONTACT CLIENT\n' +
         'Marque: ' + (fd.brandName || 'Non renseigne') + '\n' +
         'Email: ' + (fd.email || 'Non renseigne') + '\n' +
         'Telephone: ' + (fd.phone || 'Non renseigne') + '\n\n' +
         'CIBLE & POSITIONNEMENT\n' +
-        'Pitch: ' + (fd.pitch || 'Non renseigne') + '\n' +
+        'Pitch (1 ligne): ' + (fd.pitch || 'Non renseigne') + '\n' +
         'Target: ' + (fd.target || 'Non renseigne') + '\n' +
         'Archetype: ' + (fd.archetype || 'Non renseigne') + '\n\n' +
-        'COPYWRITING: ' + (fd.copywriting === 'me' ? 'Client fournit' : 'Tomorrow redige') + '\n\n' +
-        (fd.hasDomain ? 'Domaine: ' + (fd.domainName || 'A preciser') : 'Pas de domaine') + '\n\n' +
-        'Payment Intent ID: ' + (window.paymentIntentId || 'N/A');
+        'VIBES\n' +
+        (vibeTexte || 'Neutres\n') + '\n' +
+        'COPYWRITING: ' + (fd.copywriting === 'me' ? 'Le client fournit le contenu' : 'Tomorrow redige le contenu') + '\n\n' +
+        'DOMAINE\n' +
+        (fd.hasDomain ? 'Possede un domaine: ' + (fd.domainName || 'A preciser lors du call') : 'Pas de domaine (a acquerir)') + '\n\n' +
+        (fd.multiLangues && fd.multiLangues.length > 0 ? 'LANGUES: ' + fd.multiLangues.join(', ') + '\n\n' : '') +
+        (fd.pagesSupQty > 0 ? 'PAGES SUPPLEMENTAIRES (' + fd.pagesSupQty + '):\n' + (fd.pagesSupNames || []).filter(Boolean).join(', ') + '\n\n' : '') +
+        (fd.logoUrl ? 'LOGO: ' + fd.logoUrl + '\n' : '') +
+        (fd.inspirationUrl ? 'INSPIRATION: ' + fd.inspirationUrl + '\n' : '') +
+        (fd.brandingUrl ? 'BRANDING: ' + fd.brandingUrl + '\n' : '') +
+        (fd.contentUrl ? 'CONTENU: ' + fd.contentUrl + '\n' : '') +
+        '\nPayment Intent ID: ' + (window.paymentIntentId || 'N/A') + '\n' +
+        '==========================================';
       
       try {
         await fetch('https://api.web3forms.com/submit', {
@@ -1175,8 +1196,8 @@
           body: JSON.stringify({
             access_key: WEB3FORMS_KEY,
             subject: '[Tomorrow.Online] Nouveau Brief - ' + (fd.brandName || 'Client'),
-            from_name: fd.brandName || 'Tomorrow.Online',
-            replyto: fd.email || '',
+            from_name: 'Tomorrow.Online',
+            email: fd.email || 'noreply@tomorrow.online',
             message: briefMessage
           })
         });
@@ -1193,8 +1214,8 @@
             access_key: WEB3FORMS_KEY,
             subject: 'Votre site en 24H - Slot bloque',
             from_name: 'Tomorrow.Online',
-            replyto: 't.martella@bigneurons.com',
-            message: 'EMAIL POUR: ' + (fd.email || '') + '\n\nBonjour et merci de votre brief sur www.tomorrow.online.\n\nNous avons bien recu et votre slot est bloque.\n\nRestez pres de votre telephone, nous vous appellerons demain matin pour valider le brief avec vous.\n\nA tres bientot,\n\nEquipe Tomorrow.online'
+            email: fd.email || '',
+            message: 'Bonjour et merci de votre brief sur www.tomorrow.online.\n\nNous avons bien recu votre demande et votre slot est bloque.\n\nRestez pres de votre telephone : nous vous appellerons demain matin pour valider le brief avec vous. Ensuite, le chrono demarre.\n\nA tres bientot,\n\nL\'equipe de Tomorrow.online'
           })
         });
         console.log('Email confirmation envoye');
