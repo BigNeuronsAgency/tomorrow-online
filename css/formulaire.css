@@ -1961,6 +1961,12 @@ body:has(.modal:not(.hidden)) .whatsapp-float {
   display: none;
 }
 
+/* Hide footer AND header in Step 8 */
+.modal-content:has(.step-8) .modal-footer,
+.modal-content:has(.step-8) .modal-header {
+  display: none !important;
+}
+
 .modal-console {
   background: var(--void);
   color: var(--white);
