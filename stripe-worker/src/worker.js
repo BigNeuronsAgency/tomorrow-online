@@ -24,7 +24,6 @@ export default {
         const body = await request.json();
         const { pack, totalAmount, email, name, careEnabled } = body;
 
-        // Convertir en centimes si nécessaire
         const amountInCents = totalAmount >= 100 ? Math.round(totalAmount * 100) : totalAmount;
 
         if (!amountInCents || amountInCents < 50) {
@@ -34,7 +33,7 @@ export default {
           });
         }
 
-        // Créer PaymentIntent via Stripe API
+        // Créer PaymentIntent pour le pack one-shot
         const stripeResponse = await fetch('https://api.stripe.com/v1/payment_intents', {
           method: 'POST',
           headers: {
@@ -63,9 +62,61 @@ export default {
           });
         }
 
+        let subscriptionId = null;
+
+        // Si Care activé, créer un Customer + Subscription
+        if (careEnabled && email) {
+          try {
+            // Créer Customer
+            const customerResponse = await fetch('https://api.stripe.com/v1/customers', {
+              method: 'POST',
+              headers: {
+                'Authorization': `Bearer ${env.STRIPE_SECRET_KEY}`,
+                'Content-Type': 'application/x-www-form-urlencoded',
+              },
+              body: new URLSearchParams({
+                'email': email,
+                'name': name || '',
+                'metadata[source]': 'Tomorrow.Online',
+                'metadata[pack]': pack || 'STARTER'
+              }).toString()
+            });
+
+            const customer = await customerResponse.json();
+
+            if (customer.id) {
+              // Créer Subscription avec le produit "Tomorrow Care"
+              // ID du prix : price_XXXXXX (à configurer dans Stripe Dashboard)
+              const subscriptionResponse = await fetch('https://api.stripe.com/v1/subscriptions', {
+                method: 'POST',
+                headers: {
+                  'Authorization': `Bearer ${env.STRIPE_SECRET_KEY}`,
+                  'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: new URLSearchParams({
+                  'customer': customer.id,
+                  'items[0][price]': 'price_1Sw4eZHhyPxNNlpwkdXD1AFF',
+                  'payment_behavior': 'default_incomplete',
+                  'payment_settings[save_default_payment_method]': 'on_subscription',
+                  'expand[]': 'latest_invoice.payment_intent',
+                  'metadata[pack]': pack || 'STARTER',
+                  'metadata[payment_intent_id]': paymentIntent.id
+                }).toString()
+              });
+
+              const subscription = await subscriptionResponse.json();
+              subscriptionId = subscription.id;
+              console.log('Subscription created:', subscriptionId);
+            }
+          } catch (subError) {
+            console.error('Subscription error:', subError);
+          }
+        }
+
         return new Response(JSON.stringify({
           clientSecret: paymentIntent.client_secret,
-          paymentIntentId: paymentIntent.id
+          paymentIntentId: paymentIntent.id,
+          subscriptionId: subscriptionId
         }), {
           headers: { ...corsHeaders, 'Content-Type': 'application/json' }
         });

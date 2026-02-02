@@ -1110,9 +1110,8 @@
       if (btn) { btn.disabled = true; btn.textContent = 'Envoi du brief...'; }
       
       try {
-        if (!window.stripeInstance || !window.stripeElements) throw new Error('Stripe non initialisé');
+        if (!window.stripeInstance || !window.stripeElements) throw new Error('Stripe non initialise');
         
-        // ENVOYER LE BRIEF AVANT LE PAIEMENT (sinon la redirection empêche l'envoi)
         await window.sendBriefEmail();
         
         if (btn) { btn.textContent = 'Paiement en cours...'; }
@@ -1121,20 +1120,27 @@
         
         var result = await window.stripeInstance.confirmPayment({
           elements: window.stripeElements,
+          redirect: 'if_required',
           confirmParams: {
-            return_url: window.location.origin + '/success.html',
             payment_method_data: {
               billing_details: { name: billingName, address: { country: 'FR' } }
             }
           }
         });
         
-        if (result.error) throw new Error(result.error.message);
+        if (result.error) {
+          throw new Error(result.error.message);
+        }
+        
+        console.log('Paiement reussi:', result.paymentIntent);
+        if (typeof window.goToStep === 'function') {
+          window.goToStep(8);
+        }
         
       } catch (error) {
-        console.error('❌ Submit error:', error);
+        console.error('Submit error:', error);
         if (errorEl) { errorEl.textContent = error.message; errorEl.classList.remove('hidden'); }
-        if (btn) { btn.disabled = false; btn.textContent = 'Sécuriser mon slot'; }
+        if (btn) { btn.disabled = false; btn.textContent = 'Securiser mon slot'; }
       }
     };
     
