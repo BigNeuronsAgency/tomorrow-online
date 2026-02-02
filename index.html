@@ -200,6 +200,52 @@
     </div>
   </section>
 
+  <!-- Technology Section (Under The Hood) -->
+  <section id="technology" class="section technology" style="background: #080808; padding: 100px 0; border-top: 1px solid rgba(255,255,255,0.05); border-bottom: 1px solid rgba(255,255,255,0.05);">
+    <div class="container">
+      <div class="section-header" style="text-align: center; margin-bottom: 60px;">
+        <h2 class="section-title">Le Moteur<span class="text-gradient">.</span></h2>
+        <p class="section-subtitle font-mono">Qu'est-ce qu'il y a sous le capot ?</p>
+      </div>
+
+      <div class="tech-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px;">
+        
+        <!-- Tomorrow Stack (Featured) -->
+        <div class="tech-card featured" style="background: linear-gradient(145deg, #111 0%, #0a0a0a 100%); border: 1px solid #333; padding: 40px; position: relative; overflow: hidden; border-radius: 4px; transition: transform 0.3s ease, border-color 0.3s ease;">
+          <div style="position: absolute; top: 0; right: 0; background: #00FF00; color: #000; font-family: 'JetBrains Mono'; font-size: 10px; font-weight: bold; padding: 5px 10px; text-transform: uppercase;">Recommandé</div>
+          <h3 style="font-family: 'Syne', sans-serif; font-size: 24px; color: white; margin-bottom: 10px; text-transform: uppercase;">Tomorrow Stack</h3>
+          <p class="font-mono" style="font-size: 10px; color: #00FF00; margin-bottom: 20px;">/// HYBRID STATIC ARCHITECTURE</p>
+          <p style="color: #999; font-size: 14px; margin-bottom: 25px; line-height: 1.6;">
+            La puissance du code brut (Next.js) combinée à un éditeur visuel simple pour vous. La performance des géants de la Tech, rendue accessible.
+          </p>
+          <ul style="list-style: none; padding: 0; font-family: 'JetBrains Mono'; font-size: 12px; color: #ccc; display: flex; flex-direction: column; gap: 10px;">
+            <li style="display: flex; gap: 10px;"><span style="color: #00FF00;">✓</span> <strong>0€ / mois</strong> (Hébergement offert à vie)</li>
+            <li style="display: flex; gap: 10px;"><span style="color: #00FF00;">✓</span> <strong>Indestructible</strong> (Sécurité maximale)</li>
+            <li style="display: flex; gap: 10px;"><span style="color: #00FF00;">✓</span> <strong>Éditeur Visuel</strong> (Changez textes & images)</li>
+          </ul>
+        </div>
+
+        <!-- Webflow Native -->
+        <div class="tech-card" style="background: #050505; border: 1px solid rgba(255,255,255,0.1); padding: 40px; border-radius: 4px; transition: transform 0.3s ease, border-color 0.3s ease;">
+          <h3 style="font-family: 'Syne', sans-serif; font-size: 24px; color: white; margin-bottom: 10px; text-transform: uppercase;">Webflow Native</h3>
+          <p class="font-mono" style="font-size: 10px; color: #4353FF; margin-bottom: 20px;">/// NO-CODE STANDARD</p>
+          <p style="color: #999; font-size: 14px; margin-bottom: 25px; line-height: 1.6;">
+            Le standard du marché pour les équipes marketing. Idéal si vous avez déjà l'habitude de l'interface Webflow et voulez garder vos habitudes.
+          </p>
+          <ul style="list-style: none; padding: 0; font-family: 'JetBrains Mono'; font-size: 12px; color: #666; display: flex; flex-direction: column; gap: 10px;">
+            <li style="display: flex; gap: 10px;"><span>●</span> Abonnement Webflow (~30€/mois) à votre charge</li>
+            <li style="display: flex; gap: 10px;"><span>●</span> Interface Éditeur Webflow</li>
+            <li style="display: flex; gap: 10px;"><span>●</span> Transfert de propriété complet</li>
+          </ul>
+        </div>
+
+      </div>
+      <div style="text-align: center; margin-top: 30px;">
+        <p class="font-mono" style="font-size: 10px; color: #444;">* Option "Code Brut" également disponible pour les équipes IT (-190€).</p>
+      </div>
+    </div>
+  </section>
+
   <!-- Pricing Section -->
   <section id="pricing" class="section pricing">
     <div class="container">
@@ -244,9 +290,9 @@
           <div class="pricing-label">Conversions instantanées</div>
           <ul class="pricing-features">
             <li><span class="feature-dot"></span> One page / Landing</li>
+            <li><span class="feature-dot"></span> <strong>Tech Hybride (Code + CMS)</strong></li>
+            <li><span class="feature-dot"></span> <strong>Hébergement Offert à vie</strong></li>
             <li><span class="feature-dot"></span> UX/UI CRO</li>
-            <li><span class="feature-dot"></span> Copy + visuels</li>
-            <li><span class="feature-dot"></span> Dev Webflow</li>
           </ul>
           <button class="btn btn-primary w-full" onclick="openModal()">
             >Bloquer mon slot
@@ -263,9 +309,9 @@
           <div class="pricing-label">Réassurance +</div>
           <ul class="pricing-features">
             <li><span class="feature-dot"></span> Max 5 pages</li>
-            <li><span class="feature-dot"></span> UX/CRO</li>
-            <li><span class="feature-dot"></span> Copy + visuels</li>
-            <li><span class="feature-dot"></span> Dev Webflow</li>
+            <li><span class="feature-dot"></span> <strong>Tech Hybride (Code + CMS)</strong></li>
+            <li><span class="feature-dot"></span> <strong>Hébergement Offert à vie</strong></li>
+            <li><span class="feature-dot"></span> CMS (Blog/Réalisations)</li>
           </ul>
           <button class="btn btn-outline w-full" onclick="openModal()">
             >Bloquer mon slot
@@ -682,11 +728,21 @@
         
         <div class="faq-item" onclick="toggleFaq(this)">
           <div class="faq-question">
-            <h3 class="faq-title">Vous gérez l'hébergement ?</h3>
+            <h3 class="faq-title">Pourquoi l'hébergement est offert ?</h3>
             <span class="faq-icon font-mono">+</span>
           </div>
           <div class="faq-answer">
-            <p>Non. Nous livrons le site clé-en-main sur votre propre infrastructure (Webflow, Netlify, Vercel…). Vous gardez le contrôle total.</p>
+            <p>Contrairement à Webflow ou WordPress qui coûtent cher, nous utilisons une technologie 'Serverless' ultra-moderne (Tomorrow Stack). C'est plus rapide, plus sécurisé, et le coût est si faible que nous vous l'offrons à vie. Pas d'abonnement mensuel.</p>
+          </div>
+        </div>
+        
+        <div class="faq-item" onclick="toggleFaq(this)">
+          <div class="faq-question">
+            <h3 class="faq-title">Je veux absolument Webflow, c'est possible ?</h3>
+            <span class="faq-icon font-mono">+</span>
+          </div>
+          <div class="faq-answer">
+            <p>Oui. Cochez l'option 'Webflow Native' dans le formulaire (+290€). Vous devrez cependant payer votre abonnement Webflow directement à la plateforme (~30€/mois).</p>
           </div>
         </div>
         
