@@ -1079,7 +1079,7 @@
         var data = await response.json();
         console.log('PaymentIntent created');
         
-        var stripe = Stripe('pk_test_51Sw2QQHhyPxNNlpw0twD0qfP74lx2DfSoyY3Zw9Unkqx1zcTW8EaoSdpbWbMS8tSwICgJiZfDaMHlpgtYXv2HZWx00GtHoIERg');
+        var stripe = Stripe('pk_live_51Sw2QQHhyPxNNlpwkcOLbvzjnqsASwkOiP6USlJtetnIXfoxp2qCo9CxEmw2KGJiwZfwpNUhBengGY1xZfMd7Cyd00xNI9soKl');
         var elements = stripe.elements({ 
           clientSecret: data.clientSecret,
           locale: 'fr',
