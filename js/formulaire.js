@@ -792,7 +792,7 @@ function getStepContent() {
   }
   
   // Step 8 - Success screen
-  if (step === 8) {
+  if (currentStep === 8) {
     return `
       <div class="step step-8">
         <div class="success-header">
@@ -945,7 +945,7 @@ function draw(preserveScroll) {
       <div class="modal-actions">
         <button onclick="window.handleCloseOrBack()" class="btn btn-back">
           <span class="back-arrow">←</span>
-          <span>${currentStep === 1 ? 'FERMER' : (currentStep === 7 ? 'PASSER' : 'ABANDONNER (AVEC REGRET)')}</span>
+          <span>${currentStep === 1 ? 'FERMER' : (currentStep === 7 ? 'RETOUR AU FORMULAIRE' : (currentStep === 8 ? 'FERMER' : 'ABANDONNER (AVEC REGRET)'))}</span>
         </button>
         
         <div class="nav-buttons">
