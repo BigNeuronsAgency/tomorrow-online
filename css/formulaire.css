@@ -2636,3 +2636,10 @@ body:has(.modal:not(.hidden)) .whatsapp-float {
   font-size: 0.85rem !important;
   color: rgba(255, 255, 255, 0.5) !important;
 }
+
+/* Success container positioning for close button */
+.step-8 .success-container,
+.success-fullscreen .success-container {
+  position: relative !important;
+  padding-top: 3rem !important;
+}
