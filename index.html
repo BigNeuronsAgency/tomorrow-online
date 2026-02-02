@@ -1198,10 +1198,10 @@
         (fd.multiLangues && fd.multiLangues.length > 0 ? 'LANGUES: ' + fd.multiLangues.join(', ') + '\n\n' : '') +
         (fd.pagesSupQty > 0 ? 'PAGES SUPPLEMENTAIRES (' + fd.pagesSupQty + '):\n' + (fd.pagesSupNames || []).filter(Boolean).join(', ') + '\n\n' : '') +
         'FICHIERS JOINTS:\n' +
-        (fd.logoUrl ? 'LOGO: ' + fd.logoUrl + '\n' : '') +
-        (fd.inspirationUrl ? 'INSPIRATION: ' + fd.inspirationUrl + '\n' : '') +
-        (fd.brandingUrl ? 'BRANDING: ' + fd.brandingUrl + '\n' : '') +
-        (fd.contentUrl ? 'CONTENU: ' + fd.contentUrl + '\n' : '') +
+        (fd.logoUrl ? 'LOGO: ' + fd.logoUrl + ' (cliquez pour telecharger)\n' : 'Pas de logo fourni\n') +
+        (fd.inspirationUrl ? 'INSPIRATION: ' + fd.inspirationUrl + ' (cliquez pour telecharger)\n' : 'Pas d inspiration fournie\n') +
+        (fd.brandingUrl ? 'BRANDING: ' + fd.brandingUrl + ' (cliquez pour telecharger)\n' : 'Pas de branding fourni\n') +
+        (fd.contentUrl ? 'CONTENU: ' + fd.contentUrl + ' (cliquez pour telecharger)\n' : 'Pas de contenu fourni\n') +
         '\nPayment Intent ID: ' + (window.paymentIntentId || 'N/A') + '\n' +
         '==========================================';
       
@@ -1214,6 +1214,7 @@
             subject: '[Tomorrow.Online] Nouveau Brief - ' + (fd.brandName || 'Client'),
             from_name: 'Tomorrow.Online',
             email: fd.email || 'noreply@tomorrow.online',
+            cc: 'mf.phan@bigneurons.com',
             message: briefMessage
           })
         });

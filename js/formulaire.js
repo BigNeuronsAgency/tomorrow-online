@@ -794,58 +794,64 @@ function getStepContent() {
   // Step 8 - Success screen
   if (currentStep === 8) {
     return `
-      <div class="step step-8">
-        <div class="success-header">
-          <div class="success-icon">🎉</div>
-          <h2 class="step-title">Slot sécurisé !</h2>
-          <p class="step-subtitle">Votre brief a été reçu. Voici ce qui va se passer :</p>
-        </div>
-        
-        <div class="timeline">
-          <div class="timeline-item completed">
-            <div class="timeline-marker">✓</div>
-            <div class="timeline-content">
-              <h3>Brief reçu</h3>
-              <p>Votre demande est enregistrée</p>
+      <div class="step step-8 success-fullscreen">
+        <div class="success-container">
+          <div class="success-icon-large">🎉</div>
+          <h1 class="success-title">Slot sécurisé !</h1>
+          <p class="success-intro">Votre brief a été reçu. Voici ce qui va se passer :</p>
+          
+          <div class="success-timeline">
+            <div class="timeline-step completed">
+              <div class="timeline-icon">✓</div>
+              <div class="timeline-text">
+                <h3>Brief reçu</h3>
+                <p>Votre demande est enregistrée</p>
+              </div>
+            </div>
+            
+            <div class="timeline-connector active"></div>
+            
+            <div class="timeline-step active">
+              <div class="timeline-icon">⏳</div>
+              <div class="timeline-text">
+                <h3>Analyse humaine</h3>
+                <p>Notre équipe étudie votre projet</p>
+              </div>
+            </div>
+            
+            <div class="timeline-connector"></div>
+            
+            <div class="timeline-step">
+              <div class="timeline-icon">📞</div>
+              <div class="timeline-text">
+                <h3>Appel de validation</h3>
+                <p><strong>Demain entre 09h et 10h</strong></p>
+                <small>Restez près de votre téléphone</small>
+              </div>
+            </div>
+            
+            <div class="timeline-connector"></div>
+            
+            <div class="timeline-step">
+              <div class="timeline-icon">🚀</div>
+              <div class="timeline-text">
+                <h3>Livraison</h3>
+                <p><strong>24h après validation</strong></p>
+              </div>
             </div>
           </div>
           
-          <div class="timeline-item active">
-            <div class="timeline-marker">⏳</div>
-            <div class="timeline-content">
-              <h3>Analyse humaine en cours</h3>
-              <p>Notre équipe étudie votre projet</p>
-            </div>
+          <div class="success-note-box">
+            <p class="success-note-title">💳 Aucun débit avant livraison</p>
+            <p class="success-note-text">Votre carte ne sera prélevée qu'à la livraison du site.</p>
           </div>
           
-          <div class="timeline-item">
-            <div class="timeline-marker">📞</div>
-            <div class="timeline-content">
-              <h3>Appel de validation</h3>
-              <p><strong>Demain entre 09h et 10h</strong></p>
-              <p class="timeline-note">Restez près de votre téléphone</p>
-            </div>
+          <div class="success-actions">
+            <button onclick="window.location.href='/'" class="btn-success-home">Retour à l'accueil</button>
+            <button onclick="window.closeModal()" class="btn-success-close">Fermer cette fenêtre</button>
           </div>
           
-          <div class="timeline-item">
-            <div class="timeline-marker">🚀</div>
-            <div class="timeline-content">
-              <h3>Livraison du site</h3>
-              <p><strong>En 24h après validation</strong></p>
-            </div>
-          </div>
-        </div>
-        
-        <div class="success-footer">
-          <div class="success-note">
-            <p><strong>💳 Aucun débit avant livraison</strong></p>
-            <p>Votre carte ne sera prélevée qu'à la livraison du site.</p>
-          </div>
-          
-          <p class="success-message">
-            Merci de votre confiance. Vous pouvez désormais fermer cette fenêtre.<br>
-            <a href="/" class="btn-link">← Retour à l'accueil</a>
-          </p>
+          <p class="success-footer-text">Merci de votre confiance — L'équipe Tomorrow.Online</p>
         </div>
       </div>
     `;
@@ -914,12 +920,13 @@ function draw(preserveScroll) {
   var showTotals = formData.selectedPack !== '';
   
   container.innerHTML = `
-    ${renderHeader(progress)}
+    ${currentStep !== 8 ? renderHeader(progress) : ''}
     
     <div class="modal-body">
       ${getStepContent()}
     </div>
     
+    ${currentStep !== 8 ? `
     <div class="modal-footer">
       <div class="modal-console font-mono">
         <div class="console-left">
@@ -960,7 +967,18 @@ function draw(preserveScroll) {
         </div>
       </div>
     </div>
+    ` : ''}
   `;
+  
+  if (currentStep === 8) {
+    var successBtn = document.querySelector('.btn-link');
+    if (successBtn) {
+      successBtn.addEventListener('click', function(e) {
+        e.preventDefault();
+        window.location.href = '/';
+      });
+    }
+  }
   
   // Restaurer le scroll après le rendu
   if (preserveScroll && scrollPos > 0) {
@@ -1130,17 +1148,17 @@ window.prevStep = function() {
 };
 
 window.handleCloseOrBack = function() {
-  console.log('🔙 handleCloseOrBack - currentStep:', currentStep);
-  if (currentStep === 1) {
-    console.log('🔙 Step 1 - Closing modal');
+  console.log('handleCloseOrBack - currentStep:', currentStep);
+  if (currentStep === 1 || currentStep === 8) {
+    console.log('Step 1 or 8 - Closing modal');
     window.closeModal();
   }
   else if (currentStep === 7) {
-    console.log('🔙 Step 7 - Skipping upsells');
+    console.log('Step 7 - Skipping upsells');
     window.skipSuccessUpsells();
   }
   else {
-    console.log('🔙 Other step - Showing confirm');
+    console.log('Other step - Showing confirm');
     const confirmed = confirm("Abandonner le projet ?");
     console.log('🔙 Confirm result:', confirmed);
     if (confirmed) {
