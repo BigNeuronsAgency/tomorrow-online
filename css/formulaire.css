@@ -2412,3 +2412,200 @@ body:has(.modal:not(.hidden)) .whatsapp-float {
   .success-actions {
     flex-direction: column;
   }
+
+/* === STEP 8 SUCCESS FULLSCREEN - OVERRIDE FORCE === */
+.step-8.success-fullscreen,
+.form-step.step-8.success-fullscreen {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  bottom: 0 !important;
+  width: 100vw !important;
+  height: 100vh !important;
+  max-width: 100vw !important;
+  max-height: 100vh !important;
+  background: #0A0A0A !important;
+  z-index: 999999 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 2rem !important;
+  margin: 0 !important;
+  overflow-y: auto !important;
+  overflow-x: hidden !important;
+  animation: fadeIn 0.3s ease-out !important;
+}
+
+.step-8 .success-container,
+.success-fullscreen .success-container {
+  max-width: 700px !important;
+  width: 100% !important;
+  text-align: center !important;
+  color: #FFFFFF !important;
+}
+
+.step-8 .success-icon-large,
+.success-fullscreen .success-icon-large {
+  font-size: 5rem !important;
+  margin-bottom: 1.5rem !important;
+}
+
+.step-8 .success-title,
+.success-fullscreen .success-title {
+  font-size: clamp(2.5rem, 6vw, 4rem) !important;
+  font-weight: 800 !important;
+  background: linear-gradient(135deg, #FF5500, #FF0000) !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  background-clip: text !important;
+  margin-bottom: 1rem !important;
+  text-transform: uppercase !important;
+}
+
+.step-8 .success-intro,
+.success-fullscreen .success-intro {
+  font-size: 1.125rem !important;
+  color: rgba(255, 255, 255, 0.8) !important;
+  margin-bottom: 3rem !important;
+}
+
+.step-8 .timeline-step,
+.success-fullscreen .timeline-step {
+  display: flex !important;
+  align-items: flex-start !important;
+  gap: 1.5rem !important;
+  padding: 1.5rem !important;
+}
+
+.step-8 .timeline-icon,
+.success-fullscreen .timeline-icon {
+  width: 60px !important;
+  height: 60px !important;
+  border-radius: 50% !important;
+  background: rgba(255, 255, 255, 0.1) !important;
+  border: 2px solid rgba(255, 255, 255, 0.2) !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  font-size: 1.75rem !important;
+}
+
+.step-8 .timeline-step.completed .timeline-icon,
+.success-fullscreen .timeline-step.completed .timeline-icon {
+  background: rgba(0, 255, 0, 0.2) !important;
+  border-color: #00FF00 !important;
+}
+
+.step-8 .timeline-step.active .timeline-icon,
+.success-fullscreen .timeline-step.active .timeline-icon {
+  background: rgba(255, 85, 0, 0.2) !important;
+  border-color: #FF5500 !important;
+}
+
+.step-8 .timeline-text h3,
+.success-fullscreen .timeline-text h3 {
+  font-size: 1.125rem !important;
+  font-weight: 700 !important;
+  color: #FFFFFF !important;
+  margin-bottom: 0.25rem !important;
+}
+
+.step-8 .timeline-text p,
+.success-fullscreen .timeline-text p {
+  font-size: 0.95rem !important;
+  color: rgba(255, 255, 255, 0.7) !important;
+  margin: 0.25rem 0 !important;
+}
+
+.step-8 .timeline-text strong,
+.success-fullscreen .timeline-text strong {
+  color: #FFFFFF !important;
+}
+
+.step-8 .timeline-text small,
+.success-fullscreen .timeline-text small {
+  font-size: 0.85rem !important;
+  color: rgba(255, 255, 255, 0.5) !important;
+  display: block !important;
+  margin-top: 0.5rem !important;
+}
+
+.step-8 .timeline-connector,
+.success-fullscreen .timeline-connector {
+  width: 2px !important;
+  height: 40px !important;
+  background: rgba(255, 255, 255, 0.1) !important;
+  margin-left: calc(1.5rem + 29px) !important;
+}
+
+.step-8 .timeline-connector.active,
+.success-fullscreen .timeline-connector.active {
+  background: linear-gradient(to bottom, #FF5500, rgba(255, 85, 0, 0.2)) !important;
+}
+
+.step-8 .success-note-box,
+.success-fullscreen .success-note-box {
+  background: rgba(255, 85, 0, 0.1) !important;
+  border: 1px solid rgba(255, 85, 0, 0.3) !important;
+  border-radius: 12px !important;
+  padding: 1.5rem !important;
+  margin-bottom: 2rem !important;
+}
+
+.step-8 .success-note-title,
+.success-fullscreen .success-note-title {
+  font-size: 1.125rem !important;
+  font-weight: 700 !important;
+  color: #FF5500 !important;
+  margin-bottom: 0.5rem !important;
+}
+
+.step-8 .success-note-text,
+.success-fullscreen .success-note-text {
+  font-size: 0.95rem !important;
+  color: rgba(255, 255, 255, 0.8) !important;
+  margin: 0 !important;
+}
+
+.step-8 .success-actions,
+.success-fullscreen .success-actions {
+  display: flex !important;
+  gap: 1rem !important;
+  justify-content: center !important;
+  margin-bottom: 2rem !important;
+}
+
+.step-8 .btn-success-home,
+.step-8 .btn-success-close,
+.success-fullscreen .btn-success-home,
+.success-fullscreen .btn-success-close {
+  padding: 1rem 2rem !important;
+  border: none !important;
+  border-radius: 8px !important;
+  font-weight: 700 !important;
+  font-size: 0.95rem !important;
+  cursor: pointer !important;
+  transition: all 0.2s !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.05em !important;
+}
+
+.step-8 .btn-success-home,
+.success-fullscreen .btn-success-home {
+  background: linear-gradient(135deg, #FF5500, #FF0000) !important;
+  color: #FFFFFF !important;
+}
+
+.step-8 .btn-success-close,
+.success-fullscreen .btn-success-close {
+  background: rgba(255, 255, 255, 0.1) !important;
+  color: #FFFFFF !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+}
+
+.step-8 .success-footer-text,
+.success-fullscreen .success-footer-text {
+  font-size: 0.85rem !important;
+  color: rgba(255, 255, 255, 0.5) !important;
+}
