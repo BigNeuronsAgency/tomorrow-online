@@ -1539,7 +1539,8 @@ window.goToPaymentStep = function() {
   draw();
   
   // Initialiser Stripe Elements après le rendu
-  setTimeout(() => {
+  // Attendre que payment-stripe-v2.js soit chargé (il se charge après formulaire.js)
+  const waitForStripe = () => {
     console.log('🔍 Checking for createPaymentStep...');
     console.log('typeof window.createPaymentStep:', typeof window.createPaymentStep);
     console.log('typeof window.applyPromoCode:', typeof window.applyPromoCode);
@@ -1548,9 +1549,12 @@ window.goToPaymentStep = function() {
       console.log('✅ createPaymentStep found, calling it...');
       window.createPaymentStep();
     } else {
-      console.error('❌ createPaymentStep NOT FOUND - stripe-payment.js not loaded?');
+      console.log('⏳ Stripe not ready, retrying in 500ms...');
+      setTimeout(waitForStripe, 500);
     }
-  }, 500);
+  };
+  
+  setTimeout(waitForStripe, 100);
 };
 
 // ========================================
