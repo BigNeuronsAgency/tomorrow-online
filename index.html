@@ -998,6 +998,16 @@
             message.innerHTML = '✅ Code valide ! -5% appliqué';
             message.style.color = '#00FF00';
             window.promoDiscount = 0.05;
+            
+            // Mettre à jour le total affiché
+            if (typeof window.calculateTotals === 'function') {
+              var totals = window.calculateTotals();
+              var totalEl = document.querySelector('.summary-line-total span.font-mono');
+              if (totalEl) {
+                var discountedPrice = Math.round(totals.price * (1 - window.promoDiscount));
+                totalEl.textContent = discountedPrice + '€';
+              }
+            }
           } else {
             message.innerHTML = '❌ Code invalide';
             message.style.color = '#FF5500';
@@ -1009,7 +1019,7 @@
       if (typeof window.createPaymentStep !== 'function') {
         console.log('⚠️ FALLBACK: Defining createPaymentStep inline');
         window.createPaymentStep = function() {
-          console.log('Creating Stripe Elements...');
+          console.log('Creating Stripe Payment Element...');
           if (typeof Stripe === 'undefined') {
             console.error('Stripe SDK not loaded');
             return;
@@ -1024,26 +1034,34 @@
             return;
           }
           
-          var card = elements.create('card', {
-            style: {
-              base: {
-                fontSize: '16px',
-                color: '#000000',
-                '::placeholder': { color: '#666666' }
+          // Utiliser Payment Element (complet avec adresse, code postal, etc.)
+          var payment = elements.create('payment', {
+            layout: 'tabs',
+            fields: {
+              billingDetails: {
+                address: {
+                  country: 'never'
+                }
               }
             }
           });
-          card.mount('#payment-element');
-          window.stripeCard = card;
+          payment.mount('#payment-element');
+          window.stripePayment = payment;
           window.stripeInstance = stripe;
-          console.log('✅ Stripe Card Element mounted');
+          window.stripeElements = elements;
+          console.log('✅ Stripe Payment Element mounted');
         };
       }
       
       if (typeof window.submitPayment !== 'function') {
         console.log('⚠️ FALLBACK: Defining submitPayment inline');
         window.submitPayment = function() {
-          alert('Paiement en cours de configuration. Veuillez réessayer.');
+          console.log('Submit payment called');
+          var btn = document.getElementById('submit-payment-btn');
+          if (btn) btn.disabled = true;
+          
+          alert('Le fichier stripe-v3.js n\'a pas pu se charger. Veuillez recharger la page et réessayer.');
+          if (btn) btn.disabled = false;
         };
       }
     }, 1000);
