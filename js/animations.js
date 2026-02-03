@@ -31,7 +31,14 @@ function initAnimations() {
   );
   
   // ULTRA FAST SCROLL EASTER EGG - Effet hallucinant uniquement sur scroll hyper rapide
-  let skewSetter = gsap.quickSetter('body', 'skewY', 'deg');
+  // Appliqué sur #main-content pour ne pas affecter les modales (position: fixed)
+  const mainContent = document.getElementById('main-content');
+  if (!mainContent) {
+    console.warn('main-content not found');
+    return;
+  }
+  
+  let skewSetter = gsap.quickSetter(mainContent, 'skewY', 'deg');
   let clamp = gsap.utils.clamp(-8, 8); // Effet MASSIF
   const VELOCITY_THRESHOLD = 5000; // Seuil ENCORE PLUS élevé (5000 au lieu de 3000)
   
@@ -44,24 +51,23 @@ function initAnimations() {
         let skew = clamp(velocity / -300); // Division faible = effet massif
         skewSetter(skew);
         
-        // Shake violent + glow flash
-        document.body.style.filter = 'brightness(1.2) saturate(1.5)';
+        // Shake violent + glow flash - sur mainContent seulement, pas body
+        mainContent.style.filter = 'brightness(1.2) saturate(1.5)';
         
         // Return to normal rapidement avec bounce
-        gsap.to('body', {
+        gsap.to(mainContent, {
           skewY: 0,
           duration: 0.6,
           ease: 'elastic.out(1, 0.5)',
           overwrite: true,
           onComplete: () => {
             // Force reset complet pour éviter tout résidu
-            document.body.style.transform = '';
-            document.body.style.pointerEvents = '';
+            mainContent.style.transform = '';
           }
         });
         
         // Reset filter
-        gsap.to(document.body, {
+        gsap.to(mainContent, {
           filter: 'brightness(1) saturate(1)',
           duration: 0.4
         });
