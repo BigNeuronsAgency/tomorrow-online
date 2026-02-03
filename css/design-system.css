@@ -3,12 +3,6 @@
    Living Braise Theme
    ======================================== */
 
-/* === RESET FOCUS OUTLINES === */
-img, div, span, section, .venn-kid, .squad-drag, .jc-kid-img {
-  outline: none !important;
-  -webkit-tap-highlight-color: transparent;
-}
-
 /* === KEYFRAMES === */
 @keyframes braise-heat {
   0%, 100% {
@@ -348,10 +342,10 @@ html.lenis {
 
 /* === WHATSAPP FLOAT BUTTON === */
 .whatsapp-float {
-  position: fixed !important;
+  position: fixed;
   bottom: 2rem;
   right: 2rem;
-  z-index: 9998;
+  z-index: 999;
   width: 60px;
   height: 60px;
   background: #25D366;

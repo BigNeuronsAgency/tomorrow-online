@@ -1167,9 +1167,6 @@
   position: relative;
   display: flex;
   gap: 2rem;
-  max-width: 1200px;
-  margin: 0 auto;
-  justify-content: center;
 }
 
 .jc-sticky-kid {
@@ -1566,8 +1563,6 @@
   width: 100%;
   height: 100%;
   object-fit: contain;
-  outline: none;
-  border: none;
 }
 
 .pulse-animation {

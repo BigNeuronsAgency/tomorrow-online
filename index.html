@@ -211,7 +211,7 @@
       <div class="tech-grid" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px;">
         
         <!-- Tomorrow Stack (Featured) -->
-        <div class="tech-card featured" style="background: linear-gradient(145deg, #111 0%, #0a0a0a 100%); border: 1px solid #FF5500; padding: 40px; position: relative; overflow: hidden; border-radius: 4px; transition: transform 0.3s ease, border-color 0.3s ease;">
+        <div class="tech-card" style="background: linear-gradient(145deg, #111 0%, #0a0a0a 100%); border: 1px solid #FF5500; padding: 40px; position: relative; overflow: hidden; border-radius: 4px;">
           <div style="position: absolute; top: 0; right: 0; background: #FF5500; color: #000; font-family: 'JetBrains Mono'; font-size: 10px; font-weight: bold; padding: 5px 10px; text-transform: uppercase;">Choix recommandé</div>
           <h3 style="font-family: 'Syne', sans-serif; font-size: 24px; color: white; margin-bottom: 10px; text-transform: uppercase;">Tomorrow Stack</h3>
           <p class="font-mono" style="font-size: 10px; color: #FF5500; margin-bottom: 20px;">/// HYBRID STATIC ARCHITECTURE</p>
@@ -226,7 +226,7 @@
         </div>
 
         <!-- Webflow Native -->
-        <div class="tech-card" style="background: #050505; border: 1px solid rgba(255,255,255,0.1); padding: 40px; border-radius: 4px; transition: transform 0.3s ease, border-color 0.3s ease;">
+        <div class="tech-card" style="background: #050505; border: 1px solid rgba(255,255,255,0.1); padding: 40px; border-radius: 4px;">
           <h3 style="font-family: 'Syne', sans-serif; font-size: 24px; color: white; margin-bottom: 10px; text-transform: uppercase;">Webflow Native</h3>
           <p class="font-mono" style="font-size: 10px; color: #4353FF; margin-bottom: 20px;">/// NO-CODE STANDARD</p>
           <p style="color: #999; font-size: 14px; margin-bottom: 25px; line-height: 1.6;">
@@ -240,7 +240,7 @@
         </div>
 
         <!-- Code Brut -->
-        <div class="tech-card" style="background: #050505; border: 1px solid rgba(255,255,255,0.1); padding: 40px; border-radius: 4px; transition: transform 0.3s ease, border-color 0.3s ease;">
+        <div class="tech-card" style="background: #050505; border: 1px solid rgba(255,255,255,0.1); padding: 40px; border-radius: 4px;">
           <h3 style="font-family: 'Syne', sans-serif; font-size: 24px; color: white; margin-bottom: 10px; text-transform: uppercase;">Code Brut</h3>
           <p class="font-mono" style="font-size: 10px; color: #00FF00; margin-bottom: 20px;">/// RAW HTML/CSS/JS</p>
           <p style="color: #999; font-size: 14px; margin-bottom: 25px; line-height: 1.6;">
@@ -739,21 +739,11 @@
         
         <div class="faq-item" onclick="toggleFaq(this)">
           <div class="faq-question">
-            <h3 class="faq-title">Pourquoi l'hébergement est offert ?</h3>
+            <h3 class="faq-title">Vous gérez l'hébergement ?</h3>
             <span class="faq-icon font-mono">+</span>
           </div>
           <div class="faq-answer">
-            <p>Contrairement à Webflow ou WordPress qui coûtent cher, nous utilisons une technologie 'Serverless' ultra-moderne (Tomorrow Stack). C'est plus rapide, plus sécurisé, et le coût est si faible que nous vous l'offrons à vie. Pas d'abonnement mensuel.</p>
-          </div>
-        </div>
-        
-        <div class="faq-item" onclick="toggleFaq(this)">
-          <div class="faq-question">
-            <h3 class="faq-title">Je veux absolument Webflow, c'est possible ?</h3>
-            <span class="faq-icon font-mono">+</span>
-          </div>
-          <div class="faq-answer">
-            <p>Oui. Cochez l'option 'Webflow Native' dans le formulaire (+290€). Vous devrez cependant payer votre abonnement Webflow directement à la plateforme (~30€/mois).</p>
+            <p>Non. Nous livrons le site clé-en-main sur votre propre infrastructure (Webflow, Netlify, Vercel…). Vous gardez le contrôle total.</p>
           </div>
         </div>
         
@@ -1483,8 +1473,8 @@
   </script>
   
   <!-- Footer Secret Modal -->
-  <div id="footer-secret-modal" style="display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.95); z-index: 10000; justify-content: center; align-items: center; backdrop-filter: blur(10px); overflow-y: auto;">
-    <div style="background: linear-gradient(135deg, #0A0A0A 0%, #1A1A1A 100%); padding: 60px 40px; border-radius: 20px; border: 3px solid #FF5500; max-width: 500px; width: 90%; text-align: center; box-shadow: 0 0 100px rgba(255, 85, 0, 0.5), inset 0 0 50px rgba(255, 85, 0, 0.1); position: relative; margin: 20px auto;">
+  <div id="footer-secret-modal" style="display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.95); z-index: 10000; justify-content: center; align-items: center; backdrop-filter: blur(10px); overflow: auto;">
+    <div style="background: linear-gradient(135deg, #0A0A0A 0%, #1A1A1A 100%); padding: 60px 40px; border-radius: 20px; border: 3px solid #FF5500; max-width: 500px; width: 90%; text-align: center; box-shadow: 0 0 100px rgba(255, 85, 0, 0.5), inset 0 0 50px rgba(255, 85, 0, 0.1); position: relative; margin: auto;">
       <h2 style="color: #FFFFFF; font-family: 'Syne', sans-serif; font-size: 32px; font-weight: 800; margin-bottom: 20px; text-transform: uppercase; letter-spacing: 2px;">On adore les rebelles 🤘</h2>
       <p style="color: #CCCCCC; font-size: 16px; margin-bottom: 30px; line-height: 1.6;">
         Tu as osé cliquer là où il ne fallait pas.<br>

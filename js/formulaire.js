@@ -22,33 +22,6 @@ var PACKS = [
   { id: 'BUSINESS', name: 'PACK BUSINESS', price: 2200, delay: 48, desc: 'Site Complet // Blog & SEO' }
 ];
 
-var TECH_OPTIONS = [
-  { 
-    id: 'tomorrow', 
-    name: 'STACK TOMORROW', 
-    price: 0, 
-    tag: 'CHOIX RECOMMANDÉ',
-    desc: 'Performance maximale. Hébergement offert à vie. Éditeur visuel inclus.',
-    features: ['Hébergement : 0€/mois', 'Autonomie : Textes/Images/SocialMedia/Statistiques', 'Sécurité & Performance : Maximale']
-  },
-  { 
-    id: 'webflow', 
-    name: 'WEBFLOW NATIVE', 
-    price: 290, 
-    tag: 'STANDARD',
-    desc: 'Site livré sur votre compte Webflow. Idéal pour les équipes marketing habituées.',
-    features: ['Abonnement : ~30€/mois (à votre charge)', 'Interface : Webflow Editor', 'Transfert : Propriété complète']
-  },
-  { 
-    id: 'raw', 
-    name: 'CODE BRUT (.ZIP)', 
-    price: -190, 
-    tag: 'EXPERT IT',
-    desc: 'Nous livrons le code source. Vos développeurs gèrent l\'intégration.',
-    features: ['Autonomie totale : Code source complet', 'Fait pour les grandes équipes : Tech interne', 'Adaptation : Intégrable dans tout CMS']
-  }
-];
-
 var UPSELLS = {
   'MAQUETTE': [
     { id: 'packGraphique', name: 'Pack Graphique', price: 160, delay: 4, tooltip: 'Un Directeur Artistique senior boosté à l\'IA, s\'occupe de votre charte graphique et nous vous fournissons votre logo, votre typo et vos couleurs', desc: 'DA senior boosté IA pour votre charte complète.' },
@@ -90,6 +63,34 @@ var DETAILS_DATA = {
   'STARTER': { title: 'PACK STARTER (24H)', included: ['Design Premium', 'Développement Webflow', 'Responsive Perfect', 'Optimisation SEO de base', 'Copywriting (Textes)'], excluded: ['Système de Blog/CMS', 'Filtres avancés', 'E-commerce'] },
   'BUSINESS': { title: 'PACK BUSINESS (48H)', included: ['Site Multi-pages (max 5)', 'CMS (Blog/Réalisations)', 'Animations Avancées (GSAP)', 'SEO Technique Avancé', 'Formation Admin'], excluded: ['E-commerce complexe', 'Espace Membre'] }
 };
+
+// OPTIONS TECHNO (Step 6)
+var TECH_OPTIONS = [
+  { 
+    id: 'tomorrow', 
+    name: 'STACK TOMORROW', 
+    price: 0, 
+    tag: 'CHOIX RECOMMANDÉ',
+    desc: 'Performance maximale. Hébergement offert à vie. Éditeur visuel inclus.',
+    features: ['Hébergement : 0€/mois', 'Autonomie : Textes/Images/SocialMedia/Statistiques', 'Sécurité & Performance : Maximale']
+  },
+  { 
+    id: 'webflow', 
+    name: 'WEBFLOW NATIVE', 
+    price: 290, 
+    tag: 'STANDARD',
+    desc: 'Site livré sur votre compte Webflow. Idéal pour les équipes marketing habituées.',
+    features: ['Abonnement : ~30€/mois (à votre charge)', 'Interface : Webflow Editor', 'Transfert : Propriété complète']
+  },
+  { 
+    id: 'raw', 
+    name: 'CODE BRUT (.ZIP)', 
+    price: -190, 
+    tag: '',
+    desc: 'Nous livrons le code source. Vos développeurs gèrent l\'intégration.',
+    features: ['Autonomie totale : Code source complet', 'Fait pour les grandes équipes', 'Adaptation : Intégrable dans tout CMS']
+  }
+];
 
 var ARCHETYPES = [
   { id: 'innocent', icon: '☁️', name: "L'Innocent", desc: "Optimisme & Sécurité" },
@@ -147,15 +148,13 @@ function calculateTotals() {
     price += pack.price;
     delay += pack.delay;
   }
-  
-  // Tech price (skip if MAQUETTE)
+  // Ajouter prix techno (sauf pour MAQUETTE)
   if (formData.selectedPack !== 'MAQUETTE') {
     var tech = TECH_OPTIONS.find(t => t.id === formData.selectedTech);
     if (tech) {
       price += tech.price;
     }
   }
-  
   var upsellList = UPSELLS[formData.selectedPack] || [];
   upsellList.forEach(u => {
     if (formData.upsells[u.id]) {
@@ -166,7 +165,7 @@ function calculateTotals() {
         var langCount = formData.multiLangues.length;
         if (langCount > 0) {
           price += u.price;
-          if (langCount > 1) price += (langCount - 1) * 20;
+          if (langCount - 1) price += (langCount - 1) * 20;
           delay += u.delay;
         }
       } else {
@@ -609,7 +608,6 @@ function getStepContent() {
   
   // Step 6: Technology Choice (Skip if MAQUETTE)
   if (currentStep === 6) {
-    // Skip auto si MAQUETTE
     if (formData.selectedPack === 'MAQUETTE') {
       currentStep = 7;
       return getStepContent();
@@ -626,25 +624,25 @@ function getStepContent() {
           ${TECH_OPTIONS.map(t => `
             <div onclick="window.selectTech('${t.id}')" 
                  class="tech-option-card ${formData.selectedTech === t.id ? 'selected' : ''}"
-                 style="border: 1px solid ${formData.selectedTech === t.id ? (t.id === 'tomorrow' ? '#FF5500' : '#333') : '#333'}; padding: 25px; cursor: pointer; transition: all 0.2s; background: ${formData.selectedTech === t.id ? (t.id === 'tomorrow' ? 'rgba(255,85,0,0.05)' : t.id === 'webflow' ? 'rgba(67,83,255,0.05)' : 'transparent') : 'transparent'}; position: relative; border-radius: 4px;">
+                 style="border: 1px solid ${formData.selectedTech === t.id ? (t.id === 'tomorrow' ? '#FF5500' : '#4353FF') : '#333'}; padding: 25px; cursor: pointer; transition: all 0.2s; background: ${formData.selectedTech === t.id ? (t.id === 'tomorrow' ? 'rgba(255,85,0,0.05)' : 'rgba(67,83,255,0.05)') : 'transparent'}; position: relative; border-radius: 4px;">
               
               ${t.id === 'tomorrow' ? `<div style="position: absolute; top: 0; right: 0; background: #FF5500; color: #000; font-size: 9px; padding: 4px 8px; font-weight:bold; font-family: monospace;">CHOIX RECOMMANDÉ</div>` : ''}
               
               <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 15px; margin-top: ${t.id === 'tomorrow' ? '20px' : '0'};">
-                <div class="tech-radio" style="width: 20px; height: 20px; border-radius: 50%; border: 2px solid ${formData.selectedTech === t.id ? (t.id === 'tomorrow' ? '#FF5500' : t.id === 'webflow' ? '#4353FF' : '#666') : '#555'}; display: flex; align-items: center; justify-content: center;">
-                  ${formData.selectedTech === t.id ? `<div style="width: 10px; height: 10px; background: ${t.id === 'tomorrow' ? '#FF5500' : t.id === 'webflow' ? '#4353FF' : '#666'}; border-radius: 50%;"></div>` : ''}
+                <div style="width: 20px; height: 20px; border-radius: 50%; border: 2px solid ${formData.selectedTech === t.id ? (t.id === 'tomorrow' ? '#FF5500' : '#4353FF') : '#555'}; display: flex; align-items: center; justify-content: center;">
+                  ${formData.selectedTech === t.id ? `<div style="width: 10px; height: 10px; background: ${t.id === 'tomorrow' ? '#FF5500' : '#4353FF'}; border-radius: 50%;"></div>` : ''}
                 </div>
-                <span class="font-syne" style="font-size: 18px; font-weight: bold; text-transform: uppercase; color: #000;">${t.name}</span>
+                <span style="font-family: 'Syne', sans-serif; font-size: 16px; font-weight: bold; text-transform: uppercase; color: #333;">${t.name}</span>
               </div>
               
               <div style="text-align: right; margin-bottom: 15px;">
-                <span class="font-mono" style="font-size: 20px; font-weight: bold; color: ${t.price > 0 ? '#FF5500' : (t.price < 0 ? '#00FF00' : '#000')}">${t.price > 0 ? '+' + t.price : (t.price < 0 ? t.price : 'INCLUS')}€</span>
+                <span style="font-family: 'JetBrains Mono', monospace; font-size: 18px; font-weight: bold; color: ${t.price > 0 ? '#FF5500' : (t.price < 0 ? '#00AA00' : '#333')}">${t.price > 0 ? '+' + t.price : (t.price < 0 ? t.price : 'INCLUS')}€</span>
               </div>
 
-              <p style="color: #999; font-size: 13px; margin-bottom: 15px; line-height: 1.5;">${t.desc}</p>
+              <p style="color: #666; font-size: 13px; margin-bottom: 15px; line-height: 1.5;">${t.desc}</p>
 
-              <div class="tech-features" style="font-size: 11px; color: #666; font-family: monospace; display: flex; flex-direction: column; gap: 8px;">
-                ${t.features.map(f => `<div style="display: flex; gap: 8px;"><span style="color: ${t.id === 'tomorrow' ? '#FF5500' : t.id === 'webflow' ? '#4353FF' : '#666'};">•</span><span>${f}</span></div>`).join('')}
+              <div style="font-size: 11px; color: #888; font-family: 'JetBrains Mono', monospace; display: flex; flex-direction: column; gap: 6px;">
+                ${t.features.map(f => `<div style="display: flex; gap: 8px;"><span style="color: ${t.id === 'tomorrow' ? '#FF5500' : '#4353FF'};">•</span><span>${f}</span></div>`).join('')}
               </div>
             </div>
           `).join('')}
@@ -653,10 +651,10 @@ function getStepContent() {
     `;
   }
   
-  // Step 7: Validation (Anciennement Step 6)
+  // Step 7: Validation (anciennement Step 6)
   if (currentStep === 7) {
     return `
-      <div class="form-step step-6">
+      <div class="form-step step-7">
         <div class="step-header">
           <h2 class="step-title">VALIDATION</h2>
           <p class="step-subtitle font-mono">Dernière ligne droite.</p>
@@ -729,7 +727,6 @@ function getStepContent() {
   if (currentStep === 8) {
     const totals = calculateTotals();
     const pack = PACKS.find(p => p.id === formData.selectedPack);
-    const tech = TECH_OPTIONS.find(t => t.id === formData.selectedTech);
     
     // Récupérer les upsells sélectionnés avec leurs détails
     const selectedUpsells = [];
@@ -747,7 +744,7 @@ function getStepContent() {
     const showCare = formData.selectedPack !== 'maquette';
     
     return `
-      <div class="form-step step-8">
+      <div class="form-step step-7">
         <div class="step-header">
           <h2 class="step-title">CONFIRMATION</h2>
           <p class="step-subtitle font-mono">Sécurisation de votre slot</p>
@@ -825,13 +822,6 @@ function getStepContent() {
               <span class="font-mono">${pack.price}€ HT</span>
             </div>
             
-            ${formData.selectedPack !== 'MAQUETTE' ? `
-            <div class="summary-line summary-line-small" style="color: #ccc;">
-              <span>INFRA: ${tech.name}</span>
-              <span class="font-mono" style="color: ${tech.price > 0 ? '#FF5500' : (tech.price < 0 ? '#00FF00' : '#FFF')}">${tech.price > 0 ? '+' : ''}${tech.price}€</span>
-            </div>
-            ` : ''}
-            
             ${hasUpsells ? `
               <div class="summary-divider"></div>
               <p class="summary-section-title">Options</p>
@@ -882,7 +872,7 @@ function getStepContent() {
     `;
   }
   
-  // Step 9: Success screen (After payment)
+  // Step 9 - Success screen
   if (currentStep === 9) {
     return `
       <div class="step step-9 success-fullscreen">
@@ -1053,7 +1043,7 @@ function draw(preserveScroll) {
         </button>
         
         <div class="nav-buttons">
-          ${currentStep > 1 && currentStep < 7 ? 
+          ${currentStep > 1 && currentStep < 8 ? 
             `<button onclick="window.prevStep()" class="btn btn-outline">← PRÉCÉDENT</button>` : 
             ''
           }
@@ -1114,15 +1104,15 @@ window.updateInput = function(key, value, consoleMsg) {
   }
 };
 
-window.selectTech = function(id) {
-  formData.selectedTech = id;
-  typeConsole('TECH SELECTED: ' + id.toUpperCase());
-  draw();
-};
-
 window.selectArchetype = function(id) {
   formData.archetype = id;
   typeConsole('ARCHETYPE SELECTED');
+  draw();
+};
+
+window.selectTech = function(id) {
+  formData.selectedTech = id;
+  typeConsole('TECH SELECTED: ' + id.toUpperCase());
   draw();
 };
 
@@ -1722,7 +1712,7 @@ function startCountdown() {
 // ========================================
 
 window.goToPaymentStep = function() {
-  // Validation de l'étape 7 (validation)
+  // Validation de l'étape 7
   if (!formData.email || !formData.phone) {
     alert('Veuillez remplir votre email et téléphone.');
     return;
