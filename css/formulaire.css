@@ -1655,7 +1655,7 @@ body:has(.modal:not(.hidden)) .whatsapp-float {
   box-shadow: 0 4px 12px rgba(255, 85, 0, 0.4);
   letter-spacing: 0.1em;
   transform: rotate(-2deg);
-  animation: pulse 2s ease-in-out infinite;
+  animation: pulse-opacity 2s ease-in-out infinite;
 }
 
 .success-main {
@@ -1832,7 +1832,7 @@ body:has(.modal:not(.hidden)) .whatsapp-float {
   justify-content: center;
   border-radius: 50%;
   flex-shrink: 0;
-  animation: scaleIn 0.5s ease-out, pulse 2s ease-in-out infinite 0.5s;
+  animation: scaleIn 0.5s ease-out, pulse-glow 2s ease-in-out infinite 0.5s;
   box-shadow: 0 8px 32px rgba(255, 85, 0, 0.5);
 }
 
@@ -1924,7 +1924,7 @@ body:has(.modal:not(.hidden)) .whatsapp-float {
 
 .report-item.active .report-icon {
   color: #fbbf24;
-  animation: pulse 1.5s ease-in-out infinite;
+  animation: pulse-opacity 1.5s ease-in-out infinite;
 }
 
 .success-next {
@@ -2051,7 +2051,7 @@ body:has(.modal:not(.hidden)) .whatsapp-float {
   text-align: right;
   overflow: hidden;
   white-space: nowrap;
-  animation: pulse 2s ease-in-out infinite;
+  animation: pulse-opacity 2s ease-in-out infinite;
 }
 
 .modal-actions {
@@ -2311,12 +2311,17 @@ body:has(.modal:not(.hidden)) .whatsapp-float {
 .timeline-step.active .timeline-icon {
   background: rgba(255, 85, 0, 0.2);
   border-color: #FF5500;
-  animation: pulse 2s ease-in-out infinite;
+  animation: pulse-glow 2s ease-in-out infinite;
 }
 
-@keyframes pulse {
+@keyframes pulse-glow {
   0%, 100% { box-shadow: 0 0 0 0 rgba(255, 85, 0, 0.7); }
   50% { box-shadow: 0 0 0 20px rgba(255, 85, 0, 0); }
+}
+
+@keyframes pulse-opacity {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
 }
 
 .timeline-text h3 {
