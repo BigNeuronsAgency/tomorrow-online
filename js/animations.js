@@ -133,6 +133,11 @@ function initAnimations() {
 }
 
 function initSmoothScroll() {
+  // Lenis désactivé temporairement - cause des bugs sur les modales
+  // TODO: Réactiver avec une configuration qui ne casse pas position:fixed
+  console.log('Smooth scroll: native mode');
+  return;
+  
   // Check if Lenis is loaded
   if (typeof Lenis === 'undefined') {
     console.warn('Lenis not loaded');
