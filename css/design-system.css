@@ -3,10 +3,20 @@
    Living Braise Theme
    ======================================== */
 
-/* === RESET FOCUS OUTLINES === */
-img, div, span, section, .venn-kid, .squad-drag, .jc-kid-img, .impatient-kid-logo, .gamification-icon, .status-icon {
+/* === RESET FOCUS OUTLINES & TAP HIGHLIGHTS === */
+*:focus {
   outline: none !important;
+}
+
+img, div, span, section, 
+.venn-kid, .venn-center-image, .pulse-animation,
+.squad-drag, .jc-kid-img, .impatient-kid-logo, 
+.gamification-icon, .status-icon, .timeline-icon,
+[class*="animation"] {
+  outline: none !important;
+  border-color: transparent;
   -webkit-tap-highlight-color: transparent;
+  -webkit-focus-ring-color: transparent;
 }
 
 /* === KEYFRAMES === */
