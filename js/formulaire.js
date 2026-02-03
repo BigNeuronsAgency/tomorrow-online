@@ -1252,13 +1252,9 @@ window.prevStep = function() {
 
 window.handleCloseOrBack = function() {
   console.log('handleCloseOrBack - currentStep:', currentStep);
-  if (currentStep === 1 || currentStep === 8) {
-    console.log('Step 1 or 8 - Closing modal');
+  if (currentStep === 1 || currentStep === 8 || currentStep === 9) {
+    console.log('Step 1, 8 or 9 - Closing modal');
     window.closeModal();
-  }
-  else if (currentStep === 7) {
-    console.log('Step 7 - Skipping upsells');
-    window.skipSuccessUpsells();
   }
   else {
     console.log('Other step - Showing confirm');
