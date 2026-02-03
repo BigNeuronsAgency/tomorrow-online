@@ -1227,6 +1227,16 @@ window.removeFile = function(index) {
 window.nextStep = function() {
   if (currentStep < totalSteps) {
     currentStep++;
+    
+    // GA4 Event: Step changée
+    if (typeof gtag === 'function') {
+      gtag('event', 'form_step', {
+        'event_category': 'formulaire',
+        'event_label': 'step_' + currentStep,
+        'value': currentStep
+      });
+    }
+    
     typeConsole('STEP ' + currentStep + ' INITIALIZED');
     draw();
   }
@@ -1259,6 +1269,14 @@ window.handleCloseOrBack = function() {
 
 window.openModal = function(plan) {
   console.log('🔥 openModal CALLED', plan);
+  
+  // GA4 Event: Formulaire ouvert
+  if (typeof gtag === 'function') {
+    gtag('event', 'form_open', {
+      'event_category': 'formulaire',
+      'event_label': plan || 'no_plan'
+    });
+  }
   
   try {
     var m = document.getElementById('bookingModal');

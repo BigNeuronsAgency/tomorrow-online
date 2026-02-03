@@ -572,10 +572,18 @@ function calculateTotal() {
 
 // Afficher l'écran de succès
 function showSuccessScreen() {
-  // Passer à l'étape succès (step 7 ou 8 selon ton formulaire)
-  // À adapter selon ta structure
+  // GA4 Event: Paiement réussi
+  if (typeof gtag === 'function') {
+    var totals = typeof calculateTotals === 'function' ? calculateTotals() : { price: 0 };
+    gtag('event', 'purchase', {
+      'event_category': 'conversion',
+      'event_label': formData.selectedPack || 'STARTER',
+      'value': totals.price,
+      'currency': 'EUR'
+    });
+  }
+  
   console.log('✅ Afficher écran de succès');
-  // Tu peux appeler la fonction existante de ton formulaire
   if (typeof finalizeForm === 'function') {
     finalizeForm();
   }
