@@ -622,38 +622,32 @@ function getStepContent() {
           <p class="step-subtitle font-mono">Vous choisissez ce que vous mettez sous le capot</p>
         </div>
         
-        <div class="tech-selection-grid" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-bottom: 30px;">
+        <div class="tech-selection-grid" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;">
           ${TECH_OPTIONS.map(t => `
             <div onclick="window.selectTech('${t.id}')" 
                  class="tech-option-card ${formData.selectedTech === t.id ? 'selected' : ''}"
-                 style="border: 1px solid ${formData.selectedTech === t.id ? (t.id === 'tomorrow' ? '#FF5500' : t.id === 'raw' ? '#00FF00' : '#4353FF') : '#333'}; padding: 25px; cursor: pointer; transition: all 0.2s; background: ${formData.selectedTech === t.id ? (t.id === 'tomorrow' ? 'rgba(255,85,0,0.05)' : t.id === 'raw' ? 'rgba(0,255,0,0.05)' : 'rgba(67,83,255,0.05)') : 'transparent'}; position: relative; border-radius: 4px;">
+                 style="border: 1px solid ${formData.selectedTech === t.id ? (t.id === 'tomorrow' ? '#FF5500' : '#333') : '#333'}; padding: 25px; cursor: pointer; transition: all 0.2s; background: ${formData.selectedTech === t.id ? (t.id === 'tomorrow' ? 'rgba(255,85,0,0.05)' : t.id === 'webflow' ? 'rgba(67,83,255,0.05)' : 'transparent') : 'transparent'}; position: relative; border-radius: 4px;">
               
-              ${t.tag ? `<div style="position: absolute; top: 0; right: 0; background: ${t.id === 'tomorrow' ? '#FF5500' : t.id === 'raw' ? '#00FF00' : '#333'}; color: ${t.id === 'raw' ? '#000' : '#FFF'}; font-size: 9px; padding: 4px 8px; font-weight:bold; font-family: monospace;">${t.tag}</div>` : ''}
+              ${t.id === 'tomorrow' ? `<div style="position: absolute; top: 0; right: 0; background: #FF5500; color: #000; font-size: 9px; padding: 4px 8px; font-weight:bold; font-family: monospace;">CHOIX RECOMMANDÉ</div>` : ''}
               
-              <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 15px; margin-top: ${t.tag ? '20px' : '0'};">
-                <div class="tech-radio" style="width: 20px; height: 20px; border-radius: 50%; border: 2px solid ${formData.selectedTech === t.id ? (t.id === 'tomorrow' ? '#FF5500' : t.id === 'raw' ? '#00FF00' : '#4353FF') : '#555'}; display: flex; align-items: center; justify-content: center;">
-                  ${formData.selectedTech === t.id ? `<div style="width: 10px; height: 10px; background: ${t.id === 'tomorrow' ? '#FF5500' : t.id === 'raw' ? '#00FF00' : '#4353FF'}; border-radius: 50%;"></div>` : ''}
+              <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 15px; margin-top: ${t.id === 'tomorrow' ? '20px' : '0'};">
+                <div class="tech-radio" style="width: 20px; height: 20px; border-radius: 50%; border: 2px solid ${formData.selectedTech === t.id ? (t.id === 'tomorrow' ? '#FF5500' : t.id === 'webflow' ? '#4353FF' : '#666') : '#555'}; display: flex; align-items: center; justify-content: center;">
+                  ${formData.selectedTech === t.id ? `<div style="width: 10px; height: 10px; background: ${t.id === 'tomorrow' ? '#FF5500' : t.id === 'webflow' ? '#4353FF' : '#666'}; border-radius: 50%;"></div>` : ''}
                 </div>
-                <span class="font-syne" style="font-size: 18px; font-weight: bold; text-transform: uppercase; color: white;">${t.name}</span>
+                <span class="font-syne" style="font-size: 18px; font-weight: bold; text-transform: uppercase; color: #000;">${t.name}</span>
               </div>
               
               <div style="text-align: right; margin-bottom: 15px;">
-                <span class="font-mono" style="font-size: 20px; font-weight: bold; color: ${t.price > 0 ? '#FF5500' : (t.price < 0 ? '#00FF00' : '#FFF')}">${t.price > 0 ? '+' + t.price : (t.price < 0 ? t.price : 'INCLUS')}€</span>
+                <span class="font-mono" style="font-size: 20px; font-weight: bold; color: ${t.price > 0 ? '#FF5500' : (t.price < 0 ? '#00FF00' : '#000')}">${t.price > 0 ? '+' + t.price : (t.price < 0 ? t.price : 'INCLUS')}€</span>
               </div>
 
               <p style="color: #999; font-size: 13px; margin-bottom: 15px; line-height: 1.5;">${t.desc}</p>
 
               <div class="tech-features" style="font-size: 11px; color: #666; font-family: monospace; display: flex; flex-direction: column; gap: 8px;">
-                ${t.features.map(f => `<div style="display: flex; gap: 8px;"><span style="color: ${t.id === 'tomorrow' ? '#FF5500' : t.id === 'raw' ? '#00FF00' : '#4353FF'};">•</span><span>${f}</span></div>`).join('')}
+                ${t.features.map(f => `<div style="display: flex; gap: 8px;"><span style="color: ${t.id === 'tomorrow' ? '#FF5500' : t.id === 'webflow' ? '#4353FF' : '#666'};">•</span><span>${f}</span></div>`).join('')}
               </div>
             </div>
           `).join('')}
-        </div>
-        
-        <div style="text-align: center;">
-          <button onclick="window.nextStep()" class="btn btn-primary" style="padding: 15px 40px;">
-            Continuer →
-          </button>
         </div>
       </div>
     `;
@@ -1732,19 +1726,18 @@ function startCountdown() {
 // ========================================
 
 window.goToPaymentStep = function() {
-  // Validation de l'étape 6
+  // Validation de l'étape 7 (validation)
   if (!formData.email || !formData.phone) {
     alert('Veuillez remplir votre email et téléphone.');
     return;
   }
   
-  // Passer à l'étape 7 (paiement)
-  currentStep = 7;
+  // Passer à l'étape 8 (paiement)
+  currentStep = 8;
   typeConsole('PAYMENT STEP INITIALIZED');
   draw();
   
   // Initialiser Stripe Elements après le rendu
-  // Attendre que payment-stripe-v2.js soit chargé (il se charge après formulaire.js)
   const waitForStripe = () => {
     console.log('🔍 Checking for createPaymentStep...');
     console.log('typeof window.createPaymentStep:', typeof window.createPaymentStep);
