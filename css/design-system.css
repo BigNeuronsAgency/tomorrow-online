@@ -70,7 +70,7 @@ img, div, span, section,
   --z-sticky: 50;
   --z-modal-overlay: 100;
   --z-modal: 200;
-  --z-cursor: 9999;
+  --z-cursor: 999999;
 }
 
 /* === RESET & BASE === */
@@ -78,6 +78,17 @@ img, div, span, section,
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+}
+
+/* === LENIS PROTECTION - Fixed elements must not be affected by smooth scroll === */
+.modal,
+.whatsapp-float,
+.custom-cursor,
+#footer-secret-modal,
+#videoModal,
+#bookingModal {
+  transform: none !important;
+  will-change: auto !important;
 }
 
 html {

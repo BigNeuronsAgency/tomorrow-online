@@ -143,7 +143,11 @@ function initSmoothScroll() {
     duration: 1.2,
     easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
     smooth: true,
-    smoothTouch: false
+    smoothTouch: false,
+    wrapper: window,
+    content: document.documentElement,
+    lerp: 0.1,
+    infinite: false
   });
   
   // Sync with GSAP ScrollTrigger
