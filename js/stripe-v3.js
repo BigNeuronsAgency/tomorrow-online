@@ -5,8 +5,8 @@
 
 console.log('🚀 payment-stripe-v2.js START LOADING');
 
-// Configuration Stripe (MODE TEST)
-const STRIPE_PUBLISHABLE_KEY = 'pk_test_51Sw2QQHhyPxNNlpw0twD0qfP74lx2DfSoyY3Zw9Unkqx1zcTW8EaoSdpbWbMS8tSwICgJiZfDaMHlpgtYXv2HZWx00GtHoIERg';
+// Configuration Stripe (MODE LIVE)
+const STRIPE_PUBLISHABLE_KEY = 'pk_live_51Sw2QQHhyPxNNlpwkcOLbvzjnqsASwkOiP6USlJtetnIXfoxp2qCo9CxEmw2KGJiwZfwpNUhBengGY1xZfMd7Cyd00xNI9soKl';
 const STRIPE_WORKER_URL = 'https://tomorrow-stripe.t-martella.workers.dev';
 
 // Configuration Web3Forms
@@ -369,58 +369,32 @@ async function createCareSubscription(paymentMethodId) {
 
 // Envoyer le brief par email
 async function sendBriefEmail() {
-  // 1. Email à l'équipe Tomorrow (brief détaillé)
-  // Web3Forms envoie toujours à l'email configuré dans le dashboard (t.martella@bigneurons.com)
-  // Le champ "email" ci-dessous est l'email de reply-to (le client)
-  const briefData = {
-    access_key: WEB3FORMS_ACCESS_KEY,
-    subject: `[Tomorrow.Online] Nouveau Brief - ${formData.brandName || 'Client'}`,
-    from_name: formData.brandName || 'Tomorrow.Online',
-    replyto: formData.email || '',
-    message: formatBriefForEmail()
-  };
-
-  try {
-    const response = await fetch(FORM_ACTION_URL, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(briefData)
-    });
-    
-    if (response.ok) {
-      console.log('✅ Brief envoyé à l\'équipe');
-    } else {
-      console.error('❌ Erreur envoi brief:', await response.text());
-    }
-  } catch (e) {
-    console.error('❌ Erreur envoi brief:', e);
-  }
-
-  // 2. Email de confirmation au client
-  // Pour envoyer AU CLIENT, on utilise un autre access_key configuré pour ça
-  // Ou on utilise le même mais avec le bon format
+  // NOTE: Le brief complet avec tous les champs + fichiers uploadés 
+  // est envoyé par submitForm() dans formulaire.js (appelé par showSuccessScreen)
+  // Ici on envoie juste la confirmation au client
+  
+  // Email de confirmation au client (en CC)
   const clientEmailData = {
     access_key: WEB3FORMS_ACCESS_KEY,
-    subject: 'Votre site en 24H - Slot bloqué',
+    subject: 'Votre projet Tomorrow.Online - Confirmation',
     from_name: 'Tomorrow.Online',
     email: TEAM_EMAIL,
     replyto: TEAM_EMAIL,
-    // Envoyer au client via le champ "to" (nécessite Pro plan) ou via "cc"
-    message: `
-EMAIL DE CONFIRMATION POUR: ${formData.email}
+    _cc: formData.email,
+    message: `Bonjour ${formData.brandName || ''} !
 
----
-
-Bonjour et merci de votre brief sur www.tomorrow.online.
+Merci pour votre brief sur tomorrow.online !
 
 Nous l'avons bien reçu et votre slot est bloqué.
 
-Restez près de votre téléphone, nous vous appellerons demain matin pour valider le brief avec vous : ensuite le chrono démarre.
+Restez près de votre téléphone, nous vous appellerons demain matin entre 9h et 10h pour valider le brief avec vous : ensuite le chrono démarre.
 
-A très bientôt,
+Rappel important : Votre carte ne sera pas débitée avant la livraison et validation de votre site.
 
-L'équipe de Tomorrow.online
-    `
+À très bientôt,
+
+L'équipe Tomorrow.Online
+contact@tomorrow.online`
   };
 
   try {
@@ -429,7 +403,7 @@ L'équipe de Tomorrow.online
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(clientEmailData)
     });
-    console.log('✅ Email de confirmation envoyé');
+    console.log('✅ Email de confirmation envoyé au client');
   } catch (e) {
     console.error('❌ Erreur envoi confirmation:', e);
   }
@@ -584,8 +558,13 @@ function showSuccessScreen() {
   }
   
   console.log('✅ Afficher écran de succès');
-  if (typeof finalizeForm === 'function') {
-    finalizeForm();
+  
+  // Appeler submitForm qui envoie le brief complet à Web3Forms
+  // (avec tous les champs + fichiers uploadés)
+  if (typeof window.submitForm === 'function') {
+    window.submitForm();
+  } else {
+    console.error('❌ submitForm non trouvé');
   }
 }
 
