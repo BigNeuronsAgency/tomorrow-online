@@ -204,52 +204,52 @@
   <section id="technology" class="section technology" style="background: #080808; padding: 100px 0; border-top: 1px solid rgba(255,255,255,0.05); border-bottom: 1px solid rgba(255,255,255,0.05);">
     <div class="container">
       <div class="section-header" style="text-align: center; margin-bottom: 60px;">
-        <h2 class="section-title">Le Moteur<span class="text-gradient">.</span></h2>
+        <h2 class="section-title">3 choix de moteurs<span class="text-gradient">.</span></h2>
         <p class="section-subtitle font-mono">Vous choisissez ce que vous mettez sous le capot</p>
       </div>
 
-      <div class="tech-grid" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px;">
+      <div class="tech-grid">
         
-        <!-- Tomorrow Stack (Featured) -->
-        <div class="tech-card" style="background: linear-gradient(145deg, #111 0%, #0a0a0a 100%); border: 1px solid #FF5500; padding: 40px; position: relative; overflow: hidden; border-radius: 4px;">
-          <div style="position: absolute; top: 0; right: 0; background: #FF5500; color: #000; font-family: 'JetBrains Mono'; font-size: 10px; font-weight: bold; padding: 5px 10px; text-transform: uppercase;">Choix recommandé</div>
-          <h3 style="font-family: 'Syne', sans-serif; font-size: 24px; color: white; margin-bottom: 10px; text-transform: uppercase;">Tomorrow Stack</h3>
-          <p class="font-mono" style="font-size: 10px; color: #FF5500; margin-bottom: 20px;">/// HYBRID STATIC ARCHITECTURE</p>
-          <p style="color: #999; font-size: 14px; margin-bottom: 25px; line-height: 1.6;">
-            La puissance du code brut (Next.js) combinée à un éditeur visuel simple pour vous. La performance des géants de la Tech, rendue accessible.
-          </p>
-          <ul style="list-style: none; padding: 0; font-family: 'JetBrains Mono'; font-size: 12px; color: #ccc; display: flex; flex-direction: column; gap: 10px;">
-            <li style="display: flex; gap: 10px;"><span style="color: #FF5500;">✓</span> <strong>0€ / mois</strong> (Hébergement offert à vie)</li>
-            <li style="display: flex; gap: 10px;"><span style="color: #FF5500;">✓</span> <strong>Autonomie</strong> (Textes/Images/SocialMedia/Statistiques)</li>
-            <li style="display: flex; gap: 10px;"><span style="color: #FF5500;">✓</span> <strong>Sécurité & Performance</strong> (Maximale)</li>
-          </ul>
-        </div>
-
-        <!-- Webflow Native -->
-        <div class="tech-card" style="background: #050505; border: 1px solid rgba(255,255,255,0.1); padding: 40px; border-radius: 4px;">
-          <h3 style="font-family: 'Syne', sans-serif; font-size: 24px; color: white; margin-bottom: 10px; text-transform: uppercase;">Webflow Native</h3>
-          <p class="font-mono" style="font-size: 10px; color: #4353FF; margin-bottom: 20px;">/// NO-CODE STANDARD</p>
-          <p style="color: #999; font-size: 14px; margin-bottom: 25px; line-height: 1.6;">
-            Le standard du marché pour les équipes marketing. Idéal si vous avez déjà l'habitude de l'interface Webflow et voulez garder vos habitudes.
-          </p>
-          <ul style="list-style: none; padding: 0; font-family: 'JetBrains Mono'; font-size: 12px; color: #666; display: flex; flex-direction: column; gap: 10px;">
-            <li style="display: flex; gap: 10px;"><span>●</span> Abonnement Webflow (~30€/mois) à votre charge</li>
-            <li style="display: flex; gap: 10px;"><span>●</span> Interface Éditeur Webflow</li>
-            <li style="display: flex; gap: 10px;"><span>●</span> Transfert de propriété complet</li>
-          </ul>
-        </div>
-
-        <!-- Code Brut -->
-        <div class="tech-card" style="background: #050505; border: 1px solid rgba(255,255,255,0.1); padding: 40px; border-radius: 4px;">
-          <h3 style="font-family: 'Syne', sans-serif; font-size: 24px; color: white; margin-bottom: 10px; text-transform: uppercase;">Code Brut</h3>
-          <p class="font-mono" style="font-size: 10px; color: #00FF00; margin-bottom: 20px;">/// RAW HTML/CSS/JS</p>
-          <p style="color: #999; font-size: 14px; margin-bottom: 25px; line-height: 1.6;">
+        <!-- Code Brut (Gauche) -->
+        <div class="tech-card">
+          <h3 class="tech-card-title">Code Brut</h3>
+          <p class="font-mono tech-card-tag" style="color: #00FF00;">/// RAW HTML/CSS/JS</p>
+          <p class="tech-card-desc">
             Nous livrons le code source propre (HTML/CSS/JS). Vos développeurs gèrent l'intégration et l'hébergement. Autonomie maximale.
           </p>
-          <ul style="list-style: none; padding: 0; font-family: 'JetBrains Mono'; font-size: 12px; color: #ccc; display: flex; flex-direction: column; gap: 10px;">
-            <li style="display: flex; gap: 10px;"><span style="color: #00FF00;">✓</span> <strong>Autonomie totale</strong> (Code source complet)</li>
-            <li style="display: flex; gap: 10px;"><span style="color: #00FF00;">✓</span> <strong>Fait pour les grandes équipes</strong> (Tech interne)</li>
-            <li style="display: flex; gap: 10px;"><span style="color: #00FF00;">✓</span> <strong>Adaptation</strong> (Intégrable dans tout CMS)</li>
+          <ul class="tech-card-features">
+            <li><span style="color: #00FF00;">✓</span> <strong>Autonomie totale</strong> (Code source complet)</li>
+            <li><span style="color: #00FF00;">✓</span> <strong>Fait pour les grandes équipes</strong> (Tech interne)</li>
+            <li><span style="color: #00FF00;">✓</span> <strong>Adaptation</strong> (Intégrable dans tout CMS)</li>
+          </ul>
+        </div>
+
+        <!-- Tomorrow Stack (Centre - Featured) -->
+        <div class="tech-card tech-card-featured">
+          <div class="tech-card-badge">Choix recommandé</div>
+          <h3 class="tech-card-title">Tomorrow Stack</h3>
+          <p class="font-mono tech-card-tag" style="color: #FF5500;">/// HYBRID STATIC ARCHITECTURE</p>
+          <p class="tech-card-desc">
+            La puissance du code brut (Next.js) combinée à un éditeur visuel simple pour vous. La performance des géants de la Tech, rendue accessible.
+          </p>
+          <ul class="tech-card-features tech-card-features-highlight">
+            <li><span style="color: #FF5500;">✓</span> <strong>0€ / mois</strong> (Hébergement offert à vie)</li>
+            <li><span style="color: #FF5500;">✓</span> <strong>Autonomie</strong> (Textes/Images/SocialMedia/Statistiques)</li>
+            <li><span style="color: #FF5500;">✓</span> <strong>Sécurité & Performance</strong> (Maximale)</li>
+          </ul>
+        </div>
+
+        <!-- Webflow Native (Droite) -->
+        <div class="tech-card">
+          <h3 class="tech-card-title">Webflow Native</h3>
+          <p class="font-mono tech-card-tag" style="color: #4353FF;">/// NO-CODE STANDARD</p>
+          <p class="tech-card-desc">
+            Le standard du marché pour les équipes marketing. Idéal si vous avez déjà l'habitude de l'interface Webflow et voulez la garder.
+          </p>
+          <ul class="tech-card-features">
+            <li><span>●</span> Abonnement Webflow (~30€/mois) à votre charge</li>
+            <li><span>●</span> Interface Éditeur Webflow</li>
+            <li><span>●</span> Transfert de propriété complet</li>
           </ul>
         </div>
 
