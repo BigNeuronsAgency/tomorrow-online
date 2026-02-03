@@ -1057,7 +1057,7 @@ function draw(preserveScroll) {
             `<button onclick="window.prevStep()" class="btn btn-outline">← PRÉCÉDENT</button>` : 
             ''
           }
-          ${currentStep < 6 ? 
+          ${currentStep < 7 ? 
             `<button onclick="window.nextStep()" class="btn btn-primary">SUIVANT →</button>` : 
             ''
           }
