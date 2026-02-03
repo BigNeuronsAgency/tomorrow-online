@@ -1443,8 +1443,6 @@
         trigger.addEventListener('click', function() {
           modal.style.display = 'flex';
           document.body.style.overflow = 'hidden';
-          var cursor = document.getElementById('cursor');
-          if (cursor) cursor.style.display = 'none';
           // Confetti explosion
           for (var i = 0; i < 50; i++) {
             setTimeout(function() {
@@ -1462,8 +1460,6 @@
         closeBtn.addEventListener('click', function() {
           modal.style.display = 'none';
           document.body.style.overflow = '';
-          var cursor = document.getElementById('cursor');
-          if (cursor) cursor.style.display = '';
         });
       }
       
@@ -1472,8 +1468,6 @@
           if (e.target === modal) {
             modal.style.display = 'none';
             document.body.style.overflow = '';
-            var cursor = document.getElementById('cursor');
-            if (cursor) cursor.style.display = '';
           }
         });
       }

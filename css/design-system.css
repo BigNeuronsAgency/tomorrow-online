@@ -70,7 +70,7 @@ img, div, span, section,
   --z-sticky: 50;
   --z-modal-overlay: 100;
   --z-modal: 200;
-  --z-cursor: 9999;
+  --z-cursor: 99999;
 }
 
 /* === RESET & BASE === */
