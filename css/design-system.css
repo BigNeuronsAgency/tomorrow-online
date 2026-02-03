@@ -80,15 +80,9 @@ img, div, span, section,
   box-sizing: border-box;
 }
 
-/* === LENIS PROTECTION - Fixed elements must not be affected by smooth scroll === */
-.modal,
-.whatsapp-float,
-.custom-cursor,
-#footer-secret-modal,
-#videoModal,
-#bookingModal {
+/* === LENIS FIX - Prevent transform on html/body that breaks position:fixed === */
+html, body {
   transform: none !important;
-  will-change: auto !important;
 }
 
 html {
