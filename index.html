@@ -743,7 +743,7 @@
             <span class="faq-icon font-mono">+</span>
           </div>
           <div class="faq-answer">
-            <p>Non. Nous livrons le site clé-en-main sur votre propre infrastructure (Webflow, Netlify, Vercel…). Vous gardez le contrôle total.</p>
+            <p>Oui, avec l'offre Tomorrow Stack (incluse) votre hébergement est gratuit à vie. En revanche les frais d'achat et de renouvellement de votre nom de domaine restent à votre charge.</p>
           </div>
         </div>
         
@@ -1415,8 +1415,7 @@
     function openVideoModal() {
       const modal = document.getElementById('videoModal');
       const iframe = document.getElementById('videoIframe');
-      // Replace YOUR_VIDEO_ID with actual Vimeo ID
-      iframe.src = 'https://player.vimeo.com/video/YOUR_VIDEO_ID?autoplay=1&badge=0&autopause=0';
+      iframe.src = 'https://player.vimeo.com/video/1141806002?autoplay=1&badge=0&autopause=0&title=0&byline=0';
       modal.classList.remove('hidden');
       document.body.style.overflow = 'hidden';
     }
@@ -1443,6 +1442,7 @@
       if (trigger && modal) {
         trigger.addEventListener('click', function() {
           modal.style.display = 'flex';
+          document.body.style.overflow = 'hidden';
           // Confetti explosion
           for (var i = 0; i < 50; i++) {
             setTimeout(function() {
@@ -1459,6 +1459,7 @@
       if (closeBtn && modal) {
         closeBtn.addEventListener('click', function() {
           modal.style.display = 'none';
+          document.body.style.overflow = '';
         });
       }
       
@@ -1466,6 +1467,7 @@
         modal.addEventListener('click', function(e) {
           if (e.target === modal) {
             modal.style.display = 'none';
+            document.body.style.overflow = '';
           }
         });
       }
