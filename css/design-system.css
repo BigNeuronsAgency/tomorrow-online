@@ -3,7 +3,7 @@
    Living Braise Theme
    ======================================== */
 
-/* === RESET FOCUS OUTLINES & TAP HIGHLIGHTS === */
+/* === RESET FOCUS OUTLINES === */
 *:focus {
   outline: none !important;
 }
@@ -11,12 +11,9 @@
 img, div, span, section, 
 .venn-kid, .venn-center-image, .pulse-animation,
 .squad-drag, .jc-kid-img, .impatient-kid-logo, 
-.gamification-icon, .status-icon, .timeline-icon,
-[class*="animation"] {
+.gamification-icon, .status-icon, .timeline-icon {
   outline: none !important;
-  border-color: transparent;
   -webkit-tap-highlight-color: transparent;
-  -webkit-focus-ring-color: transparent;
 }
 
 /* === KEYFRAMES === */
@@ -78,11 +75,6 @@ img, div, span, section,
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-}
-
-/* === LENIS FIX - Prevent transform on html/body that breaks position:fixed === */
-html, body {
-  transform: none !important;
 }
 
 html {
@@ -363,10 +355,10 @@ html.lenis {
 
 /* === WHATSAPP FLOAT BUTTON === */
 .whatsapp-float {
-  position: fixed !important;
+  position: fixed;
   bottom: 2rem;
   right: 2rem;
-  z-index: 9998;
+  z-index: 999;
   width: 60px;
   height: 60px;
   background: #25D366;
