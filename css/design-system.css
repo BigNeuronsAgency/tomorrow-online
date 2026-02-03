@@ -16,6 +16,21 @@ img, div, span, section,
   -webkit-tap-highlight-color: transparent;
 }
 
+/* Override pulse-glow on timeline icons - remove orange box on mobile */
+@media (max-width: 768px) {
+  .timeline-step .timeline-icon {
+    animation: none !important;
+    box-shadow: none !important;
+  }
+  
+  .timeline-step.active .timeline-icon {
+    background: rgba(255, 85, 0, 0.2);
+    border-color: #FF5500;
+    animation: none !important;
+    box-shadow: none !important;
+  }
+}
+
 /* === KEYFRAMES === */
 @keyframes braise-heat {
   0%, 100% {
