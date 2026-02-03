@@ -229,6 +229,22 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
+      position: absolute;
+      top: 0;
+      left: 0;
+      transition: opacity 0.3s ease;
+    }
+    
+    .member-photo .img-child {
+      opacity: 0;
+    }
+    
+    .team-member:hover .member-photo .img-child {
+      opacity: 1;
+    }
+    
+    .team-member:hover .member-photo .img-adult {
+      opacity: 0;
     }
     
     .ai-card .member-photo {
@@ -514,7 +530,8 @@
       <div class="team-grid">
         <div class="team-member">
           <div class="member-photo">
-            <img src="https://cdn.prod.website-files.com/69296dff64369c09698b8e09/6929b3ba12f3501c3c46a2fd_PPTIMTOMORROW.jpeg" alt="Tim">
+            <img src="https://cdn.prod.website-files.com/69296dff64369c09698b8e09/6929b3ba12f3501c3c46a2fd_PPTIMTOMORROW.jpeg" alt="Tim" class="img-adult">
+            <img src="images/tim-enfant.png" alt="Tim enfant" class="img-child">
           </div>
           <div class="member-info">
             <div class="member-role">Stratégie & Produit</div>
@@ -526,7 +543,8 @@
         
         <div class="team-member">
           <div class="member-photo">
-            <img src="images/arthur-new.png" alt="Arthur">
+            <img src="images/arthur-adulte.jpg" alt="Arthur" class="img-adult">
+            <img src="images/arthur-new.png" alt="Arthur enfant" class="img-child">
           </div>
           <div class="member-info">
             <div class="member-role">Copywriting & Neuro</div>
@@ -538,11 +556,12 @@
         
         <div class="team-member">
           <div class="member-photo">
-            <img src="https://cdn.prod.website-files.com/69296dff64369c09698b8e09/6929b3baa5fe9626cb9515ab_PPMARIIATOMORROW.jpeg" alt="Maria">
+            <img src="https://cdn.prod.website-files.com/69296dff64369c09698b8e09/6929b3baa5fe9626cb9515ab_PPMARIIATOMORROW.jpeg" alt="Mariia" class="img-adult">
+            <img src="images/mariia-enfant.jpg" alt="Mariia enfant" class="img-child">
           </div>
           <div class="member-info">
             <div class="member-role">UX Design</div>
-            <h3 class="member-name">Maria</h3>
+            <h3 class="member-name">Mariia</h3>
             <div class="member-xp">5 ans d'XP • Pixel Perfect</div>
             <p class="member-desc">UX Designer obsédée par l'ergonomie. Elle ne laisse rien passer : hiérarchie visuelle, accessibilité, micro-interactions. L'IA génère, elle valide (ou corrige).</p>
           </div>
@@ -550,7 +569,8 @@
         
         <div class="team-member">
           <div class="member-photo">
-            <img src="https://cdn.prod.website-files.com/69296dff64369c09698b8e09/6929b3bb9d273975e576c5ed_PPHAMIDTOMORROW.png" alt="Hamid">
+            <img src="https://cdn.prod.website-files.com/69296dff64369c09698b8e09/6929b3bb9d273975e576c5ed_PPHAMIDTOMORROW.png" alt="Hamid" class="img-adult">
+            <img src="images/hamid-enfant.jpg" alt="Hamid enfant" class="img-child">
           </div>
           <div class="member-info">
             <div class="member-role">Direction Artistique</div>
@@ -562,7 +582,8 @@
         
         <div class="team-member">
           <div class="member-photo">
-            <img src="https://cdn.prod.website-files.com/69296dff64369c09698b8e09/6929b3ba2589776800f492e4_PPMARIEFRANCINETOMORROW.jpg" alt="Marie-Francine">
+            <img src="https://cdn.prod.website-files.com/69296dff64369c09698b8e09/6929b3ba2589776800f492e4_PPMARIEFRANCINETOMORROW.jpg" alt="Marie-Francine" class="img-adult">
+            <img src="images/mf-enfant.jpg" alt="Marie-Francine enfant" class="img-child">
           </div>
           <div class="member-info">
             <div class="member-role">Ops & Pilotage</div>
