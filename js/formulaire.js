@@ -745,6 +745,7 @@ function getStepContent() {
     
     return `
       <div class="form-step step-7">
+        <button onclick="window.prevStep()" class="payment-close-btn" title="Revenir en arrière">×</button>
         <div class="step-header">
           <h2 class="step-title">CONFIRMATION</h2>
           <p class="step-subtitle font-mono">Sécurisation de votre slot</p>
